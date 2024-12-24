@@ -124,17 +124,6 @@ header {
     }
 }
 
-@media (min-width: 769px) {
-    main {
-        flex-direction: column; /* Stack vertically on small screens */
-        height: auto; /* Sesuaikan tinggi konten */
-    }
-    
-    .games-container {
-        grid-template-columns: 2fr;
-    }
-}
-
 @keyframes pulse-text {
     0%, 100% {
         text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
