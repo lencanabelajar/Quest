@@ -5,9 +5,17 @@ body {
     color: #fff;
 }
 
+/* Header */
 header {
-    background: #2a2a40;
-    padding: 10px 20px;
+    font-family: 'Orbitron', sans-serif;
+    background: #000080;
+    color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    top: 0;
+    z-index: 10;
 }
 
 .dashboard-title {
@@ -69,3 +77,4 @@ header {
     border-radius: 10px;
     margin: 20px;
 }
+
