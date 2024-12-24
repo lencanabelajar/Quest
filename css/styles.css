@@ -1,0 +1,71 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    background: #1e1e2f;
+    color: #fff;
+}
+
+header {
+    background: #2a2a40;
+    padding: 10px 20px;
+}
+
+.dashboard-title {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.dashboard-menu {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+.menu-item {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.menu-item:hover {
+    background: #3a3a5e;
+}
+
+.dashboard-main {
+    padding: 20px;
+}
+
+.recent-games, .twitch-streaming {
+    margin-bottom: 20px;
+}
+
+.games-container {
+    display: flex;
+    gap: 10px;
+}
+
+.game-item {
+    background: #2a2a40;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.game-thumbnail {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.twitch-streaming {
+    display: flex;
+    gap: 10px;
+}
+
+.player-status {
+    background: #2a2a40;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+}
