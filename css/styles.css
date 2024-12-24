@@ -114,6 +114,11 @@ header {
 }
 
 @media (max-width: 768px) {
+    main {
+        flex-direction: column; /* Stack vertically on small screens */
+        height: auto; /* Sesuaikan tinggi konten */
+    }
+    
     .games-container {
         grid-template-columns: 1fr;
     }
