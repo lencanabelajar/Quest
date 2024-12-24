@@ -178,7 +178,7 @@ header {
     background: linear-gradient(135deg, #1e1e2f, #191970);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     animation: glow-bg 3s infinite alternate;
-    height: 250px; /* Tetapkan tinggi kartu seragam */
+    height: 350px; /* Tetapkan tinggi kartu seragam */
     max-width: 200px; /* Batas maksimum lebar kartu */
 }
 
