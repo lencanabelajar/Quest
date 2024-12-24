@@ -45,61 +45,76 @@ header {
     padding: 20px;
 }
 
-.recent-games, .twitch-streaming {
+.recent-games, .game-favourite {
     margin-bottom: 20px;
 }
 
 .games-container {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .game-item {
-    background: #2a2a40;
-    padding: 10px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    padding: 15px;
+    border-radius: 15px;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-item:nth-child(2n) {
+    background: linear-gradient(135deg, #7ee8fa, #80ff72);
+}
+
+.game-item:nth-child(3n) {
+    background: linear-gradient(135deg, #ffe29f, #ffa99f);
+}
+
+.game-item:nth-child(4n) {
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+}
+
+.game-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .game-thumbnail {
     width: 100%;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-.games-favourite {
+.pagination {
     display: flex;
+    justify-content: center;
     gap: 10px;
-}
-
-/* Footer */
-footer {
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    background: #191970;
-    color: #fff;
-    padding: 10px 0;
-    width: 100%;
     margin-top: 20px;
-    animation: pulse-text 2s infinite;
 }
 
-@keyframes pulse-text {
-    0%, 100% {
-        text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+.pagination button {
+    background: #3a3a5e;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.pagination button:hover {
+    background: #1e1e2f;
+}
+
+.pagination button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .games-container {
+        grid-template-columns: 1fr;
     }
-    50% {
-        text-shadow: 0 0 20px #FFFFFF, 0 0 30px #FFFFFF;
-    }
-}
-
-h1 {
-    animation: pulse-text 2s infinite;
-}
-
-h2 {
-    animation: pulse-text 2s infinite;
-}
-
-h3 {
-    animation: pulse-text 2s infinite;
 }
