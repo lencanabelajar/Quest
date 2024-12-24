@@ -170,6 +170,24 @@ header {
     cursor: not-allowed;
 }
 
+/* Game Favourite Section */
+.game-favourite {
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1e1e2f, #191970);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    animation: glow-bg 3s infinite alternate;
+}
+
+.game-favourite h2 {
+    text-align: center;
+    color: #fff;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    animation: pulse-text 2s infinite;
+}
+
 /* Footer */
 footer {
     font-family: 'Orbitron', sans-serif;
@@ -197,6 +215,11 @@ footer {
     .game-thumbnail {
         aspect-ratio: 4/3; /* Rasio aspek berbeda untuk layar kecil */
     }
+        .game-link {
+        height: auto;
+        max-width: 90%;
+        margin: 0 auto;
+    }
 }
 
 @media (orientation: landscape) and (max-width: 768px) {
@@ -206,6 +229,11 @@ footer {
 
     .game-item {
         max-width: calc(50% - 20px); /* Kurangi margin agar tetap seragam */
+        height: auto;
+    }
+    
+    .game-link {
+        max-width: calc(50% - 20px);
         height: auto;
     }
 }
