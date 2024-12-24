@@ -76,6 +76,17 @@ header {
     background: linear-gradient(135deg, #d4fc79, #96e6a1);
 }
 
+.game-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.game-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
 .game-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
