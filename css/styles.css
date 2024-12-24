@@ -118,19 +118,30 @@ header {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* Konsistensi ukuran kartu */
+//* Konsistensi ukuran kartu */
 .game-item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 350px; /* Tetapkan tinggi kartu seragam */
+    max-width: 300px; /* Batas maksimum lebar kartu */
+    margin: 0 auto; /* Pusatkan kartu jika terlalu kecil */
+    box-sizing: border-box; /* Sertakan padding dalam perhitungan ukuran */
 }
 
 .game-thumbnail {
     width: 100%;
+    aspect-ratio: 16/9; /* Tetapkan rasio aspek untuk gambar */
+    object-fit: cover; /* Pastikan gambar selalu proporsional */
     border-radius: 10px;
     margin-bottom: 10px;
+}
+
+.game-link h3, .game-link p {
+    font-size: 1rem; /* Ukuran font seragam */
+    text-align: center; /* Pastikan teks rata tengah */
+    margin: 5px 0;
 }
 
 .pagination {
@@ -171,61 +182,33 @@ footer {
     animation: pulse-text 2s infinite;
 }
 
+/* Responsif */
 @media (max-width: 768px) {
-    main {
-        flex-direction: column; /* Susun secara vertikal */
-        height: auto;
-        width: auto;
-    }
-
     .games-container {
-        grid-template-columns: 1fr; /* Satu kolom untuk perangkat kecil (portrait) */
-        gap: 15px; /* Tambahkan ruang antar elemen */
+        grid-template-columns: 1fr; /* Satu kolom untuk layar kecil */
+        gap: 10px;
     }
 
     .game-item {
-        padding: 15px;
-        font-size: 1em;
+        height: auto; /* Kartu dinamis di layar kecil */
+        max-width: 90%; /* Gunakan 90% dari lebar layar */
     }
 
     .game-thumbnail {
-        width: 100%; /* Gambar penuh dalam kartu */
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
-    h3, p {
-        font-size: 1rem; /* Ukuran font yang proporsional */
+        aspect-ratio: 4/3; /* Rasio aspek berbeda untuk layar kecil */
     }
 }
 
 @media (orientation: landscape) and (max-width: 768px) {
-    .dashboard-main {
-        padding: 10px;
-    }
-
     .games-container {
         grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk landscape */
-        gap: 10px; /* Kurangi jarak antar elemen untuk layar lebar kecil */
     }
 
     .game-item {
-        padding: 10px;
-        font-size: 0.95em; /* Ukuran font sedikit lebih kecil */
-        height: auto; /* Sesuaikan tinggi secara dinamis */
-    }
-
-    .game-thumbnail {
-        width: 100%; /* Gambar penuh dalam kartu */
-        height: auto; /* Tetap menjaga proporsi gambar */
-        border-radius: 8px;
-    }
-
-    h3, p {
-        font-size: 0.9rem; /* Sedikit lebih kecil untuk efisiensi ruang */
+        max-width: calc(50% - 20px); /* Kurangi margin agar tetap seragam */
+        height: auto;
     }
 }
-
 
 @keyframes pulse-text {
     0%, 100% {
