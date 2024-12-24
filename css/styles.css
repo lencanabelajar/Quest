@@ -124,7 +124,7 @@ header {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 250px; /* Tetapkan tinggi kartu seragam */
+    height: 350px; /* Tetapkan tinggi kartu seragam */
     max-width: 200px; /* Batas maksimum lebar kartu */
     margin: 1 auto; /* Pusatkan kartu jika terlalu kecil */
     box-sizing: border-box; /* Sertakan padding dalam perhitungan ukuran */
