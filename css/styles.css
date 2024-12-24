@@ -51,7 +51,7 @@ header {
 
 .games-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
@@ -173,12 +173,29 @@ footer {
 
 @media (max-width: 768px) {
     main {
-        flex-direction: column;
+        flex-direction: column; /* Susun secara vertikal */
         height: auto;
         width: auto;
     }
+
     .games-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Satu kolom untuk perangkat kecil (portrait) */
+        gap: 15px; /* Tambahkan ruang antar elemen */
+    }
+
+    .game-item {
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    .game-thumbnail {
+        width: 100%; /* Gambar penuh dalam kartu */
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+
+    h3, p {
+        font-size: 1rem; /* Ukuran font yang proporsional */
     }
 }
 
@@ -186,19 +203,29 @@ footer {
     .dashboard-main {
         padding: 10px;
     }
+
     .games-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk landscape */
+        gap: 10px; /* Kurangi jarak antar elemen untuk layar lebar kecil */
     }
+
     .game-item {
         padding: 10px;
-        font-size: 0.9em;
+        font-size: 0.95em; /* Ukuran font sedikit lebih kecil */
+        height: auto; /* Sesuaikan tinggi secara dinamis */
     }
+
     .game-thumbnail {
-        width: 100%;
+        width: 100%; /* Gambar penuh dalam kartu */
+        height: auto; /* Tetap menjaga proporsi gambar */
         border-radius: 8px;
     }
+
+    h3, p {
+        font-size: 0.9rem; /* Sedikit lebih kecil untuk efisiensi ruang */
+    }
 }
+
 
 @keyframes pulse-text {
     0%, 100% {
