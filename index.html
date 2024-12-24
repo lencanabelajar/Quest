@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QUEST ID">
+    <meta property="og:title" content="Quest.ID">
+    <meta property="og:description" content="Platform pembelajaran interaktif berbasis game.">
+    <meta property="og:image" content="assets/icon/QUEST.ID.png">
+    <meta property="og:url" content="https://quest.id">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Quest Dashboard</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/icon/QUEST.ID.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">QUEST.ID</h1>
+            <nav class="dashboard-menu">
+                <a href="home.html" class="menu-item">🏡 Beranda</a>
+                <a href="leaderboard.html" class="menu-item">📊 Leaderboard</a>
+                <a href="profil.html" class="menu-item">📲 Profil</a>
+                <a href="store.html" class="menu-item">💰 Toko</a>
+                <a href="news.html" class="menu-item">📰 Berita</a>
+                <a href="community.html" class="menu-item">🌏 Komunitas</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="recent-games">
+            <h2>Recent Games</h2>
+            <div class="games-container">
+                <!-- Setiap game item -->
+                <div class="game-item">
+                    <img src="images/fortnite.jpg" alt="Fortnite Royal Battle" class="game-thumbnail">
+                    <h3>Fortnite Royal Battle</h3>
+                    <p>Online</p>
+                </div>
+                <div class="game-item">
+                    <img src="images/gta5.jpg" alt="GTA 5" class="game-thumbnail">
+                    <h3>GTA 5</h3>
+                    <p>Action</p>
+                </div>
+                <div class="game-item">
+                    <img src="images/cyberpunk.jpg" alt="Cyberpunk 2077" class="game-thumbnail">
+                    <h3>Cyberpunk 2077</h3>
+                    <p>Online</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="twitch-streaming">
+            <h2>Twitch Streaming</h2>
+            <div class="stream-container">
+                <div class="stream-item">
+                    <img src="images/twitch1.jpg" alt="Stream Thumbnail" class="stream-thumbnail">
+                    <h3>Why I am so Positive</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="player-status">
+        <h2>Status Pemain</h2>
+        <div class="status-info">
+            <p>ID Pemain: <span id="player-id">12345</span></p>
+            <p>Nama Pemain: <span id="player-name">Pepe Velasquez</span></p>
+            <p>Level: <span id="player-level">15</span></p>
+        </div>
+    </aside>
+
+    <footer>
+        <p>&copy; 2024 QUEST.ID</p>
+    </footer>
+</body>
+</html>
