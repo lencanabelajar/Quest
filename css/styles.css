@@ -127,14 +127,30 @@ footer {
 
 @media (max-width: 768px) {
     main {
-        flex-direction: column; /* Stack vertically on small screens */
-        height: auto; /* Sesuaikan tinggi konten */
+        flex-direction: column;
+        height: auto;
         width: auto;
     }
-    
     .games-container {
         grid-template-columns: 1fr;
-        
+    }
+}
+
+@media (orientation: landscape) and (max-width: 768px) {
+    .dashboard-main {
+        padding: 10px;
+    }
+    .games-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .game-item {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .game-thumbnail {
+        width: 100%;
+        border-radius: 8px;
     }
 }
 
