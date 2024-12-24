@@ -66,16 +66,9 @@ header {
     border-radius: 10px;
 }
 
-.twitch-streaming {
+.games-favourite {
     display: flex;
     gap: 10px;
-}
-
-.player-status {
-    background: #2a2a40;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 20px;
 }
 
 /* Footer */
