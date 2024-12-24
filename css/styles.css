@@ -113,6 +113,18 @@ header {
     cursor: not-allowed;
 }
 
+/* Footer */
+footer {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    background: #191970;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: 20px;
+    animation: pulse-text 2s infinite;
+}
+
 @media (max-width: 768px) {
     main {
         flex-direction: column; /* Stack vertically on small screens */
