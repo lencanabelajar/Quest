@@ -27,6 +27,7 @@ header {
     display: flex;
     gap: 15px;
     list-style: none;
+    background: #ff7eb3;
 }
 
 .menu-item {
