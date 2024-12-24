@@ -50,19 +50,9 @@ header {
 }
 
 .games-container {
-    flex: 2; /* Sama dengan card-container */
-    background-color: #f0f0f0; /* Pastikan warnanya konsisten */
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 5px;
-   overflow: hidden;
-   font-family: 'Arial', sans-serif;
-   font-weight: normal;
-    text-align: justify;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .game-item {
