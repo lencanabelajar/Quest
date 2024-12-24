@@ -117,6 +117,7 @@ header {
     main {
         flex-direction: column; /* Stack vertically on small screens */
         height: auto; /* Sesuaikan tinggi konten */
+        width: auto;
     }
     
     .games-container {
