@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toko - QUEST.ID">
+    <meta property="og:title" content="Toko - Quest.ID">
+    <meta property="og:description" content="Belanja item di Quest.ID Store">
+    <meta property="og:image" content="assets/icon/QUEST.ID.png">
+    <meta property="og:url" content="https://quest.id/store">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Toko - QUEST.ID</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/icon/ruby.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">QUEST.ID</h1>
+            <nav class="dashboard-menu">
+                <a href="home.html" class="menu-item">🏡</a>
+                <a href="leaderboard.html" class="menu-item">📊</a>
+                <a href="profil.html" class="menu-item">📲</a>
+                <a href="store.html" class="menu-item">💰</a>
+                <a href="news.html" class="menu-item">📰</a>
+                <a href="community.html" class="menu-item">🌏</a>
+                <a href="#" id="logout-btn" class="menu-item">Log Out</a>
+                <span id="user-name" style="margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="store-section">
+            <h2>Quest.ID Store</h2>
+            <div class="store-items">
+                <!-- Item list -->
+                <div class="store-item">
+                    <img src="assets/icon/item1.png" alt="Item 1" class="store-item-img">
+                    <p>Item 1</p>
+                    <p>Harga: 100 Ruby</p>
+                    <button class="buy-btn">Beli</button>
+                </div>
+                <div class="store-item">
+                    <img src="assets/icon/item2.png" alt="Item 2" class="store-item-img">
+                    <p>Item 2</p>
+                    <p>Harga: 150 Ruby</p>
+                    <button class="buy-btn">Beli</button>
+                </div>
+                <!-- Repeat for more items -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            Dibuat oleh Hariyanto - WA +62 856-0932-6414 - Kabupaten Kepahiang
+        </address>
+        <p>&copy; 2024 QUEST.ID All rights reserved.</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
