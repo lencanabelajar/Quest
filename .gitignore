@@ -1,8 +1,3 @@
-
-### **.gitignore**
-File ini digunakan untuk mengabaikan file atau folder yang tidak perlu di-commit ke dalam repositori Git, seperti file build, file konfigurasi pribadi, dan lainnya.
-
-```plaintext
 # Node.js dependencies
 node_modules/
 
@@ -22,3 +17,8 @@ node_modules/
 # System files
 .DS_Store
 Thumbs.db
+
+# Jangan abaikan folder berikut karena berisi file yang diperlukan untuk aplikasi
+!/assets/
+!/css/
+!/js/
