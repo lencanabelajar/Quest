@@ -77,7 +77,7 @@ onAuthStateChanged(auth, user => {
   } else {
     console.log("User is signed out");
     // Redirect to login page if not authenticated
-    window.location.href = "index.html";
+    window.location.href = "index.html";  // Pengguna yang belum login diarahkan ke halaman login
   }
 });
 
@@ -120,4 +120,14 @@ const displayUserProfile = (userId) => {
   });
 };
 
-export { signUp, login, logout, uploadProfilePicture, displayUserProfile };
+// Redirect if user is not authenticated (useful for pages like home)
+const redirectIfNotAuthenticated = () => {
+  onAuthStateChanged(auth, user => {
+    if (!user) {
+      // Jika pengguna belum login, arahkan ke halaman login
+      window.location.href = "index.html";
+    }
+  });
+};
+
+export { signUp, login, logout, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
