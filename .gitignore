@@ -1,0 +1,24 @@
+
+### **.gitignore**
+File ini digunakan untuk mengabaikan file atau folder yang tidak perlu di-commit ke dalam repositori Git, seperti file build, file konfigurasi pribadi, dan lainnya.
+
+```plaintext
+# Node.js dependencies
+node_modules/
+
+# Firebase emulator data
+.firebase/
+
+# Build output
+/dist
+/build
+
+# Log files
+*.log
+
+# Environment files
+.env
+
+# System files
+.DS_Store
+Thumbs.db
