@@ -28,6 +28,10 @@
                 <a href="store.html" class="menu-item">💰</a>
                 <a href="news.html" class="menu-item">📰</a>
                 <a href="community.html" class="menu-item">🌏</a>
+                <a href="#" id="login-btn" class="menu-item">Log In</a>
+                <a href="#" id="register-btn" class="menu-item">Daftar</a>
+                <a href="#" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
+                <span id="user-name" style="display: none; margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
             </nav>
         </div>
     </header>
@@ -97,6 +101,34 @@
                 </div>
             </div>
         </section>
+                        <div id="modal-login" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('login')">&times;</span>
+                        <h2>Log In</h2>
+                        <form id="login-form">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" required>
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" required>
+                            <button type="submit">Log In</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="modal-register" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('register')">&times;</span>
+                        <h2>Daftar</h2>
+                        <form id="register-form">
+                            <label for="new-username">Username:</label>
+                            <input type="text" id="new-username" name="new-username" required>
+                            <label for="new-password">Password:</label>
+                            <input type="password" id="new-password" name="new-password" required>
+                            <button type="submit">Daftar</button>
+                        </form>
+                    </div>
+                </div>
+
     </main>
         <footer>
             <address>
