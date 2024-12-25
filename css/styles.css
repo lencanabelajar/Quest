@@ -169,13 +169,13 @@ header {
 
 /* Game Favourite Section */
 .game-favourite {
-    margin: 10px auto;
-    padding: 15px;
-    border-radius: 15px;
+    margin: 5px auto;
+    padding: 10px;
+    border-radius: 12px;
     display: grid; /* Menambahkan display grid agar grid-template-columns bekerja */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Mengatur grid responsif dengan elemen lebih kecil */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Mengatur grid responsif dengan elemen lebih kecil */
     background: linear-gradient(135deg, #1e1e2f, #4b0082); /* Menambahkan gradasi yang lebih menarik */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); /* Bayangan lebih besar dan lebih dramatis */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Bayangan lebih kecil namun tetap dramatis */
     animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite; /* Menambahkan animasi transformasi */
 }
 
@@ -183,11 +183,11 @@ header {
 .game-favourite h2 {
     text-align: center;
     color: #fff;
-    font-size: 2em; /* Ukuran font lebih besar untuk efek visual */
-    margin-bottom: 15px;
+    font-size: 1.6em; /* Ukuran font lebih kecil untuk tampilan compact */
+    margin-bottom: 10px;
     animation: pulse-text 3s ease-in-out infinite; /* Mengubah animasi untuk teks */
     text-transform: uppercase; /* Membuat teks lebih menarik */
-    letter-spacing: 2px; /* Memberikan jarak antar huruf */
+    letter-spacing: 1px; /* Mengurangi jarak antar huruf untuk ukuran lebih kecil */
 }
 
 /* Footer */
