@@ -35,6 +35,8 @@ header {
     list-style: none;
     background: #191970;
     justify-content: center;
+    flex-wrap: wrap; /* Membuat menu dapat membungkus jika lebar layar kecil */
+    padding: 5px 0; /* Menambah jarak vertikal */
 }
 
 .menu-item {
