@@ -169,25 +169,28 @@ header {
 
 /* Game Favourite Section */
 .game-favourite {
-    margin: 2px auto; /* Mengurangi margin */
-    padding: 5px; /* Mengurangi padding */
-    border-radius: 10px; /* Membuat border-radius lebih kecil */
-    display: grid; /* Menambahkan display grid agar grid-template-columns bekerja */
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Memperkecil ukuran grid */
-    background: linear-gradient(135deg, #1e1e2f, #4b0082); /* Menambahkan gradasi yang lebih menarik */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); /* Mengurangi bayangan */
-    animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite; /* Menambahkan animasi transformasi */
+    margin: 20px auto; /* Margin yang lebih besar agar lebih terpusat */
+    padding: 15px; /* Padding untuk memberi ruang lebih */
+    width: 250px; /* Menetapkan lebar untuk menghindari kartu terlalu lebar */
+    border-radius: 12px; /* Border-radius lebih bulat */
+    display: flex; /* Menggunakan flex agar konten di dalamnya lebih teratur */
+    flex-direction: column;
+    align-items: center; /* Memusatkan isi */
+    background: linear-gradient(135deg, #1e1e2f, #4b0082); /* Gradasi menarik */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Efek bayangan lebih lembut */
+    animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite; /* Animasi */
+    text-align: center; /* Memusatkan teks */
 }
 
 /* Game Favourite Heading */
 .game-favourite h2 {
     text-align: center;
     color: #fff;
-    font-size: 1.2em; /* Ukuran font lebih kecil */
-    margin-bottom: 5px; /* Mengurangi margin */
-    animation: pulse-text 3s ease-in-out infinite; /* Mengubah animasi untuk teks */
-    text-transform: uppercase; /* Membuat teks lebih menarik */
-    letter-spacing: 0.5px; /* Mengurangi jarak antar huruf */
+    font-size: 1.1em; /* Ukuran font sedikit lebih kecil */
+    margin-bottom: 10px; /* Margin yang lebih besar untuk jarak lebih lapang */
+    animation: pulse-text 3s ease-in-out infinite; /* Animasi untuk heading */
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Spasi huruf yang lebih besar untuk kesan lebih modern */
 }
 
 /* Styling untuk Game Favourite - Game Info */
@@ -196,43 +199,43 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    padding: 10px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c); /* Gradasi warna */
+    padding: 12px;
+    border-radius: 10px; /* Menambahkan border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s; /* Efek transisi yang halus */
+    width: 100%; /* Menjamin game-info menggunakan lebar penuh kartu */
 }
 
 /* Game Info Heading */
 .game-info h3 {
-    font-size: 1.4em;
-    margin: 10px 0;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    font-size: 1.2em; /* Ukuran font agak kecil agar proporsional */
+    margin: 8px 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6); /* Menambahkan bayangan pada teks */
 }
 
 /* Game Invois (Image) */
 .game-invois {
-    width: 80px; /* Ukuran lebih kecil */
-    height: 80px; /* Ukuran lebih kecil */
+    width: 60px; /* Menyesuaikan ukuran gambar agar lebih kecil */
+    height: 60px; /* Sama dengan lebar untuk menjaga proporsi */
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 50%; /* Membuat gambar berbentuk bulat */
     margin-bottom: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Bayangan halus pada gambar */
 }
 
 /* Game Info Paragraphs */
 .game-info p {
     margin: 5px 0;
-    font-size: 1em;
+    font-size: 0.95em; /* Ukuran font sedikit lebih kecil */
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
 }
 
 /* Hover Effects on Game Info */
 .game-info:hover {
-    transform: scale(1.05); /* Zoom in sedikit */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.6);
+    transform: scale(1.05); /* Zoom in sedikit saat hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.6); /* Efek bayangan saat hover */
 }
 
 /* Styling untuk Share (Jika Ada) */
@@ -241,21 +244,22 @@ header {
     align-items: center;
     justify-content: center;
     background: #191970;
-    padding: 10px;
+    padding: 8px 15px;
     border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
 
+/* Hover Effects for Share Button */
 .game-share:hover {
-    background-color: #3a3a5e; /* Warna latar belakang berubah pada hover */
+    background-color: #3a3a5e; /* Warna latar belakang berubah */
     transform: scale(1.05); /* Efek zoom saat hover */
 }
 
-/* Untuk Tombol Share di Game Favourite */
+/* Styling untuk Tombol Share di Game Favourite */
 .game-share-btn {
-    padding: 10px 15px;
+    padding: 8px 12px;
     background-color: #00bfff;
     color: #fff;
     border-radius: 5px;
@@ -267,7 +271,32 @@ header {
 }
 
 .game-share-btn:hover {
-    background-color: #008cba;
+    background-color: #008cba; /* Warna tombol berubah saat hover */
+}
+
+/* Responsif untuk ukuran kecil */
+@media (max-width: 480px) {
+    .game-favourite {
+        width: 200px; /* Lebar kontainer menyesuaikan layar kecil */
+        padding: 10px;
+    }
+
+    .game-info {
+        padding: 8px;
+    }
+
+    .game-invois {
+        width: 50px;
+        height: 50px;
+    }
+
+    .game-info h3 {
+        font-size: 1em;
+    }
+
+    .game-info p {
+        font-size: 0.85em;
+    }
 }
 
 /* Footer */
