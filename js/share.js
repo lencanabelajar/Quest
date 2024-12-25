@@ -1,3 +1,4 @@
+// Import Firebase functions from firebase.js
 import { shareCertificate, shareBadge } from './firebase.js';
 
 // Elements for sharing actions
@@ -8,10 +9,11 @@ const shareBadgeBtn = document.getElementById('share-badge-btn');
 shareCertificateBtn.addEventListener('click', () => {
   shareCertificate()
     .then(() => {
-      alert('Certificate shared successfully!');
+      alert('Certificate shared successfully!'); // Notify success
     })
     .catch(error => {
-      alert('Sharing certificate failed: ' + error.message);
+      console.error('Error sharing certificate: ', error); // Log error for debugging
+      alert('Sharing certificate failed: ' + error.message); // Show error to the user
     });
 });
 
@@ -19,9 +21,10 @@ shareCertificateBtn.addEventListener('click', () => {
 shareBadgeBtn.addEventListener('click', () => {
   shareBadge()
     .then(() => {
-      alert('Badge shared successfully!');
+      alert('Badge shared successfully!'); // Notify success
     })
     .catch(error => {
-      alert('Sharing badge failed: ' + error.message);
+      console.error('Error sharing badge: ', error); // Log error for debugging
+      alert('Sharing badge failed: ' + error.message); // Show error to the user
     });
 });
