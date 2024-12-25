@@ -398,9 +398,10 @@ footer {
 .navbar {
     display: flex;
     flex-wrap: wrap; /* Membuat elemen-elemen dibungkus di baris baru */
-    justify-content: space-evenly; /* Memberi jarak antar elemen */
+    justify-content: center; /* Memberi jarak antar elemen */
     align-items: center;
     padding: 10px;
+    gap: 5px;
 }
 
 /* Ikon dan tombol navigasi */
@@ -428,54 +429,46 @@ footer {
 
 /* Media Query untuk ukuran layar lebih kecil */
 @media (max-width: 768px) {
-    /* Mengatur navbar agar lebih rapat di layar kecil */
     .navbar {
-        flex-direction: column; /* Mengubah orientasi menjadi vertikal */
-        align-items: center; /* Memusatkan elemen */
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* Ukuran ikon untuk ponsel portrait */
     .navbar .icon {
-        font-size: 1.2em; /* Ikon lebih kecil agar tidak terlalu besar */
-        margin: 5px; /* Mengurangi jarak antar ikon */
+        font-size: 1.2em;
+        margin: 5px;
     }
 
-    /* Ukuran teks di sebelah ikon */
     .navbar .text {
-        font-size: 0.8em; /* Ukuran teks lebih kecil */
+        font-size: 0.8em;
     }
 
-    /* Tombol Log In dan Daftar lebih kecil dan rapat */
     .navbar .login, .navbar .register {
         padding: 6px 10px;
         font-size: 0.8em;
         margin: 5px;
     }
-
-    /* Mengatur lebar navbar agar menyesuaikan layar */
-    .navbar {
-        width: 100%; /* Lebar 100% agar sesuai dengan layar ponsel */
-    }
-
-    /* Ikon dan teks pada navbar menggunakan flex agar rata tengah */
-    .navbar .icon, .navbar .text, .navbar .login, .navbar .register {
-        width: 100%; /* Lebar penuh */
-        text-align: center; /* Memusatkan teks */
-    }
 }
 
 /* Untuk layar lebih kecil dari 480px (portrait handphone kecil) */
 @media (max-width: 480px) {
-    /* Menyesuaikan ukuran ikon */
     .navbar .icon {
-        font-size: 1.1em; /* Ikon lebih kecil di layar kecil */
-        margin: 3px; /* Mengurangi margin antar ikon */
+        font-size: 1.1em; /* Ukuran ikon lebih kecil */
+        margin: 3px; /* Mengurangi jarak antar ikon */
     }
 
-    /* Menyesuaikan ukuran tombol Log In dan Daftar */
     .navbar .login, .navbar .register {
         font-size: 0.7em; /* Ukuran font tombol lebih kecil */
         padding: 5px 8px; /* Padding lebih kecil */
+    }
+
+    .navbar {
+        width: 100%;
+    }
+
+    .navbar .icon, .navbar .text, .navbar .login, .navbar .register {
+        width: 100%; /* Lebar penuh */
+        text-align: center; /* Memusatkan teks */
     }
 }
 
