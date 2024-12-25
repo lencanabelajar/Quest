@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leaderboard - QUEST.ID">
+    <meta property="og:title" content="Leaderboard - Quest.ID">
+    <meta property="og:description" content="Lihat papan peringkat pemain terbaik di Quest.ID">
+    <meta property="og:image" content="assets/icon/QUEST.ID.png">
+    <meta property="og:url" content="https://quest.id/leaderboard">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Leaderboard - QUEST.ID</title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/icon/ruby.png" type="image/png">
+</head>
+<body>
+    <header>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">QUEST.ID</h1>
+            <nav class="dashboard-menu">
+                <a href="home.html" class="menu-item">🏡</a>
+                <a href="leaderboard.html" class="menu-item">📊</a>
+                <a href="profil.html" class="menu-item">📲</a>
+                <a href="store.html" class="menu-item">💰</a>
+                <a href="news.html" class="menu-item">📰</a>
+                <a href="community.html" class="menu-item">🌏</a>
+                <a href="#" id="logout-btn" class="menu-item">Log Out</a>
+                <span id="user-name" style="margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="leaderboard-section">
+            <h2>Papan Peringkat</h2>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Posisi</th>
+                        <th>Nama</th>
+                        <th>Poin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Nama Pengguna 1</td>
+                        <td>1000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Nama Pengguna 2</td>
+                        <td>950</td>
+                    </tr>
+                    <!-- Repeat for other users -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <address>
+            Dibuat oleh Hariyanto - WA +62 856-0932-6414 - Kabupaten Kepahiang
+        </address>
+        <p>&copy; 2024 QUEST.ID All rights reserved.</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
