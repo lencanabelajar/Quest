@@ -39,8 +39,13 @@ loginForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const email = event.target.username.value;
   const password = event.target.password.value;
-  login(email, password);
-  loginModal.style.display = 'none';  // Close modal after login
+  login(email, password)
+    .then(() => {
+      loginModal.style.display = 'none';  // Close modal after login
+    })
+    .catch(error => {
+      alert('Login failed: ' + error.message);  // Show error message
+    });
 });
 
 // Handle register form submission
@@ -48,26 +53,45 @@ registerForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const email = event.target['new-username'].value;
   const password = event.target['new-password'].value;
-  signUp(email, password);
-  registerModal.style.display = 'none';  // Close modal after registration
+  signUp(email, password)
+    .then(() => {
+      registerModal.style.display = 'none';  // Close modal after registration
+    })
+    .catch(error => {
+      alert('Registration failed: ' + error.message);  // Show error message
+    });
 });
 
 // Handle logout
 logoutBtn.addEventListener('click', () => {
-  logout();
+  logout()
+    .then(() => {
+      userNameDisplay.innerText = ""; // Clear user info
+      logoutBtn.style.display = 'none';  // Hide logout button
+      loginBtn.style.display = 'inline'; // Show login button
+      registerBtn.style.display = 'inline'; // Show register button
+    })
+    .catch(error => {
+      alert('Logout failed: ' + error.message);  // Show error message
+    });
 });
 
 // Handle profile image upload
 profileImageInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   if (file) {
-    uploadProfilePicture(file);
+    uploadProfilePicture(file)
+      .then(() => {
+        alert('Profile picture uploaded successfully!');
+      })
+      .catch(error => {
+        alert('Error uploading profile picture: ' + error.message);
+      });
   }
 });
 
 // Display user information on the dashboard
 window.addEventListener('load', () => {
-  // Check if the user is logged in
   const user = firebase.auth().currentUser;
   if (user) {
     userNameDisplay.innerText = user.email.split('@')[0]; // Display username as part of the email
@@ -95,6 +119,8 @@ const displayUserProfileInfo = (userId) => {
         document.getElementById("profile-img").src = userData.profilePicture;
       }
     }
+  }).catch(error => {
+    console.error("Error displaying user profile:", error.message);
   });
 };
 
@@ -181,4 +207,3 @@ const loadGames = (page) => {
 
 // Initialize pagination
 handlePagination();
-
