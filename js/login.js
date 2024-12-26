@@ -1,28 +1,31 @@
-import { login } from './firebase.js';
+// Import fungsi login dari firebase.js
+import { login } from './firebase.js';  // Sesuaikan dengan lokasi firebase.js Anda
 
-// Handle login form submission
-const loginForm = document.getElementById('login-form');
+// Tangani pengiriman form
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Mencegah form untuk submit secara default
+    
+    // Ambil nilai dari input form
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-// Event listener untuk menangani form submission
-loginForm.addEventListener('submit', (event) => {
-  event.preventDefault();  // Mencegah form submit otomatis
+    // Validasi form
+    if (!email || !password) {
+        alert('Harap isi semua kolom!');
+        return;
+    }
 
-  // Ambil nilai input dari form
-  const email = event.target.email.value;   // Pastikan id input email sesuai dengan 'email'
-  const password = event.target.password.value;
+    // Proses login menggunakan Firebase Authentication
+    login(email, password)
+        .then(userCredential => {
+            const user = userCredential.user;
 
-  // Validasi input
-  if (!email || !password) {
-    alert('Email dan password harus diisi.');
-    return;
-  }
-
-  // Panggil fungsi login dan tangani hasilnya
-  login(email, password)
-    .then(() => {
-      window.location.href = 'home.html';  // Redirect ke halaman home setelah login berhasil
-    })
-    .catch(error => {
-      alert('Login gagal: ' + error.message);  // Tampilkan pesan error jika login gagal
-    });
+            // Redirect setelah login berhasil
+            console.log("Login berhasil! Menuju halaman utama.");
+            window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+        })
+        .catch(error => {
+            console.error("Login gagal:", error.message);
+            alert(`Gagal login: ${error.message}`);
+        });
 });
