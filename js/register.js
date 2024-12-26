@@ -59,7 +59,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
 
             // Redirect setelah registrasi berhasil
             console.log("Registrasi berhasil! Menuju halaman utama.");
-            window.location.href = 'html/home.html'; // Ganti dengan halaman home Anda
+            window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
         })
         .catch(error => {
             // Menyembunyikan loading spinner jika terjadi error
