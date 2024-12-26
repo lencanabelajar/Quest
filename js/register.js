@@ -1,5 +1,5 @@
 // Import fungsi signUp dan uploadProfilePicture dari firebase.js
-import { signUp, uploadProfilePicture } from './firebase.js'; // Sesuaikan dengan lokasi firebase.js Anda
+import { signUp, uploadProfilePicture, updateProfilePicture } from './firebase.js'; // Sesuaikan dengan lokasi firebase.js Anda
 
 // Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
@@ -30,6 +30,9 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         return;
     }
 
+    // Menampilkan loading spinner
+    document.getElementById('loading-spinner').style.display = 'block';
+
     // Proses pendaftaran menggunakan Firebase Authentication
     signUp(email, password)
         .then(user => {
@@ -43,17 +46,25 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
             }
         })
         .then(url => {
-            // Jika gambar profil berhasil di-upload, simpan URL ke Firestore (jika diperlukan)
+            // Jika gambar profil berhasil di-upload, simpan URL ke Firestore
             if (url) {
                 console.log('Gambar profil berhasil diupload:', url);
                 // Simpan URL gambar ke Firestore (misalnya dengan fungsi `updateProfilePicture`)
+                return updateProfilePicture(user.uid, url);
             }
+        })
+        .then(() => {
+            // Sembunyikan loading spinner setelah registrasi selesai
+            document.getElementById('loading-spinner').style.display = 'none';
 
             // Redirect setelah registrasi berhasil
             console.log("Registrasi berhasil! Menuju halaman utama.");
             window.location.href = 'html/home.html'; // Ganti dengan halaman home Anda
         })
         .catch(error => {
+            // Menyembunyikan loading spinner jika terjadi error
+            document.getElementById('loading-spinner').style.display = 'none';
+
             console.error("Registrasi gagal:", error.message);
             document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
             document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
