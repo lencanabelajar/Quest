@@ -158,3 +158,14 @@ onAuthStateChanged(auth, user => {
   }
 });
 
+// Pastikan pengguna sudah login untuk mengakses halaman home
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    console.log("User is not authenticated, redirecting to login page.");
+    window.location.href = "../index.html";  // Mengarahkan ke halaman login jika belum login
+  } else {
+    console.log("User is signed in:", user);
+    // Menampilkan informasi pengguna jika sudah login
+    document.getElementById("username-display").innerText = user.email.split('@')[0];
+  }
+});
