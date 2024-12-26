@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc, collection } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Firebase configuration
@@ -34,6 +34,9 @@ const signUp = (email, password) => {
         username: email.split('@')[0],  // Use email part before @ as username
         level: "Pemula",  // Default level
         createdAt: new Date()
+      }).then(() => {
+        console.log("User data saved to Firestore");
+        window.location.href = "home.html";  // Redirect to home page after sign up
       });
       console.log("User signed up:", user);
     })
@@ -48,8 +51,7 @@ const login = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User logged in:", user);
-      // Redirect to home page after login
-      window.location.href = "home.html";window.location.href = "html/home.html";  // Sesuaikan dengan struktur folder
+      window.location.href = "home.html";  // Redirect to home page after login
     })
     .catch(error => {
       console.error("Error during login:", error.message);
@@ -77,7 +79,7 @@ onAuthStateChanged(auth, user => {
   } else {
     console.log("User is signed out");
     // Redirect to login page if not authenticated
-    window.location.href = "index.html";  // Pengguna yang belum login diarahkan ke halaman login
+    window.location.href = "index.html";  // Redirect to login page if the user is not authenticated
   }
 });
 
@@ -87,7 +89,6 @@ const uploadProfilePicture = (file) => {
   uploadBytes(storageRef, file).then(snapshot => {
     console.log('Uploaded a file!');
     getDownloadURL(storageRef).then(url => {
-      // Save the URL in Firestore
       const user = auth.currentUser;
       updateDoc(doc(db, "users", user.uid), {
         profilePicture: url
@@ -124,58 +125,10 @@ const displayUserProfile = (userId) => {
 const redirectIfNotAuthenticated = () => {
   onAuthStateChanged(auth, user => {
     if (!user) {
-      // Jika pengguna belum login, arahkan ke halaman login
+      // If user is not authenticated, redirect to login
       window.location.href = "index.html";
     }
   });
 };
 
 export { signUp, login, logout, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
-
-.then(userCredential => {
-  const user = userCredential.user;
-  setDoc(doc(db, "users", user.uid), {
-    email: user.email,
-    username: email.split('@')[0],  // Use email part before @ as username
-    level: "Pemula",  // Default level
-    createdAt: new Date()
-  }).then(() => {
-    console.log("User data saved to Firestore");
-    window.location.href = "home.html";  // Arahkan ke halaman home setelah pendaftaran
-  });
-  console.log("User signed up:", user);
-})
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    console.log("User is signed in:", user);
-    // Tampilkan data pengguna atau arahkan ke halaman home
-    window.location.href = "home.html";  // Jika pengguna login, arahkan ke halaman home
-  } else {
-    console.log("User is signed out");
-    // Jika pengguna belum login, arahkan ke halaman login
-    window.location.href = "index.html";
-  }
-});
-
-// Pastikan pengguna sudah login untuk mengakses halaman home
-onAuthStateChanged(auth, user => {
-  if (!user) {
-    console.log("User is not authenticated, redirecting to login page.");
-    window.location.href = "../index.html";  // Mengarahkan ke halaman login jika belum login
-  } else {
-    console.log("User is signed in:", user);
-    // Menampilkan informasi pengguna jika sudah login
-    document.getElementById("username-display").innerText = user.email.split('@')[0];
-  }
-});
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    document.getElementById("logout-btn").style.display = "block";
-    document.getElementById("username-display").innerText = user.email.split('@')[0];
-  } else {
-    document.getElementById("logout-btn").style.display = "none";
-    window.location.href = "index.html";  // Pengguna diarahkan ke login jika tidak terautentikasi
-  }
-});
