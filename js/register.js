@@ -29,21 +29,22 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
 
     // Proses pendaftaran menggunakan Firebase Authentication
     signUp(email, password)
-        .then(userCredential => {
-            const user = userCredential.user;
-
+        .then(user => {
             // Jika ada gambar profil yang diupload, lakukan upload ke Firebase Storage
             if (profileImageInput.files.length > 0) {
                 const file = profileImageInput.files[0];
-                uploadProfilePicture(file, user.uid) // Upload file gambar ke Firebase Storage
-                    .then(url => {
-                        // Setelah upload sukses, simpan URL gambar ke Firestore atau Realtime Database (Jika perlu)
-                        console.log('Gambar profil berhasil diupload:', url);
-                    })
-                    .catch(error => {
-                        console.error('Error upload gambar profil:', error);
-                        alert('Gagal mengunggah gambar profil!');
-                    });
+                return uploadProfilePicture(file, user.uid);  // Mengupload gambar dan mengembalikan URL gambar
+            } else {
+                // Jika tidak ada gambar profil yang diupload, langsung lanjutkan
+                return Promise.resolve();  // Kembalikan promise yang resolve untuk melanjutkan alur
+            }
+        })
+        .then(url => {
+            if (url) {
+                // Jika gambar profil berhasil di-upload, simpan URL ke Firestore
+                console.log('Gambar profil berhasil diupload:', url);
+                // Simpan URL gambar ke Firestore (jika diperlukan)
+                // updateProfilePicture(user.uid, url); // Jika ingin menyimpan ke Firestore
             }
 
             // Redirect setelah registrasi berhasil
