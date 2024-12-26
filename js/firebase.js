@@ -131,3 +131,30 @@ const redirectIfNotAuthenticated = () => {
 };
 
 export { signUp, login, logout, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
+
+.then(userCredential => {
+  const user = userCredential.user;
+  setDoc(doc(db, "users", user.uid), {
+    email: user.email,
+    username: email.split('@')[0],  // Use email part before @ as username
+    level: "Pemula",  // Default level
+    createdAt: new Date()
+  }).then(() => {
+    console.log("User data saved to Firestore");
+    window.location.href = "home.html";  // Arahkan ke halaman home setelah pendaftaran
+  });
+  console.log("User signed up:", user);
+})
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    console.log("User is signed in:", user);
+    // Tampilkan data pengguna atau arahkan ke halaman home
+    window.location.href = "home.html";  // Jika pengguna login, arahkan ke halaman home
+  } else {
+    console.log("User is signed out");
+    // Jika pengguna belum login, arahkan ke halaman login
+    window.location.href = "index.html";
+  }
+});
+
