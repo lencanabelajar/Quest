@@ -37,6 +37,13 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" placeholder="******" required>
                 
+                <label for="confirm-password">Konfirmasi Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="******" required>
+                
+                <!-- Optional: Avatar upload -->
+                <label for="profile-image">Upload Gambar Profil:</label>
+                <input type="file" id="profile-image" name="profile-image" accept="image/*">
+                
                 <button type="submit">Daftar</button>
             </form>
             <div id="error-message" style="color: red; display: none;"></div>
@@ -51,8 +58,9 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-    <script src="../js/scripts.js"></script>
+    <!-- Scripts -->
     <script src="../js/firebase.js"></script>
+    <script src="../js/scripts.js"></script>
     <script src="../js/register.js"></script>
 </body>
 </html>
