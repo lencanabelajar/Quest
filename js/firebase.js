@@ -125,18 +125,21 @@ const updateProfile = (newEmail, newUsername) => {
   }
 };
 
-// Upload Profile Picture
+// Fungsi untuk meng-upload gambar profil
 const uploadProfilePicture = (file, uid) => {
   const allowedTypes = ['image/jpeg', 'image/png'];
   if (!allowedTypes.includes(file.type)) {
     alert('Please upload a valid image file.');
-    return;
+    return Promise.reject('Invalid file type');
   }
 
   const storageRef = ref(storage, 'profile-pictures/' + file.name);
-  uploadBytes(storageRef, file).then(snapshot => {
-    console.log('Uploaded a file!');
-    getDownloadURL(storageRef).then(url => {
+  return uploadBytes(storageRef, file)  // Mengupload file ke Firebase Storage
+    .then(snapshot => {
+      console.log('Uploaded a file!');
+      return getDownloadURL(storageRef);  // Mendapatkan URL gambar yang di-upload
+    })
+    .then(url => {
       // Simpan URL gambar profil ke Firestore
       setDoc(doc(db, "users", uid), { profilePicture: url }, { merge: true })
         .then(() => {
@@ -144,10 +147,12 @@ const uploadProfilePicture = (file, uid) => {
         }).catch(error => {
           console.error("Error updating profile picture:", error.message);
         });
+      return url;  // Mengembalikan URL untuk digunakan di register.js
+    })
+    .catch(error => {
+      console.error("Error uploading file:", error.message);
+      return Promise.reject(error);  // Menyebabkan error jika upload gagal
     });
-  }).catch(error => {
-    console.error("Error uploading file:", error.message);
-  });
 };
 
 // Panggil fungsi ini saat login atau setelah update XP
