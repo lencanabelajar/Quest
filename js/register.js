@@ -26,7 +26,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         signUp(username, password)
             .then(() => {
                 // Redirect setelah registrasi berhasil
-                window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+                window.location.href = '/html/home.html'; // Ganti dengan halaman home Anda
             })
             .catch(error => {
                 alert(`Error: ${error.message}`);
