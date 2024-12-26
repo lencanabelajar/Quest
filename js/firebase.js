@@ -123,7 +123,8 @@ const updateProfile = (newEmail, newUsername) => {
     setDoc(doc(db, "users", user.uid), {
       email: newEmail,
       username: newUsername
-    }).then(() => {
+    }, { merge: true })  // Gunakan { merge: true } untuk tidak menimpa data lainnya
+    .then(() => {
       console.log("User profile updated");
     }).catch(error => {
       console.error("Error updating profile:", error.message);
