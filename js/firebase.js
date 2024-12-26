@@ -25,30 +25,24 @@ const storage = getStorage();
 
 // Sign Up Function
 const signUp = (email, password) => {
-  // Validasi email dan password (contoh)
-  if (!email || !password) {
-    alert("Email dan password wajib diisi!");
-    return;
-  }
-
   return createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       const user = userCredential.user;
-      // Simpan data pengguna di Firestore
-      setDoc(doc(db, "users", user.uid), {
+      // Menyimpan data pengguna di Firestore (opsional)
+      return setDoc(doc(db, "users", user.uid), {
         email: user.email,
-        username: email.split('@')[0],  // Gunakan bagian email sebelum @ sebagai username
-        level: "Pemula",  // Default level
+        username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
+        level: "Pemula",  // Level default
         createdAt: new Date()
-      }).then(() => {
-        console.log("User data saved to Firestore");
-        window.location.href = "../html/home.html";  // Redirect to home page after sign up
       });
-      console.log("User signed up:", user);
+    })
+    .then(() => {
+      console.log("User data saved to Firestore");
+      return Promise.resolve(); // Pastikan promise selesai sebelum melanjutkan
     })
     .catch(error => {
       console.error("Error during sign-up:", error.message);
-      alert(`Pendaftaran gagal: ${error.message}`);
+      return Promise.reject(error); // Menangani error dan menolaknya kembali
     });
 };
 
