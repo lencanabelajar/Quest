@@ -1,4 +1,4 @@
-// Import fungsi signUp dari firebase.js
+// Import fungsi signUp dan uploadProfilePicture dari firebase.js
 import { signUp, uploadProfilePicture } from './firebase.js';  // Sesuaikan dengan lokasi firebase.js Anda
 
 // Tangani pengiriman form
