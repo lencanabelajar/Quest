@@ -41,10 +41,8 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         })
         .then(url => {
             if (url) {
-                // Jika gambar profil berhasil di-upload, simpan URL ke Firestore
+                // Jika gambar profil berhasil di-upload, simpan URL ke Firestore (jika diperlukan)
                 console.log('Gambar profil berhasil diupload:', url);
-                // Simpan URL gambar ke Firestore (jika diperlukan)
-                // updateProfilePicture(user.uid, url); // Jika ingin menyimpan ke Firestore
             }
 
             // Redirect setelah registrasi berhasil
