@@ -1,8 +1,7 @@
-// Import the necessary Firebase services
+// Import Firebase services yang dibutuhkan
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Firebase configuration
@@ -18,10 +17,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth();
-const db = getFirestore();
-const storage = getStorage();
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 // Sign Up Function
 const signUp = (email, password) => {
@@ -39,36 +37,11 @@ const signUp = (email, password) => {
     })
     .then(() => {
       console.log("User data saved to Firestore");
-      return Promise.resolve(); // Pastikan promise selesai sebelum melanjutkan
+      window.location.replace("../html/home.html");  // Redirect after registration
     })
     .catch(error => {
       console.error("Error during sign-up:", error.message);
-      return Promise.reject(error); // Menangani error dan menolaknya kembali
-    });
-};
-
-// Fungsi login tetap sama
-const login = (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      console.log("User logged in:", user);
-      window.location.href = "../html/home.html";  // Redirect to home page after login
-    })
-    .catch(error => {
-      console.error("Error during login:", error.message);
-    });
-};
-
-// Fungsi untuk logout tetap sama
-const logout = () => {
-  signOut(auth)
-    .then(() => {
-      console.log("User logged out");
-      window.location.href = "index.html";  // Redirect to login page after logout
-    })
-    .catch(error => {
-      console.error("Error during logout:", error.message);
+      alert(`Error: ${error.message}`); // Alert user for error
     });
 };
 
@@ -78,10 +51,11 @@ const login = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User logged in:", user);
-      window.location.href = "../html/home.html";  // Redirect to home page after login
+      window.location.replace("../html/home.html");  // Redirect to home page after login
     })
     .catch(error => {
       console.error("Error during login:", error.message);
+      alert(`Error: ${error.message}`); // Alert user for error
     });
 };
 
@@ -90,7 +64,7 @@ const logout = () => {
   signOut(auth)
     .then(() => {
       console.log("User logged out");
-      window.location.href = "index.html";  // Redirect to login page after logout
+      window.location.replace("index.html");  // Redirect to login page after logout
     })
     .catch(error => {
       console.error("Error during logout:", error.message);
@@ -101,39 +75,30 @@ const logout = () => {
 onAuthStateChanged(auth, user => {
   if (user) {
     console.log("User is signed in:", user);
-    // Display user information in the dashboard
     document.getElementById("username-display").innerText = user.email.split('@')[0];
   } else {
     console.log("User is signed out");
-    // Redirect to login page if not authenticated
-    window.location.href = "index.html";  // Redirect to login page if the user is not authenticated
+    window.location.replace("index.html");  // Redirect to login page if the user is not authenticated
   }
 });
 
-// Update Profile Function (Email, Username, etc.)
+// Profile Update Function
 const updateProfile = (newEmail, newUsername) => {
   const user = auth.currentUser;
   if (user) {
-    updateDoc(doc(db, "users", user.uid), {
+    setDoc(doc(db, "users", user.uid), {
       email: newEmail,
       username: newUsername
-    })
-      .then(() => {
-        console.log("User profile updated");
-        // Optionally, update user credentials in Firebase Authentication
-        user.updateEmail(newEmail)
-          .then(() => console.log("Email updated in Firebase Authentication"))
-          .catch(error => console.error("Error updating email in Firebase Authentication:", error));
-      })
-      .catch(error => {
-        console.error("Error updating user profile:", error);
-      });
+    }).then(() => {
+      console.log("User profile updated");
+    }).catch(error => {
+      console.error("Error updating profile:", error.message);
+    });
   }
 };
 
-// Upload Profile Picture to Firebase Storage
+// Upload Profile Picture
 const uploadProfilePicture = (file) => {
-  // Validasi file agar hanya menerima gambar
   const allowedTypes = ['image/jpeg', 'image/png'];
   if (!allowedTypes.includes(file.type)) {
     alert('Please upload a valid image file.');
@@ -145,45 +110,16 @@ const uploadProfilePicture = (file) => {
     console.log('Uploaded a file!');
     getDownloadURL(storageRef).then(url => {
       const user = auth.currentUser;
-      updateDoc(doc(db, "users", user.uid), {
-        profilePicture: url
-      }).then(() => {
-        console.log("Profile picture uploaded and URL saved");
-      }).catch(error => {
-        console.error("Error updating user profile:", error);
-      });
+      setDoc(doc(db, "users", user.uid), { profilePicture: url }, { merge: true })
+        .then(() => {
+          console.log("Profile picture uploaded and URL saved");
+        }).catch(error => {
+          console.error("Error updating profile picture:", error.message);
+        });
     });
   }).catch(error => {
-    console.error("Error uploading file:", error);
+    console.error("Error uploading file:", error.message);
   });
 };
 
-// Function to display user profile information
-const displayUserProfile = (userId) => {
-  getDoc(doc(db, "users", userId)).then(docSnap => {
-    if (docSnap.exists()) {
-      const userData = docSnap.data();
-      document.getElementById("user-email").innerText = userData.email;
-      document.getElementById("user-level").innerText = userData.level;
-      if (userData.profilePicture) {
-        document.getElementById("profile-img").src = userData.profilePicture;
-      }
-    } else {
-      console.log("No such document!");
-    }
-  }).catch(error => {
-    console.error("Error getting document:", error);
-  });
-};
-
-// Redirect if user is not authenticated (useful for pages like home)
-const redirectIfNotAuthenticated = () => {
-  onAuthStateChanged(auth, user => {
-    if (!user) {
-      // If user is not authenticated, redirect to login
-      window.location.href = "index.html";
-    }
-  });
-};
-
-export { signUp, login, logout, updateProfile, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
+export { signUp, login, logout, updateProfile, uploadProfilePicture };
