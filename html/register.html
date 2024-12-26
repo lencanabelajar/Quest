@@ -35,10 +35,10 @@
                 <input type="email" id="email" name="email" placeholder="example@domain.com" required>
                 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="******" required>
+                <input type="password" id="password" name="password" placeholder="******" required autocomplete="new-password">
                 
                 <label for="confirm-password">Konfirmasi Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="******" required>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="******" required autocomplete="new-password">
                 
                 <!-- Optional: Avatar upload -->
                 <label for="profile-image">Upload Gambar Profil:</label>
@@ -61,6 +61,6 @@
     <!-- Scripts -->
     <script src="../js/firebase.js"></script>
     <script src="../js/scripts.js"></script>
-    <script src="../js/register.js"></script>
+    <script type="module" src="path/to/register.js"></script>
 </body>
 </html>
