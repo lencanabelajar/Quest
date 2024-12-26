@@ -72,7 +72,7 @@ const login = (email, password) => {
         }
       });
 
-      window.location.replace("../html/home.html");
+      window.location.replace("html/home.html");
     })
     .catch(error => {
       console.error("Error during login:", error.message);
