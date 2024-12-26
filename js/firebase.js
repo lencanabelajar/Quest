@@ -44,7 +44,7 @@ const signUp = async (email, password) => {
     });
 
     console.log("User data saved to Firestore");
-    window.location.replace("../html/home.html");  // Redirect after registration
+    window.location.replace("/html/home.html");  // Redirect after registration
   } catch (error) {
     console.error("Error during sign-up:", error.message);
     alert(`Error: ${error.message}`); // Alert user for error
