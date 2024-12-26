@@ -126,7 +126,6 @@ const displayUserProfileInfo = (userId) => {
 
 // Example usage for leaderboards and game statistics, to display in leaderboard.html
 const updateLeaderboard = () => {
-  // Logic to update leaderboard, e.g. fetching data from Firestore
   const leaderboardRef = firebase.firestore().collection('leaderboards');
   leaderboardRef.get().then(snapshot => {
     snapshot.forEach(doc => {
@@ -172,16 +171,14 @@ const handlePagination = () => {
 
 // Function to load the list of games based on the current page
 const loadGames = (page) => {
-  // Example: load games for the current page (pagination logic)
   const gamesContainer = document.querySelector('.games-container');
   gamesContainer.innerHTML = ''; // Clear previous games
 
-  // Fetch and display the games for the selected page
   const gamesPerPage = 6;
   const start = (page - 1) * gamesPerPage;
   const end = start + gamesPerPage;
   
-  // Example list of games, replace this with actual data fetching logic
+  // Replace with actual API/database call
   const gamesList = [
     { title: "Fortnite Royal Battle", description: "Aset Pertanian Bronze Level", url: "#" },
     { title: "Game 2", description: "Game description here", url: "#" },
