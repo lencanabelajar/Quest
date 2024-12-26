@@ -13,6 +13,7 @@ if (usernameFromUrl && passwordFromUrl) {
 }
 
 // Tangani pengiriman form
+// Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
     
@@ -25,10 +26,12 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         // Menggunakan fungsi signUp dari firebase.js untuk melakukan registrasi
         signUp(username, password)
             .then(() => {
+                console.log("Registration successful! Redirecting to home.html");
                 // Redirect setelah registrasi berhasil
                 window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
             })
             .catch(error => {
+                console.error("Registration failed:", error.message);
                 alert(`Error: ${error.message}`);
             });
     } else {
