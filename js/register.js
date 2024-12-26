@@ -20,7 +20,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     // Proses pendaftaran (misalnya Firebase Authentication atau sistem backend lainnya)
     if (username && password) {
         // Contoh pengalihan setelah berhasil daftar
-        window.location.href = '../home.html'; // Ganti dengan halaman home Anda
+        window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
     } else {
         alert('Harap isi semua kolom!');
     }
