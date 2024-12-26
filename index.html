@@ -28,9 +28,11 @@
                 <a href="html/store.html" class="menu-item">💰</a>
                 <a href="html/news.html" class="menu-item">📰</a>
                 <a href="html/community.html" class="menu-item">🌏</a>
-                <a href="html/login.html" class="menu-item">Log In</a>
-                <a href="html/register.html" class="menu-item">Daftar</a>
-                <a href="../html/login.html" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
+                <!-- Tampilkan menu Log In dan Daftar jika user belum login -->
+                <a href="html/login.html" id="login-link" class="menu-item">Log In</a>
+                <a href="html/register.html" id="register-link" class="menu-item">Daftar</a>
+                <!-- Tampilkan menu Log Out dan username jika user sudah login -->
+                <a href="#" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
                 <span id="user-name" style="display: none; margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
             </nav>
         </div>
@@ -40,7 +42,8 @@
         <section class="recent-games">
             <h2>Daftar Game</h2>
             <div class="games-container">
-                <!-- Setiap game item -->
+                <!-- Game Items -->
+                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
                 <div class="game-item">
                     <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
                         <h3>Fortnite Royal Battle</h3>
@@ -49,69 +52,40 @@
                         <p>Online</p>
                     </a>
                 </div>
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                 <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
+                <!-- Tambahkan lebih banyak game di sini -->
             </div>
         </section>
-                <div class="pagination">
-                    <button disabled>Prev</button>
-                    <button>1</button>
-                    <button>2</button>
-                    <button>Next</button>
-                </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button disabled>Prev</button>
+            <button>1</button>
+            <button>2</button>
+            <button>Next</button>
+        </div>
+
         <section class="game-favourite">
             <h2>Game Baru</h2>
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-info">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
+            <div class="game-item">
+                <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-info">
+                    <h3>Fortnite Royal Battle</h3>
+                    <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois">
+                    <p>Aset Pertanian Bronze Level</p>
+                    <p>Online</p>
+                </a>
             </div>
         </section>
-     </main>
-        <footer>
-            <address>
-                Dibuat oleh Hariyanto - WA +62 856-0932-6414 - Kabupaten Kepahiang
-            </address>
-            <p>&copy; 2024 QUEST.ID All rights reserved.</p>
-        </footer>
+    </main>
 
-        <!-- Skrip JavaScript -->
-            <script src="js/firebase.js"></script>
-            <script src="js/scripts.js"></script>
+    <footer>
+        <address>
+            Dibuat oleh Hariyanto - WA +62 856-0932-6414 - Kabupaten Kepahiang
+        </address>
+        <p>&copy; 2024 QUEST.ID All rights reserved.</p>
+    </footer>
 
+    <!-- Skrip JavaScript -->
+    <script src="js/firebase.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
