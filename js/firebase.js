@@ -49,7 +49,7 @@ const login = (email, password) => {
       const user = userCredential.user;
       console.log("User logged in:", user);
       // Redirect to home page after login
-      window.location.href = "home.html";
+      window.location.href = "home.html";window.location.href = "html/home.html";  // Sesuaikan dengan struktur folder
     })
     .catch(error => {
       console.error("Error during login:", error.message);
