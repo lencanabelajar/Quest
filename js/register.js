@@ -1,3 +1,6 @@
+// Import fungsi signUp dari firebase.js
+import { signUp } from './firebase.js';  // Sesuaikan dengan lokasi firebase.js Anda
+
 // Ambil parameter dari URL
 const urlParams = new URLSearchParams(window.location.search);
 const usernameFromUrl = urlParams.get('username');
@@ -17,10 +20,17 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Proses pendaftaran (misalnya Firebase Authentication atau sistem backend lainnya)
+    // Proses pendaftaran menggunakan Firebase Authentication
     if (username && password) {
-        // Contoh pengalihan setelah berhasil daftar
-        window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+        // Menggunakan fungsi signUp dari firebase.js untuk melakukan registrasi
+        signUp(username, password)
+            .then(() => {
+                // Redirect setelah registrasi berhasil
+                window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+            })
+            .catch(error => {
+                alert(`Error: ${error.message}`);
+            });
     } else {
         alert('Harap isi semua kolom!');
     }
