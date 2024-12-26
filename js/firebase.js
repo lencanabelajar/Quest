@@ -85,8 +85,36 @@ onAuthStateChanged(auth, user => {
   }
 });
 
+// Update Profile Function (Email, Username, etc.)
+const updateProfile = (newEmail, newUsername) => {
+  const user = auth.currentUser;
+  if (user) {
+    updateDoc(doc(db, "users", user.uid), {
+      email: newEmail,
+      username: newUsername
+    })
+      .then(() => {
+        console.log("User profile updated");
+        // Optionally, update user credentials in Firebase Authentication
+        user.updateEmail(newEmail)
+          .then(() => console.log("Email updated in Firebase Authentication"))
+          .catch(error => console.error("Error updating email in Firebase Authentication:", error));
+      })
+      .catch(error => {
+        console.error("Error updating user profile:", error);
+      });
+  }
+};
+
 // Upload Profile Picture to Firebase Storage
 const uploadProfilePicture = (file) => {
+  // Validasi file agar hanya menerima gambar
+  const allowedTypes = ['image/jpeg', 'image/png'];
+  if (!allowedTypes.includes(file.type)) {
+    alert('Please upload a valid image file.');
+    return;
+  }
+
   const storageRef = ref(storage, 'profile-pictures/' + file.name);
   uploadBytes(storageRef, file).then(snapshot => {
     console.log('Uploaded a file!');
@@ -133,14 +161,4 @@ const redirectIfNotAuthenticated = () => {
   });
 };
 
-export { signUp, login, logout, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    console.log("User is signed in:", user); // Debugging
-  } else {
-    console.log("User is signed out");
-    // Redirect to login page if not authenticated
-    window.location.href = "index.html";  // Redirect to login page if the user is not authenticated
-  }
-});
+export { signUp, login, logout, updateProfile, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
