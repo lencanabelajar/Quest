@@ -50,18 +50,6 @@
 
     <script src="../js/scripts.js"></script>
     <script src="../js/firebase.js"></script>
-    <script>
-// Ambil parameter dari URL
-const urlParams = new URLSearchParams(window.location.search);
-const usernameFromUrl = urlParams.get('username');
-const passwordFromUrl = urlParams.get('password');
-
-// Isi form dengan nilai parameter URL jika ada
-if (usernameFromUrl && passwordFromUrl) {
-    document.getElementById('username').value = usernameFromUrl;
-    document.getElementById('password').value = passwordFromUrl;
-}
-</script>
-
+    <script src="../js/register.js"></script>
 </body>
 </html>
