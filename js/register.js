@@ -1,5 +1,5 @@
 // Import fungsi signUp dan uploadProfilePicture dari firebase.js
-import { signUp, uploadProfilePicture } from './firebase.js';
+import { signUp, uploadProfilePicture } from './firebase.js'; // Sesuaikan dengan lokasi firebase.js Anda
 
 // Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
@@ -34,8 +34,8 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     signUp(email, password)
         .then(user => {
             // Jika ada gambar profil yang diupload, lakukan upload ke Firebase Storage
-            if (profileImageInput.files.length > 0) {
-                const file = profileImageInput.files[0];
+            const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
+            if (file) {
                 return uploadProfilePicture(file, user.uid);  // Mengupload gambar dan mengembalikan URL gambar
             } else {
                 // Jika tidak ada gambar profil yang diupload, langsung lanjutkan
@@ -43,17 +43,15 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
             }
         })
         .then(url => {
+            // Jika gambar profil berhasil di-upload, simpan URL ke Firestore (jika diperlukan)
             if (url) {
-                // Jika gambar profil berhasil di-upload, simpan URL ke Firestore (jika diperlukan)
                 console.log('Gambar profil berhasil diupload:', url);
                 // Simpan URL gambar ke Firestore (misalnya dengan fungsi `updateProfilePicture`)
             }
 
             // Redirect setelah registrasi berhasil
-            setTimeout(() => {
-                console.log("Registrasi berhasil! Menuju halaman utama.");
-                window.location.href = 'html/home.html'; // Ganti dengan halaman home Anda
-            }, 1000); // Penundaan 1 detik untuk menunggu proses
+            console.log("Registrasi berhasil! Menuju halaman utama.");
+            window.location.href = 'html/home.html'; // Ganti dengan halaman home Anda
         })
         .catch(error => {
             console.error("Registrasi gagal:", error.message);
