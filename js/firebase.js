@@ -21,32 +21,33 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-// Sign Up Function
-const signUp = (email, password) => {
-  console.log("Starting signUp with:", email, password); // Debugging
-  return createUserWithEmailAndPassword(auth, email, password)
-    .then(userCredential => {
-      const user = userCredential.user;
-      console.log("User created:", user); // Debugging
-      // Save user data to Firestore
-      return setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
-        level: "Pemula",  // Level default
-        createdAt: new Date(),
-        xp: 0,            // XP default
-        questTokens: 5,    // Quest Tokens default
-        tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
-      });
-    })
-    .then(() => {
-      console.log("User data saved to Firestore");
-      window.location.replace("../html/home.html");  // Redirect after registration
-    })
-    .catch(error => {
-      console.error("Error during sign-up:", error.message);
-      alert(`Error: ${error.message}`); // Alert user for error
+// Sign Up Function with async/await
+const signUp = async (email, password) => {
+  try {
+    console.log("Starting signUp with:", email, password); // Debugging
+
+    // Create user with Firebase Authentication
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User created:", user); // Debugging
+
+    // Save user data to Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
+      level: "Pemula",  // Level default
+      createdAt: new Date(),
+      xp: 0,            // XP default
+      questTokens: 5,    // Quest Tokens default
+      tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
     });
+
+    console.log("User data saved to Firestore");
+    window.location.replace("../html/home.html");  // Redirect after registration
+  } catch (error) {
+    console.error("Error during sign-up:", error.message);
+    alert(`Error: ${error.message}`); // Alert user for error
+  }
 };
 
 // Login Function
