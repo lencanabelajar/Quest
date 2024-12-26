@@ -1,10 +1,8 @@
 // Import Firebase services yang dibutuhkan
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, updateDoc, Timestamp } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, getDoc, Timestamp } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getDoc } from "firebase/firestore";
-import { Timestamp } from "firebase/firestore";  // Pastikan menggunakan Timestamp yang benar
 
 // Firebase configuration
 const firebaseConfig = {
@@ -30,18 +28,16 @@ const signUp = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User created:", user); // Debugging
-      setDoc(doc(db, "users", user.uid), {
-            email: user.email,
-            username: email.split('@')[0],
-            level: "Pemula",  // Level default
-            createdAt: new Date(),
-            xp: 0,            // XP default
-            questTokens: 5,    // Quest Tokens default
-            tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
-          }).then(() => {
-            console.log("User data saved to Firestore");
-            window.location.replace("../html/home.html");  // Redirect after registration
-          });
+      // Save user data to Firestore
+      return setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
+        level: "Pemula",  // Level default
+        createdAt: new Date(),
+        xp: 0,            // XP default
+        questTokens: 5,    // Quest Tokens default
+        tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
+      });
     })
     .then(() => {
       console.log("User data saved to Firestore");
@@ -59,20 +55,20 @@ const login = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User logged in:", user);
-      
-        // Cek XP dan tentukan level saat login
-        const userDoc = doc(db, "users", user.uid);
-        getDoc(userDoc).then(docSnap => {
-          if (docSnap.exists()) {
-            const userData = docSnap.data();
-            const xp = userData.xp || 0;  // Pastikan ada nilai xp
-            const level = getLevelFromXP(xp);  // Update level berdasarkan XP
-            updateDoc(userDoc, {
-              lastLogin: Timestamp.now(),
-              level: level,  // Level yang baru
-            });
-          }
-        });
+
+      // Cek XP dan tentukan level saat login
+      const userDoc = doc(db, "users", user.uid);
+      getDoc(userDoc).then(docSnap => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const xp = userData.xp || 0;  // Pastikan ada nilai xp
+          const level = getLevelFromXP(xp);  // Update level berdasarkan XP
+          updateDoc(userDoc, {
+            lastLogin: Timestamp.now(),
+            level: level,  // Level yang baru
+          });
+        }
+      });
 
       window.location.replace("../html/home.html");
     })
@@ -89,16 +85,6 @@ const getLevelFromXP = (xp) => {
   if (xp >= 500) return "Silver";
   return "Bronze";  // Default level
 };
-
-return setDoc(doc(db, "users", user.uid), {
-  email: user.email,
-  username: email.split('@')[0],
-  level: "Pemula",  // Level default
-  createdAt: new Date(),
-  xp: 0,            // XP default
-  questTokens: 5,    // Quest Tokens default
-  tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
-});
 
 // Logout Function
 const logout = () => {
@@ -165,14 +151,34 @@ const uploadProfilePicture = (file) => {
 };
 
 // Panggil fungsi ini saat login atau setelah update XP
-updateLevel(user.uid, xp);
+const updateLevel = (userId, xp) => {
+  let level = "Bronze";  // Default level
 
-updateDoc(doc(db, "users", user.uid), {
-  lastLogin: Timestamp.now(),  // Update last login time
-  level: "Bronze",  // Atur level, bisa diubah berdasarkan XP
-  questTokens: 5,   // Menyimpan jumlah token
-  tasksCompleted: [], // Daftar tugas yang telah diselesaikan
-  xp: 100           // XP pengguna
-});
+  // Logika untuk menentukan level berdasarkan XP
+  if (xp >= 1500) {
+    level = "Diamond";  // XP >= 1500 berarti Diamond
+  } else if (xp >= 1000) {
+    level = "Gold";  // XP >= 1000 berarti Gold
+  } else if (xp >= 500) {
+    level = "Silver";  // XP >= 500 berarti Silver
+  }
 
-export { signUp, login, logout, updateProfile, uploadProfilePicture };
+  // Update level di Firestore
+  updateDoc(doc(db, "users", userId), {
+    level: level
+  });
+};
+
+// Panggil fungsi ini saat login atau setelah update XP
+const updateUserLevelAfterLogin = (userId) => {
+  const userDoc = doc(db, "users", userId);
+  getDoc(userDoc).then(docSnap => {
+    if (docSnap.exists()) {
+      const userData = docSnap.data();
+      const xp = userData.xp || 0;
+      updateLevel(userId, xp); // Update level berdasarkan XP
+    }
+  });
+};
+
+export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevelAfterLogin };
