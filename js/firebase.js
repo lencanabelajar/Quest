@@ -47,6 +47,31 @@ const signUp = (email, password) => {
     });
 };
 
+// Fungsi login tetap sama
+const login = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      console.log("User logged in:", user);
+      window.location.href = "../html/home.html";  // Redirect to home page after login
+    })
+    .catch(error => {
+      console.error("Error during login:", error.message);
+    });
+};
+
+// Fungsi untuk logout tetap sama
+const logout = () => {
+  signOut(auth)
+    .then(() => {
+      console.log("User logged out");
+      window.location.href = "index.html";  // Redirect to login page after logout
+    })
+    .catch(error => {
+      console.error("Error during logout:", error.message);
+    });
+};
+
 // Login Function
 const login = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password)
