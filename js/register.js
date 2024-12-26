@@ -13,17 +13,20 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
 
     // Validasi form
     if (!email || !password || !confirmPassword) {
-        alert('Harap isi semua kolom!');
+        document.getElementById('error-message').innerText = 'Harap isi semua kolom!';
+        document.getElementById('error-message').style.display = 'block';
         return;
     }
 
-    if (password !== confirmPassword) {
-        alert('Password dan Konfirmasi Password tidak cocok!');
+   if (password !== confirmPassword) {
+        document.getElementById('error-message').innerText = 'Password dan Konfirmasi Password tidak cocok!';
+        document.getElementById('error-message').style.display = 'block';
         return;
     }
 
     if (password.length < 6) {
-        alert('Password harus memiliki minimal 6 karakter!');
+        document.getElementById('error-message').innerText = 'Password harus memiliki minimal 6 karakter!';
+        document.getElementById('error-message').style.display = 'block';
         return;
     }
 
@@ -52,6 +55,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         })
         .catch(error => {
             console.error("Registrasi gagal:", error.message);
-            alert(`Gagal registrasi: ${error.message}`);
+            document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
+            document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
         });
 });
