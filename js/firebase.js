@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, updateDoc, Timestamp } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getDoc } from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";  // Pastikan menggunakan Timestamp yang benar
 
 // Firebase configuration
 const firebaseConfig = {
@@ -28,12 +30,18 @@ const signUp = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User created:", user); // Debugging
-      return setDoc(doc(db, "users", user.uid), {
-        email: user.email,
-        username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
-        level: "Pemula",  // Level default
-        createdAt: new Date()
-      });
+      setDoc(doc(db, "users", user.uid), {
+            email: user.email,
+            username: email.split('@')[0],
+            level: "Pemula",  // Level default
+            createdAt: new Date(),
+            xp: 0,            // XP default
+            questTokens: 5,    // Quest Tokens default
+            tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
+          }).then(() => {
+            console.log("User data saved to Firestore");
+            window.location.replace("../html/home.html");  // Redirect after registration
+          });
     })
     .then(() => {
       console.log("User data saved to Firestore");
@@ -52,20 +60,19 @@ const login = (email, password) => {
       const user = userCredential.user;
       console.log("User logged in:", user);
       
-      // Ambil data pengguna dari Firestore
-      const userDoc = doc(db, "users", user.uid);
-      getDoc(userDoc).then(docSnap => {
-        if (docSnap.exists()) {
-          const userData = docSnap.data();
-          const xp = userData.xp || 0;  // Pastikan ada nilai xp
-          
-          // Update lastLogin dan level pengguna
-          updateDoc(userDoc, {
-            lastLogin: Timestamp.now(),
-            level: getLevelFromXP(xp),  // Update level berdasarkan XP
-          });
-        }
-      });
+        // Cek XP dan tentukan level saat login
+        const userDoc = doc(db, "users", user.uid);
+        getDoc(userDoc).then(docSnap => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const xp = userData.xp || 0;  // Pastikan ada nilai xp
+            const level = getLevelFromXP(xp);  // Update level berdasarkan XP
+            updateDoc(userDoc, {
+              lastLogin: Timestamp.now(),
+              level: level,  // Level yang baru
+            });
+          }
+        });
 
       window.location.replace("../html/home.html");
     })
@@ -157,31 +164,8 @@ const uploadProfilePicture = (file) => {
   });
 };
 
-const updateLevel = (userId, xp) => {
-  let level = "Bronze";  // Default level
-
-  // Logika untuk menentukan level berdasarkan XP
-  if (xp >= 1000) {
-    level = "Gold";  // XP >= 1000 berarti Gold
-  } else if (xp >= 500) {
-    level = "Silver";  // XP >= 500 berarti Silver
-  } else if (xp >= 100) {
-    level = "Bronze";  // XP >= 100 berarti Bronze
-  }
-
-  // Jika XP lebih tinggi, beri level Diamond
-  if (xp >= 1500) {
-    level = "Diamond";  // Diamond level untuk XP >= 1500
-  }
-
-  // Update level di Firestore
-  updateDoc(doc(db, "users", userId), {
-    level: level
-  });
-};
-
 // Panggil fungsi ini saat login atau setelah update XP
-updateLevel(user.uid, user.xp);
+updateLevel(user.uid, xp);
 
 updateDoc(doc(db, "users", user.uid), {
   lastLogin: Timestamp.now(),  // Update last login time
