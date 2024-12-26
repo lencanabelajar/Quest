@@ -42,7 +42,7 @@ const signUp = (email, password) => {
         createdAt: new Date()
       }).then(() => {
         console.log("User data saved to Firestore");
-        window.location.href = "home.html";  // Redirect to home page after sign up
+        window.location.href = "../html/home.html";  // Redirect to home page after sign up
       });
       console.log("User signed up:", user);
     })
