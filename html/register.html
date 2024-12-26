@@ -43,9 +43,15 @@
                 <!-- Optional: Avatar upload -->
                 <label for="profile-image">Upload Gambar Profil:</label>
                 <input type="file" id="profile-image" name="profile-image" accept="image/png, image/jpeg">
-               
+                
+                <!-- Loading Spinner -->
+                <div id="loading-spinner" style="display: none;">
+                    <img src="assets/spinner.gif" alt="Loading..."> <!-- Ganti dengan spinner gif yang sesuai -->
+                </div>
+
                 <button type="submit">Daftar</button>
             </form>
+
             <!-- Pesan kesalahan ditampilkan di sini -->
             <div id="error-message" style="color: red; display: none;"></div>
             <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
