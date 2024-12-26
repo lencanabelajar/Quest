@@ -2,6 +2,7 @@
 import { login } from './firebase.js';  // Sesuaikan dengan lokasi firebase.js Anda
 
 // Tangani pengiriman form
+// Tangani pengiriman form
 document.getElementById('login-form').addEventListener('submit', function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
     
@@ -11,7 +12,8 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
 
     // Validasi form
     if (!email || !password) {
-        alert('Harap isi semua kolom!');
+        document.getElementById('error-message').innerText = 'Harap isi semua kolom!';
+        document.getElementById('error-message').style.display = 'block';
         return;
     }
 
@@ -26,6 +28,7 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         })
         .catch(error => {
             console.error("Login gagal:", error.message);
-            alert(`Gagal login: ${error.message}`);
+            document.getElementById('error-message').innerText = `Gagal login: ${error.message}`;
+            document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
         });
 });
