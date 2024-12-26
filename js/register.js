@@ -59,7 +59,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
                 // Tambahkan penundaan sedikit agar proses selesai sebelum redirect
                 setTimeout(() => {
                     console.log("Registrasi berhasil! Menuju halaman utama.");
-                    window.location.href = 'html/home.html'; // Ganti dengan halaman home Anda
+                    window.location.replace('html/home.html'); // Ganti dengan halaman home Anda
                 }, 1000); // Penundaan 1 detik
             })
 
