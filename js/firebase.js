@@ -169,3 +169,13 @@ onAuthStateChanged(auth, user => {
     document.getElementById("username-display").innerText = user.email.split('@')[0];
   }
 });
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    document.getElementById("logout-btn").style.display = "block";
+    document.getElementById("username-display").innerText = user.email.split('@')[0];
+  } else {
+    document.getElementById("logout-btn").style.display = "none";
+    window.location.href = "index.html";  // Pengguna diarahkan ke login jika tidak terautentikasi
+  }
+});
