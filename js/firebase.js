@@ -1,7 +1,7 @@
 // Import Firebase services yang dibutuhkan
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, updateDoc, Timestamp } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Firebase configuration
@@ -52,18 +52,46 @@ const login = (email, password) => {
       const user = userCredential.user;
       console.log("User logged in:", user);
       
-     // Update lastLogin di Firestore setelah login
-      updateDoc(doc(db, "users", user.uid), {
-        lastLogin: firebase.firestore.Timestamp.now()  // Update timestamp login
-      });      
-      
-      window.location.replace("../html/home.html");  // Redirect to home page after login
+      // Ambil data pengguna dari Firestore
+      const userDoc = doc(db, "users", user.uid);
+      getDoc(userDoc).then(docSnap => {
+        if (docSnap.exists()) {
+          const userData = docSnap.data();
+          const xp = userData.xp || 0;  // Pastikan ada nilai xp
+          
+          // Update lastLogin dan level pengguna
+          updateDoc(userDoc, {
+            lastLogin: Timestamp.now(),
+            level: getLevelFromXP(xp),  // Update level berdasarkan XP
+          });
+        }
+      });
+
+      window.location.replace("../html/home.html");
     })
     .catch(error => {
       console.error("Error during login:", error.message);
-      alert(`Error: ${error.message}`); // Alert user for error
+      alert(`Error: ${error.message}`);
     });
 };
+
+// Fungsi untuk menentukan level berdasarkan XP
+const getLevelFromXP = (xp) => {
+  if (xp >= 1500) return "Diamond";
+  if (xp >= 1000) return "Gold";
+  if (xp >= 500) return "Silver";
+  return "Bronze";  // Default level
+};
+
+return setDoc(doc(db, "users", user.uid), {
+  email: user.email,
+  username: email.split('@')[0],
+  level: "Pemula",  // Level default
+  createdAt: new Date(),
+  xp: 0,            // XP default
+  questTokens: 5,    // Quest Tokens default
+  tasksCompleted: [] // Daftar tugas yang telah diselesaikan (kosong untuk sementara)
+});
 
 // Logout Function
 const logout = () => {
@@ -155,7 +183,7 @@ const updateLevel = (userId, xp) => {
 updateLevel(user.uid, user.xp);
 
 updateDoc(doc(db, "users", user.uid), {
-  lastLogin: firebase.firestore.Timestamp.now(),  // Update last login time
+  lastLogin: Timestamp.now(),  // Update last login time
   level: "Bronze",  // Atur level, bisa diubah berdasarkan XP
   questTokens: 5,   // Menyimpan jumlah token
   tasksCompleted: [], // Daftar tugas yang telah diselesaikan
