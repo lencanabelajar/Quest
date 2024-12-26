@@ -51,6 +51,12 @@ const login = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User logged in:", user);
+      
+     // Update lastLogin di Firestore setelah login
+      updateDoc(doc(db, "users", user.uid), {
+        lastLogin: firebase.firestore.Timestamp.now()  // Update timestamp login
+      });      
+      
       window.location.replace("../html/home.html");  // Redirect to home page after login
     })
     .catch(error => {
@@ -121,5 +127,39 @@ const uploadProfilePicture = (file) => {
     console.error("Error uploading file:", error.message);
   });
 };
+
+const updateLevel = (userId, xp) => {
+  let level = "Bronze";  // Default level
+
+  // Logika untuk menentukan level berdasarkan XP
+  if (xp >= 1000) {
+    level = "Gold";  // XP >= 1000 berarti Gold
+  } else if (xp >= 500) {
+    level = "Silver";  // XP >= 500 berarti Silver
+  } else if (xp >= 100) {
+    level = "Bronze";  // XP >= 100 berarti Bronze
+  }
+
+  // Jika XP lebih tinggi, beri level Diamond
+  if (xp >= 1500) {
+    level = "Diamond";  // Diamond level untuk XP >= 1500
+  }
+
+  // Update level di Firestore
+  updateDoc(doc(db, "users", userId), {
+    level: level
+  });
+};
+
+// Panggil fungsi ini saat login atau setelah update XP
+updateLevel(user.uid, user.xp);
+
+updateDoc(doc(db, "users", user.uid), {
+  lastLogin: firebase.firestore.Timestamp.now(),  // Update last login time
+  level: "Bronze",  // Atur level, bisa diubah berdasarkan XP
+  questTokens: 5,   // Menyimpan jumlah token
+  tasksCompleted: [], // Daftar tugas yang telah diselesaikan
+  xp: 100           // XP pengguna
+});
 
 export { signUp, login, logout, updateProfile, uploadProfilePicture };
