@@ -25,10 +25,11 @@ const storage = getStorage();
 
 // Sign Up Function
 const signUp = (email, password) => {
+  console.log("Starting signUp with:", email, password); // Debugging
   return createUserWithEmailAndPassword(auth, email, password)
     .then(userCredential => {
       const user = userCredential.user;
-      // Menyimpan data pengguna di Firestore (opsional)
+      console.log("User created:", user); // Debugging
       return setDoc(doc(db, "users", user.uid), {
         email: user.email,
         username: email.split('@')[0],  // Menggunakan bagian email sebelum @ sebagai username
@@ -133,3 +134,13 @@ const redirectIfNotAuthenticated = () => {
 };
 
 export { signUp, login, logout, uploadProfilePicture, displayUserProfile, redirectIfNotAuthenticated };
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    console.log("User is signed in:", user); // Debugging
+  } else {
+    console.log("User is signed out");
+    // Redirect to login page if not authenticated
+    window.location.href = "index.html";  // Redirect to login page if the user is not authenticated
+  }
+});
