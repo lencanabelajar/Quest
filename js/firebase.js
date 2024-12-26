@@ -126,7 +126,7 @@ const updateProfile = (newEmail, newUsername) => {
 };
 
 // Upload Profile Picture
-const uploadProfilePicture = (file) => {
+const uploadProfilePicture = (file, uid) => {
   const allowedTypes = ['image/jpeg', 'image/png'];
   if (!allowedTypes.includes(file.type)) {
     alert('Please upload a valid image file.');
@@ -137,8 +137,8 @@ const uploadProfilePicture = (file) => {
   uploadBytes(storageRef, file).then(snapshot => {
     console.log('Uploaded a file!');
     getDownloadURL(storageRef).then(url => {
-      const user = auth.currentUser;
-      setDoc(doc(db, "users", user.uid), { profilePicture: url }, { merge: true })
+      // Simpan URL gambar profil ke Firestore
+      setDoc(doc(db, "users", uid), { profilePicture: url }, { merge: true })
         .then(() => {
           console.log("Profile picture uploaded and URL saved");
         }).catch(error => {
