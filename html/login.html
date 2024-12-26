@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login - QUEST.ID">
-    <meta property="og:title" content="Login - Quest.ID">
-    <meta property="og:description" content="Masuk ke akun QUEST.ID Anda">
+    <meta name="description" content="Masuk - QUEST.ID">
+    <meta property="og:title" content="Masuk - Quest.ID">
+    <meta property="og:description" content="Masuk ke akun QUEST.ID">
     <meta property="og:image" content="assets/icon/QUEST.ID.png">
     <meta property="og:url" content="https://quest.id/login">
     <meta name="twitter:card" content="summary_large_image">
 
-    <title>Login - QUEST.ID</title>
+    <title>Masuk - QUEST.ID</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/styles.css">
@@ -29,14 +29,17 @@
 
     <main class="dashboard-main">
         <section class="login-section">
-            <h2>Log In</h2>
-            <form id="login-form">
-                <label for="username">Email:</label>
-                <input type="email" id="username" name="email" required> <!-- Mengganti name menjadi "email" -->
+            <h2>Masuk ke Akun</h2>
+            <form id="login-form" autocomplete="off">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+                
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Log In</button>
+                <input type="password" id="password" name="password" placeholder="******" required>
+                
+                <button type="submit">Masuk</button>
             </form>
+            <div id="error-message" style="color: red; display: none;"></div>
             <p>Belum punya akun? <a href="register.html">Daftar</a></p>
         </section>
     </main>
@@ -48,8 +51,8 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-       <script src="../js/scripts.js"></script>
-       <script src="../js/login.js"></script>
-       <script src="../js/firebase.js"></script>
+    <script src="../js/scripts.js"></script>
+    <script src="../js/firebase.js"></script>
+    <script src="../js/login.js"></script>
 </body>
 </html>
