@@ -58,7 +58,7 @@ const login = (email, password) => {
     .then(userCredential => {
       const user = userCredential.user;
       console.log("User logged in:", user);
-      window.location.href = "home.html";  // Redirect to home page after login
+      window.location.href = "../html/home.html";  // Redirect to home page after login
     })
     .catch(error => {
       console.error("Error during login:", error.message);
