@@ -1,5 +1,5 @@
-// Import fungsi signUp dan uploadProfilePicture dari firebase.js
-import { signUp, uploadProfilePicture, updateProfilePicture } from './firebase.js'; // Sesuaikan dengan lokasi firebase.js Anda
+// Import fungsi untuk menyimpan data ke Airtable
+import { saveUserToAirtable } from './airtable.js'; // Sesuaikan dengan lokasi airtable.js Anda
 
 // Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
@@ -33,38 +33,27 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     // Menampilkan loading spinner
     document.getElementById('loading-spinner').style.display = 'block';
 
-    // Proses pendaftaran menggunakan Firebase Authentication
-    signUp(email, password)
+    // Proses pendaftaran dan simpan ke Airtable
+    saveUserToAirtable(email, password)
         .then(user => {
-            // Jika ada gambar profil yang diupload, lakukan upload ke Firebase Storage
+            // Jika ada gambar profil yang diupload, simpan gambar ke server atau URL
             const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
             if (file) {
-                return uploadProfilePicture(file, user.uid);  // Mengupload gambar dan mengembalikan URL gambar
+                // Bisa menambahkan logika untuk mengupload gambar dan simpan URL-nya
+                return uploadProfilePicture(file, user.id);  // Gantilah dengan cara upload yang sesuai
             } else {
-                // Jika tidak ada gambar profil yang diupload, langsung lanjutkan
-                return Promise.resolve();  // Kembalikan promise yang resolve untuk melanjutkan alur
-            }
-        })
-        .then(url => {
-            // Jika gambar profil berhasil di-upload, simpan URL ke Firestore
-            if (url) {
-                console.log('Gambar profil berhasil diupload:', url);
-                // Simpan URL gambar ke Firestore (misalnya dengan fungsi `updateProfilePicture`)
-                return updateProfilePicture(user.uid, url);
+                return Promise.resolve(); // Lanjutkan tanpa gambar profil
             }
         })
         .then(() => {
             // Sembunyikan loading spinner setelah registrasi selesai
             document.getElementById('loading-spinner').style.display = 'none';
-
-            // Redirect setelah registrasi berhasil
             console.log("Registrasi berhasil! Menuju halaman utama.");
             window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
         })
         .catch(error => {
             // Menyembunyikan loading spinner jika terjadi error
             document.getElementById('loading-spinner').style.display = 'none';
-
             console.error("Registrasi gagal:", error.message);
             document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
             document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
