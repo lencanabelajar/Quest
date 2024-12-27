@@ -1,4 +1,4 @@
-import { signUp, login, logout, uploadProfilePicture, displayUserProfile } from './airtable.js';
+import { displayUserProfile } from './airtable.js';
 
 // Elements from the HTML
 const loginBtn = document.getElementById("login-btn");
