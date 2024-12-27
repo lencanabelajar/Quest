@@ -16,4 +16,10 @@
   },
   "author": "Hariyanto",
   "license": "MIT"
+},
+{
+  "type": "module",
+  "scripts": {
+    "build": "parcel build index.html"
+  }
 }
