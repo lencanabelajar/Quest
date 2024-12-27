@@ -49,6 +49,39 @@ const signUp = async (email, password) => {
 
     console.log("User created:", newUser);
     alert("Sign-up berhasil!");
+    return newUser[0].fields; // Mengembalikan data pengguna yang baru dibuat
+  } catch (error) {
+    console.error("Error during sign-up:", error.message);
+    throw new Error(error.message);
+  }
+};
+
+// Fungsi untuk sign-up
+const signUp = async (email, password) => {
+  try {
+    if (!validateEmail(email)) throw new Error("Email tidak valid");
+    if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
+
+    const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
+    const hashedPassword = btoa(password); // Ganti dengan bcrypt untuk keamanan produksi
+
+    const newUser = await base("users").create([
+      {
+        fields: {
+          email,
+          username,
+          passwordHash: hashedPassword,
+          level: "Pemula",
+          createdAt: new Date().toISOString(),
+          xp: 0,
+          questTokens: 5,
+          tasksCompleted: [],
+        },
+      },
+    ]);
+
+    console.log("User created:", newUser);
+    alert("Sign-up berhasil!");
     window.location.replace("html/home.html");
   } catch (error) {
     console.error("Error during sign-up:", error.message);
@@ -95,41 +128,33 @@ const logout = () => {
   window.location.replace("index.html");
 };
 
-// Fungsi untuk memperbarui profil
-const updateProfile = async (email, newUsername) => {
+// Fungsi untuk mengunggah gambar profil
+const uploadProfilePicture = async (file, email) => {
   try {
-    if (!validateEmail(email)) throw new Error("Email tidak valid");
+    const fileName = `${email}_profile_picture`; // Nama file unik berdasarkan email pengguna
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "your_cloudinary_upload_preset"); // Ganti dengan preset Cloudinary Anda
+    
+    const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    const records = await base("users")
-      .select({
-        filterByFormula: `email = '${email}'`,
-      })
-      .firstPage();
+    const data = await response.json();
+    if (!data.secure_url) throw new Error("Gagal mengupload gambar profil");
 
-    if (records.length === 0) {
-      throw new Error("User tidak ditemukan");
-    }
-
-    const userId = records[0].id;
-    await base("users").update([
-      {
-        id: userId,
-        fields: {
-          username: newUsername,
-        },
-      },
-    ]);
-
-    console.log("Profile updated");
-    alert("Profil berhasil diperbarui!");
+    const imageUrl = data.secure_url; // Ambil URL gambar yang berhasil diupload
+    const user = await updateProfilePicture(imageUrl, email);
+    return user;
   } catch (error) {
-    console.error("Error updating profile:", error.message);
-    alert(`Error: ${error.message}`);
+    console.error("Error uploading profile picture:", error.message);
+    throw new Error(error.message);
   }
 };
 
-// Fungsi untuk mengunggah gambar profil
-const uploadProfilePicture = async (imageUrl, email) => {
+// Fungsi untuk memperbarui profil
+const updateProfilePicture = async (imageUrl, email) => {
   try {
     const records = await base("users")
       .select({
@@ -142,20 +167,19 @@ const uploadProfilePicture = async (imageUrl, email) => {
     }
 
     const userId = records[0].id;
-    await base("users").update([
-      {
-        id: userId,
-        fields: {
-          profilePicture: imageUrl,
-        },
+    await base("users").update([{
+      id: userId,
+      fields: {
+        profilePicture: imageUrl,
       },
-    ]);
+    }]);
 
     console.log("Profile picture updated");
     alert("Gambar profil berhasil diperbarui!");
+    return records[0].fields;
   } catch (error) {
-    console.error("Error uploading profile picture:", error.message);
-    alert(`Error: ${error.message}`);
+    console.error("Error updating profile picture:", error.message);
+    throw new Error(error.message);
   }
 };
 
