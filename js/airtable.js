@@ -193,5 +193,70 @@ export const updateUserLevel = async (email, xp) => {
   }
 };
 
+// Fungsi untuk menampilkan profil pengguna
+export const displayUserProfile = async (email) => {
+  try {
+    const records = await base("users")
+      .select({ filterByFormula: `email = '${email}'` })
+      .firstPage();
+    if (records.length === 0) {
+      throw new Error("User tidak ditemukan");
+    }
+    return records[0].fields;  // Mengembalikan profil pengguna
+  } catch (error) {
+    console.error("Error displaying user profile:", error.message);
+    throw new Error(error.message);
+  }
+};
+
+// Fungsi untuk mengambil item dari toko
+export const getStoreItems = async () => {
+  try {
+    const records = await base("store")
+      .select()
+      .firstPage();
+    return records.map(record => record.fields);
+  } catch (error) {
+    console.error("Error fetching store items:", error.message);
+    throw new Error(error.message);
+  }
+};
+
+// Fungsi untuk membeli item
+export const purchaseItem = async (userEmail, itemId) => {
+  try {
+    const userRecords = await base("users")
+      .select({ filterByFormula: `email = '${userEmail}'` })
+      .firstPage();
+    if (userRecords.length === 0) {
+      throw new Error("User tidak ditemukan");
+    }
+    const user = userRecords[0].fields;
+    // Logika untuk mengurangi XP atau Quest Tokens berdasarkan item
+    // Update user setelah pembelian item
+    await base("users").update([{
+      id: userRecords[0].id,
+      fields: { questTokens: user.questTokens - 1 }  // Contoh: mengurangi Quest Tokens
+    }]);
+    return "Item purchased successfully";
+  } catch (error) {
+    console.error("Error purchasing item:", error.message);
+    throw new Error(error.message);
+  }
+};
+
+// Fungsi untuk menyimpan pengguna ke Airtable
+export const saveUserToAirtable = async (userData) => {
+  try {
+    const newUser = await base("users").create([{
+      fields: userData
+    }]);
+    return newUser[0].fields;
+  } catch (error) {
+    console.error("Error saving user to Airtable:", error.message);
+    throw new Error(error.message);
+  }
+};
+
 // Export fungsi-fungsi yang dibuat
 export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
