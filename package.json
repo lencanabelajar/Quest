@@ -4,13 +4,11 @@
   "description": "Quest ID Platform Pembelajaran Interaktif",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html",  // Gunakan Parcel untuk bundling file HTML, JS, dan CSS
-    "build": "parcel build index.html",
-    "serve": "firebase emulators:start"  // Menjalankan emulasi Firebase secara lokal
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
-    "firebase": "^9.6.1",  // Pastikan versi Firebase sesuai dengan yang digunakan
-    "parcel-bundler": "^1.12.5"  // Parcel bundler untuk build aplikasi
+    "parcel": "^2.0.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
