@@ -1,5 +1,6 @@
 // Airtable API Setup
 import Airtable from "airtable";
+import bcrypt from 'bcryptjs'; // Correct import for bcryptjs
 
 // Mengakses API Key dan Base ID dari environment variables (GitHub Secrets)
 const apiKey = process.env.AIRTABLE_API_KEY;
@@ -30,9 +31,8 @@ export const signUp = async (email, password) => {
     if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
 
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
-    import bcrypt from 'bcryptjs';
+    const hashedPassword = await bcrypt.hash(password, 10);  // Use bcryptjs for hashing
 
-    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await base("users").create([
       {
         fields: {
