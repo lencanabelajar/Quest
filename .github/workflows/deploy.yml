@@ -15,52 +15,63 @@ jobs:
     steps:
       # 1. Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Update to the latest version v3
 
       # 2. Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3 # Update to the latest version v3
         with:
           node-version: '18'
 
-      # 3. Install dependencies (including npm packages)
+      # 3. Cache Node.js modules to speed up future builds
+      - name: Cache Node.js modules
+        uses: actions/cache@v3 # Update to v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4. Install dependencies (including npm packages)
       - name: Install dependencies
         run: npm install
 
-      # 4. Build the project (prepare production files)
+      # 5. Build the project (prepare production files)
       - name: Build project
         run: npm run build
 
-      # 5. Run Airtable script with API credentials
+      # 6. Run Airtable script with API credentials
       - name: Run Airtable script with API credentials
         run: |
           node js/airtable.js
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-        
-      # 6. Run tests (optional, can be customized based on your testing framework)
+
+      # 7. Run tests (optional, can be customized based on your testing framework)
       - name: Run tests
         run: npm test
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
 
-      # 7. Deploy to Netlify (assuming Netlify CLI is installed)
+      # 8. Deploy to Netlify (assuming Netlify CLI is installed)
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
       - name: Deploy to Netlify
         run: |
-          npm install -g netlify-cli
-          netlify deploy --prod --dir=dist
+          netlify deploy --prod --dir=dist --clear-cache # Clear cache to avoid outdated content
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
-        
-      # 8. Cache Node modules to speed up future builds
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
+
+      # 9. Cache build output to speed up future builds
+      - name: Cache build output
+        uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: dist/
+          key: ${{ runner.os }}-dist-${{ hashFiles('**/dist/*') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-dist-
