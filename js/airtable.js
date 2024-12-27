@@ -259,5 +259,24 @@ export const saveUserToAirtable = async (userData) => {
   }
 };
 
+// Fungsi untuk mengambil data leaderboard dari Airtable
+export async function getLeaderboardData() {
+  const airtableBase = 'YOUR_AIRTABLE_BASE_URL';
+  const tableName = 'Leaderboard'; // Ganti dengan nama tabel yang sesuai
+  
+  const response = await fetch(`${airtableBase}/${tableName}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer YOUR_AIRTABLE_API_KEY`,
+    }
+  });
+
+  const data = await response.json();
+  return data.records.map(record => ({
+    name: record.fields.Name,
+    score: record.fields.Score,
+  }));
+}
+
 // Export fungsi-fungsi yang dibuat
 export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
