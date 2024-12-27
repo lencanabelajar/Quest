@@ -15,25 +15,28 @@ const specialGameSection = document.querySelector('.game-special');
 // Fungsi untuk memuat data game secara dinamis
 const loadGames = async () => {
   try {
+    // Menampilkan indikator loading sebelum data dimuat
+    loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
+
     // Simulasi mengambil data game dari API atau Airtable
     const gamesData = [
       {
         title: "Fortnite Royal Battle",
-        image: "assets/icon/ruby.png",
+        image: "../assets/icon/ruby.png",
         description: "Aset Pertanian Bronze Level",
         status: "Online",
         link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
       },
       {
         title: "Game Edukasi 1",
-        image: "assets/icon/ruby.png",
+        image: "../assets/icon/ruby.png",
         description: "Tantangan Level 1",
         status: "Online",
         link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
       },
       {
         title: "Game Edukasi 2",
-        image: "assets/icon/ruby.png",
+        image: "../assets/icon/ruby.png",
         description: "Tantangan Level 2",
         status: "Offline",
         link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
@@ -54,8 +57,15 @@ const loadGames = async () => {
       `;
       gamesContainer.appendChild(gameItem);
     });
+
+    // Menyembunyikan indikator loading setelah data dimuat
+    loadingIndicator.style.display = 'none'; // Sembunyikan indikator loading
   } catch (error) {
     console.error('Error loading games:', error);
+    alert('Terjadi kesalahan saat memuat game, coba lagi nanti.');
+
+    // Menyembunyikan indikator loading setelah error
+    loadingIndicator.style.display = 'none';
   }
 };
 
