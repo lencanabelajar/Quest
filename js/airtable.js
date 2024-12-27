@@ -1,25 +1,43 @@
 // Airtable API Setup
 import Airtable from "airtable";
 
-// Variabel untuk menyimpan API Key dan Base ID
-const apiKey = "patldQvubyvfB9WHz.e3e7e086a4955a095285cedef6b688de39ca9a18f1c309584b001fdf14e89cf2";
-const baseId = "appTXPks4klq2Mni1";
+// Variabel untuk menyimpan API Key dan Base ID dari environment variables
+const apiKey = process.env.AIRTABLE_API_KEY;
+const baseId = process.env.AIRTABLE_BASE_ID;
+
+// Validasi API Key dan Base ID
+if (!apiKey || !baseId) {
+  throw new Error("Airtable API Key atau Base ID tidak ditemukan. Pastikan Anda sudah mengatur process.env dengan benar.");
+}
 
 // Inisialisasi Airtable Base
 const base = new Airtable({ apiKey }).base(baseId);
 
-export { base };
-import { base } from "./airtable.js";
+// Fungsi untuk validasi input
+const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+};
 
+const validatePassword = (password) => {
+  return password.length >= 6; // Minimum panjang password
+};
+
+// Fungsi untuk sign-up
 const signUp = async (email, password) => {
   try {
+    if (!validateEmail(email)) throw new Error("Email tidak valid");
+    if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
+
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
+    const hashedPassword = btoa(password); // Ganti dengan bcrypt untuk keamanan produksi
+
     const newUser = await base("users").create([
       {
         fields: {
-          email: email,
-          username: username,
-          passwordHash: btoa(password), // Simpan password dalam bentuk hash sederhana (gunakan metode hashing aman seperti bcrypt untuk produksi)
+          email,
+          username,
+          passwordHash: hashedPassword,
           level: "Pemula",
           createdAt: new Date().toISOString(),
           xp: 0,
@@ -37,8 +55,12 @@ const signUp = async (email, password) => {
     alert(`Error: ${error.message}`);
   }
 };
+
+// Fungsi untuk login
 const login = async (email, password) => {
   try {
+    if (!validateEmail(email)) throw new Error("Email tidak valid");
+
     const records = await base("users")
       .select({
         filterByFormula: `email = '${email}'`,
@@ -46,16 +68,17 @@ const login = async (email, password) => {
       .firstPage();
 
     if (records.length === 0) {
-      throw new Error("User not found");
+      throw new Error("User tidak ditemukan");
     }
 
     const user = records[0].fields;
 
     if (atob(user.passwordHash) !== password) {
-      throw new Error("Invalid password");
+      throw new Error("Password tidak valid");
     }
 
     console.log("User logged in:", user);
+    localStorage.setItem("user", JSON.stringify(user)); // Simpan user ke localStorage
     alert("Login berhasil!");
     window.location.replace("html/home.html");
   } catch (error) {
@@ -63,14 +86,20 @@ const login = async (email, password) => {
     alert(`Error: ${error.message}`);
   }
 };
+
+// Fungsi untuk logout
 const logout = () => {
+  localStorage.removeItem("user"); // Hapus data user dari localStorage
   console.log("User logged out");
   alert("Logout berhasil!");
   window.location.replace("index.html");
 };
 
+// Fungsi untuk memperbarui profil
 const updateProfile = async (email, newUsername) => {
   try {
+    if (!validateEmail(email)) throw new Error("Email tidak valid");
+
     const records = await base("users")
       .select({
         filterByFormula: `email = '${email}'`,
@@ -78,7 +107,7 @@ const updateProfile = async (email, newUsername) => {
       .firstPage();
 
     if (records.length === 0) {
-      throw new Error("User not found");
+      throw new Error("User tidak ditemukan");
     }
 
     const userId = records[0].id;
@@ -99,6 +128,7 @@ const updateProfile = async (email, newUsername) => {
   }
 };
 
+// Fungsi untuk mengunggah gambar profil
 const uploadProfilePicture = async (imageUrl, email) => {
   try {
     const records = await base("users")
@@ -108,7 +138,7 @@ const uploadProfilePicture = async (imageUrl, email) => {
       .firstPage();
 
     if (records.length === 0) {
-      throw new Error("User not found");
+      throw new Error("User tidak ditemukan");
     }
 
     const userId = records[0].id;
@@ -129,6 +159,7 @@ const uploadProfilePicture = async (imageUrl, email) => {
   }
 };
 
+// Fungsi untuk menentukan level berdasarkan XP
 const updateLevel = (xp) => {
   if (xp >= 1500) return "Diamond";
   if (xp >= 1000) return "Gold";
@@ -136,8 +167,11 @@ const updateLevel = (xp) => {
   return "Bronze";
 };
 
+// Fungsi untuk memperbarui XP dan level user
 const updateUserLevel = async (email, xp) => {
   try {
+    if (!validateEmail(email)) throw new Error("Email tidak valid");
+
     const records = await base("users")
       .select({
         filterByFormula: `email = '${email}'`,
@@ -145,7 +179,7 @@ const updateUserLevel = async (email, xp) => {
       .firstPage();
 
     if (records.length === 0) {
-      throw new Error("User not found");
+      throw new Error("User tidak ditemukan");
     }
 
     const userId = records[0].id;
@@ -155,8 +189,8 @@ const updateUserLevel = async (email, xp) => {
       {
         id: userId,
         fields: {
-          xp: xp,
-          level: level,
+          xp,
+          level,
         },
       },
     ]);
@@ -169,4 +203,5 @@ const updateUserLevel = async (email, xp) => {
   }
 };
 
+// Export fungsi-fungsi yang dibuat
 export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
