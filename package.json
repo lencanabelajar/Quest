@@ -2,7 +2,7 @@
   "name": "Quest",
   "version": "1.0.0",
   "description": "Quest ID Platform Pembelajaran Interaktif",
-  "main": "index.html",  // Ubah menjadi index.html
+  "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
