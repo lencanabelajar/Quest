@@ -1,4 +1,3 @@
-// Import fungsi untuk menyimpan data ke Airtable
 import { saveUserToAirtable, uploadProfilePicture } from './airtable.js';
 
 // Tangani pengiriman form
