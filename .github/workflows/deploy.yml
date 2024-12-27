@@ -10,22 +10,22 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # Menggunakan Ubuntu 24.04 yang akan datang
 
     steps:
       # 1. Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3 # Update to the latest version v3
+        uses: actions/checkout@v3 # Update ke versi terbaru v3
 
       # 2. Set up Node.js environment
       - name: Set up Node.js
-        uses: actions/setup-node@v3 # Update to the latest version v3
+        uses: actions/setup-node@v3 # Update ke versi terbaru v3
         with:
           node-version: '18'
 
       # 3. Cache Node.js modules to speed up future builds
       - name: Cache Node.js modules
-        uses: actions/cache@v3 # Update to v3
+        uses: actions/cache@v3 # Update ke v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -55,10 +55,11 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
 
-      # 8. Deploy to Netlify (assuming Netlify CLI is installed)
+      # 8. Install Netlify CLI
       - name: Install Netlify CLI
         run: npm install -g netlify-cli
 
+      # 9. Deploy to Netlify (clear cache to avoid outdated content)
       - name: Deploy to Netlify
         run: |
           netlify deploy --prod --dir=dist --clear-cache # Clear cache to avoid outdated content
@@ -67,7 +68,7 @@ jobs:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
 
-      # 9. Cache build output to speed up future builds
+      # 10. Cache build output to speed up future builds
       - name: Cache build output
         uses: actions/cache@v3
         with:
@@ -75,3 +76,10 @@ jobs:
           key: ${{ runner.os }}-dist-${{ hashFiles('**/dist/*') }}
           restore-keys: |
             ${{ runner.os }}-dist-
+
+      # 11. Optional step to notify deployment success/failure (e.g., Slack, Email)
+      - name: Notify deployment status (optional)
+        if: success()
+        run: echo "Deployment to Netlify successful!"
+        # Optionally, add integrations like Slack, email, etc. for notifications.
+
