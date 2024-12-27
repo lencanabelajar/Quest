@@ -37,16 +37,49 @@
     <main class="dashboard-main">
         <section class="community-section">
             <h2>Komunitas</h2>
+
+            <!-- Forum Diskusi -->
             <div class="community-forum">
                 <h3>Forum Diskusi</h3>
                 <p>Bergabunglah dengan diskusi komunitas Quest.ID untuk berbagi tips dan trik.</p>
+
+                <div class="forum-comments">
+                    <h4>Komentar Terbaru</h4>
+                    <ul id="comment-list">
+                        <!-- Daftar komentar akan muncul di sini -->
+                    </ul>
+                </div>
+
+                <div class="post-comment">
+                    <h4>Tulis Komentar</h4>
+                    <textarea id="comment-input" placeholder="Tulis komentar Anda di sini..."></textarea>
+                    <button id="submit-comment">Kirim Komentar</button>
+                </div>
             </div>
+
+            <!-- Acara Komunitas -->
             <div class="community-events">
                 <h3>Acara Komunitas</h3>
                 <ul>
-                    <li>Event 1: Kompetisi Mingguan</li>
-                    <li>Event 2: Perayaan Tahun Baru</li>
+                    <li>
+                        <strong>Event 1: Kompetisi Mingguan</strong>
+                        <p>Kompetisi mingguan untuk mencapai skor tertinggi.</p>
+                        <button class="join-event-btn">Bergabung</button>
+                    </li>
+                    <li>
+                        <strong>Event 2: Perayaan Tahun Baru</strong>
+                        <p>Acara spesial untuk merayakan tahun baru dengan hadiah menarik!</p>
+                        <button class="join-event-btn">Bergabung</button>
+                    </li>
                 </ul>
+            </div>
+
+            <!-- Daftar Anggota Komunitas -->
+            <div class="community-members">
+                <h3>Anggota Komunitas</h3>
+                <div id="members-list">
+                    <!-- Daftar anggota komunitas akan dimuat di sini -->
+                </div>
             </div>
         </section>
     </main>
@@ -58,8 +91,10 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-         <script type="module" src="../js/airtable.js"></script>
-        <script type="module" src="../js/scripts.js"></script>
+    <!-- Script untuk menangani interaksi -->
+    <script type="module" src="../js/airtable.js"></script>
+    <script type="module" src="../js/community.js"></script>
+    <script type="module" src="../js/scripts.js"></script>
 
 </body>
 </html>
