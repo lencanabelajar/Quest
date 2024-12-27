@@ -1,7 +1,7 @@
 // Airtable API Setup
 import Airtable from "airtable";
 
-// Variabel untuk menyimpan API Key dan Base ID dari environment variables
+// Mengakses API Key dan Base ID dari environment variables (GitHub Secrets)
 const apiKey = process.env.AIRTABLE_API_KEY;
 const baseId = process.env.AIRTABLE_BASE_ID;
 
