@@ -1,5 +1,5 @@
 // Import Firebase functions from firebase.js
-import { shareCertificate, shareBadge } from './firebase.js';
+import { shareCertificate, shareBadge } from './airtable.js';
 
 // Elements for sharing actions
 const shareCertificateBtn = document.getElementById('share-certificate-btn');
