@@ -341,5 +341,28 @@ export function getCommunityMembers() {
     });
 }
 
+// Contoh fungsi untuk mengambil berita dari Airtable atau sumber lainnya
+export async function getNews() {
+  const url = 'https://api.airtable.com/v0/your_base_id/News';  // Ganti dengan URL API Airtable Anda
+  const apiKey = 'your_api_key';  // Ganti dengan API Key Airtable Anda
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch news');
+  }
+
+  const data = await response.json();
+  return data.records.map(record => ({
+    title: record.fields.title,
+    description: record.fields.description,
+    url: record.fields.url,  // Misalnya jika berita memiliki URL
+  }));
+}
+
 // Export fungsi-fungsi yang dibuat
 export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
