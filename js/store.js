@@ -1,13 +1,22 @@
-// Di scripts.js atau file lain
+// Import fungsi untuk mengambil data dan menyimpan pembelian dari Airtable
 import { getStoreItems, purchaseItem, saveUserToAirtable } from './airtable.js';
 
-// Elements for displaying store items
+// Elemen untuk menampilkan item toko
 const storeItemsContainer = document.getElementById('store-items');
 
-// Load store items from Firebase
+// Fungsi untuk memuat item toko dari Airtable
 window.addEventListener('load', () => {
-  getStoreItems()
+  getStoreItems() // Mendapatkan item dari Airtable
     .then(items => {
+      // Kosongkan kontainer sebelum menampilkan item
+      storeItemsContainer.innerHTML = ''; 
+
+      if (items.length === 0) {
+        storeItemsContainer.innerHTML = '<p>Belum ada item di toko.</p>';
+        return;
+      }
+
+      // Loop melalui item dan menambahkannya ke halaman
       items.forEach(item => {
         const itemElement = document.createElement('div');
         itemElement.classList.add('store-item');
@@ -15,29 +24,32 @@ window.addEventListener('load', () => {
           <img src="${item.image}" alt="${item.name}" class="store-item-img">
           <h3>${item.name}</h3>
           <p>${item.description}</p>
-          <button class="buy-btn" data-id="${item.id}">Buy for ${item.price} coins</button>
+          <p>Harga: ${item.price} Ruby</p>
+          <button class="buy-btn" data-id="${item.id}">Beli</button>
         `;
         storeItemsContainer.appendChild(itemElement);
       });
 
-      // Attach event listeners to buy buttons after items are loaded
+      // Menambahkan event listener untuk tombol beli setelah item dimuat
       const buyButtons = document.querySelectorAll('.buy-btn');
       buyButtons.forEach(button => {
         button.addEventListener('click', () => {
           const itemId = button.dataset.id;
+
+          // Menangani pembelian item
           purchaseItem(itemId)
             .then(() => {
-              alert('Item purchased successfully!');
+              alert('Item berhasil dibeli!');
             })
             .catch(error => {
-              console.error('Error purchasing item: ', error); // Log error for debugging
-              alert('Purchase failed: ' + error.message); // Show error to the user
+              console.error('Error membeli item: ', error);
+              alert('Gagal membeli item: ' + error.message);
             });
         });
       });
     })
     .catch(error => {
-      console.error('Error loading store items: ', error); // Log error for debugging
-      alert('Failed to load store items: ' + error.message); // Show error to the user
+      console.error('Error memuat item toko: ', error);
+      alert('Gagal memuat item toko: ' + error.message);
     });
 });
