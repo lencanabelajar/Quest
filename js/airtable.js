@@ -30,7 +30,10 @@ export const signUp = async (email, password) => {
     if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
 
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
-    const hashedPassword = btoa(password); // Ganti dengan bcrypt untuk keamanan produksi
+    import bcrypt from 'bcrypt';
+    
+    const hashedPassword = await bcrypt.hash(password, 10);  // Gunakan bcrypt
+
 
     const newUser = await base("users").create([
       {
@@ -53,39 +56,6 @@ export const signUp = async (email, password) => {
   } catch (error) {
     console.error("Error during sign-up:", error.message);
     throw new Error(error.message);
-  }
-};
-
-// Fungsi untuk sign-up
-const signUp = async (email, password) => {
-  try {
-    if (!validateEmail(email)) throw new Error("Email tidak valid");
-    if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
-
-    const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
-    const hashedPassword = btoa(password); // Ganti dengan bcrypt untuk keamanan produksi
-
-    const newUser = await base("users").create([
-      {
-        fields: {
-          email,
-          username,
-          passwordHash: hashedPassword,
-          level: "Pemula",
-          createdAt: new Date().toISOString(),
-          xp: 0,
-          questTokens: 5,
-          tasksCompleted: [],
-        },
-      },
-    ]);
-
-    console.log("User created:", newUser);
-    alert("Sign-up berhasil!");
-    window.location.replace("html/home.html");
-  } catch (error) {
-    console.error("Error during sign-up:", error.message);
-    alert(`Error: ${error.message}`);
   }
 };
 
