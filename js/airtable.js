@@ -278,5 +278,68 @@ export async function getLeaderboardData() {
   }));
 }
 
+// Fungsi untuk mendapatkan komentar dari forum komunitas
+export function getForumComments() {
+    return new Promise((resolve, reject) => {
+        base('Forum Comments')
+            .select({
+                view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
+            })
+            .firstPage((err, records) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const comments = records.map(record => ({
+                        username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
+                        text: record.get('Comment'), // Pastikan sesuai dengan field di Airtable
+                    }));
+                    resolve(comments);
+                }
+            });
+    });
+}
+
+// Fungsi untuk mengirim komentar ke Airtable
+export function postComment(comment) {
+    return new Promise((resolve, reject) => {
+        base('Forum Comments').create([
+            {
+                fields: {
+                    Username: comment.username,
+                    Comment: comment.text,
+                },
+            },
+        ], (err, records) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(records);
+            }
+        });
+    });
+}
+
+// Fungsi untuk mendapatkan anggota komunitas
+export function getCommunityMembers() {
+    return new Promise((resolve, reject) => {
+        base('Community Members')
+            .select({
+                view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
+            })
+            .firstPage((err, records) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const members = records.map(record => ({
+                        username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
+                        avatar: record.get('Avatar'), // Ganti dengan field avatar yang sesuai
+                        level: record.get('Level'), // Ganti dengan field level yang sesuai
+                    }));
+                    resolve(members);
+                }
+            });
+    });
+}
+
 // Export fungsi-fungsi yang dibuat
 export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
