@@ -1,7 +1,6 @@
-// Import fungsi login dari firebase.js
-import { login } from './airtable.js';  // Sesuaikan dengan lokasi firebase.js Anda
+// Import fungsi login dari airtable.js
+import { login } from './airtable.js';  // Sesuaikan dengan lokasi airtable.js Anda
 
-// Tangani pengiriman form
 // Tangani pengiriman form
 document.getElementById('login-form').addEventListener('submit', function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
@@ -17,11 +16,9 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
         return;
     }
 
-    // Proses login menggunakan Firebase Authentication
+    // Proses login menggunakan fungsi login dari airtable.js
     login(email, password)
-        .then(userCredential => {
-            const user = userCredential.user;
-
+        .then(user => {
             // Redirect setelah login berhasil
             console.log("Login berhasil! Menuju halaman utama.");
             window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
