@@ -1,12 +1,63 @@
 // Import fungsi dari airtable.js
-import { logout, uploadProfilePicture, updateUserLevel } from './airtable.js';  // Pastikan jalur ini benar
+import { logout, uploadProfilePicture, updateUserLevel } from './airtable.js'; // Pastikan jalur ini benar
 
 // Mendapatkan elemen DOM
 const usernameDisplay = document.getElementById('username-display');
 const logoutBtn = document.getElementById('logout-btn');
 const userProfileImage = document.getElementById('profile-picture');
 const profilePictureInput = document.getElementById('profile-picture-input');
+const gamesContainer = document.querySelector('.games-container');
 const loadingIndicator = document.getElementById('loading-indicator'); // Indikator loading
+const gameSection = document.querySelector('.recent-games');
+const favoriteGameSection = document.querySelector('.game-favourite');
+const specialGameSection = document.querySelector('.game-special');
+
+// Fungsi untuk memuat data game secara dinamis
+const loadGames = async () => {
+  try {
+    // Simulasi mengambil data game dari API atau Airtable
+    const gamesData = [
+      {
+        title: "Fortnite Royal Battle",
+        image: "assets/icon/ruby.png",
+        description: "Aset Pertanian Bronze Level",
+        status: "Online",
+        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
+      },
+      {
+        title: "Game Edukasi 1",
+        image: "assets/icon/ruby.png",
+        description: "Tantangan Level 1",
+        status: "Online",
+        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
+      },
+      {
+        title: "Game Edukasi 2",
+        image: "assets/icon/ruby.png",
+        description: "Tantangan Level 2",
+        status: "Offline",
+        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
+      },
+    ];
+
+    // Memasukkan data game ke dalam kontainer
+    gamesData.forEach(game => {
+      const gameItem = document.createElement('div');
+      gameItem.classList.add('game-item');
+      gameItem.innerHTML = `
+        <a href="${game.link}" class="game-link">
+          <h3>${game.title}</h3>
+          <img src="${game.image}" alt="${game.description}" class="game-thumbnail">
+          <p>${game.description}</p>
+          <p>${game.status}</p>
+        </a>
+      `;
+      gamesContainer.appendChild(gameItem);
+    });
+  } catch (error) {
+    console.error('Error loading games:', error);
+  }
+};
 
 // Cek jika pengguna sudah login
 const checkUserStatus = () => {
@@ -41,7 +92,7 @@ const handleProfilePictureChange = async (event) => {
 
       // Upload gambar ke Cloudinary dan update di Airtable
       const updatedUser = await uploadProfilePicture(file, user.email);
-      
+
       // Update data pengguna di localStorage dan tampilkan gambar profil baru
       localStorage.setItem('user', JSON.stringify(updatedUser)); 
       userProfileImage.src = updatedUser.profilePicture; // Update gambar profil di halaman
@@ -51,7 +102,7 @@ const handleProfilePictureChange = async (event) => {
     } catch (error) {
       console.error("Error uploading profile picture:", error.message);
       alert('Gagal mengunggah gambar profil. Silakan coba lagi.');
-      
+
       // Menyembunyikan indikator loading setelah proses selesai
       loadingIndicator.style.display = 'none';
     }
@@ -65,3 +116,6 @@ profilePictureInput?.addEventListener('change', handleProfilePictureChange);
 
 // Panggil fungsi untuk memeriksa status pengguna saat halaman dimuat
 checkUserStatus();
+
+// Muat game saat halaman dimuat
+loadGames();
