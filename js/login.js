@@ -4,7 +4,7 @@ import { login } from './airtable.js';  // Sesuaikan dengan lokasi airtable.js A
 // Tangani pengiriman form
 document.getElementById('login-form').addEventListener('submit', function (e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
-    
+
     // Ambil nilai dari input form
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
@@ -22,18 +22,26 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
         return;
     }
 
+    // Tampilkan loading spinner saat proses login berjalan
+    document.getElementById('loading-spinner').style.display = 'block';
+
     // Proses login menggunakan fungsi login dari airtable.js
     login(email, password)
         .then(user => {
+            // Menyimpan informasi pengguna (jika dibutuhkan) ke localStorage atau sessionStorage
+            sessionStorage.setItem('userEmail', email);  // Anda bisa menyimpan lebih banyak data pengguna jika perlu
+
             // Redirect setelah login berhasil
             console.log("Login berhasil! Menuju halaman utama.");
-
-            // Pastikan pengalihan URL yang benar
             window.location.href = '/html/home.html';  // Ganti dengan halaman home Anda
         })
         .catch(error => {
             console.error("Login gagal:", error.message);
             showError(`Gagal login: ${error.message}`);
+        })
+        .finally(() => {
+            // Sembunyikan loading spinner setelah proses selesai
+            document.getElementById('loading-spinner').style.display = 'none';
         });
 });
 
