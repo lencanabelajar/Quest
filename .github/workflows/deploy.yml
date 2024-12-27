@@ -1,4 +1,4 @@
-name: Deploy App
+name: Quest
 
 on:
   push:
@@ -21,9 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run script using secrets
+      - name: Build project
+        run: npm run build
+
+      - name: Run Airtable script with API credentials
         run: |
-          node your-script.js
+          node airtable.js
         env:
           AIRTABLE_API_KEY: ${{ secrets.AIRTABLE_API_KEY }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+
