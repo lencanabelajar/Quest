@@ -1,6 +1,5 @@
-import { saveUserToAirtable, uploadProfilePicture } from './airtable.js';
+import bcrypt from 'bcryptjs'; // Mengimpor bcryptjs
 
-// Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
     
@@ -29,32 +28,38 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
         return;
     }
 
-    // Menampilkan loading spinner
-    document.getElementById('loading-spinner').style.display = 'block';
+    // Hash password di frontend menggunakan bcryptjs
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
+        if (err) {
+            console.error("Error hashing password:", err);
+            return;
+        }
 
-    // Proses pendaftaran dan simpan ke Airtable
-    saveUserToAirtable(email, password)
-        .then(user => {
-            // Jika ada gambar profil yang diupload, simpan gambar ke server atau URL
-            const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
-            if (file) {
-                // Bisa menambahkan logika untuk mengupload gambar dan simpan URL-nya
-                return uploadProfilePicture(file, user.id);  // Gantilah dengan cara upload yang sesuai
-            } else {
-                return Promise.resolve(); // Lanjutkan tanpa gambar profil
-            }
-        })
-        .then(() => {
-            // Sembunyikan loading spinner setelah registrasi selesai
-            document.getElementById('loading-spinner').style.display = 'none';
-            console.log("Registrasi berhasil! Menuju halaman utama.");
-            window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
-        })
-        .catch(error => {
-            // Menyembunyikan loading spinner jika terjadi error
-            document.getElementById('loading-spinner').style.display = 'none';
-            console.error("Registrasi gagal:", error.message);
-            document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
-            document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
-        });
+        // Menampilkan loading spinner
+        document.getElementById('loading-spinner').style.display = 'block';
+
+        // Proses pendaftaran dan simpan ke Airtable dengan password yang sudah di-hash
+        signUp(email, hashedPassword) // Gunakan fungsi signUp dengan password yang sudah di-hash
+            .then(user => {
+                // Jika ada gambar profil yang diupload, simpan gambar ke server atau URL
+                const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
+                if (file) {
+                    return uploadProfilePicture(file, email); // Gantilah dengan cara upload yang sesuai
+                } else {
+                    return Promise.resolve(); // Lanjutkan tanpa gambar profil
+                }
+            })
+            .then(() => {
+                // Sembunyikan loading spinner setelah registrasi selesai
+                document.getElementById('loading-spinner').style.display = 'none';
+                console.log("Registrasi berhasil! Menuju halaman utama.");
+                window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+            })
+            .catch(error => {
+                document.getElementById('loading-spinner').style.display = 'none';
+                console.error("Registrasi gagal:", error.message);
+                document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
+                document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
+            });
+    });
 });
