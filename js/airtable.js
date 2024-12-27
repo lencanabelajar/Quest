@@ -30,11 +30,9 @@ export const signUp = async (email, password) => {
     if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
 
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
-    import bcrypt from 'bcrypt';
-    
-    const hashedPassword = await bcrypt.hash(password, 10);  // Gunakan bcrypt
+    import bcrypt from 'bcryptjs';
 
-
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = await base("users").create([
       {
         fields: {
