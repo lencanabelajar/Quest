@@ -74,7 +74,9 @@ export const login = async (email, password) => {
 
     const user = records[0].fields;
 
-    if (atob(user.passwordHash) !== password) {
+    // Menggunakan bcrypt untuk membandingkan password dengan hash
+    const match = await bcrypt.compare(password, user.passwordHash);
+    if (!match) {
       throw new Error("Password tidak valid");
     }
 
@@ -87,6 +89,7 @@ export const login = async (email, password) => {
     alert(`Error: ${error.message}`);
   }
 };
+
 
 // Fungsi untuk logout
 export const logout = () => {
