@@ -8,6 +8,10 @@ node_modules/
 /dist
 /build
 
+# Cache
+/.parcel-cache
+/.sass-cache
+
 # Log files
 *.log
 
@@ -22,3 +26,6 @@ Thumbs.db
 !/assets/
 !/css/
 !/js/
+!/index.html
+!/html/
+!/netlify/
