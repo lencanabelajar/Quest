@@ -3,18 +3,19 @@
   "version": "1.0.0",
   "description": "Quest ID Platform Pembelajaran Interaktif",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html", 
     "build": "parcel build index.html",
-    "dev": "parcel serve index.html", 
-    "deploy": "netlify deploy --prod --dir=dist" 
+    "dev": "parcel serve index.html",
+    "deploy": "netlify deploy --prod --dir=dist",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
-    "parcel": "^2.8.0",
-    "airtable": "^0.11.2"
+    "parcel": "^2.8.0",   
+    "airtable": "^0.11.2" 
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
-    "uglify-js": "^3.14.4"
+    "uglify-js": "^3.14.4" 
   },
   "author": "Hariyanto",
   "license": "MIT"
