@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "parcel": "^2.0.0",
-    "airtable": "^0.11.2"
+    "airtable": "^0.11.2",
+    "bcryptjs": "^2.4.3"  // ensure bcryptjs is listed as a dependency
   },
   "devDependencies": {
     "dotenv": "^8.2.0"
