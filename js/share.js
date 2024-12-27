@@ -1,30 +1,30 @@
-// Import Firebase functions from firebase.js
+// Import fungsi untuk berbagi sertifikat dan badge dari airtable.js
 import { shareCertificate, shareBadge } from './airtable.js';
 
-// Elements for sharing actions
+// Elemen untuk tombol berbagi sertifikat dan badge
 const shareCertificateBtn = document.getElementById('share-certificate-btn');
 const shareBadgeBtn = document.getElementById('share-badge-btn');
 
-// Handle certificate sharing
+// Fungsi untuk berbagi sertifikat
 shareCertificateBtn.addEventListener('click', () => {
   shareCertificate()
     .then(() => {
-      alert('Certificate shared successfully!'); // Notify success
+      alert('Sertifikat berhasil dibagikan!'); // Memberitahu keberhasilan
     })
     .catch(error => {
-      console.error('Error sharing certificate: ', error); // Log error for debugging
-      alert('Sharing certificate failed: ' + error.message); // Show error to the user
+      console.error('Error saat membagikan sertifikat: ', error); // Log error untuk debugging
+      alert('Gagal membagikan sertifikat: ' + error.message); // Memberitahu kegagalan
     });
 });
 
-// Handle badge sharing
+// Fungsi untuk berbagi badge
 shareBadgeBtn.addEventListener('click', () => {
   shareBadge()
     .then(() => {
-      alert('Badge shared successfully!'); // Notify success
+      alert('Badge berhasil dibagikan!'); // Memberitahu keberhasilan
     })
     .catch(error => {
-      console.error('Error sharing badge: ', error); // Log error for debugging
-      alert('Sharing badge failed: ' + error.message); // Show error to the user
+      console.error('Error saat membagikan badge: ', error); // Log error untuk debugging
+      alert('Gagal membagikan badge: ' + error.message); // Memberitahu kegagalan
     });
 });
