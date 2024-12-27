@@ -1,39 +1,16 @@
 // Airtable API Setup
 import Airtable from "airtable";
-import bcrypt from 'bcryptjs'; // Correct import for bcryptjs
+import bcrypt from "bcryptjs"; // Correct import for bcryptjs
+import fetch from "node-fetch"; // Untuk mengakses API eksternal jika diperlukan
+import dotenv from "dotenv"; // Menggunakan dotenv untuk mengakses variabel di .env
 
-// Mengimpor dotenv untuk mengakses variabel di .env
-require('dotenv').config();
+dotenv.config(); // Memuat variabel .env
 
 // Mengakses API key dan URL Airtable dari file .env
 const apiKey = process.env.AIRTABLE_API_KEY;
-const baseUrl = process.env.AIRTABLE_BASE_URL;
-
-// Contoh penggunaan untuk mengambil data dari Airtable API
-const fetch = require('node-fetch');
-
-async function fetchData() {
-  try {
-    const response = await fetch(baseUrl, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
-      }
-    });
-
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-}
-
-fetchData();
-
-// Mengakses API Key dan Base ID dari environment variables (GitHub Secrets)
-const apiKey = process.env.AIRTABLE_API_KEY;
-const baseId = process.env.AIRTABLE_BASE_ID;
+const baseId = process.env.AIRTABLE_BASE_ID; // Base ID untuk Airtable
+const baseUrl = process.env.AIRTABLE_BASE_URL; // Base URL jika diperlukan untuk akses langsung
+const cloudinaryPreset = process.env.CLOUDINARY_UPLOAD_PRESET; // Cloudinary preset jika menggunakan
 
 // Validasi API Key dan Base ID
 if (!apiKey || !baseId) {
@@ -60,7 +37,7 @@ export const signUp = async (email, password) => {
     if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
 
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
-    const hashedPassword = await bcrypt.hash(password, 10);  // Use bcryptjs for hashing
+    const hashedPassword = await bcrypt.hash(password, 10);  // Menggunakan bcryptjs untuk hashing
 
     // Membuat user baru di Airtable
     const newUser = await base("users").create([{
@@ -132,7 +109,7 @@ export const uploadProfilePicture = async (file, email) => {
     const fileName = `${email}_profile_picture`; // Nama file unik berdasarkan email pengguna
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_cloudinary_upload_preset"); // Ganti dengan preset Cloudinary Anda
+    formData.append("upload_preset", cloudinaryPreset); // Ganti dengan preset Cloudinary Anda
 
     const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
       method: "POST",
@@ -181,217 +158,85 @@ export const updateProfilePicture = async (imageUrl, email) => {
   }
 };
 
-// Fungsi untuk menentukan level berdasarkan XP
-const updateLevel = (xp) => {
-  if (xp >= 1500) return "Diamond";
-  if (xp >= 1000) return "Gold";
-  if (xp >= 500) return "Silver";
-  return "Bronze";
-};
-
-// Fungsi untuk memperbarui XP dan level user
-export const updateUserLevel = async (email, xp) => {
-  try {
-    if (!validateEmail(email)) throw new Error("Email tidak valid");
-
-    const records = await base("users")
-      .select({
-        filterByFormula: `email = '${email}'`,
-      })
-      .firstPage();
-
-    if (records.length === 0) {
-      throw new Error("User tidak ditemukan");
-    }
-
-    const userId = records[0].id;
-    const level = updateLevel(xp);
-
-    await base("users").update([{
-      id: userId,
-      fields: {
-        xp,
-        level,
-      },
-    }]);
-
-    console.log("XP and level updated");
-    alert("XP dan level berhasil diperbarui!");
-  } catch (error) {
-    console.error("Error updating XP and level:", error.message);
-    alert(`Error: ${error.message}`);
-  }
-};
-
-// Fungsi untuk menampilkan profil pengguna
-export const displayUserProfile = async (email) => {
-  try {
-    const records = await base("users")
-      .select({ filterByFormula: `email = '${email}'` })
-      .firstPage();
-    if (records.length === 0) {
-      throw new Error("User tidak ditemukan");
-    }
-    return records[0].fields;  // Mengembalikan profil pengguna
-  } catch (error) {
-    console.error("Error displaying user profile:", error.message);
-    throw new Error(error.message);
-  }
-};
-
-// Fungsi untuk mengambil item dari toko
-export const getStoreItems = async () => {
-  try {
-    const records = await base("store")
-      .select()
-      .firstPage();
-    return records.map(record => record.fields);
-  } catch (error) {
-    console.error("Error fetching store items:", error.message);
-    throw new Error(error.message);
-  }
-};
-
-// Fungsi untuk membeli item
-export const purchaseItem = async (userEmail, itemId) => {
-  try {
-    const userRecords = await base("users")
-      .select({ filterByFormula: `email = '${userEmail}'` })
-      .firstPage();
-    if (userRecords.length === 0) {
-      throw new Error("User tidak ditemukan");
-    }
-    const user = userRecords[0].fields;
-    // Logika untuk mengurangi XP atau Quest Tokens berdasarkan item
-    // Update user setelah pembelian item
-    await base("users").update([{
-      id: userRecords[0].id,
-      fields: { questTokens: user.questTokens - 1 }  // Contoh: mengurangi Quest Tokens
-    }]);
-    return "Item purchased successfully";
-  } catch (error) {
-    console.error("Error purchasing item:", error.message);
-    throw new Error(error.message);
-  }
-};
-
-// Fungsi untuk menyimpan pengguna ke Airtable
-export const saveUserToAirtable = async (userData) => {
-  try {
-    const newUser = await base("users").create([{
-      fields: userData
-    }]);
-    return newUser[0].fields;
-  } catch (error) {
-    console.error("Error saving user to Airtable:", error.message);
-    throw new Error(error.message);
-  }
-};
-
 // Fungsi untuk mengambil data leaderboard dari Airtable
 export async function getLeaderboardData() {
-  const airtableBase = 'YOUR_AIRTABLE_BASE_URL';
-  const tableName = 'Leaderboard'; // Ganti dengan nama tabel yang sesuai
-  
-  const response = await fetch(`${airtableBase}/${tableName}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer YOUR_AIRTABLE_API_KEY`,
-    }
-  });
+  try {
+    const records = await base("Leaderboard")
+      .select()
+      .firstPage();
 
-  const data = await response.json();
-  return data.records.map(record => ({
-    name: record.fields.Name,
-    score: record.fields.Score,
-  }));
+    return records.map(record => ({
+      name: record.fields.Name,
+      score: record.fields.Score,
+    }));
+  } catch (error) {
+    console.error("Error fetching leaderboard data:", error.message);
+    throw new Error(error.message);
+  }
 }
 
-// Fungsi untuk mendapatkan komentar dari forum komunitas
+// Fungsi untuk mengambil komentar dari forum komunitas
 export function getForumComments() {
-    return new Promise((resolve, reject) => {
-        base('Forum Comments')
-            .select({
-                view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
-            })
-            .firstPage((err, records) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    const comments = records.map(record => ({
-                        username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
-                        text: record.get('Comment'), // Pastikan sesuai dengan field di Airtable
-                    }));
-                    resolve(comments);
-                }
-            });
-    });
+  return new Promise((resolve, reject) => {
+    base('Forum Comments')
+      .select({
+        view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
+      })
+      .firstPage((err, records) => {
+        if (err) {
+          reject(err);
+        } else {
+          const comments = records.map(record => ({
+            username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
+            text: record.get('Comment'), // Pastikan sesuai dengan field di Airtable
+          }));
+          resolve(comments);
+        }
+      });
+  });
 }
 
 // Fungsi untuk mengirim komentar ke Airtable
 export function postComment(comment) {
-    return new Promise((resolve, reject) => {
-        base('Forum Comments').create([
-            {
-                fields: {
-                    Username: comment.username,
-                    Comment: comment.text,
-                },
-            },
-        ], (err, records) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(records);
-            }
-        });
+  return new Promise((resolve, reject) => {
+    base('Forum Comments').create([
+      {
+        fields: {
+          Username: comment.username,
+          Comment: comment.text,
+        },
+      },
+    ], (err, records) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(records);
+      }
     });
+  });
 }
 
 // Fungsi untuk mendapatkan anggota komunitas
 export function getCommunityMembers() {
-    return new Promise((resolve, reject) => {
-        base('Community Members')
-            .select({
-                view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
-            })
-            .firstPage((err, records) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    const members = records.map(record => ({
-                        username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
-                        avatar: record.get('Avatar'), // Ganti dengan field avatar yang sesuai
-                        level: record.get('Level'), // Ganti dengan field level yang sesuai
-                    }));
-                    resolve(members);
-                }
-            });
-    });
-}
-
-// Contoh fungsi untuk mengambil berita dari Airtable atau sumber lainnya
-export async function getNews() {
-  const url = 'https://api.airtable.com/v0/your_base_id/News';  // Ganti dengan URL API Airtable Anda
-  const apiKey = 'your_api_key';  // Ganti dengan API Key Airtable Anda
-
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-    },
+  return new Promise((resolve, reject) => {
+    base('Community Members')
+      .select({
+        view: 'Grid view', // Ganti sesuai dengan tampilan di Airtable
+      })
+      .firstPage((err, records) => {
+        if (err) {
+          reject(err);
+        } else {
+          const members = records.map(record => ({
+            username: record.get('Username'), // Pastikan sesuai dengan field di Airtable
+            avatar: record.get('Avatar'), // Ganti dengan field avatar yang sesuai
+            level: record.get('Level'), // Ganti dengan field level yang sesuai
+          }));
+          resolve(members);
+        }
+      });
   });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch news');
-  }
-
-  const data = await response.json();
-  return data.records.map(record => ({
-    title: record.fields.title,
-    description: record.fields.description,
-    url: record.fields.url,  // Misalnya jika berita memiliki URL
-  }));
 }
 
-// Export fungsi-fungsi yang dibuat
-export { signUp, login, logout, updateProfile, uploadProfilePicture, updateUserLevel };
+// Export semua fungsi
+export { signUp, login, logout, updateProfilePicture, getLeaderboardData, getForumComments, postComment, getCommunityMembers };
