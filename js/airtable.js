@@ -24,7 +24,7 @@ const validatePassword = (password) => {
 };
 
 // Fungsi untuk sign-up
-const signUp = async (email, password) => {
+export const signUp = async (email, password) => {
   try {
     if (!validateEmail(email)) throw new Error("Email tidak valid");
     if (!validatePassword(password)) throw new Error("Password harus memiliki panjang minimal 6 karakter");
@@ -90,7 +90,7 @@ const signUp = async (email, password) => {
 };
 
 // Fungsi untuk login
-const login = async (email, password) => {
+export const login = async (email, password) => {
   try {
     if (!validateEmail(email)) throw new Error("Email tidak valid");
 
@@ -121,7 +121,7 @@ const login = async (email, password) => {
 };
 
 // Fungsi untuk logout
-const logout = () => {
+export const logout = () => {
   localStorage.removeItem("user"); // Hapus data user dari localStorage
   console.log("User logged out");
   alert("Logout berhasil!");
@@ -129,13 +129,13 @@ const logout = () => {
 };
 
 // Fungsi untuk mengunggah gambar profil
-const uploadProfilePicture = async (file, email) => {
+export const uploadProfilePicture = async (file, email) => {
   try {
     const fileName = `${email}_profile_picture`; // Nama file unik berdasarkan email pengguna
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "your_cloudinary_upload_preset"); // Ganti dengan preset Cloudinary Anda
-    
+
     const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
       method: "POST",
       body: formData,
@@ -154,7 +154,7 @@ const uploadProfilePicture = async (file, email) => {
 };
 
 // Fungsi untuk memperbarui profil
-const updateProfilePicture = async (imageUrl, email) => {
+export const updateProfilePicture = async (imageUrl, email) => {
   try {
     const records = await base("users")
       .select({
@@ -192,7 +192,7 @@ const updateLevel = (xp) => {
 };
 
 // Fungsi untuk memperbarui XP dan level user
-const updateUserLevel = async (email, xp) => {
+export const updateUserLevel = async (email, xp) => {
   try {
     if (!validateEmail(email)) throw new Error("Email tidak valid");
 
@@ -209,15 +209,13 @@ const updateUserLevel = async (email, xp) => {
     const userId = records[0].id;
     const level = updateLevel(xp);
 
-    await base("users").update([
-      {
-        id: userId,
-        fields: {
-          xp,
-          level,
-        },
+    await base("users").update([{
+      id: userId,
+      fields: {
+        xp,
+        level,
       },
-    ]);
+    }]);
 
     console.log("XP and level updated");
     alert("XP dan level berhasil diperbarui!");
