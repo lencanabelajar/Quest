@@ -1,5 +1,5 @@
 // Import fungsi dari airtable.js
-import { logout, uploadProfilePicture, updateUserLevel } from './airtable.js';
+import { logout, uploadProfilePicture, updateUserLevel } from './airtable.js';  // Pastikan jalur ini benar
 
 // Mendapatkan elemen DOM
 const usernameDisplay = document.getElementById('username-display');
