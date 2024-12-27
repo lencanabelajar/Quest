@@ -1,5 +1,5 @@
 // Di scripts.js atau file lain
-import { displayUserProfile, getStoreItems, purchaseItem, saveUserToAirtable } from './airtable.js';
+import { getStoreItems, purchaseItem, saveUserToAirtable } from './airtable.js';
 
 // Elements for displaying store items
 const storeItemsContainer = document.getElementById('store-items');
