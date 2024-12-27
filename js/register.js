@@ -11,20 +11,24 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
 
     // Validasi form
     if (!email || !password || !confirmPassword) {
-        document.getElementById('error-message').innerText = 'Harap isi semua kolom!';
-        document.getElementById('error-message').style.display = 'block';
+        displayErrorMessage('Harap isi semua kolom!');
         return;
     }
 
+    // Validasi email
+    if (!validateEmail(email)) {
+        displayErrorMessage('Email tidak valid!');
+        return;
+    }
+
+    // Validasi password
     if (password !== confirmPassword) {
-        document.getElementById('error-message').innerText = 'Password dan Konfirmasi Password tidak cocok!';
-        document.getElementById('error-message').style.display = 'block';
+        displayErrorMessage('Password dan Konfirmasi Password tidak cocok!');
         return;
     }
 
     if (password.length < 6) {
-        document.getElementById('error-message').innerText = 'Password harus memiliki minimal 6 karakter!';
-        document.getElementById('error-message').style.display = 'block';
+        displayErrorMessage('Password harus memiliki minimal 6 karakter!');
         return;
     }
 
@@ -32,6 +36,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
         if (err) {
             console.error("Error hashing password:", err);
+            displayErrorMessage('Terjadi kesalahan saat hashing password!');
             return;
         }
 
@@ -58,8 +63,45 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
             .catch(error => {
                 document.getElementById('loading-spinner').style.display = 'none';
                 console.error("Registrasi gagal:", error.message);
-                document.getElementById('error-message').innerText = `Gagal registrasi: ${error.message}`;
-                document.getElementById('error-message').style.display = 'block';  // Tampilkan error message
+                displayErrorMessage(`Gagal registrasi: ${error.message}`);
             });
     });
 });
+
+// Fungsi untuk menampilkan pesan error
+function displayErrorMessage(message) {
+    document.getElementById('error-message').innerText = message;
+    document.getElementById('error-message').style.display = 'block';
+}
+
+// Fungsi validasi email
+function validateEmail(email) {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+}
+
+// Fungsi untuk registrasi pengguna (gunakan API atau backend yang sesuai)
+function signUp(email, hashedPassword) {
+    // Fungsi ini harus diubah sesuai dengan metode pendaftaran yang Anda gunakan (misalnya, Airtable, Firebase, dll.)
+    return new Promise((resolve, reject) => {
+        // Simulasi delay dan validasi sederhana
+        setTimeout(() => {
+            if (email === "test@example.com") {
+                reject(new Error("Email sudah terdaftar"));
+            } else {
+                resolve({ email }); // Simulasikan pengguna baru berhasil terdaftar
+            }
+        }, 1000);
+    });
+}
+
+// Fungsi untuk meng-upload gambar profil
+function uploadProfilePicture(file, email) {
+    return new Promise((resolve, reject) => {
+        // Simulasi upload gambar
+        setTimeout(() => {
+            console.log(`Gambar profil untuk ${email} berhasil di-upload: ${file.name}`);
+            resolve();
+        }, 1000);
+    });
+}
