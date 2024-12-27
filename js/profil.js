@@ -1,4 +1,4 @@
-import { displayUserProfile, uploadProfilePicture, logout } from './firebase.js';
+import { displayUserProfile, uploadProfilePicture, logout } from './airtable.js';
 
 // Elemen untuk menampilkan profil pengguna
 const userNameDisplay = document.getElementById('username-display');
