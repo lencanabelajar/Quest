@@ -16,3 +16,10 @@
   "author": "Hariyanto",
   "license": "MIT"
 }
+{
+  "dependencies": {
+    "airtable": "^0.11.2",
+    "parcel": "^2.0.0",
+    ...
+  }
+}
