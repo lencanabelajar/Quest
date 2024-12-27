@@ -1,5 +1,4 @@
-// Import Firebase functions from firebase.js
-import { signUp, login, logout, uploadProfilePicture, displayUserProfile } from './firebase.js';
+import { signUp, login, logout, uploadProfilePicture, displayUserProfile } from './airtable.js';
 
 // Elements from the HTML
 const loginBtn = document.getElementById("login-btn");
