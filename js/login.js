@@ -1,5 +1,5 @@
 // Import fungsi login dari firebase.js
-import { login } from './firebase.js';  // Sesuaikan dengan lokasi firebase.js Anda
+import { login } from './airtable.js';  // Sesuaikan dengan lokasi firebase.js Anda
 
 // Tangani pengiriman form
 // Tangani pengiriman form
