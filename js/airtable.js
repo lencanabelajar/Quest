@@ -2,6 +2,35 @@
 import Airtable from "airtable";
 import bcrypt from 'bcryptjs'; // Correct import for bcryptjs
 
+// Mengimpor dotenv untuk mengakses variabel di .env
+require('dotenv').config();
+
+// Mengakses API key dan URL Airtable dari file .env
+const apiKey = process.env.AIRTABLE_API_KEY;
+const baseUrl = process.env.AIRTABLE_BASE_URL;
+
+// Contoh penggunaan untuk mengambil data dari Airtable API
+const fetch = require('node-fetch');
+
+async function fetchData() {
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchData();
+
 // Mengakses API Key dan Base ID dari environment variables (GitHub Secrets)
 const apiKey = process.env.AIRTABLE_API_KEY;
 const baseId = process.env.AIRTABLE_BASE_ID;
