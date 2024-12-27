@@ -1,5 +1,5 @@
 // Import fungsi untuk menyimpan data ke Airtable
-import { saveUserToAirtable } from './airtable.js'; // Sesuaikan dengan lokasi airtable.js Anda
+import { saveUserToAirtable } from './js/airtable.js'; // Sesuaikan dengan lokasi airtable.js Anda
 
 // Tangani pengiriman form
 document.getElementById('register-form').addEventListener('submit', function(e) {
