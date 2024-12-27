@@ -14,7 +14,6 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/styles.css">
- 
     <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
 </head>
 <body>
@@ -35,41 +34,29 @@
     </header>
 
     <main class="dashboard-main">
+        <!-- Recent Games Section -->
         <section class="recent-games">
+            <h2>Game Terbaru</h2>
             <div class="games-container">
-                <!-- Setiap game item -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="../assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Tambahkan game lainnya sesuai kebutuhan -->
+                <!-- Game items akan dimuat di sini dengan home.js -->
             </div>
         </section>
-        
-        <!-- Paginasasi untuk daftar game -->
+
+        <!-- Game Baru Section -->
+        <section class="game-favourite">
+            <h2>Game Favorit</h2>
+            <div class="games-container">
+                <!-- Game favorit akan dimuat di sini -->
+            </div>
+        </section>
+
+        <!-- Pagination for game list -->
         <div class="pagination">
             <button disabled>Prev</button>
             <button>1</button>
             <button>2</button>
             <button>Next</button>
         </div>
-
-        <section class="game-favourite">
-            <h2>Game Baru</h2>
-            <!-- Daftar game baru -->
-            <div class="game-item">
-                <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                    <h3>Fortnite Royal Battle</h3>
-                    <img src="../assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                    <p>Aset Pertanian Bronze Level</p>
-                    <p>Online</p>
-                </a>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -79,8 +66,8 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-    <!-- Skrip untuk Firebase dan Autentikasi -->
-    <script type="module" src="../js/home.js"></script
-    <script type="module" src="../js/airtable.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="../js/home.js"></script> <!-- Menyertakan home.js -->
+    <script type="module" src="../js/airtable.js"></script> <!-- Menyertakan airtable.js untuk autentikasi dan data pengguna -->
 </body>
 </html>
