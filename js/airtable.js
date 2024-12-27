@@ -33,20 +33,19 @@ export const signUp = async (email, password) => {
     const username = email.split("@")[0]; // Gunakan bagian awal email sebagai username
     const hashedPassword = await bcrypt.hash(password, 10);  // Use bcryptjs for hashing
 
-    const newUser = await base("users").create([
-      {
-        fields: {
-          email,
-          username,
-          passwordHash: hashedPassword,
-          level: "Pemula",
-          createdAt: new Date().toISOString(),
-          xp: 0,
-          questTokens: 5,
-          tasksCompleted: [],
-        },
+    // Membuat user baru di Airtable
+    const newUser = await base("users").create([{
+      fields: {
+        email,
+        username,
+        passwordHash: hashedPassword,
+        level: "Pemula",
+        createdAt: new Date().toISOString(),
+        xp: 0,
+        questTokens: 5,
+        tasksCompleted: [],
       },
-    ]);
+    }]);
 
     console.log("User created:", newUser);
     alert("Sign-up berhasil!");
@@ -89,7 +88,6 @@ export const login = async (email, password) => {
     alert(`Error: ${error.message}`);
   }
 };
-
 
 // Fungsi untuk logout
 export const logout = () => {
