@@ -1,9 +1,8 @@
-// Import Firebase functions from airtable.js
+// Import functions from airtable.js
 import { getTasks, submitTaskAnswer } from './airtable.js';
 
 // Elements for displaying tasks and task submission
 const tasksContainer = document.getElementById('tasks-container');
-const taskAnswerForm = document.getElementById('task-answer-form');
 
 // Load tasks from Airtable or any external data source
 window.addEventListener('load', () => {
