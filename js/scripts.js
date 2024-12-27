@@ -1,6 +1,6 @@
-import { displayUserProfile } from './airtable.js';
+import { login, signUp, logout, uploadProfilePicture, displayUserProfile } from './airtable.js';
 
-// Elements from the HTML
+// DOM Elements
 const loginBtn = document.getElementById("login-btn");
 const registerBtn = document.getElementById("register-btn");
 const logoutBtn = document.getElementById("logout-btn");
@@ -13,134 +13,96 @@ const loginForm = document.getElementById("login-form");
 const registerForm = document.getElementById("register-form");
 const profileImageInput = document.getElementById("profile-image-input");
 
-// Open login modal
-loginBtn.addEventListener('click', () => {
-  loginModal.style.display = 'block';
-});
-
-// Open register modal
-registerBtn.addEventListener('click', () => {
-  registerModal.style.display = 'block';
-});
-
-// Close login modal
-closeLoginModal.addEventListener('click', () => {
-  loginModal.style.display = 'none';
-});
-
-// Close register modal
-closeRegisterModal.addEventListener('click', () => {
-  registerModal.style.display = 'none';
-});
+// Toggle login modal
+loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
+registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
+closeLoginModal.addEventListener('click', () => loginModal.style.display = 'none');
+closeRegisterModal.addEventListener('click', () => registerModal.style.display = 'none');
 
 // Handle login form submission
-loginForm.addEventListener('submit', (event) => {
+loginForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const email = event.target.username.value;
   const password = event.target.password.value;
-  login(email, password)
-    .then(() => {
-      loginModal.style.display = 'none';  // Close modal after login
-    })
-    .catch(error => {
-      alert('Login failed: ' + error.message);  // Show error message
-    });
-});
-
-// Handle register form submission
-registerForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const email = event.target['new-username'].value;
-  const password = event.target['new-password'].value;
-  signUp(email, password)
-    .then(() => {
-      registerModal.style.display = 'none';  // Close modal after registration
-    })
-    .catch(error => {
-      alert('Registration failed: ' + error.message);  // Show error message
-    });
-});
-
-// Handle logout
-logoutBtn.addEventListener('click', () => {
-  logout()
-    .then(() => {
-      userNameDisplay.innerText = ""; // Clear user info
-      logoutBtn.style.display = 'none';  // Hide logout button
-      loginBtn.style.display = 'inline'; // Show login button
-      registerBtn.style.display = 'inline'; // Show register button
-    })
-    .catch(error => {
-      alert('Logout failed: ' + error.message);  // Show error message
-    });
-});
-
-// Handle profile image upload
-profileImageInput.addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    uploadProfilePicture(file)
-      .then(() => {
-        alert('Profile picture uploaded successfully!');
-      })
-      .catch(error => {
-        alert('Error uploading profile picture: ' + error.message);
-      });
+  try {
+    await login(email, password);
+    loginModal.style.display = 'none';
+  } catch (error) {
+    alert('Login failed: ' + error.message);
   }
 });
 
-// Display user information on the dashboard
-window.addEventListener('load', () => {
-  const user = firebase.auth().currentUser;
+// Handle registration form submission
+registerForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const email = event.target['new-username'].value;
+  const password = event.target['new-password'].value;
+  try {
+    await signUp(email, password);
+    registerModal.style.display = 'none';
+  } catch (error) {
+    alert('Registration failed: ' + error.message);
+  }
+});
+
+// Handle logout
+logoutBtn.addEventListener('click', async () => {
+  try {
+    await logout();
+    userNameDisplay.innerText = '';
+    logoutBtn.style.display = 'none';
+    loginBtn.style.display = 'inline';
+    registerBtn.style.display = 'inline';
+  } catch (error) {
+    alert('Logout failed: ' + error.message);
+  }
+});
+
+// Handle profile image upload
+profileImageInput.addEventListener('change', async (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    try {
+      await uploadProfilePicture(file);
+      alert('Profile picture uploaded successfully!');
+    } catch (error) {
+      alert('Error uploading profile picture: ' + error.message);
+    }
+  }
+});
+
+// Check user login status on page load
+window.addEventListener('load', async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
   if (user) {
-    userNameDisplay.innerText = user.email.split('@')[0]; // Display username as part of the email
+    userNameDisplay.innerText = user.username; // Display username
     logoutBtn.style.display = 'inline';  // Show logout button
     loginBtn.style.display = 'none';    // Hide login button
     registerBtn.style.display = 'none'; // Hide register button
-    displayUserProfile(user.uid); // Load user profile data
+    displayUserProfileInfo(user.email);
   } else {
-    userNameDisplay.innerText = ""; // Hide username if not logged in
-    logoutBtn.style.display = 'none';  // Hide logout button
+    userNameDisplay.innerText = ''; // Hide username
+    logoutBtn.style.display = 'none'; // Hide logout button
     loginBtn.style.display = 'inline'; // Show login button
     registerBtn.style.display = 'inline'; // Show register button
   }
 });
 
-// Example to display user profile image and details
-const displayUserProfileInfo = (userId) => {
-  displayUserProfile(userId).then(userData => {
-    if (userData) {
-      // Show user info
-      document.getElementById("user-email").innerText = userData.email;
-      document.getElementById("user-level").innerText = userData.level;
-      // Display profile image if available
-      if (userData.profilePicture) {
-        document.getElementById("profile-img").src = userData.profilePicture;
-      }
+// Function to display user profile info
+const displayUserProfileInfo = async (email) => {
+  try {
+    const userData = await displayUserProfile(email);
+    document.getElementById("user-email").innerText = userData.email;
+    document.getElementById("user-level").innerText = userData.level;
+    if (userData.profilePicture) {
+      document.getElementById("profile-img").src = userData.profilePicture;
     }
-  }).catch(error => {
+  } catch (error) {
     console.error("Error displaying user profile:", error.message);
-  });
+  }
 };
 
-// Example usage for leaderboards and game statistics, to display in leaderboard.html
-const updateLeaderboard = () => {
-  const leaderboardRef = firebase.firestore().collection('leaderboards');
-  leaderboardRef.get().then(snapshot => {
-    snapshot.forEach(doc => {
-      const user = doc.data();
-      const leaderboardElement = document.createElement('div');
-      leaderboardElement.innerHTML = `
-        <p>${user.username}: ${user.score} points</p>
-      `;
-      document.getElementById('leaderboard-list').appendChild(leaderboardElement);
-    });
-  }).catch(error => {
-    console.error("Error fetching leaderboard data: ", error);
-  });
-};
-
-// Example function to handle pagination in game list (index.html)
+// Handle pagination for game list (index.html)
 const handlePagination = () => {
   const prevBtn = document.querySelector('.pagination button:first-child');
   const nextBtn = document.querySelector('.pagination button:last-child');
@@ -168,7 +130,7 @@ const handlePagination = () => {
   });
 };
 
-// Function to load the list of games based on the current page
+// Function to load the list of games dynamically
 const loadGames = (page) => {
   const gamesContainer = document.querySelector('.games-container');
   gamesContainer.innerHTML = ''; // Clear previous games
@@ -176,16 +138,15 @@ const loadGames = (page) => {
   const gamesPerPage = 6;
   const start = (page - 1) * gamesPerPage;
   const end = start + gamesPerPage;
-  
-  // Replace with actual API/database call
+
   const gamesList = [
     { title: "Fortnite Royal Battle", description: "Aset Pertanian Bronze Level", url: "#" },
     { title: "Game 2", description: "Game description here", url: "#" },
-    // Add more games...
+    // More games...
   ];
 
   const gamesToShow = gamesList.slice(start, end);
-  
+
   gamesToShow.forEach(game => {
     const gameItem = document.createElement('div');
     gameItem.classList.add('game-item');
