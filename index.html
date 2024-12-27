@@ -9,72 +9,41 @@
     <meta property="og:image" content="assets/icon/ruby.png">
     <meta property="og:url" content="https://quest">
     <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
 
     <title>Quest Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="assets/icon/ruby.png" type="image/png">
 </head>
+
 <body>
     <header>
         <div class="dashboard-header">
             <h1 class="dashboard-title">QUEST.ID</h1>
             <nav class="dashboard-menu">
-                <a href="html/home.html" class="menu-item">🏡</a>
-                <a href="html/leaderboard.html" class="menu-item">📊</a>
-                <a href="html/profil.html" class="menu-item">📲</a>
-                <a href="html/store.html" class="menu-item">💰</a>
-                <a href="html/news.html" class="menu-item">📰</a>
-                <a href="html/community.html" class="menu-item">🌏</a>
-                <!-- Tampilkan menu Log In dan Daftar jika user belum login -->
+                <a href="html/home.html" class="menu-item" aria-label="Halaman Beranda">🏡</a>
+                <a href="html/leaderboard.html" class="menu-item" aria-label="Leaderboard">📊</a>
+                <a href="html/profil.html" class="menu-item" aria-label="Profil Pengguna">📲</a>
+                <a href="html/store.html" class="menu-item" aria-label="Toko">💰</a>
+                <a href="html/news.html" class="menu-item" aria-label="Berita Terbaru">📰</a>
+                <a href="html/community.html" class="menu-item" aria-label="Komunitas">🌏</a>
                 <a href="html/login.html" id="login-link" class="menu-item">Log In</a>
                 <a href="html/register.html" id="register-link" class="menu-item">Daftar</a>
-                <!-- Tampilkan menu Log Out dan username jika user sudah login -->
-                <a href="#" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
-                <span id="user-name" style="display: none; margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
+                <a href="#" id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</a>
+                <span id="user-name" style="display: none;">Halo, <span id="username-display"></span>!</span>
             </nav>
         </div>
     </header>
 
     <main class="dashboard-main">
         <section class="recent-games">
-            <div class="games-container">
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
+            <h2>Game Favorit</h2>
+            <div class="games-container" id="games-list">
+                <!-- Game items akan dimuat di sini -->
             </div>
         </section>
 
-        <!-- Pagination -->
         <div class="pagination">
             <button disabled>Prev</button>
             <button>1</button>
@@ -87,80 +56,24 @@
             <div class="game-item">
                 <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-info">
                     <h3>Fortnite Royal Battle</h3>
-                    <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois">
+                    <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois" loading="lazy">
                     <p>Aset Pertanian Bronze Level</p>
                     <p>Online</p>
                 </a>
             </div>
         </section>
-         <section class="recent-games">
-             <h2>Edisi Pelajar</h2>
+
+        <section class="recent-games">
+            <h2>Edisi Pelajar</h2>
             <div class="games-container">
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
+                <!-- Game items untuk pelajar akan dimuat di sini -->
             </div>
         </section>
-         <section class="recent-games">
-             <h2>Edisi Penjurusan Khusus</h2>
+
+        <section class="recent-games">
+            <h2>Edisi Penjurusan Khusus</h2>
             <div class="games-container">
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
-                <!-- Game Items -->
-                <!-- Ini adalah contoh, Anda bisa mengganti dengan data dinamis -->
-                <div class="game-item">
-                    <a href="https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html" class="game-link">
-                        <h3>Fortnite Royal Battle</h3>
-                        <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-thumbnail">
-                        <p>Aset Pertanian Bronze Level</p>
-                        <p>Online</p>
-                    </a>
-                </div>
+                <!-- Game items untuk penjurusan khusus akan dimuat di sini -->
             </div>
         </section>
     </main>
@@ -173,7 +86,8 @@
     </footer>
 
     <!-- Skrip JavaScript -->
-<script type="module" src="./js/scripts.js"></script>
-<script type="module" src="./js/airtable.js"></script>
+    <script type="module" src="./js/scripts.js"></script>
+    <script type="module" src="./js/airtable.js"></script>
+    <script type="module" src="./js/home.js"></script>
 </body>
 </html>
