@@ -25,7 +25,7 @@
                 <a href="../html/home.html" class="menu-item">🏡</a>
                 <a href="../html/leaderboard.html" class="menu-item">📊</a>
                 <a href="../html/profil.html" class="menu-item">📲</a>
-                <a href="../html/store.html" class="menu-item">💰</a>
+                <a href="../html/store.html" class="menu-item active">💰</a>
                 <a href="../html/news.html" class="menu-item">📰</a>
                 <a href="../html/community.html" class="menu-item">🌏</a>
                 <a href="../html/login.html" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
@@ -37,21 +37,9 @@
     <main class="dashboard-main">
         <section class="store-section">
             <h2>Quest.ID Store</h2>
-            <div class="store-items">
-                <!-- Item list -->
-                <div class="store-item">
-                    <img src="../assets/icon/ruby.png" alt="Item 1" class="store-item-img">
-                    <p>Item 1</p>
-                    <p>Harga: 100 Ruby</p>
-                    <button class="buy-btn">Beli</button>
-                </div>
-                <div class="store-item">
-                    <img src="../assets/icon/ruby.png" alt="Item 2" class="store-item-img">
-                    <p>Item 2</p>
-                    <p>Harga: 150 Ruby</p>
-                    <button class="buy-btn">Beli</button>
-                </div>
-                <!-- Repeat for more items -->
+            <div id="store-items" class="store-items">
+                <!-- Item list will be dynamically injected -->
+                <p>Memuat item...</p>
             </div>
         </section>
     </main>
@@ -63,7 +51,7 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-        <script type="module" src="../js/scripts.js"></script>
-        <script type="module" src="../js/store.js"></script>
+    <script type="module" src="../js/scripts.js"></script>
+    <script type="module" src="../js/store.js"></script>
 </body>
 </html>
