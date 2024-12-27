@@ -24,7 +24,7 @@
             <nav class="dashboard-menu">
                 <a href="../html/home.html" class="menu-item">🏡</a>
                 <a href="../html/leaderboard.html" class="menu-item">📊</a>
-                <a href="../html/profil.html" class="menu-item">📲</a>
+                <a href="../html/profil.html" class="menu-item active">📲</a>
                 <a href="../html/store.html" class="menu-item">💰</a>
                 <a href="../html/news.html" class="menu-item">📰</a>
                 <a href="../html/community.html" class="menu-item">🌏</a>
@@ -38,12 +38,16 @@
         <section class="profile-section">
             <h2>Profil Pengguna</h2>
             <div class="profile-container">
-                <img src="../assets/icon/ruby.png" alt="Profil" class="profile-avatar">
+                <div class="profile-avatar-container">
+                    <img src="../assets/icon/ruby.png" alt="Profil" class="profile-avatar">
+                    <input type="file" id="profile-image-input" class="profile-image-input" style="display: none;" />
+                    <button id="change-profile-pic-btn" class="profile-btn">Ganti Foto Profil</button>
+                </div>
                 <div class="profile-details">
                     <p><strong>Nama:</strong> <span id="user-name-display">Nama Pengguna</span></p>
                     <p><strong>Email:</strong> <span id="user-email-display">email@domain.com</span></p>
                     <p><strong>Level:</strong> <span id="user-level-display">Pemula</span></p>
-                    <button id="edit-profile-btn">Edit Profil</button>
+                    <button id="edit-profile-btn" class="profile-btn">Edit Profil</button>
                 </div>
             </div>
         </section>
@@ -56,8 +60,9 @@
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
 
-        <script type="module" src="../js/airtable.js"></script>
-        <script type="module" src="../js/scripts.js"></script>
-        <script type="module" src="../js/home.js"></script>
+    <!-- Scripts -->
+    <script type="module" src="../js/airtable.js"></script>
+    <script type="module" src="../js/scripts.js"></script>
+    <script type="module" src="../js/profil.js"></script>
 </body>
 </html>
