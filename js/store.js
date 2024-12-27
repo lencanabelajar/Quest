@@ -1,5 +1,5 @@
-// Import Firebase functions from firebase.js
-import { getStoreItems, purchaseItem } from './airtable.js';
+// Di scripts.js atau file lain
+import { displayUserProfile, getStoreItems, purchaseItem, saveUserToAirtable } from './airtable.js';
 
 // Elements for displaying store items
 const storeItemsContainer = document.getElementById('store-items');
