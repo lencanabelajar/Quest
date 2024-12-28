@@ -1,6 +1,3 @@
-// Import fungsi dari airtable.js
-import { logout, uploadProfilePicture, updateUserLevel } from './airtable.js'; // Pastikan jalur ini benar
-
 // Mendapatkan elemen DOM
 const usernameDisplay = document.getElementById('username-display');
 const logoutBtn = document.getElementById('logout-btn');
@@ -8,17 +5,14 @@ const userProfileImage = document.getElementById('profile-picture');
 const profilePictureInput = document.getElementById('profile-picture-input');
 const gamesContainer = document.querySelector('.games-container');
 const loadingIndicator = document.getElementById('loading-indicator'); // Indikator loading
-const gameSection = document.querySelector('.recent-games');
-const favoriteGameSection = document.querySelector('.game-favourite');
-const specialGameSection = document.querySelector('.game-special');
 
 // Fungsi untuk memuat data game secara dinamis
-const loadGames = async () => {
+const loadGames = () => {
   try {
     // Menampilkan indikator loading sebelum data dimuat
     loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
 
-    // Simulasi mengambil data game dari API atau Airtable
+    // Data game simulasi, Anda bisa menambahkannya sesuai kebutuhan
     const gamesData = [
       {
         title: "Fortnite Royal Battle",
@@ -86,12 +80,12 @@ const checkUserStatus = () => {
 
 // Fungsi logout
 logoutBtn?.addEventListener('click', () => {
-  logout(); // Panggil fungsi logout dari airtable.js
+  localStorage.removeItem('user'); // Hapus data pengguna dari localStorage
   window.location.href = '/html/index.html';  // Arahkan ke halaman login setelah logout
 });
 
 // Fungsi untuk memperbarui gambar profil
-const handleProfilePictureChange = async (event) => {
+const handleProfilePictureChange = (event) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const file = event.target.files[0]; // Ambil file yang diupload
 
@@ -100,8 +94,8 @@ const handleProfilePictureChange = async (event) => {
       // Menampilkan indikator loading
       loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
 
-      // Upload gambar ke Cloudinary dan update di Airtable
-      const updatedUser = await uploadProfilePicture(file, user.email);
+      // Simulasi upload gambar ke server atau penyimpanan cloud
+      const updatedUser = { ...user, profilePicture: URL.createObjectURL(file) }; // Simulasi update data
 
       // Update data pengguna di localStorage dan tampilkan gambar profil baru
       localStorage.setItem('user', JSON.stringify(updatedUser)); 
