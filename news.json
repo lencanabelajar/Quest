@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Berita Terbaru 1",
+    "description": "Deskripsi singkat berita pertama.",
+    "url": "https://example.com/berita-terbaru-1"
+  },
+  {
+    "title": "Berita Terbaru 2",
+    "description": "Deskripsi singkat berita kedua.",
+    "url": "https://example.com/berita-terbaru-2"
+  },
+  {
+    "title": "Berita Terbaru 3",
+    "description": "Deskripsi singkat berita ketiga.",
+    "url": "https://example.com/berita-terbaru-3"
+  }
+]
