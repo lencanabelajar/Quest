@@ -1,0 +1,8 @@
+[build]
+  # Menentukan folder fungsi
+  functions = "netlify/functions"
+  # Menentukan folder build output (jika menggunakan build seperti React, Vue, dll.)
+  publish = "dist"  # Sesuaikan dengan folder output build aplikasi Anda
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"  # Ini hanya contoh plugin, sesuaikan sesuai kebutuhan Anda
