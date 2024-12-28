@@ -1,12 +1,23 @@
-// Import dari airtable.js untuk mengakses data
-import { getForumComments, postComment, getCommunityMembers } from './airtable.js';
-
 // Elemen DOM
 const commentList = document.getElementById('comment-list');
 const commentInput = document.getElementById('comment-input');
 const submitCommentButton = document.getElementById('submit-comment');
 const membersList = document.getElementById('members-list');
 const joinEventButtons = document.querySelectorAll('.join-event-btn');
+
+// Simulasi data komentar (bisa diganti dengan API atau database lainnya)
+const commentsData = [
+    { username: 'Alice', text: 'Ini adalah komentar pertama!' },
+    { username: 'Bob', text: 'Menarik sekali diskusi ini.' },
+    { username: 'Charlie', text: 'Saya setuju dengan pendapat Bob.' }
+];
+
+// Simulasi data anggota komunitas
+const membersData = [
+    { username: 'Alice', avatar: 'https://example.com/avatar1.jpg', level: 5 },
+    { username: 'Bob', avatar: 'https://example.com/avatar2.jpg', level: 3 },
+    { username: 'Charlie', avatar: 'https://example.com/avatar3.jpg', level: 2 }
+];
 
 // Fungsi untuk menampilkan komentar di forum
 function displayComments(comments) {
@@ -20,15 +31,10 @@ function displayComments(comments) {
     });
 }
 
-// Fungsi untuk mengambil komentar dari Airtable (atau sumber lain)
+// Fungsi untuk mengambil komentar dari sumber data
 function loadComments() {
-    getForumComments()
-        .then(comments => {
-            displayComments(comments);
-        })
-        .catch(error => {
-            console.error('Gagal mengambil komentar: ', error);
-        });
+    // Di sini, Anda bisa menggantikan data statis dengan API call jika ada
+    displayComments(commentsData);
 }
 
 // Fungsi untuk mengirimkan komentar baru
@@ -40,14 +46,10 @@ function handlePostComment() {
             text: commentText,
         };
 
-        postComment(newComment)
-            .then(() => {
-                loadComments(); // Muat ulang komentar setelah berhasil mengirim
-                commentInput.value = ''; // Kosongkan input
-            })
-            .catch(error => {
-                console.error('Gagal mengirim komentar: ', error);
-            });
+        // Simulasi mengirim komentar baru
+        commentsData.push(newComment); // Menambahkan komentar ke data statis
+        displayComments(commentsData); // Update tampilan komentar
+        commentInput.value = ''; // Kosongkan input
     }
 }
 
@@ -65,22 +67,17 @@ function displayMembers(members) {
     });
 }
 
-// Fungsi untuk mengambil anggota komunitas dari Airtable
+// Fungsi untuk mengambil anggota komunitas dari sumber data
 function loadMembers() {
-    getCommunityMembers()
-        .then(members => {
-            displayMembers(members);
-        })
-        .catch(error => {
-            console.error('Gagal mengambil anggota komunitas: ', error);
-        });
+    // Di sini, Anda bisa menggantikan data statis dengan API call jika ada
+    displayMembers(membersData);
 }
 
 // Fungsi untuk bergabung dalam acara komunitas
 function handleJoinEvent(event) {
     const eventName = event.target.previousElementSibling.innerText;
     alert(`Anda telah bergabung dalam acara: ${eventName}`);
-    // Proses bergabung bisa ditambahkan di sini, misalnya menambah ke Airtable atau backend
+    // Proses bergabung bisa ditambahkan di sini, misalnya menambah ke database atau backend
 }
 
 // Mengikat event listener ke tombol Kirim Komentar
