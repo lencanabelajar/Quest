@@ -1,5 +1,4 @@
-import bcrypt from 'bcryptjs'; // Mengimpor bcryptjs
-
+// js/register.js
 // DOM Elements
 const registerForm = document.getElementById('register-form');
 const profileImageInput = document.getElementById('profile-image');
@@ -35,23 +34,28 @@ registerForm.addEventListener('submit', async function(e) {
     }
 
     try {
-        // Hash password di frontend menggunakan bcryptjs
-        const hashedPassword = await hashPassword(password);
-
         // Menampilkan loading spinner
         loadingSpinner.style.display = 'block';
 
-        // Proses pendaftaran dan simpan ke Airtable dengan password yang sudah di-hash
-        const user = await signUp(email, hashedPassword);
+        // Mengirim data ke serverless function Netlify
+        const response = await fetch('/.netlify/functions/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-        // Simpan gambar profil jika ada
-        const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
-        if (file) {
-            await uploadProfilePicture(file, email);
+        const data = await response.json();
+
+        if (response.status !== 200) {
+            throw new Error(data.message); // Jika ada error, lemparkan
         }
 
         // Sembunyikan loading spinner setelah registrasi selesai
         loadingSpinner.style.display = 'none';
+
+        // Jika berhasil, redirect ke halaman home
         console.log("Registrasi berhasil! Menuju halaman utama.");
         window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
     } catch (error) {
@@ -71,42 +75,4 @@ function displayErrorMessage(message) {
 function validateEmail(email) {
     const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     return regex.test(email);
-}
-
-// Fungsi untuk hash password
-function hashPassword(password) {
-    return new Promise((resolve, reject) => {
-        bcrypt.hash(password, 10, (err, hashedPassword) => {
-            if (err) {
-                reject(new Error("Terjadi kesalahan saat hashing password!"));
-            } else {
-                resolve(hashedPassword);
-            }
-        });
-    });
-}
-
-// Fungsi untuk registrasi pengguna (gunakan API atau backend yang sesuai)
-function signUp(email, hashedPassword) {
-    return new Promise((resolve, reject) => {
-        // Simulasi delay dan validasi sederhana
-        setTimeout(() => {
-            if (email === "test@example.com") {
-                reject(new Error("Email sudah terdaftar"));
-            } else {
-                resolve({ email }); // Simulasikan pengguna baru berhasil terdaftar
-            }
-        }, 1000);
-    });
-}
-
-// Fungsi untuk meng-upload gambar profil
-function uploadProfilePicture(file, email) {
-    return new Promise((resolve, reject) => {
-        // Simulasi upload gambar
-        setTimeout(() => {
-            console.log(`Gambar profil untuk ${email} berhasil di-upload: ${file.name}`);
-            resolve();
-        }, 1000);
-    });
 }
