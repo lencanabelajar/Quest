@@ -1,15 +1,12 @@
-// Import fungsi login dari airtable.js
-import { login } from './airtable.js';  // Sesuaikan dengan lokasi airtable.js Anda
-
-// Tangani pengiriman form
-document.getElementById('login-form').addEventListener('submit', function (e) {
-    e.preventDefault(); // Mencegah form untuk submit secara default
+// Fungsi untuk login
+export function handleLogin(event) {
+    event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Validasi form: Pastikan email dan password diisi
+    // Validasi form
     if (!email || !password) {
         showError('Harap isi semua kolom!');
         return;
@@ -25,25 +22,76 @@ document.getElementById('login-form').addEventListener('submit', function (e) {
     // Tampilkan loading spinner saat proses login berjalan
     document.getElementById('loading-spinner').style.display = 'block';
 
-    // Proses login menggunakan fungsi login dari airtable.js
-    login(email, password)
+    // Proses login, misalnya dengan memeriksa di database atau API
+    // Ini simulasi, Anda dapat menggantinya dengan logika API sebenarnya
+    loginUser(email, password)
         .then(user => {
-            // Menyimpan informasi pengguna (jika dibutuhkan) ke localStorage atau sessionStorage
-            sessionStorage.setItem('userEmail', email);  // Anda bisa menyimpan lebih banyak data pengguna jika perlu
+            // Menyimpan informasi pengguna ke localStorage
+            localStorage.setItem('user', JSON.stringify(user));
 
-            // Redirect setelah login berhasil
-            console.log("Login berhasil! Menuju halaman utama.");
-            window.location.href = '/html/home.html';  // Ganti dengan halaman home Anda
+            // Menyembunyikan spinner dan redirect ke halaman utama
+            document.getElementById('loading-spinner').style.display = 'none';
+            window.location.href = '/html/home.html';
         })
         .catch(error => {
-            console.error("Login gagal:", error.message);
-            showError(`Gagal login: ${error.message}`);
-        })
-        .finally(() => {
-            // Sembunyikan loading spinner setelah proses selesai
             document.getElementById('loading-spinner').style.display = 'none';
+            showError(`Gagal login: ${error.message}`);
         });
-});
+}
+
+// Fungsi untuk register
+export function handleRegister(event) {
+    event.preventDefault(); // Mencegah form untuk submit secara default
+
+    // Ambil nilai dari input form
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    // Validasi form
+    if (!email || !password || !confirmPassword) {
+        showError('Harap isi semua kolom!');
+        return;
+    }
+
+    // Validasi email
+    if (!validateEmail(email)) {
+        showError('Email tidak valid!');
+        return;
+    }
+
+    // Validasi password
+    if (password !== confirmPassword) {
+        showError('Password dan Konfirmasi Password tidak cocok!');
+        return;
+    }
+
+    if (password.length < 6) {
+        showError('Password harus memiliki minimal 6 karakter!');
+        return;
+    }
+
+    // Tampilkan loading spinner saat proses pendaftaran
+    document.getElementById('loading-spinner').style.display = 'block';
+
+    // Proses pendaftaran
+    registerUser(email, password)
+        .then(user => {
+            // Menyembunyikan spinner dan redirect ke halaman login
+            document.getElementById('loading-spinner').style.display = 'none';
+            window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah registrasi berhasil
+        })
+        .catch(error => {
+            document.getElementById('loading-spinner').style.display = 'none';
+            showError(`Gagal registrasi: ${error.message}`);
+        });
+}
+
+// Fungsi untuk menangani logout
+export function handleLogout() {
+    localStorage.removeItem('user'); // Hapus informasi user dari localStorage
+    window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah logout
+}
 
 // Fungsi untuk menampilkan pesan error
 function showError(message) {
@@ -52,11 +100,36 @@ function showError(message) {
     errorMessageElement.style.display = 'block';
 }
 
-// Fungsi untuk menghapus pesan error ketika pengguna mulai mengetik
-document.getElementById('email').addEventListener('input', clearError);
-document.getElementById('password').addEventListener('input', clearError);
+// Fungsi validasi email
+function validateEmail(email) {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+}
 
-function clearError() {
-    const errorMessageElement = document.getElementById('error-message');
-    errorMessageElement.style.display = 'none';
+// Fungsi simulasi login (ganti dengan logika backend nyata)
+function loginUser(email, password) {
+    return new Promise((resolve, reject) => {
+        // Simulasi login
+        setTimeout(() => {
+            if (email === "test@example.com" && password === "password123") {
+                resolve({ username: 'Test User', email }); // Simulasi user berhasil login
+            } else {
+                reject(new Error('Email atau password salah'));
+            }
+        }, 1000);
+    });
+}
+
+// Fungsi simulasi registrasi (ganti dengan logika backend nyata)
+function registerUser(email, password) {
+    return new Promise((resolve, reject) => {
+        // Simulasi registrasi
+        setTimeout(() => {
+            if (email === "test@example.com") {
+                reject(new Error('Email sudah terdaftar'));
+            } else {
+                resolve({ username: email, email }); // Simulasi registrasi berhasil
+            }
+        }, 1000);
+    });
 }
