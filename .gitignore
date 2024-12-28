@@ -1,31 +1,32 @@
-# Node.js dependencies
+# Node.js
 node_modules/
-
-# Firebase emulator data
-.firebase/
-
-# Build output
-/dist
-/build
-
-# Cache
-/.parcel-cache
-/.sass-cache
-
-# Log files
+dist/
 *.log
+
+# Parcel cache
+.cache/
+
+# Netlify deploy files
+netlify.toml
 
 # Environment files
 .env
 
-# System files
+# IDEs and Editors
+.idea/
+.vscode/
+
+# OS generated files
 .DS_Store
 Thumbs.db
 
-# Jangan abaikan folder berikut karena berisi file yang diperlukan untuk aplikasi
-!/assets/
-!/css/
-!/js/
-!/index.html
-!/html/
-!/netlify/
+# Output from npm pack
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore any build directories that Parcel or other build tools may create
+build/
+
+# Ignore files that contain sensitive information
+*.env
