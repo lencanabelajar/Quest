@@ -5,21 +5,7 @@ const submitCommentButton = document.getElementById('submit-comment');
 const membersList = document.getElementById('members-list');
 const joinEventButtons = document.querySelectorAll('.join-event-btn');
 
-// Simulasi data komentar (bisa diganti dengan API atau database lainnya)
-const commentsData = [
-    { username: 'Alice', text: 'Ini adalah komentar pertama!' },
-    { username: 'Bob', text: 'Menarik sekali diskusi ini.' },
-    { username: 'Charlie', text: 'Saya setuju dengan pendapat Bob.' }
-];
-
-// Simulasi data anggota komunitas
-const membersData = [
-    { username: 'Alice', avatar: 'https://example.com/avatar1.jpg', level: 5 },
-    { username: 'Bob', avatar: 'https://example.com/avatar2.jpg', level: 3 },
-    { username: 'Charlie', avatar: 'https://example.com/avatar3.jpg', level: 2 }
-];
-
-// Fungsi untuk menampilkan komentar di forum
+// Fungsi untuk menampilkan komentar
 function displayComments(comments) {
     commentList.innerHTML = ''; // Bersihkan komentar lama
     comments.forEach(comment => {
@@ -31,14 +17,20 @@ function displayComments(comments) {
     });
 }
 
-// Fungsi untuk mengambil komentar dari sumber data
-function loadComments() {
-    // Di sini, Anda bisa menggantikan data statis dengan API call jika ada
-    displayComments(commentsData);
+// Fungsi untuk mengambil komentar dari API Netlify Functions
+async function loadComments() {
+    try {
+        const response = await fetch('/api/getComments'); // Memanggil API Netlify Functions
+        const comments = await response.json();
+        displayComments(comments);
+    } catch (error) {
+        console.error('Error loading comments: ', error);
+        alert('Failed to load comments: ' + error.message);
+    }
 }
 
-// Fungsi untuk mengirimkan komentar baru
-function handlePostComment() {
+// Fungsi untuk mengirimkan komentar baru ke API
+async function handlePostComment() {
     const commentText = commentInput.value.trim();
     if (commentText) {
         const newComment = {
@@ -46,10 +38,25 @@ function handlePostComment() {
             text: commentText,
         };
 
-        // Simulasi mengirim komentar baru
-        commentsData.push(newComment); // Menambahkan komentar ke data statis
-        displayComments(commentsData); // Update tampilan komentar
-        commentInput.value = ''; // Kosongkan input
+        try {
+            const response = await fetch('/api/postComment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newComment),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to post comment');
+            }
+
+            loadComments(); // Memuat komentar setelah berhasil diposting
+            commentInput.value = ''; // Kosongkan input
+        } catch (error) {
+            console.error('Error posting comment: ', error);
+            alert('Failed to post comment: ' + error.message);
+        }
     }
 }
 
@@ -67,17 +74,40 @@ function displayMembers(members) {
     });
 }
 
-// Fungsi untuk mengambil anggota komunitas dari sumber data
-function loadMembers() {
-    // Di sini, Anda bisa menggantikan data statis dengan API call jika ada
-    displayMembers(membersData);
+// Fungsi untuk mengambil anggota komunitas dari API
+async function loadMembers() {
+    try {
+        const response = await fetch('/api/getMembers');
+        const members = await response.json();
+        displayMembers(members);
+    } catch (error) {
+        console.error('Error loading members: ', error);
+        alert('Failed to load members: ' + error.message);
+    }
 }
 
 // Fungsi untuk bergabung dalam acara komunitas
-function handleJoinEvent(event) {
+async function handleJoinEvent(event) {
     const eventName = event.target.previousElementSibling.innerText;
     alert(`Anda telah bergabung dalam acara: ${eventName}`);
-    // Proses bergabung bisa ditambahkan di sini, misalnya menambah ke database atau backend
+
+    try {
+        const response = await fetch('/api/joinEvent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ eventName }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to join event');
+        }
+        alert('Anda berhasil bergabung dalam acara!');
+    } catch (error) {
+        console.error('Error joining event: ', error);
+        alert('Failed to join event: ' + error.message);
+    }
 }
 
 // Mengikat event listener ke tombol Kirim Komentar
