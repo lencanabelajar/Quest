@@ -1,33 +1,73 @@
 // Elemen untuk menampilkan leaderboard
 const leaderboardBody = document.getElementById('leaderboard-body');
+const sortButton = document.getElementById('sort-button'); // Tombol untuk mengurutkan leaderboard
+const filterInput = document.getElementById('filter-input'); // Input untuk filter leaderboard
 
-// Data leaderboard statis (misalnya bisa dari file JSON atau API eksternal)
-const leaderboardData = [
-  { name: "User1", points: 1500 },
-  { name: "User2", points: 1400 },
-  { name: "User3", points: 1300 },
-  { name: "User4", points: 1200 },
-  { name: "User5", points: 1100 }
-];
+// Fungsi untuk memuat leaderboard dari API eksternal atau server
+const loadLeaderboard = async () => {
+  try {
+    // Menampilkan indikator loading sebelum data dimuat
+    leaderboardBody.innerHTML = '<tr><td colspan="3">Memuat data...</td></tr>';
 
-// Fungsi untuk memuat leaderboard
-function loadLeaderboard() {
-  if (leaderboardData.length === 0) {
-    leaderboardBody.innerHTML = '<tr><td colspan="3">Papan peringkat kosong.</td></tr>';
-    return;
+    // Ambil data leaderboard dari API (misalnya menggunakan fetch)
+    const response = await fetch('/api/getLeaderboard');  // Ganti dengan URL API Anda
+    const leaderboardData = await response.json();  // Mengambil data leaderboard
+
+    if (leaderboardData.length === 0) {
+      leaderboardBody.innerHTML = '<tr><td colspan="3">Papan peringkat kosong.</td></tr>';
+      return;
+    }
+
+    // Menambahkan data leaderboard ke dalam tabel
+    leaderboardBody.innerHTML = ''; // Bersihkan konten tabel terlebih dahulu
+    leaderboardData.forEach((entry, index) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${entry.name}</td>
+        <td>${entry.points}</td>
+      `;
+      leaderboardBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error('Error loading leaderboard:', error);
+    leaderboardBody.innerHTML = '<tr><td colspan="3">Gagal memuat data leaderboard. Coba lagi nanti.</td></tr>';
   }
+};
 
-  // Menambahkan data leaderboard ke dalam tabel
-  leaderboardData.forEach((entry, index) => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${entry.name}</td>
-      <td>${entry.points}</td>
-    `;
-    leaderboardBody.appendChild(row);
+// Fungsi untuk mengurutkan leaderboard berdasarkan poin
+const sortLeaderboard = () => {
+  const rows = Array.from(leaderboardBody.querySelectorAll('tr'));
+  const sortedRows = rows.slice(1).sort((a, b) => {
+    const pointsA = parseInt(a.cells[2].textContent);
+    const pointsB = parseInt(b.cells[2].textContent);
+    return pointsB - pointsA; // Urutkan dari poin tertinggi ke terendah
   });
-}
+
+  // Menambahkan kembali baris yang sudah diurutkan
+  leaderboardBody.innerHTML = '';
+  sortedRows.forEach(row => leaderboardBody.appendChild(row));
+};
+
+// Fungsi untuk memfilter leaderboard berdasarkan input
+const filterLeaderboard = () => {
+  const filterText = filterInput.value.toLowerCase();
+  const rows = Array.from(leaderboardBody.querySelectorAll('tr'));
+
+  rows.forEach(row => {
+    const nameCell = row.cells[1];
+    if (nameCell) {
+      const name = nameCell.textContent.toLowerCase();
+      row.style.display = name.includes(filterText) ? '' : 'none';
+    }
+  });
+};
+
+// Mengikat event listener untuk tombol urutkan
+sortButton?.addEventListener('click', sortLeaderboard);
+
+// Mengikat event listener untuk input filter
+filterInput?.addEventListener('input', filterLeaderboard);
 
 // Memuat leaderboard saat halaman dimuat
 window.addEventListener('load', loadLeaderboard);
