@@ -13,32 +13,37 @@ const closeLoginModal = document.querySelector("#modal-login .close");
 const closeRegisterModal = document.querySelector("#modal-register .close");
 const profileImageInput = document.getElementById("profile-image-input");
 
-// Toggle login modal
-loginBtn.addEventListener('click', () => loginModal.style.display = 'block');
-registerBtn.addEventListener('click', () => registerModal.style.display = 'block');
-closeLoginModal.addEventListener('click', () => loginModal.style.display = 'none');
-closeRegisterModal.addEventListener('click', () => registerModal.style.display = 'none');
+// Event listener functions
+function toggleModal(modal, displayStyle) {
+    modal.style.display = displayStyle;
+}
 
-// Initialize pagination
-handlePagination();
+// Initialize Modals
+loginBtn.addEventListener('click', () => toggleModal(loginModal, 'block'));
+registerBtn.addEventListener('click', () => toggleModal(registerModal, 'block'));
+closeLoginModal.addEventListener('click', () => toggleModal(loginModal, 'none'));
+closeRegisterModal.addEventListener('click', () => toggleModal(registerModal, 'none'));
 
 // Check user login status on page load
-window.addEventListener('load', async () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (user) {
-    userNameDisplay.innerText = user.username; // Display username
-    logoutBtn.style.display = 'inline';  // Show logout button
-    loginBtn.style.display = 'none';    // Hide login button
-    registerBtn.style.display = 'none'; // Hide register button
-  } else {
-    userNameDisplay.innerText = ''; // Hide username
-    logoutBtn.style.display = 'none'; // Hide logout button
-    loginBtn.style.display = 'inline'; // Show login button
-    registerBtn.style.display = 'inline'; // Show register button
-  }
+window.addEventListener('load', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+        userNameDisplay.innerText = user.username;
+        toggleAuthUI(true);  // Show logged-in UI
+    } else {
+        userNameDisplay.innerText = '';
+        toggleAuthUI(false); // Show logged-out UI
+    }
 });
 
-// Event listeners for login and register
+// Helper function to toggle authentication UI
+function toggleAuthUI(isLoggedIn) {
+    logoutBtn.style.display = isLoggedIn ? 'inline' : 'none';
+    loginBtn.style.display = isLoggedIn ? 'none' : 'inline';
+    registerBtn.style.display = isLoggedIn ? 'none' : 'inline';
+}
+
+// Event listeners for login and register forms
 document.getElementById('login-form').addEventListener('submit', handleLogin);
 document.getElementById('register-form').addEventListener('submit', handleRegister);
 logoutBtn.addEventListener('click', handleLogout);
@@ -46,5 +51,6 @@ logoutBtn.addEventListener('click', handleLogout);
 // Handle profile image upload
 profileImageInput.addEventListener('change', handleProfileImageUpload);
 
-// Load games
+// Load games and initialize pagination
 loadGames(1); // Default to page 1
+handlePagination(); // Initialize pagination
