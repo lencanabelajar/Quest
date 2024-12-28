@@ -1,77 +1,70 @@
 import bcrypt from 'bcryptjs'; // Mengimpor bcryptjs
 
-document.getElementById('register-form').addEventListener('submit', function(e) {
+// DOM Elements
+const registerForm = document.getElementById('register-form');
+const profileImageInput = document.getElementById('profile-image');
+const loadingSpinner = document.getElementById('loading-spinner');
+const errorMessageElement = document.getElementById('error-message');
+
+// Event listener untuk form registrasi
+registerForm.addEventListener('submit', async function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
     
     // Ambil nilai dari input form
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
-    const profileImageInput = document.getElementById('profile-image');
 
     // Validasi form
     if (!email || !password || !confirmPassword) {
-        displayErrorMessage('Harap isi semua kolom!');
-        return;
+        return displayErrorMessage('Harap isi semua kolom!');
     }
 
     // Validasi email
     if (!validateEmail(email)) {
-        displayErrorMessage('Email tidak valid!');
-        return;
+        return displayErrorMessage('Email tidak valid!');
     }
 
     // Validasi password
     if (password !== confirmPassword) {
-        displayErrorMessage('Password dan Konfirmasi Password tidak cocok!');
-        return;
+        return displayErrorMessage('Password dan Konfirmasi Password tidak cocok!');
     }
 
     if (password.length < 6) {
-        displayErrorMessage('Password harus memiliki minimal 6 karakter!');
-        return;
+        return displayErrorMessage('Password harus memiliki minimal 6 karakter!');
     }
 
-    // Hash password di frontend menggunakan bcryptjs
-    bcrypt.hash(password, 10, (err, hashedPassword) => {
-        if (err) {
-            console.error("Error hashing password:", err);
-            displayErrorMessage('Terjadi kesalahan saat hashing password!');
-            return;
-        }
+    try {
+        // Hash password di frontend menggunakan bcryptjs
+        const hashedPassword = await hashPassword(password);
 
         // Menampilkan loading spinner
-        document.getElementById('loading-spinner').style.display = 'block';
+        loadingSpinner.style.display = 'block';
 
         // Proses pendaftaran dan simpan ke Airtable dengan password yang sudah di-hash
-        signUp(email, hashedPassword) // Gunakan fungsi signUp dengan password yang sudah di-hash
-            .then(user => {
-                // Jika ada gambar profil yang diupload, simpan gambar ke server atau URL
-                const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
-                if (file) {
-                    return uploadProfilePicture(file, email); // Gantilah dengan cara upload yang sesuai
-                } else {
-                    return Promise.resolve(); // Lanjutkan tanpa gambar profil
-                }
-            })
-            .then(() => {
-                // Sembunyikan loading spinner setelah registrasi selesai
-                document.getElementById('loading-spinner').style.display = 'none';
-                console.log("Registrasi berhasil! Menuju halaman utama.");
-                window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
-            })
-            .catch(error => {
-                document.getElementById('loading-spinner').style.display = 'none';
-                console.error("Registrasi gagal:", error.message);
-                displayErrorMessage(`Gagal registrasi: ${error.message}`);
-            });
-    });
+        const user = await signUp(email, hashedPassword);
+
+        // Simpan gambar profil jika ada
+        const file = profileImageInput.files.length > 0 ? profileImageInput.files[0] : null;
+        if (file) {
+            await uploadProfilePicture(file, email);
+        }
+
+        // Sembunyikan loading spinner setelah registrasi selesai
+        loadingSpinner.style.display = 'none';
+        console.log("Registrasi berhasil! Menuju halaman utama.");
+        window.location.href = '../html/home.html'; // Ganti dengan halaman home Anda
+    } catch (error) {
+        loadingSpinner.style.display = 'none';
+        console.error("Registrasi gagal:", error.message);
+        displayErrorMessage(`Gagal registrasi: ${error.message}`);
+    }
 });
 
 // Fungsi untuk menampilkan pesan error
 function displayErrorMessage(message) {
-    document.getElementById('error-message').innerText = message;
-    document.getElementById('error-message').style.display = 'block';
+    errorMessageElement.innerText = message;
+    errorMessageElement.style.display = 'block';
 }
 
 // Fungsi validasi email
@@ -80,9 +73,21 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
+// Fungsi untuk hash password
+function hashPassword(password) {
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hashedPassword) => {
+            if (err) {
+                reject(new Error("Terjadi kesalahan saat hashing password!"));
+            } else {
+                resolve(hashedPassword);
+            }
+        });
+    });
+}
+
 // Fungsi untuk registrasi pengguna (gunakan API atau backend yang sesuai)
 function signUp(email, hashedPassword) {
-    // Fungsi ini harus diubah sesuai dengan metode pendaftaran yang Anda gunakan (misalnya, Airtable, Firebase, dll.)
     return new Promise((resolve, reject) => {
         // Simulasi delay dan validasi sederhana
         setTimeout(() => {
