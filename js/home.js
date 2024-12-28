@@ -6,38 +6,17 @@ const profilePictureInput = document.getElementById('profile-picture-input');
 const gamesContainer = document.querySelector('.games-container');
 const loadingIndicator = document.getElementById('loading-indicator'); // Indikator loading
 
-// Fungsi untuk memuat data game secara dinamis
-const loadGames = () => {
+// Fungsi untuk memuat data game secara dinamis dari API atau server
+const loadGames = async () => {
   try {
-    // Menampilkan indikator loading sebelum data dimuat
     loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
 
-    // Data game simulasi, Anda bisa menambahkannya sesuai kebutuhan
-    const gamesData = [
-      {
-        title: "Fortnite Royal Battle",
-        image: "../assets/icon/ruby.png",
-        description: "Aset Pertanian Bronze Level",
-        status: "Online",
-        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
-      },
-      {
-        title: "Game Edukasi 1",
-        image: "../assets/icon/ruby.png",
-        description: "Tantangan Level 1",
-        status: "Online",
-        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
-      },
-      {
-        title: "Game Edukasi 2",
-        image: "../assets/icon/ruby.png",
-        description: "Tantangan Level 2",
-        status: "Offline",
-        link: "https://hariyanto89.github.io/Quest/tasks/asetpertanianbronze.html"
-      },
-    ];
+    // Ambil data game dari API (misalnya Netlify Functions atau database)
+    const response = await fetch('/api/getGames');
+    const gamesData = await response.json();
 
     // Memasukkan data game ke dalam kontainer
+    gamesContainer.innerHTML = ''; // Bersihkan kontainer game lama
     gamesData.forEach(game => {
       const gameItem = document.createElement('div');
       gameItem.classList.add('game-item');
@@ -52,13 +31,10 @@ const loadGames = () => {
       gamesContainer.appendChild(gameItem);
     });
 
-    // Menyembunyikan indikator loading setelah data dimuat
     loadingIndicator.style.display = 'none'; // Sembunyikan indikator loading
   } catch (error) {
     console.error('Error loading games:', error);
     alert('Terjadi kesalahan saat memuat game, coba lagi nanti.');
-
-    // Menyembunyikan indikator loading setelah error
     loadingIndicator.style.display = 'none';
   }
 };
@@ -85,29 +61,36 @@ logoutBtn?.addEventListener('click', () => {
 });
 
 // Fungsi untuk memperbarui gambar profil
-const handleProfilePictureChange = (event) => {
+const handleProfilePictureChange = async (event) => {
   const user = JSON.parse(localStorage.getItem('user'));
   const file = event.target.files[0]; // Ambil file yang diupload
 
   if (user && file) {
     try {
-      // Menampilkan indikator loading
       loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
 
       // Simulasi upload gambar ke server atau penyimpanan cloud
-      const updatedUser = { ...user, profilePicture: URL.createObjectURL(file) }; // Simulasi update data
+      // Upload gambar ke server dan dapatkan URL gambar baru
+      const formData = new FormData();
+      formData.append('file', file);
 
-      // Update data pengguna di localStorage dan tampilkan gambar profil baru
-      localStorage.setItem('user', JSON.stringify(updatedUser)); 
+      const response = await fetch('/api/uploadProfilePicture', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Gagal mengunggah gambar profil');
+      }
+
+      const updatedUser = { ...user, profilePicture: await response.text() }; // Mendapatkan URL gambar dari server
+      localStorage.setItem('user', JSON.stringify(updatedUser)); // Simpan perubahan
       userProfileImage.src = updatedUser.profilePicture; // Update gambar profil di halaman
 
-      // Menyembunyikan indikator loading setelah proses selesai
-      loadingIndicator.style.display = 'none';
+      loadingIndicator.style.display = 'none'; // Sembunyikan indikator loading
     } catch (error) {
       console.error("Error uploading profile picture:", error.message);
       alert('Gagal mengunggah gambar profil. Silakan coba lagi.');
-
-      // Menyembunyikan indikator loading setelah proses selesai
       loadingIndicator.style.display = 'none';
     }
   } else {
