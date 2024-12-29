@@ -13,23 +13,30 @@ const loadGames = async () => {
 
     // Ambil data game dari API (misalnya Netlify Functions atau database)
     const response = await fetch('/api/getGames');
+    if (!response.ok) {
+      throw new Error('Gagal memuat data game');
+    }
     const gamesData = await response.json();
 
     // Memasukkan data game ke dalam kontainer
     gamesContainer.innerHTML = ''; // Bersihkan kontainer game lama
-    gamesData.forEach(game => {
-      const gameItem = document.createElement('div');
-      gameItem.classList.add('game-item');
-      gameItem.innerHTML = `
-        <a href="${game.link}" class="game-link">
-          <h3>${game.title}</h3>
-          <img src="${game.image}" alt="${game.description}" class="game-thumbnail">
-          <p>${game.description}</p>
-          <p>${game.status}</p>
-        </a>
-      `;
-      gamesContainer.appendChild(gameItem);
-    });
+    if (gamesData.length === 0) {
+      gamesContainer.innerHTML = '<p>Tidak ada game yang tersedia.</p>';
+    } else {
+      gamesData.forEach(game => {
+        const gameItem = document.createElement('div');
+        gameItem.classList.add('game-item');
+        gameItem.innerHTML = `
+          <a href="${game.link}" class="game-link">
+            <h3>${game.title}</h3>
+            <img src="${game.image}" alt="${game.description}" class="game-thumbnail">
+            <p>${game.description}</p>
+            <p><strong>Status:</strong> ${game.status}</p>
+          </a>
+        `;
+        gamesContainer.appendChild(gameItem);
+      });
+    }
 
     loadingIndicator.style.display = 'none'; // Sembunyikan indikator loading
   } catch (error) {
@@ -50,14 +57,14 @@ const checkUserStatus = () => {
     logoutBtn.style.display = 'inline'; // Tampilkan tombol logout
   } else {
     // Jika tidak ada pengguna yang terautentikasi, arahkan ke halaman login
-    window.location.href = 'index.html';  // Pastikan path yang benar
+    window.location.href = '/html/login.html';  // Pastikan path yang benar
   }
 };
 
 // Fungsi logout
 logoutBtn?.addEventListener('click', () => {
   localStorage.removeItem('user'); // Hapus data pengguna dari localStorage
-  window.location.href = 'index.html';  // Arahkan ke halaman login setelah logout
+  window.location.href = '/html/login.html';  // Arahkan ke halaman login setelah logout
 });
 
 // Fungsi untuk memperbarui gambar profil
@@ -70,7 +77,6 @@ const handleProfilePictureChange = async (event) => {
       loadingIndicator.style.display = 'block'; // Tampilkan indikator loading
 
       // Simulasi upload gambar ke server atau penyimpanan cloud
-      // Upload gambar ke server dan dapatkan URL gambar baru
       const formData = new FormData();
       formData.append('file', file);
 
