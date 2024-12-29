@@ -6,34 +6,34 @@
     <meta name="description" content="QUEST - Platform Pembelajaran Interaktif Berbasis Game">
     <meta property="og:title" content="Quest - Platform Pembelajaran Interaktif">
     <meta property="og:description" content="Quest adalah platform pembelajaran interaktif berbasis game yang dirancang untuk mendukung pengalaman belajar yang menyenangkan dan efektif.">
-    <meta property="og:image" content="../assets/icon/ruby.png">
+    <meta property="og:image" content="assets/icon/ruby.png">
     <meta property="og:url" content="https://questid.netlify.app">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:type" content="website">
     <title>Quest Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-    <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
-    <base href="/">
+    <link rel="icon" href="assets/icon/ruby.png" type="image/png">
 </head>
 <body>
     <header>
         <div class="dashboard-header">
             <h1 class="dashboard-title">QUEST.ID</h1>
-                <nav class="dashboard-menu">
-                    <a href="html/home.html" class="menu-item" aria-label="Halaman Beranda">🏡</a>
-                    <a href="html/leaderboard.html" class="menu-item" aria-label="Leaderboard">📊</a>
-                    <a href="html/profil.html" class="menu-item" aria-label="Profil Pengguna">📲</a>
-                    <a href="html/store.html" class="menu-item" aria-label="Toko">💰</a>
-                    <a href="html/news.html" class="menu-item" aria-label="Berita Terbaru">📰</a>
-                    <a href="html/community.html" class="menu-item" aria-label="Komunitas">🌏</a>
-                    <a href="html/login.html" id="login-link" class="menu-item">Log In</a>
-                    <a href="html/register.html" id="register-link" class="menu-item">Daftar</a>
-                    <a href="#" id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</a>
-                    <span id="user-name" style="display: none;">Halo, <span id="username-display"></span>!</span>
-                </nav>
+            <nav class="dashboard-menu">
+                <a href="html/home.html" class="menu-item" aria-label="Halaman Beranda">🏡</a>
+                <a href="html/leaderboard.html" class="menu-item" aria-label="Leaderboard">📊</a>
+                <a href="html/profil.html" class="menu-item" aria-label="Profil Pengguna">📲</a>
+                <a href="html/store.html" class="menu-item" aria-label="Toko">💰</a>
+                <a href="html/news.html" class="menu-item" aria-label="Berita Terbaru">📰</a>
+                <a href="html/community.html" class="menu-item" aria-label="Komunitas">🌏</a>
+                <a href="html/login.html" id="login-link" class="menu-item">Log In</a>
+                <a href="html/register.html" id="register-link" class="menu-item">Daftar</a>
+                <a href="#" id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</a>
+                <span id="user-name" style="display: none;">Halo, <span id="username-display"></span>!</span>
+            </nav>
         </div>
     </header>
+
     <main class="dashboard-main">
         <section class="recent-games">
             <h2>Game Favorit</h2>
@@ -41,29 +41,33 @@
                 <!-- Game items akan dimuat di sini -->
             </div>
         </section>
+
         <div class="pagination">
             <button disabled>Prev</button>
             <button>1</button>
             <button>2</button>
             <button>Next</button>
         </div>
+
         <section class="game-favourite">
             <h2>Game Baru</h2>
             <div class="game-item">
                 <a href="tasks/asetpertanianbronze.html" class="game-info">
                     <h3>Fortnite Royal Battle</h3>
-                    <img src="../assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois" loading="lazy">
+                    <img src="assets/icon/ruby.png" alt="Aset Pertanian Bronze" class="game-invois" loading="lazy">
                     <p>Aset Pertanian Bronze Level</p>
                     <p>Online</p>
                 </a>
             </div>
         </section>
+
         <section class="recent-games">
             <h2>Edisi Pelajar</h2>
             <div class="games-container">
                 <!-- Game items untuk pelajar akan dimuat di sini -->
             </div>
         </section>
+
         <section class="recent-games">
             <h2>Edisi Penjurusan Khusus</h2>
             <div class="games-container">
@@ -71,12 +75,14 @@
             </div>
         </section>
     </main>
+
     <footer>
         <address>
-            Dibuat oleh Hariyanto - WA +62 856-0932-6414 - Kabupaten Kepahiang
+            Dibuat oleh Hariyanto - WA +62 856-0932-6414
         </address>
         <p>&copy; 2024 QUEST.ID All rights reserved.</p>
     </footer>
+
     <script type="module" src="js/scripts.js"></script>
     <script type="module" src="js/home.js"></script>
 </body>
