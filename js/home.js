@@ -57,14 +57,14 @@ const checkUserStatus = () => {
     logoutBtn.style.display = 'inline'; // Tampilkan tombol logout
   } else {
     // Jika tidak ada pengguna yang terautentikasi, arahkan ke halaman login
-    window.location.href = '/html/login.html';  // Pastikan path yang benar
+    window.location.href = 'index.html';  // Pastikan path yang benar
   }
 };
 
 // Fungsi logout
 logoutBtn?.addEventListener('click', () => {
   localStorage.removeItem('user'); // Hapus data pengguna dari localStorage
-  window.location.href = '/html/login.html';  // Arahkan ke halaman login setelah logout
+  window.location.href = 'index.html';  // Arahkan ke halaman login setelah logout
 });
 
 // Fungsi untuk memperbarui gambar profil
