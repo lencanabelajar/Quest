@@ -1,5 +1,5 @@
 [build]
-  publish = "html" 
+  publish = "." 
   functions = "netlify/functions"
   command = "npm run build"
 
@@ -10,6 +10,6 @@
   directory = "netlify/functions"
 
 [[redirects]]
-  from = "/*"
+  from = "/html/*"
   to = "/index.html"
   status = 200
