@@ -62,6 +62,9 @@ registerForm.addEventListener('submit', function(e) {
 
         // Jika berhasil, redirect ke halaman profil atau halaman utama
         console.log("Registrasi berhasil! Menuju halaman profil.");
+        // Setelah menyimpan data pengguna di localStorage
+        sessionStorage.setItem('userEmail', email); // Menyimpan email di sessionStorage
+
         window.location.href = '../html/profil.html'; // Ganti dengan halaman yang sesuai
     } catch (error) {
         loadingSpinner.style.display = 'none';
@@ -92,5 +95,3 @@ function readImageFile(file) {
     });
 }
 
-// Setelah menyimpan data pengguna di localStorage
-sessionStorage.setItem('userEmail', email); // Menyimpan email di sessionStorage
