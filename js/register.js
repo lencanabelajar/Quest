@@ -1,5 +1,3 @@
-// js/register.js
-
 // DOM Elements
 const registerForm = document.getElementById('register-form');
 const profileImageInput = document.getElementById('profile-image');
@@ -7,7 +5,7 @@ const loadingSpinner = document.getElementById('loading-spinner');
 const errorMessageElement = document.getElementById('error-message');
 
 // Event listener untuk form registrasi
-registerForm.addEventListener('submit', async function(e) {
+registerForm.addEventListener('submit', function(e) {
     e.preventDefault(); // Mencegah form untuk submit secara default
     
     // Ambil nilai dari input form
@@ -34,44 +32,33 @@ registerForm.addEventListener('submit', async function(e) {
         return displayErrorMessage('Password harus memiliki minimal 6 karakter!');
     }
 
-    try {
-        // Menampilkan loading spinner
-        loadingSpinner.style.display = 'block';
+    // Menampilkan loading spinner
+    loadingSpinner.style.display = 'block';
 
-        // Cek apakah ada gambar profil yang diupload
+    try {
+        // Menyimpan gambar profil sebagai URL lokal jika ada
         let profileImageURL = '';
         if (profileImageInput.files.length > 0) {
             const profileImageFile = profileImageInput.files[0];
-            profileImageURL = await uploadProfileImage(profileImageFile);
+            profileImageURL = await readImageFile(profileImageFile);
         }
 
-        // Mengirim data ke serverless function Netlify
-        const response = await fetch('/.netlify/functions/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password, profileImage: profileImageURL })
-        });
-
-        const data = await response.json();
-
-        if (response.status !== 200) {
-            throw new Error(data.message); // Jika ada error, lemparkan
-        }
-
-        // Sembunyikan loading spinner setelah registrasi selesai
-        loadingSpinner.style.display = 'none';
-
-        // Simpan data pengguna di localStorage
-        const user = {
-            email,
+        // Simpan data pengguna ke localStorage
+        const userData = {
+            email: email,
+            password: password, // Anda bisa menambahkan enkripsi jika diperlukan
             profileImage: profileImageURL || 'default-profile.png', // Default jika tidak ada gambar
         };
-        localStorage.setItem('user', JSON.stringify(user)); // Menyimpan user di localStorage
+
+        let users = JSON.parse(localStorage.getItem('users')) || []; // Ambil daftar pengguna yang sudah ada
+        users.push(userData); // Tambahkan pengguna baru
+        localStorage.setItem('users', JSON.stringify(users)); // Simpan daftar pengguna
 
         // Bersihkan form setelah berhasil
         registerForm.reset();
+
+        // Menyembunyikan loading spinner setelah proses selesai
+        loadingSpinner.style.display = 'none';
 
         // Jika berhasil, redirect ke halaman profil atau halaman utama
         console.log("Registrasi berhasil! Menuju halaman profil.");
@@ -95,27 +82,12 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// Fungsi untuk meng-upload gambar profil
-async function uploadProfileImage(file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    try {
-        const response = await fetch('/.netlify/functions/upload-profile-image', {
-            method: 'POST',
-            body: formData,
-        });
-
-        const result = await response.json();
-
-        if (response.status !== 200) {
-            throw new Error(result.message || 'Gagal meng-upload gambar profil');
-        }
-
-        return result.imageURL;  // URL gambar profil yang di-upload
-    } catch (error) {
-        console.error("Upload gambar gagal:", error.message);
-        displayErrorMessage('Gagal meng-upload gambar profil.');
-        return '';  // Return an empty string if upload fails
-    }
+// Fungsi untuk membaca file gambar sebagai URL lokal menggunakan FileReader
+function readImageFile(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result); // Menyimpan gambar sebagai base64 URL
+        reader.onerror = reject;
+        reader.readAsDataURL(file); // Membaca file sebagai base64 URL
+    });
 }
