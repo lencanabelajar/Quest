@@ -12,6 +12,7 @@ const registerModal = document.getElementById("modal-register");
 const closeLoginModal = document.querySelector("#modal-login .close");
 const closeRegisterModal = document.querySelector("#modal-register .close");
 const profileImageInput = document.getElementById("profile-image-input");
+const spinner = document.getElementById("spinner");  // Spinner gif element
 
 // Event listener functions
 function toggleModal(modal, displayStyle) {
@@ -34,6 +35,17 @@ window.addEventListener('load', () => {
         userNameDisplay.innerText = '';
         toggleAuthUI(false); // Show logged-out UI
     }
+
+    // Show the loading spinner while games are loading
+    showSpinner(true);
+    loadGames(1)  // Load games for page 1
+        .then(() => {
+            showSpinner(false); // Hide spinner once games are loaded
+        })
+        .catch((err) => {
+            console.error("Error loading games:", err);
+            showSpinner(false); // Hide spinner in case of error
+        });
 });
 
 // Helper function to toggle authentication UI
@@ -41,6 +53,11 @@ function toggleAuthUI(isLoggedIn) {
     logoutBtn.style.display = isLoggedIn ? 'inline' : 'none';
     loginBtn.style.display = isLoggedIn ? 'none' : 'inline';
     registerBtn.style.display = isLoggedIn ? 'none' : 'inline';
+}
+
+// Helper function to show/hide loading spinner
+function showSpinner(show) {
+    spinner.style.display = show ? 'block' : 'none';
 }
 
 // Event listeners for login and register forms
@@ -52,5 +69,4 @@ logoutBtn.addEventListener('click', handleLogout);
 profileImageInput.addEventListener('change', handleProfileImageUpload);
 
 // Load games and initialize pagination
-loadGames(1); // Default to page 1
-handlePagination(); // Initialize pagination
+handlePagination(); // Initialize pagination for dynamic loading
