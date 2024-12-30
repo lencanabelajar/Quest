@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QUEST">
-    <meta property="og:title" content="Quest">
-    <meta property="og:description" content="Platform pembelajaran interaktif berbasis game.">
+    <meta name="description" content="Profil pengguna di QUEST.ID - Platform pembelajaran interaktif berbasis game">
+    <meta property="og:title" content="Profil Pengguna - QUEST.ID">
+    <meta property="og:description" content="Lihat dan kelola profil pengguna Anda di QUEST.ID, platform pembelajaran berbasis game yang menyenangkan.">
     <meta property="og:image" content="../assets/icon/ruby.png">
-    <meta property="og:url" content="https://quest">
     <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
 
     <title>Profil Pengguna - QUEST.ID</title>
 
@@ -17,34 +18,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
 </head>
+
 <body>
     <header>
         <div class="dashboard-header">
             <h1 class="dashboard-title">QUEST.ID</h1>
             <nav class="dashboard-menu">
-                <a href="index.html" class="menu-item">🏡</a>
-                <a href="../html/profil.html" class="menu-item active">📲</a>
-                <a href="../html/news.html" class="menu-item">📰</a>
-                <a href="../html/login.html" id="logout-btn" class="menu-item" style="display: none;">Log Out</a>
-                <span id="user-name" style="margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
+                <a href="index.html" class="menu-item" aria-label="Beranda">🏡</a>
+                <a href="../html/profil.html" class="menu-item active" aria-label="Profil">📲</a>
+                <a href="../html/news.html" class="menu-item" aria-label="Berita">📰</a>
+                <button id="logout-btn" class="menu-item" style="display: none;">Log Out</button>
+                <span id="user-greeting" style="margin-left: 10px;">Halo, <span id="username-display"></span>!</span>
             </nav>
         </div>
     </header>
 
     <main class="dashboard-main">
+        <h1>Profil Anda</h1>
         <section class="profile-section">
-            <h2>Profil Pengguna</h2>
+            <h2>Informasi Profil</h2>
             <div class="profile-container">
                 <div class="profile-avatar-container">
-                    <img id="profile-avatar" src="../assets/icon/ruby.png" alt="Profil" class="profile-avatar">
-                    <input type="file" id="profile-image-input" class="profile-image-input" style="display: none;" />
-                    <button id="change-profile-pic-btn" class="profile-btn">Ganti Foto Profil</button>
+                    <img id="profile-avatar" src="../assets/icon/ruby.png" alt="Foto Profil" class="profile-avatar">
+                    <input type="file" id="profile-image-input" class="profile-image-input" style="display: none;" accept="image/png, image/jpeg" aria-label="Unggah gambar profil">
+                    <button id="change-profile-pic-btn" class="profile-btn" aria-label="Ganti foto profil">Ganti Foto Profil</button>
                 </div>
                 <div class="profile-details">
                     <p><strong>Nama:</strong> <span id="user-name-display">Nama Pengguna</span></p>
                     <p><strong>Email:</strong> <span id="user-email-display">email@domain.com</span></p>
                     <p><strong>Level:</strong> <span id="user-level-display">Pemula</span></p>
-                    <button id="edit-profile-btn" class="profile-btn">Edit Profil</button>
+                    <button id="edit-profile-btn" class="profile-btn" aria-label="Edit profil">Edit Profil</button>
+                </div>
+            </div>
+
+            <div id="edit-profile-modal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <h3>Edit Profil</h3>
+                    <form id="edit-profile-form">
+                        <label for="edit-name" class="form-label">Nama:</label>
+                        <input type="text" id="edit-name" name="edit-name" placeholder="Nama baru Anda" required>
+                        
+                        <label for="edit-level" class="form-label">Level:</label>
+                        <select id="edit-level" name="edit-level" required>
+                            <option value="Pemula">Pemula</option>
+                            <option value="Menengah">Menengah</option>
+                            <option value="Ahli">Ahli</option>
+                        </select>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="save-btn">Simpan</button>
+                            <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -61,4 +86,5 @@
     <script type="module" src="../js/scripts.js"></script>
     <script type="module" src="../js/profil.js"></script>
 </body>
+
 </html>
