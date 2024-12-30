@@ -1,5 +1,7 @@
 // Elemen tempat berita akan ditampilkan
 const newsContainer = document.getElementById('news-container');
+const loadingSpinner = document.getElementById('loading-spinner');  // Spinner loading
+const errorMessage = document.getElementById('error-message');  // Elemen untuk menampilkan pesan error
 
 // Data berita statis (sebagai contoh, ini bisa diganti dengan file JSON atau API eksternal)
 const newsData = [
@@ -29,18 +31,31 @@ function displayNews(news) {
     articleElement.innerHTML = `
       <h3>${article.title}</h3>
       <p>${article.description}</p>
-      <a href="${article.url}" target="_blank">Baca lebih lanjut</a>
+      <a href="${article.url}" target="_blank" class="read-more">Baca lebih lanjut</a>
     `;
     newsContainer.appendChild(articleElement);
   });
 }
 
+// Fungsi untuk menampilkan pesan error
+function showError(message) {
+  errorMessage.textContent = message;
+  errorMessage.style.display = 'block';
+  loadingSpinner.style.display = 'none';  // Sembunyikan spinner jika terjadi error
+}
+
 // Fungsi untuk mengambil berita (bisa dari file JSON atau API eksternal)
 function getNews() {
+  loadingSpinner.style.display = 'block';  // Tampilkan spinner saat menunggu data
   return new Promise((resolve, reject) => {
     // Jika Anda menggunakan file JSON lokal (misalnya news.json), Anda bisa fetch seperti berikut:
     fetch('news.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Gagal mengambil data berita.');
+        }
+        return response.json();
+      })
       .then(data => {
         resolve(data);
       })
@@ -48,24 +63,15 @@ function getNews() {
         reject('Error fetching news: ' + error.message);
       });
 
-    // Atau jika menggunakan API eksternal, Anda bisa fetch dari API seperti:
-    /*
-    fetch('https://api.example.com/news')
-      .then(response => response.json())
-      .then(data => resolve(data))
-      .catch(error => reject('Error fetching news: ' + error.message));
-    */
-  });
-}
-
 // Ambil dan tampilkan berita ketika halaman dimuat
 window.addEventListener('load', () => {
   getNews()
     .then(news => {
+      loadingSpinner.style.display = 'none';  // Sembunyikan spinner setelah data dimuat
       displayNews(news);
     })
     .catch(error => {
-      console.error('Error loading news: ', error);
-      alert('Gagal memuat berita: ' + error);
+      loadingSpinner.style.display = 'none';  // Sembunyikan spinner jika terjadi error
+      showError('Gagal memuat berita: ' + error);  // Tampilkan pesan error
     });
 });
