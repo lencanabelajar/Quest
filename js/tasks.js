@@ -1,7 +1,6 @@
 // Ambil elemen-elemen yang diperlukan
-const taskForm = document.getElementById('task-form');
-const answerInput = document.getElementById('answer');
-const taskFeedback = document.getElementById('task-feedback');
+const taskForms = document.querySelectorAll('.task-quiz form');
+const taskFeedbackElements = document.querySelectorAll('.task-feedback');
 const completionMessage = document.getElementById('completion-message');
 
 // Jawaban yang benar untuk setiap pertanyaan
@@ -22,41 +21,60 @@ function checkAnswer(inputId, feedbackId, correctAnswer) {
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
         feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
         feedbackElement.style.color = "green";
+        feedbackElement.style.display = 'block';
+        storeProgress(inputId, true);
     } else {
         feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
         feedbackElement.style.color = "red";
+        feedbackElement.style.display = 'block';
+        storeProgress(inputId, false);
     }
 
-    feedbackElement.style.display = 'block';
+    checkCompletion();
+}
+
+// Fungsi untuk menyimpan progres jawaban ke sessionStorage
+function storeProgress(inputId, isCorrect) {
+    const taskNumber = inputId.replace('answer', '');
+    sessionStorage.setItem(`task${taskNumber}Completed`, isCorrect);
+}
+
+// Fungsi untuk memeriksa apakah semua tugas sudah selesai
+function checkCompletion() {
+    let allTasksCompleted = true;
+    for (let i = 1; i <= 6; i++) {
+        if (sessionStorage.getItem(`task${i}Completed`) !== 'true') {
+            allTasksCompleted = false;
+            break;
+        }
+    }
+
+    if (allTasksCompleted) {
+        completionMessage.style.display = 'block';
+    }
 }
 
 // Event listeners untuk setiap form
-document.getElementById('task-form-1').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer1', 'task-feedback1', correctAnswers.question1);
+taskForms.forEach((form, index) => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const answerId = `answer${index + 1}`;
+        const feedbackId = `task-feedback${index + 1}`;
+        checkAnswer(answerId, feedbackId, correctAnswers[`question${index + 1}`]);
+    });
 });
 
-document.getElementById('task-form-2').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer2', 'task-feedback2', correctAnswers.question2);
-});
+// Jika sebelumnya sudah ada progres, tampilkan feedbacknya
+function loadPreviousProgress() {
+    for (let i = 1; i <= 6; i++) {
+        const taskCompleted = sessionStorage.getItem(`task${i}Completed`);
+        if (taskCompleted === 'true') {
+            document.getElementById(`task-feedback${i}`).textContent = "Jawaban Anda benar! Selamat!";
+            document.getElementById(`task-feedback${i}`).style.color = "green";
+            document.getElementById(`task-feedback${i}`).style.display = 'block';
+        }
+    }
+}
 
-document.getElementById('task-form-3').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer3', 'task-feedback3', correctAnswers.question3);
-});
-
-document.getElementById('task-form-4').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer4', 'task-feedback4', correctAnswers.question4);
-});
-
-document.getElementById('task-form-5').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer5', 'task-feedback5', correctAnswers.question5);
-});
-
-document.getElementById('task-form-6').addEventListener('submit', function(e) {
-    e.preventDefault();
-    checkAnswer('answer6', 'task-feedback6', correctAnswers.question6);
-});
+// Load progres sebelumnya ketika halaman dimuat
+loadPreviousProgress();
