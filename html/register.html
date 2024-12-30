@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QUEST">
-    <meta property="og:title" content="Quest">
-    <meta property="og:description" content="Platform pembelajaran interaktif berbasis game.">
+    <meta name="description" content="QUEST - Platform Pembelajaran Interaktif Berbasis Game">
+    <meta property="og:title" content="Quest - Platform Pembelajaran Interaktif">
+    <meta property="og:description" content="Quest adalah platform pembelajaran interaktif berbasis game yang dirancang untuk mendukung pengalaman belajar yang menyenangkan dan efektif.">
     <meta property="og:image" content="../assets/icon/ruby.png">
-    <meta property="og:url" content="https://quest">
+    <meta property="og:url" content="https://questid.netlify.app">
     <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
 
     <title>Daftar - QUEST.ID</title>
     <script src="https://cdn.jsdelivr.net/npm/bcryptjs@2.4.3/dist/bcrypt.min.js"></script>
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
 </head>
+
 <body>
     <header>
         <div class="dashboard-header">
             <h1 class="dashboard-title">QUEST.ID</h1>
             <nav class="dashboard-menu">
-                <a href="../index.html" class="menu-item">🏠</a>
+                <a href="../index.html" class="menu-item" aria-label="Halaman Beranda">🏠</a>
             </nav>
         </div>
     </header>
@@ -30,30 +34,32 @@
     <main class="dashboard-main">
         <section class="register-section">
             <h2>Daftar Akun</h2>
-            <form id="register-form" autocomplete="off">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="example@domain.com" required>
+            <form id="register-form" autocomplete="off" aria-labelledby="register-form">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" placeholder="example@domain.com" required aria-required="true" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text">Email yang valid diperlukan untuk proses pendaftaran.</small>
+
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" id="password" name="password" placeholder="******" required aria-required="true" autocomplete="new-password">
                 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="******" required autocomplete="new-password">
+                <label for="confirm-password" class="form-label">Konfirmasi Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="******" required aria-required="true" autocomplete="new-password">
                 
-                <label for="confirm-password">Konfirmasi Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="******" required autocomplete="new-password">
-                
-                <!-- Optional: Avatar upload -->
-                <label for="profile-image">Upload Gambar Profil:</label>
-                <input type="file" id="profile-image" name="profile-image" accept="image/png, image/jpeg">
-                
-                <!-- Loading Spinner -->
-                <div id="loading-spinner" style="display: none;">
-                    <img src="../assets/spinner.gif" alt="Loading..."> <!-- Ganti dengan spinner gif yang sesuai -->
+                <div class="form-group">
+                    <label for="profile-image" class="form-label">Upload Gambar Profil:</label>
+                    <input type="file" id="profile-image" name="profile-image" accept="image/png, image/jpeg" aria-label="Upload gambar profil">
                 </div>
 
-                <button type="submit">Daftar</button>
+                <!-- Loading Spinner -->
+                <div id="loading-spinner" style="display: none;">
+                    <img src="../assets/spinner.gif" alt="Loading...">
+                </div>
+
+                <button type="submit" id="register-btn">Daftar</button>
             </form>
 
-            <!-- Pesan kesalahan ditampilkan di sini -->
-            <div id="error-message" style="color: red; display: none;"></div>
+            <!-- Error Message -->
+            <div id="error-message" class="error-message" style="display: none;"></div>
             <p>Sudah punya akun? <a href="login.html">Masuk</a></p>
         </section>
     </main>
@@ -68,6 +74,6 @@
     <!-- Scripts -->
     <script type="module" src="../js/scripts.js"></script>
     <script type="module" src="../js/register.js"></script>
-
 </body>
+
 </html>
