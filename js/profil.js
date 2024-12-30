@@ -3,15 +3,16 @@ const userNameDisplay = document.getElementById('username-display');
 const profileImageInput = document.getElementById('profile-image-input');
 const profileImage = document.getElementById('profile-img');
 const logoutBtn = document.getElementById('logout-btn');
+const uploadSpinner = document.getElementById('upload-spinner'); // Spinner untuk upload gambar
 
 // Fungsi untuk mengambil data profil pengguna dari localStorage
 function getUserProfile() {
   const users = JSON.parse(localStorage.getItem('users')) || [];
   const userEmail = sessionStorage.getItem('userEmail'); // Ambil email pengguna yang login
-  
+
   // Cari pengguna berdasarkan email
   const user = users.find(u => u.email === userEmail);
-  
+
   return user || null; // Kembalikan data pengguna atau null jika tidak ditemukan
 }
 
@@ -22,6 +23,16 @@ function uploadProfilePicture(file) {
     alert('Pengguna tidak terautentikasi atau file tidak valid');
     return;
   }
+
+  // Validasi file gambar
+  const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+  if (!validFileTypes.includes(file.type)) {
+    alert('Format file tidak didukung! Harap unggah gambar dengan format JPEG atau PNG.');
+    return;
+  }
+
+  // Tampilkan spinner selama proses upload
+  uploadSpinner.style.display = 'block';
 
   // Membaca file gambar sebagai base64
   const reader = new FileReader();
@@ -36,10 +47,10 @@ function uploadProfilePicture(file) {
 function updateProfilePictureInStorage(profileImageURL) {
   const users = JSON.parse(localStorage.getItem('users')) || [];
   const userEmail = sessionStorage.getItem('userEmail');
-  
+
   // Cari pengguna berdasarkan email
   const userIndex = users.findIndex(u => u.email === userEmail);
-  
+
   if (userIndex !== -1) {
     // Perbarui gambar profil
     users[userIndex].profileImage = profileImageURL;
@@ -49,6 +60,9 @@ function updateProfilePictureInStorage(profileImageURL) {
   } else {
     alert('Pengguna tidak ditemukan');
   }
+
+  // Sembunyikan spinner setelah upload selesai
+  uploadSpinner.style.display = 'none';
 }
 
 // Fungsi untuk menangani logout
@@ -60,11 +74,11 @@ function logout() {
 // Fungsi untuk menampilkan profil pengguna saat halaman dimuat
 function loadUserProfile() {
   const userEmail = sessionStorage.getItem('userEmail');
-  
+
   if (userEmail) {
     userNameDisplay.innerText = userEmail.split('@')[0]; // Menampilkan nama pengguna berdasarkan email
     const userProfile = getUserProfile();
-    
+
     if (userProfile) {
       if (userProfile.profileImage) {
         profileImage.src = userProfile.profileImage; // Menampilkan foto profil jika ada
