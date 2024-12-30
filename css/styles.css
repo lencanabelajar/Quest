@@ -369,10 +369,9 @@ form p a:hover {
 /* Styling untuk profil section */
 .profile-section {
     padding: 25px;
-    background-color: #f9f9f9; /* Warna latar belakang lebih terang untuk kontras yang lebih baik */
-    text: black;
+    background-color: #f9f9f9;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan agar tampak lebih modern */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
 }
 
@@ -380,8 +379,8 @@ form p a:hover {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px; /* Menambahkan jarak antara avatar dan detail profil */
-    flex-wrap: wrap; /* Agar responsif di perangkat kecil */
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .profile-avatar-container {
@@ -394,8 +393,8 @@ form p a:hover {
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #3498db; /* Border lebih tebal dan kontras */
-    margin-bottom: 15px; /* Memberikan ruang antara gambar dan tombol */
+    border: 4px solid #3498db;
+    margin-bottom: 15px;
 }
 
 .profile-image-input {
@@ -404,29 +403,30 @@ form p a:hover {
 
 .profile-btn {
     background-color: #3498db;
-    color: #fff; /* Mengubah warna tulisan menjadi putih agar kontras */
+    color: #fff;
     border: none;
     padding: 12px 20px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1rem;
-    transition: background-color 0.3s, transform 0.2s; /* Menambahkan efek transisi saat hover */
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .profile-btn:hover {
     background-color: #2980b9;
-    transform: scale(1.05); /* Efek zoom saat hover */
+    transform: scale(1.05);
 }
 
 .profile-details {
     flex-grow: 1;
-    padding: 10px 0; /* Memberikan jarak atas dan bawah */
+    padding: 10px 0;
     font-size: 1.1rem;
-    line-height: 1.6; /* Mengatur jarak antar baris untuk keterbacaan yang lebih baik */
+    line-height: 1.6;
+    color: #000; /* Warna tulisan hitam di bagian profil */
 }
 
 .profile-details p {
-    margin-bottom: 15px; /* Memberikan jarak antar elemen */
+    margin-bottom: 15px;
 }
 
 .profile-details strong {
@@ -436,7 +436,7 @@ form p a:hover {
 
 #edit-profile-btn {
     background-color: #16a085;
-    color: #fff; /* Mengubah warna teks agar kontras */
+    color: #fff;
     border-radius: 5px;
     padding: 12px 20px;
     font-size: 1rem;
@@ -444,7 +444,7 @@ form p a:hover {
 
 #edit-profile-btn:hover {
     background-color: #1abc9c;
-    transform: scale(1.05); /* Efek zoom saat hover */
+    transform: scale(1.05);
 }
 
 /* Main content */
