@@ -23,14 +23,22 @@ export async function handleLogin(event) {
         return;
     }
 
+    // Validasi panjang password (minimal 6 karakter)
+    if (password.length < 6) {
+        showError('Password harus memiliki minimal 6 karakter!');
+        return;
+    }
+
     // Tampilkan loading spinner saat proses login berjalan
     loadingSpinner.style.display = 'block';
 
     try {
+        // Fungsi untuk melakukan login
         const user = await loginUser(email, password);
-        
+
         // Menyimpan informasi pengguna ke sessionStorage
         sessionStorage.setItem('userEmail', user.email);
+        sessionStorage.setItem('userName', user.name); // Jika ada nama pengguna
 
         // Menyembunyikan spinner dan redirect ke halaman profil
         loadingSpinner.style.display = 'none';
