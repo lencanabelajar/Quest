@@ -91,3 +91,6 @@ function readImageFile(file) {
         reader.readAsDataURL(file); // Membaca file sebagai base64 URL
     });
 }
+
+// Setelah menyimpan data pengguna di localStorage
+sessionStorage.setItem('userEmail', email); // Menyimpan email di sessionStorage
