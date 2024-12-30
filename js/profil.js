@@ -4,45 +4,55 @@ const profileImageInput = document.getElementById('profile-image-input');
 const profileImage = document.getElementById('profile-img');
 const logoutBtn = document.getElementById('logout-btn');
 
-// Fungsi untuk mengambil data profil pengguna (menggunakan Netlify Function)
-async function getUserProfile(userEmail) {
-  try {
-    const response = await fetch(`/api/getUserProfile?email=${encodeURIComponent(userEmail)}`);
-    if (!response.ok) {
-      throw new Error('Error fetching user profile');
-    }
-    const userProfile = await response.json();
-    return userProfile;
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    throw error;
-  }
+// Fungsi untuk mengambil data profil pengguna dari localStorage
+function getUserProfile() {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const userEmail = sessionStorage.getItem('userEmail'); // Ambil email pengguna yang login
+  
+  // Cari pengguna berdasarkan email
+  const user = users.find(u => u.email === userEmail);
+  
+  return user || null; // Kembalikan data pengguna atau null jika tidak ditemukan
 }
 
-// Fungsi untuk memperbarui gambar profil (menggunakan Netlify Function)
-async function uploadProfilePicture(file, userEmail) {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('email', userEmail);
+// Fungsi untuk memperbarui gambar profil
+function uploadProfilePicture(file) {
+  const userEmail = sessionStorage.getItem('userEmail');
+  if (!userEmail || !file) {
+    alert('Pengguna tidak terautentikasi atau file tidak valid');
+    return;
+  }
 
-  try {
-    const response = await fetch('/api/uploadProfilePicture', {
-      method: 'POST',
-      body: formData,
-    });
-    if (!response.ok) {
-      throw new Error('Error uploading profile picture');
-    }
+  // Membaca file gambar sebagai base64
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const profileImageURL = reader.result; // URL base64 gambar
+    updateProfilePictureInStorage(profileImageURL);
+  };
+  reader.readAsDataURL(file); // Membaca file gambar
+}
+
+// Fungsi untuk memperbarui gambar profil di localStorage
+function updateProfilePictureInStorage(profileImageURL) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const userEmail = sessionStorage.getItem('userEmail');
+  
+  // Cari pengguna berdasarkan email
+  const userIndex = users.findIndex(u => u.email === userEmail);
+  
+  if (userIndex !== -1) {
+    // Perbarui gambar profil
+    users[userIndex].profileImage = profileImageURL;
+    localStorage.setItem('users', JSON.stringify(users)); // Simpan ke localStorage
     alert('Foto profil berhasil diunggah!');
-    window.location.reload();  // Reload halaman untuk memperbarui gambar profil
-  } catch (error) {
-    console.error('Error uploading profile picture:', error);
-    alert('Terjadi kesalahan saat mengunggah foto profil: ' + error.message);
+    window.location.reload(); // Reload halaman untuk menampilkan gambar terbaru
+  } else {
+    alert('Pengguna tidak ditemukan');
   }
 }
 
 // Fungsi untuk menangani logout
-async function logout() {
+function logout() {
   sessionStorage.removeItem('userEmail');
   window.location.href = 'login.html'; // Redirect ke halaman login
 }
@@ -54,16 +64,17 @@ window.addEventListener('load', () => {
   // Cek apakah user sudah login
   if (userEmail) {
     userNameDisplay.innerText = userEmail.split('@')[0]; // Menampilkan nama pengguna berdasarkan email
-    getUserProfile(userEmail)
-      .then(userData => {
-        if (userData && userData.profilePicture) {
-          profileImage.src = userData.profilePicture; // Menampilkan foto profil jika ada
-        }
-      })
-      .catch(error => {
-        console.error('Error displaying user profile:', error);
-        alert('Gagal menampilkan profil pengguna');
-      });
+    const userProfile = getUserProfile();
+    
+    if (userProfile) {
+      if (userProfile.profileImage) {
+        profileImage.src = userProfile.profileImage; // Menampilkan foto profil jika ada
+      } else {
+        profileImage.src = 'default-profile.png'; // Gambar default jika tidak ada profil
+      }
+    } else {
+      alert('Data profil tidak ditemukan');
+    }
   } else {
     window.location.href = 'login.html'; // Redirect ke halaman login jika pengguna tidak terautentikasi
   }
@@ -72,13 +83,7 @@ window.addEventListener('load', () => {
 // Fungsi untuk menangani unggahan gambar profil
 profileImageInput.addEventListener('change', (event) => {
   const file = event.target.files[0]; // Ambil file gambar yang diunggah
-  const userEmail = sessionStorage.getItem('userEmail');
-  
-  if (file && userEmail) {
-    uploadProfilePicture(file, userEmail);
-  } else {
-    alert('File tidak valid atau pengguna tidak terautentikasi');
-  }
+  uploadProfilePicture(file);
 });
 
 // Fungsi untuk menangani logout
