@@ -366,6 +366,92 @@ form p a:hover {
     margin: 20px auto;
 }
 
+/* Main content */
+.task-main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.task-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.task-description p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.task-quiz {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-quiz h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.task-quiz label {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.task-quiz input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.task-quiz button {
+    background-color: #1e3a8a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.task-quiz button:hover {
+    background-color: #ffb300;
+}
+
+.task-quiz p {
+    font-size: 14px;
+    color: #4caf50; /* Green feedback */
+    display: none;
+}
+
+/* Completion message */
+#completion-message {
+    background-color: #d4edda;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    font-size: 18px;
+    margin-top: 30px;
+    text-align: center;
+}
+
 /* Media Query for smaller screens */
 @media (max-width: 768px) {
     .games-container {
@@ -413,6 +499,22 @@ form p a:hover {
     input[type="file"],
     button[type="submit"] {
         font-size: 1em;
+    }
+        .task-main {
+        padding: 15px;
+    }
+
+    .task-container h2 {
+        font-size: 24px;
+    }
+
+    .task-quiz h3 {
+        font-size: 18px;
+    }
+
+    .task-quiz input,
+    .task-quiz button {
+        font-size: 14px;
     }
 }
 
