@@ -57,7 +57,8 @@ function logout() {
   window.location.href = 'login.html'; // Redirect ke halaman login
 }
 
-window.addEventListener('load', () => {
+// Fungsi untuk menampilkan profil pengguna saat halaman dimuat
+function loadUserProfile() {
   const userEmail = sessionStorage.getItem('userEmail');
   
   if (userEmail) {
@@ -68,7 +69,7 @@ window.addEventListener('load', () => {
       if (userProfile.profileImage) {
         profileImage.src = userProfile.profileImage; // Menampilkan foto profil jika ada
       } else {
-        profileImage.src = './assets/default-profile.png'; // Pastikan path gambar default benar
+        profileImage.src = './assets/default-profile.png'; // Path gambar default jika tidak ada gambar profil
       }
     } else {
       alert('Data profil tidak ditemukan');
@@ -77,16 +78,22 @@ window.addEventListener('load', () => {
   } else {
     window.location.href = 'login.html'; // Redirect ke halaman login jika pengguna tidak terautentikasi
   }
-});
+}
 
-
-// Fungsi untuk menangani unggahan gambar profil
+// Event listener untuk menangani unggahan gambar profil
 profileImageInput.addEventListener('change', (event) => {
   const file = event.target.files[0]; // Ambil file gambar yang diunggah
-  uploadProfilePicture(file);
+  if (file) {
+    uploadProfilePicture(file);
+  }
 });
 
-// Fungsi untuk menangani logout
+// Event listener untuk menangani logout
 logoutBtn.addEventListener('click', () => {
   logout();
+});
+
+// Memuat profil pengguna saat halaman dimuat
+window.addEventListener('load', () => {
+  loadUserProfile();
 });
