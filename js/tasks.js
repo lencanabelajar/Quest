@@ -18,6 +18,7 @@ function checkAnswer(inputId, feedbackId, correctAnswer) {
     const userAnswer = document.getElementById(inputId).value.trim();
     const feedbackElement = document.getElementById(feedbackId);
 
+    // Memberikan umpan balik setelah pemeriksaan jawaban
     if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
         feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
         feedbackElement.style.color = "green";
@@ -42,6 +43,8 @@ function storeProgress(inputId, isCorrect) {
 // Fungsi untuk memeriksa apakah semua tugas sudah selesai
 function checkCompletion() {
     let allTasksCompleted = true;
+
+    // Memeriksa semua tugas yang ada apakah sudah selesai
     for (let i = 1; i <= 6; i++) {
         if (sessionStorage.getItem(`task${i}Completed`) !== 'true') {
             allTasksCompleted = false;
@@ -49,6 +52,7 @@ function checkCompletion() {
         }
     }
 
+    // Menampilkan pesan penyelesaian jika semua tugas sudah selesai
     if (allTasksCompleted) {
         completionMessage.style.display = 'block';
     }
@@ -68,10 +72,16 @@ taskForms.forEach((form, index) => {
 function loadPreviousProgress() {
     for (let i = 1; i <= 6; i++) {
         const taskCompleted = sessionStorage.getItem(`task${i}Completed`);
+        const feedbackElement = document.getElementById(`task-feedback${i}`);
+
         if (taskCompleted === 'true') {
-            document.getElementById(`task-feedback${i}`).textContent = "Jawaban Anda benar! Selamat!";
-            document.getElementById(`task-feedback${i}`).style.color = "green";
-            document.getElementById(`task-feedback${i}`).style.display = 'block';
+            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+            feedbackElement.style.color = "green";
+            feedbackElement.style.display = 'block';
+        } else if (taskCompleted === 'false') {
+            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+            feedbackElement.style.color = "red";
+            feedbackElement.style.display = 'block';
         }
     }
 }
