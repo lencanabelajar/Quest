@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tugas Aset Pertanian Bronze">
+    <meta property="og:title" content="Tugas Aset Pertanian Bronze">
+    <meta property="og:description" content="Selamat datang di Tugas Aset Pertanian Bronze. Selesaikan tantangan ini untuk mengumpulkan poin!">
+    <meta property="og:image" content="../assets/icon/ruby.png">
+    <meta property="og:url" content="https://questid.netlify.app/tasks/asetpertanianbronze.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
+    <title>Aset Pertanian Bronze - QUEST</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">QUEST - Tugas Aset Pertanian Bronze</h1>
+            <nav class="dashboard-menu">
+                <a href="../index.html" class="menu-item" aria-label="Halaman Beranda">🏡</a>
+                <a href="../html/profil.html" class="menu-item" aria-label="Profil Pengguna">📲</a>
+                <a href="../html/news.html" class="menu-item" aria-label="Berita Terbaru">📰</a>
+                <a href="../html/login.html" class="menu-item">Log In</a>
+                <a href="../html/register.html" class="menu-item">Daftar</a>
+                <a href="#" id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</a>
+                <span id="user-name" style="display: none;">Halo, <span id="username-display"></span>!</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="task-main">
+        <section class="task-container">
+            <h2>Aset Pertanian Bronze</h2>
+            <div class="task-description">
+                <p>Selamat datang di tugas Aset Pertanian Bronze! Untuk menyelesaikan tugas ini, Anda perlu menyelesaikan beberapa tantangan mengenai pengelolaan aset pertanian tingkat dasar.</p>
+            </div>
+
+            <div class="task-quiz">
+                <h3>Pertanyaan 1: Apa itu Aset Pertanian Bronze?</h3>
+                <form id="task-form">
+                    <label for="answer">Jawaban:</label>
+                    <input type="text" id="answer" name="answer" required>
+                    <button type="submit">Kirim Jawaban</button>
+                </form>
+                <p id="task-feedback" style="display:none;"></p>
+            </div>
+
+            <div id="completion-message" style="display:none;">
+                <h3>Selamat! Anda telah menyelesaikan tugas ini.</h3>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 QUEST. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/tasks.js"></script>
+</body>
+
+</html>
