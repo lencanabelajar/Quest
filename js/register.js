@@ -62,7 +62,7 @@ registerForm.addEventListener('submit', function(e) {
 
         // Jika berhasil, redirect ke halaman profil atau halaman utama
         console.log("Registrasi berhasil! Menuju halaman profil.");
-        window.location.href = '../html/profile.html'; // Ganti dengan halaman yang sesuai
+        window.location.href = '../html/profil.html'; // Ganti dengan halaman yang sesuai
     } catch (error) {
         loadingSpinner.style.display = 'none';
         console.error("Registrasi gagal:", error.message);
