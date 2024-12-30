@@ -3,8 +3,8 @@ import { handleProfileImageUpload } from './profil.js';
 import { loadGames, handlePagination } from './tasks.js';
 
 // DOM Elements
-const loginBtn = document.getElementById("login-btn");
-const registerBtn = document.getElementById("register-btn");
+const loginBtn = document.getElementById("login-link");
+const registerBtn = document.getElementById("register-link");
 const logoutBtn = document.getElementById("logout-btn");
 const userNameDisplay = document.getElementById("username-display");
 const loginModal = document.getElementById("modal-login");
