@@ -41,7 +41,6 @@
             <h2>Game Favorit</h2>
             <div class="games-container" id="games-list">
                 <!-- Game items akan dimuat di sini -->
-                <!-- Contoh item game -->
                 <div class="game-item">
                     <a href="tasks/asetpertanianbronze.html" class="game-info">
                         <h3>Fortnite Royal Battle</h3>
@@ -74,17 +73,22 @@
 
         <section class="recent-games">
             <h2>Edisi Pelajar</h2>
-            <div class="games-container">
+            <div class="games-container" id="student-games-list">
                 <!-- Game items untuk pelajar akan dimuat di sini -->
             </div>
         </section>
 
         <section class="recent-games">
             <h2>Edisi Penjurusan Khusus</h2>
-            <div class="games-container">
+            <div class="games-container" id="special-edition-games-list">
                 <!-- Game items untuk penjurusan khusus akan dimuat di sini -->
             </div>
         </section>
+
+        <!-- Loading Spinner -->
+        <div id="spinner" style="display: none;">
+            <img src="assets/spinner.gif" alt="Loading..." />
+        </div>
     </main>
 
     <footer>
