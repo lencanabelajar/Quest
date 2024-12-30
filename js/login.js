@@ -30,7 +30,7 @@ export function handleLogin(event) {
 
         // Menyembunyikan spinner dan redirect ke halaman utama
         document.getElementById('loading-spinner').style.display = 'none';
-        window.location.href = '/html/home.html'; // Ganti dengan halaman yang sesuai
+        window.location.href = '/index.html'; // Ganti dengan halaman yang sesuai
     } catch (error) {
         // Menyembunyikan spinner dan tampilkan pesan error
         document.getElementById('loading-spinner').style.display = 'none';
