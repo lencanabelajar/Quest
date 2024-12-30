@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QUEST - Berita dan Pengumuman">
-    <meta property="og:title" content="Berita - QUEST.ID">
-    <meta property="og:description" content="Berita terbaru dan pengumuman di Quest.ID">
+    <meta name="description" content="Tugas Aset Pertanian Bronze di QUEST.ID - Pelajari dan selesaikan tantangan seru tentang pengelolaan aset pertanian tingkat dasar.">
+    <meta property="og:title" content="Aset Pertanian Bronze - QUEST.ID">
+    <meta property="og:description" content="Selesaikan tugas Aset Pertanian Bronze untuk meningkatkan kemampuan pengelolaan aset pertanian Anda.">
     <meta property="og:image" content="../../assets/icon/ruby.png">
-    <meta property="og:url" content="https://quest">
+    <meta property="og:url" content="https://quest/tugas/aset-pertanian-bronze">
     <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="article">
 
-    <title>Aset Pertanian Bronze - QUEST</title>
+    <title>Aset Pertanian Bronze - QUEST.ID</title>
 
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="../../assets/icon/ruby.png" type="image/png">
@@ -20,86 +23,60 @@
 <body>
     <header>
         <div class="dashboard-header">
-            <h1 class="dashboard-title"Aset Pertanian Bronze</h1>
+            <h1 class="dashboard-title">Aset Pertanian Bronze</h1>
             <nav class="dashboard-menu">
                 <a href="https://lencanabelajar.github.io/Quest/index.html" class="menu-item" aria-label="Halaman Beranda">🏡</a>
                 <a href="../../html/profil.html" class="menu-item" aria-label="Profil Pengguna">📲</a>
                 <a href="../../html/news.html" class="menu-item" aria-label="Berita Terbaru">📰</a>
-                <a href="../../html/login.html" class="menu-item">Log In</a>
-                <a href="../../html/register.html" class="menu-item">Daftar</a>
-                <a href="#" id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</a>
+                <a href="../../html/login.html" class="menu-item" aria-label="Masuk">Log In</a>
+                <a href="../../html/register.html" class="menu-item" aria-label="Daftar">Daftar</a>
+                <button id="logout-btn" class="menu-item" style="display: none;" aria-label="Keluar">Log Out</button>
                 <span id="user-name" style="display: none;">Halo, <span id="username-display"></span>!</span>
             </nav>
         </div>
     </header>
 
     <main class="task-main">
+        <h1 class="task-title">Tugas: Aset Pertanian Bronze</h1>
         <section class="task-container">
-            <div class="task-description">
-                <p>Selamat datang di tugas Aset Pertanian Bronze! Untuk menyelesaikan tugas ini, Anda perlu menyelesaikan beberapa tantangan mengenai pengelolaan aset pertanian tingkat dasar.</p>
+            <p>Selamat datang di tugas Aset Pertanian Bronze! Pelajari dan selesaikan pertanyaan di bawah ini untuk meningkatkan kemampuan Anda dalam mengelola aset pertanian tingkat dasar.</p>
+            
+            <!-- Pertanyaan -->
+            <div class="task-quiz">
+                <h3>Pertanyaan 1: Apa itu Aset Pertanian Bronze?</h3>
+                <form id="task-form-1" class="task-form">
+                    <label for="answer1">Jawaban:</label>
+                    <input type="text" id="answer1" name="answer1" required placeholder="Masukkan jawaban Anda">
+                    <button type="submit">Kirim Jawaban</button>
+                </form>
+                <p id="task-feedback1" class="task-feedback" style="display: none;">Jawaban Anda telah dikirim!</p>
             </div>
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 1: Apa itu Aset Pertanian Bronze?</h3>
-                        <form id="task-form-1">
-                            <label for="answer1">Jawaban:</label>
-                            <input type="text" id="answer1" name="answer1" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback1" style="display:none;"></p>
-                    </div>
-                    
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 2: Apa keuntungan Aset Pertanian Bronze?</h3>
-                        <form id="task-form-2">
-                            <label for="answer2">Jawaban:</label>
-                            <input type="text" id="answer2" name="answer2" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback2" style="display:none;"></p>
-                    </div>
-                    
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 3: Siapa yang mengelola Aset Pertanian Bronze?</h3>
-                        <form id="task-form-3">
-                            <label for="answer3">Jawaban:</label>
-                            <input type="text" id="answer3" name="answer3" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback3" style="display:none;"></p>
-                    </div>
-                    
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 4: Apa manfaat dari mengelola Aset Pertanian Bronze?</h3>
-                        <form id="task-form-4">
-                            <label for="answer4">Jawaban:</label>
-                            <input type="text" id="answer4" name="answer4" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback4" style="display:none;"></p>
-                    </div>
-                    
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 5: Bagaimana cara memulai investasi Aset Pertanian Bronze?</h3>
-                        <form id="task-form-5">
-                            <label for="answer5">Jawaban:</label>
-                            <input type="text" id="answer5" name="answer5" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback5" style="display:none;"></p>
-                    </div>
-                    
-                    <div class="task-quiz">
-                        <h3>Pertanyaan 6: Apa tantangan dalam mengelola Aset Pertanian Bronze?</h3>
-                        <form id="task-form-6">
-                            <label for="answer6">Jawaban:</label>
-                            <input type="text" id="answer6" name="answer6" required>
-                            <button type="submit">Kirim Jawaban</button>
-                        </form>
-                        <p id="task-feedback6" style="display:none;"></p>
-                    </div>
 
-            <div id="completion-message" style="display:none;">
-                <h3>Selamat! Anda telah menyelesaikan tugas ini.</h3>
+            <div class="task-quiz">
+                <h3>Pertanyaan 2: Apa keuntungan Aset Pertanian Bronze?</h3>
+                <form id="task-form-2" class="task-form">
+                    <label for="answer2">Jawaban:</label>
+                    <input type="text" id="answer2" name="answer2" required placeholder="Masukkan jawaban Anda">
+                    <button type="submit">Kirim Jawaban</button>
+                </form>
+                <p id="task-feedback2" class="task-feedback" style="display: none;">Jawaban Anda telah dikirim!</p>
+            </div>
+
+            <!-- Tambahan lainnya -->
+            <div class="task-quiz">
+                <h3>Pertanyaan 3: Siapa yang mengelola Aset Pertanian Bronze?</h3>
+                <form id="task-form-3" class="task-form">
+                    <label for="answer3">Jawaban:</label>
+                    <input type="text" id="answer3" name="answer3" required placeholder="Masukkan jawaban Anda">
+                    <button type="submit">Kirim Jawaban</button>
+                </form>
+                <p id="task-feedback3" class="task-feedback" style="display: none;">Jawaban Anda telah dikirim!</p>
+            </div>
+
+            <div class="task-completion" style="display: none;">
+                <h3>Selamat!</h3>
+                <p>Anda telah menyelesaikan semua pertanyaan.</p>
+                <button id="reset-task-btn">Mulai Ulang</button>
             </div>
         </section>
     </main>
@@ -108,6 +85,7 @@
         <p>&copy; 2024 QUEST. All rights reserved.</p>
     </footer>
 
+    <!-- Scripts -->
     <script src="../../js/tasks.js"></script>
 </body>
 
