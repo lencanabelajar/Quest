@@ -1,4 +1,4 @@
-// Elemen untuk menampilkan pesan error
+// Elemen untuk menampilkan pesan error dan spinner loading
 const errorMessageElement = document.getElementById('error-message');
 const loadingSpinner = document.getElementById('loading-spinner');
 
