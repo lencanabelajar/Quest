@@ -101,9 +101,9 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// Fungsi validasi password
+// Memperbarui regex untuk memperbolehkan koma dalam password
 function validatePassword(password) {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&,])[A-Za-z\d@$!%*?&,]{6,}$/;
     return regex.test(password);
 }
 
