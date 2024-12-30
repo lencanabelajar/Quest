@@ -1,10 +1,10 @@
 // Fungsi untuk login
-export function handleLogin(event) {
+export async function handleLogin(event) {
     event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
 
     // Validasi form
     if (!email || !password) {
@@ -22,31 +22,30 @@ export function handleLogin(event) {
     // Tampilkan loading spinner saat proses login berjalan
     document.getElementById('loading-spinner').style.display = 'block';
 
-    // Proses login, misalnya dengan memeriksa di database atau API
-    // Ini simulasi, Anda dapat menggantinya dengan logika API sebenarnya
-    loginUser(email, password)
-        .then(user => {
-            // Menyimpan informasi pengguna ke localStorage
-            localStorage.setItem('user', JSON.stringify(user));
+    try {
+        const user = await loginUser(email, password);
+        
+        // Menyimpan informasi pengguna ke localStorage
+        localStorage.setItem('user', JSON.stringify(user));
 
-            // Menyembunyikan spinner dan redirect ke halaman utama
-            document.getElementById('loading-spinner').style.display = 'none';
-            window.location.href = '/html/home.html';
-        })
-        .catch(error => {
-            document.getElementById('loading-spinner').style.display = 'none';
-            showError(`Gagal login: ${error.message}`);
-        });
+        // Menyembunyikan spinner dan redirect ke halaman utama
+        document.getElementById('loading-spinner').style.display = 'none';
+        window.location.href = '/html/home.html'; // Ganti dengan halaman yang sesuai
+    } catch (error) {
+        // Menyembunyikan spinner dan tampilkan pesan error
+        document.getElementById('loading-spinner').style.display = 'none';
+        showError(`Gagal login: ${error.message}`);
+    }
 }
 
 // Fungsi untuk register
-export function handleRegister(event) {
+export async function handleRegister(event) {
     event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
 
     // Validasi form
     if (!email || !password || !confirmPassword) {
@@ -74,17 +73,17 @@ export function handleRegister(event) {
     // Tampilkan loading spinner saat proses pendaftaran
     document.getElementById('loading-spinner').style.display = 'block';
 
-    // Proses pendaftaran
-    registerUser(email, password)
-        .then(user => {
-            // Menyembunyikan spinner dan redirect ke halaman login
-            document.getElementById('loading-spinner').style.display = 'none';
-            window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah registrasi berhasil
-        })
-        .catch(error => {
-            document.getElementById('loading-spinner').style.display = 'none';
-            showError(`Gagal registrasi: ${error.message}`);
-        });
+    try {
+        const user = await registerUser(email, password);
+
+        // Menyembunyikan spinner dan redirect ke halaman login
+        document.getElementById('loading-spinner').style.display = 'none';
+        window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah registrasi berhasil
+    } catch (error) {
+        // Menyembunyikan spinner dan tampilkan pesan error
+        document.getElementById('loading-spinner').style.display = 'none';
+        showError(`Gagal registrasi: ${error.message}`);
+    }
 }
 
 // Fungsi untuk menangani logout
@@ -107,9 +106,9 @@ function validateEmail(email) {
 }
 
 // Fungsi simulasi login (ganti dengan logika backend nyata)
-function loginUser(email, password) {
+async function loginUser(email, password) {
+    // Simulasi login menggunakan API atau backend
     return new Promise((resolve, reject) => {
-        // Simulasi login
         setTimeout(() => {
             if (email === "test@example.com" && password === "password123") {
                 resolve({ username: 'Test User', email }); // Simulasi user berhasil login
@@ -121,9 +120,9 @@ function loginUser(email, password) {
 }
 
 // Fungsi simulasi registrasi (ganti dengan logika backend nyata)
-function registerUser(email, password) {
+async function registerUser(email, password) {
+    // Simulasi registrasi menggunakan API atau backend
     return new Promise((resolve, reject) => {
-        // Simulasi registrasi
         setTimeout(() => {
             if (email === "test@example.com") {
                 reject(new Error('Email sudah terdaftar'));
