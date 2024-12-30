@@ -1,5 +1,9 @@
-// Fungsi untuk login
-export function handleLogin(event) {
+// Elemen untuk menampilkan pesan error
+const errorMessageElement = document.getElementById('error-message');
+const loadingSpinner = document.getElementById('loading-spinner');
+
+// Fungsi untuk menangani login
+export async function handleLogin(event) {
     event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
@@ -20,89 +24,28 @@ export function handleLogin(event) {
     }
 
     // Tampilkan loading spinner saat proses login berjalan
-    document.getElementById('loading-spinner').style.display = 'block';
+    loadingSpinner.style.display = 'block';
 
     try {
         const user = await loginUser(email, password);
         
-        // Menyimpan informasi pengguna ke localStorage
-        localStorage.setItem('user', JSON.stringify(user));
+        // Menyimpan informasi pengguna ke sessionStorage
+        sessionStorage.setItem('userEmail', user.email);
 
-        // Menyembunyikan spinner dan redirect ke halaman utama
-        document.getElementById('loading-spinner').style.display = 'none';
-        window.location.href = '/index.html'; // Ganti dengan halaman yang sesuai
+        // Menyembunyikan spinner dan redirect ke halaman profil
+        loadingSpinner.style.display = 'none';
+        window.location.href = '/html/profil.html'; // Ganti dengan halaman yang sesuai
     } catch (error) {
         // Menyembunyikan spinner dan tampilkan pesan error
-        document.getElementById('loading-spinner').style.display = 'none';
+        loadingSpinner.style.display = 'none';
         showError(`Gagal login: ${error.message}`);
     }
 }
 
-// Fungsi untuk register
-export function handleRegister(event) {
-    event.preventDefault(); // Mencegah form untuk submit secara default
-
-    // Ambil nilai dari input form
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('confirm-password').value.trim();
-
-    // Validasi form
-    if (!email || !password || !confirmPassword) {
-        showError('Harap isi semua kolom!');
-        return;
-    }
-
-    // Validasi email
-    if (!validateEmail(email)) {
-        showError('Email tidak valid!');
-        return;
-    }
-
-    // Validasi password
-    if (password !== confirmPassword) {
-        showError('Password dan Konfirmasi Password tidak cocok!');
-        return;
-    }
-
-    if (password.length < 6) {
-        showError('Password harus memiliki minimal 6 karakter!');
-        return;
-    }
-
-    // Tampilkan loading spinner saat proses pendaftaran
-    document.getElementById('loading-spinner').style.display = 'block';
-
-    try {
-        const user = await registerUser(email, password);
-
-        // Menyembunyikan spinner dan redirect ke halaman login
-        document.getElementById('loading-spinner').style.display = 'none';
-        window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah registrasi berhasil
-    } catch (error) {
-        // Menyembunyikan spinner dan tampilkan pesan error
-        document.getElementById('loading-spinner').style.display = 'none';
-        showError(`Gagal registrasi: ${error.message}`);
-    }
-}
-
-// Fungsi untuk menangani logout
-export function handleLogout() {
-    localStorage.removeItem('user'); // Hapus informasi user dari localStorage
-    window.location.href = '/html/login.html'; // Arahkan ke halaman login setelah logout
-}
-
-// Fungsi untuk menampilkan pesan error
+// Fungsi untuk menangani error
 function showError(message) {
-    const errorMessageElement = document.getElementById('error-message');
     errorMessageElement.innerText = message;
     errorMessageElement.style.display = 'block';
-}
-
-// Fungsi validasi email
-function validateEmail(email) {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return regex.test(email);
 }
 
 // Fungsi untuk login pengguna dengan cek di localStorage
@@ -121,22 +64,6 @@ async function loginUser(email, password) {
     }
 }
 
-// Fungsi untuk register pengguna dan simpan ke localStorage
-async function registerUser(email, password) {
-    // Ambil semua pengguna dari localStorage
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-
-    // Cek apakah email sudah terdaftar
-    if (users.find(user => user.email === email)) {
-        throw new Error('Email sudah terdaftar'); // Jika email sudah ada
-    }
-
-    // Tambahkan pengguna baru ke daftar
-    const newUser = { email, password }; // Simpan email dan password (Anda bisa tambahkan fitur enkripsi password jika perlu)
-    users.push(newUser);
-
-    // Simpan daftar pengguna kembali ke localStorage
-    localStorage.setItem('users', JSON.stringify(users));
-
-    return newUser; // Kembalikan data pengguna baru
-}
+// Event listener untuk form login
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', handleLogin);
