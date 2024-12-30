@@ -1,5 +1,5 @@
 // Fungsi untuk login
-export async function handleLogin(event) {
+export function handleLogin(event) {
     event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
@@ -39,7 +39,7 @@ export async function handleLogin(event) {
 }
 
 // Fungsi untuk register
-export async function handleRegister(event) {
+export function handleRegister(event) {
     event.preventDefault(); // Mencegah form untuk submit secara default
 
     // Ambil nilai dari input form
@@ -105,30 +105,38 @@ function validateEmail(email) {
     return regex.test(email);
 }
 
-// Fungsi simulasi login (ganti dengan logika backend nyata)
+// Fungsi untuk login pengguna dengan cek di localStorage
 async function loginUser(email, password) {
-    // Simulasi login menggunakan API atau backend
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (email === "test@example.com" && password === "password123") {
-                resolve({ username: 'Test User', email }); // Simulasi user berhasil login
-            } else {
-                reject(new Error('Email atau password salah'));
-            }
-        }, 1000);
-    });
+    // Ambil semua pengguna dari localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Cari pengguna dengan email yang sesuai
+    const user = users.find(user => user.email === email);
+
+    // Cek apakah pengguna ada dan password cocok
+    if (user && user.password === password) {
+        return user; // Kembalikan data pengguna
+    } else {
+        throw new Error('Email atau password salah'); // Jika gagal login
+    }
 }
 
-// Fungsi simulasi registrasi (ganti dengan logika backend nyata)
+// Fungsi untuk register pengguna dan simpan ke localStorage
 async function registerUser(email, password) {
-    // Simulasi registrasi menggunakan API atau backend
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (email === "test@example.com") {
-                reject(new Error('Email sudah terdaftar'));
-            } else {
-                resolve({ username: email, email }); // Simulasi registrasi berhasil
-            }
-        }, 1000);
-    });
+    // Ambil semua pengguna dari localStorage
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    // Cek apakah email sudah terdaftar
+    if (users.find(user => user.email === email)) {
+        throw new Error('Email sudah terdaftar'); // Jika email sudah ada
+    }
+
+    // Tambahkan pengguna baru ke daftar
+    const newUser = { email, password }; // Simpan email dan password (Anda bisa tambahkan fitur enkripsi password jika perlu)
+    users.push(newUser);
+
+    // Simpan daftar pengguna kembali ke localStorage
+    localStorage.setItem('users', JSON.stringify(users));
+
+    return newUser; // Kembalikan data pengguna baru
 }
