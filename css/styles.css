@@ -381,9 +381,9 @@ form p a:hover {
 }
 
 .task-description p {
-    font-size: 18px;
+    font-size: 10px;
     color: #555;
-    line-height: 1.6;
+    line-height: 1;
 }
 
 .task-quiz {
