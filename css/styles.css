@@ -35,8 +35,8 @@ header {
     list-style: none;
     background: #191970;
     justify-content: center;
-    flex-wrap: wrap; /* Membuat menu dapat membungkus jika lebar layar kecil */
-    padding: 5px 0; /* Menambah jarak vertikal */
+    flex-wrap: wrap;
+    padding: 5px 0;
 }
 
 .menu-item {
@@ -171,76 +171,67 @@ header {
 
 /* Game Favourite Section */
 .game-favourite {
-    margin: 20px auto; /* Margin yang lebih besar agar lebih terpusat */
-    padding: 15px; /* Padding untuk memberi ruang lebih */
-    width: 250px; /* Menetapkan lebar untuk menghindari kartu terlalu lebar */
-    border-radius: 12px; /* Border-radius lebih bulat */
-    display: flex; /* Menggunakan flex agar konten di dalamnya lebih teratur */
+    margin: 20px auto;
+    padding: 15px;
+    width: 250px;
+    border-radius: 12px;
+    display: flex;
     flex-direction: column;
-    align-items: center; /* Memusatkan isi */
-    background: linear-gradient(135deg, #1e1e2f, #4b0082); /* Gradasi menarik */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Efek bayangan lebih lembut */
-    animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite; /* Animasi */
-    text-align: center; /* Memusatkan teks */
-}
-
-/* Game Favourite Heading */
-.game-favourite h2 {
+    align-items: center;
+    background: linear-gradient(135deg, #1e1e2f, #4b0082);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite;
     text-align: center;
-    color: #fff;
-    font-size: 1.1em; /* Ukuran font sedikit lebih kecil */
-    margin-bottom: 10px; /* Margin yang lebih besar untuk jarak lebih lapang */
-    animation: pulse-text 3s ease-in-out infinite; /* Animasi untuk heading */
-    text-transform: uppercase;
-    letter-spacing: 1px; /* Spasi huruf yang lebih besar untuk kesan lebih modern */
 }
 
-/* Styling untuk Game Favourite - Game Info */
+.game-favourite h2 {
+    color: #fff;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    animation: pulse-text 3s ease-in-out infinite;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .game-info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #ff7eb3, #ff758c); /* Gradasi warna */
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
     padding: 12px;
-    border-radius: 10px; /* Menambahkan border-radius */
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s, box-shadow 0.3s; /* Efek transisi yang halus */
-    width: 100%; /* Menjamin game-info menggunakan lebar penuh kartu */
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
 }
 
-/* Game Info Heading */
 .game-info h3 {
-    font-size: 1.2em; /* Ukuran font agak kecil agar proporsional */
+    font-size: 1.2em;
     margin: 8px 0;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6); /* Menambahkan bayangan pada teks */
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
 }
 
-/* Game Invois (Image) */
 .game-invois {
-    width: 60px; /* Menyesuaikan ukuran gambar agar lebih kecil */
-    height: 60px; /* Sama dengan lebar untuk menjaga proporsi */
+    width: 60px;
+    height: 60px;
     object-fit: cover;
-    border-radius: 50%; /* Membuat gambar berbentuk bulat */
+    border-radius: 50%;
     margin-bottom: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Bayangan halus pada gambar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Game Info Paragraphs */
 .game-info p {
     margin: 5px 0;
-    font-size: 0.95em; /* Ukuran font sedikit lebih kecil */
+    font-size: 0.95em;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
 }
 
-/* Hover Effects on Game Info */
 .game-info:hover {
-    transform: scale(1.05); /* Zoom in sedikit saat hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.6); /* Efek bayangan saat hover */
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
-/* Styling untuk Share (Jika Ada) */
 .game-share {
     display: flex;
     align-items: center;
@@ -253,13 +244,11 @@ header {
     transition: background-color 0.3s, transform 0.3s;
 }
 
-/* Hover Effects for Share Button */
 .game-share:hover {
-    background-color: #3a3a5e; /* Warna latar belakang berubah */
-    transform: scale(1.05); /* Efek zoom saat hover */
+    background-color: #3a3a5e;
+    transform: scale(1.05);
 }
 
-/* Styling untuk Tombol Share di Game Favourite */
 .game-share-btn {
     padding: 8px 12px;
     background-color: #00bfff;
@@ -273,35 +262,73 @@ header {
 }
 
 .game-share-btn:hover {
-    background-color: #008cba; /* Warna tombol berubah saat hover */
+    background-color: #008cba;
 }
 
-/* Responsif untuk ukuran kecil */
+/* Media Query for smaller screens */
+@media (max-width: 768px) {
+    .games-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .game-item {
+        height: auto;
+        max-width: 90%;
+    }
+
+    .game-thumbnail {
+        aspect-ratio: 4/3;
+    }
+
+    .game-link {
+        height: auto;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar .icon {
+        font-size: 1.2em;
+        margin: 5px;
+    }
+
+    .navbar .text {
+        font-size: 0.8em;
+    }
+
+    .navbar .login, .navbar .register {
+        padding: 6px 10px;
+        font-size: 0.8em;
+        margin: 5px;
+    }
+}
+
 @media (max-width: 480px) {
-    .game-favourite {
-        width: 200px; /* Lebar kontainer menyesuaikan layar kecil */
-        padding: 10px;
+    .navbar .icon {
+        font-size: 1.1em;
+        margin: 3px;
     }
 
-    .game-info {
-        padding: 8px;
+    .navbar .login, .navbar .register {
+        font-size: 0.7em;
+        padding: 5px 8px;
     }
 
-    .game-invois {
-        width: 50px;
-        height: 50px;
+    .navbar {
+        width: 100%;
     }
 
-    .game-info h3 {
-        font-size: 1em;
-    }
-
-    .game-info p {
-        font-size: 0.85em;
+    .navbar .icon, .navbar .text, .navbar .login, .navbar .register {
+        width: 100%;
+        text-align: center;
     }
 }
 
-/* Footer */
 footer {
     font-family: 'Press Start 2P', sans-serif;
     text-align: center;
@@ -344,133 +371,14 @@ footer {
     }
 }
 
-/* Animasi scale-up untuk efek zoom */
 @keyframes scale-up {
     0% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.03); /* Sedikit zoom agar tetap compact */
+        transform: scale(1.03);
     }
     100% {
-        transform: scale(1); /* Kembali ke ukuran asli */
+        transform: scale(1);
     }
 }
-
-/* Responsif */
-@media (max-width: 768px) {
-    .games-container {
-        grid-template-columns: 1fr; /* Satu kolom untuk layar kecil */
-        gap: 10px;
-    }
-
-    .game-item {
-        height: auto; /* Kartu dinamis di layar kecil */
-        max-width: 90%; /* Gunakan 90% dari lebar layar */
-    }
-
-    .game-thumbnail {
-        aspect-ratio: 4/3; /* Rasio aspek berbeda untuk layar kecil */
-    }
-
-    .game-link {
-        height: auto;
-        max-width: 90%;
-        margin: 0 auto;
-    }
-}
-
-@media (orientation: landscape) and (max-width: 768px) {
-    .games-container {
-        grid-template-columns: repeat(2, 1fr); /* Dua kolom untuk landscape */
-    }
-
-    .game-item {
-        max-width: calc(50% - 20px); /* Kurangi margin agar tetap seragam */
-        height: auto;
-    }
-    
-    .game-link {
-        max-width: calc(50% - 20px);
-        height: auto;
-    }
-}
-
-/* Umum - Menyusun elemen-elemen navigasi */
-.navbar {
-    display: flex;
-    flex-wrap: wrap; /* Membuat elemen-elemen dibungkus di baris baru */
-    justify-content: center; /* Memberi jarak antar elemen */
-    align-items: center;
-    padding: 10px;
-    gap: 5px;
-}
-
-/* Ikon dan tombol navigasi */
-.navbar .icon {
-    font-size: 1.5em; /* Ukuran ikon lebih kecil */
-    margin: 5px 10px; /* Memberikan jarak antar ikon */
-}
-
-/* Teks di sebelah ikon */
-.navbar .text {
-    font-size: 0.9em; /* Mengurangi ukuran font untuk teks */
-}
-
-/* Tombol Log In dan Daftar */
-.navbar .login, .navbar .register {
-    padding: 8px 12px;
-    font-size: 0.9em; /* Ukuran font tombol lebih kecil */
-    margin: 5px;
-    border-radius: 5px;
-    background-color: #4CAF50; /* Warna tombol */
-    color: #fff;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-/* Media Query untuk ukuran layar lebih kecil */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .navbar .icon {
-        font-size: 1.2em;
-        margin: 5px;
-    }
-
-    .navbar .text {
-        font-size: 0.8em;
-    }
-
-    .navbar .login, .navbar .register {
-        padding: 6px 10px;
-        font-size: 0.8em;
-        margin: 5px;
-    }
-}
-
-/* Untuk layar lebih kecil dari 480px (portrait handphone kecil) */
-@media (max-width: 480px) {
-    .navbar .icon {
-        font-size: 1.1em; /* Ukuran ikon lebih kecil */
-        margin: 3px; /* Mengurangi jarak antar ikon */
-    }
-
-    .navbar .login, .navbar .register {
-        font-size: 0.7em; /* Ukuran font tombol lebih kecil */
-        padding: 5px 8px; /* Padding lebih kecil */
-    }
-
-    .navbar {
-        width: 100%;
-    }
-
-    .navbar .icon, .navbar .text, .navbar .login, .navbar .register {
-        width: 100%; /* Lebar penuh */
-        text-align: center; /* Memusatkan teks */
-    }
-}
-
