@@ -33,11 +33,11 @@ async function uploadProfilePicture(file, userEmail) {
     if (!response.ok) {
       throw new Error('Error uploading profile picture');
     }
-    alert('Profile picture uploaded successfully!');
+    alert('Foto profil berhasil diunggah!');
     window.location.reload();  // Reload halaman untuk memperbarui gambar profil
   } catch (error) {
     console.error('Error uploading profile picture:', error);
-    alert('Error uploading profile picture: ' + error.message);
+    alert('Terjadi kesalahan saat mengunggah foto profil: ' + error.message);
   }
 }
 
@@ -50,6 +50,8 @@ async function logout() {
 // Fungsi untuk menampilkan profil pengguna
 window.addEventListener('load', () => {
   const userEmail = sessionStorage.getItem('userEmail');
+  
+  // Cek apakah user sudah login
   if (userEmail) {
     userNameDisplay.innerText = userEmail.split('@')[0]; // Menampilkan nama pengguna berdasarkan email
     getUserProfile(userEmail)
@@ -60,6 +62,7 @@ window.addEventListener('load', () => {
       })
       .catch(error => {
         console.error('Error displaying user profile:', error);
+        alert('Gagal menampilkan profil pengguna');
       });
   } else {
     window.location.href = 'login.html'; // Redirect ke halaman login jika pengguna tidak terautentikasi
@@ -70,8 +73,11 @@ window.addEventListener('load', () => {
 profileImageInput.addEventListener('change', (event) => {
   const file = event.target.files[0]; // Ambil file gambar yang diunggah
   const userEmail = sessionStorage.getItem('userEmail');
+  
   if (file && userEmail) {
     uploadProfilePicture(file, userEmail);
+  } else {
+    alert('File tidak valid atau pengguna tidak terautentikasi');
   }
 });
 
