@@ -370,6 +370,7 @@ form p a:hover {
 .profile-section {
     padding: 25px;
     background-color: #f9f9f9; /* Warna latar belakang lebih terang untuk kontras yang lebih baik */
+    text: black;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan agar tampak lebih modern */
     margin-top: 20px;
