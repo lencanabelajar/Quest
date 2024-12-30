@@ -1,9 +1,11 @@
 // Elemen untuk menampilkan profil pengguna
 const userNameDisplay = document.getElementById('username-display');
 const profileImageInput = document.getElementById('profile-image-input');
-const profileImage = document.getElementById('profile-img');
+const profileImage = document.getElementById('profile-avatar'); // Perbaiki ID jika berbeda
 const logoutBtn = document.getElementById('logout-btn');
 const uploadSpinner = document.getElementById('upload-spinner'); // Spinner untuk upload gambar
+const editProfileBtn = document.getElementById('edit-profile-btn');
+const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
 
 // Fungsi untuk mengambil data profil pengguna dari localStorage
 function getUserProfile() {
@@ -76,6 +78,7 @@ function loadUserProfile() {
   const userEmail = sessionStorage.getItem('userEmail');
 
   if (userEmail) {
+    // Menampilkan nama pengguna berdasarkan email
     userNameDisplay.innerText = userEmail.split('@')[0]; // Menampilkan nama pengguna berdasarkan email
     const userProfile = getUserProfile();
 
@@ -102,9 +105,46 @@ profileImageInput.addEventListener('change', (event) => {
   }
 });
 
-// Event listener untuk menangani logout
+// Event listener untuk menangani tombol logout
 logoutBtn.addEventListener('click', () => {
   logout();
+});
+
+// Event listener untuk menangani klik tombol Edit Profil
+editProfileBtn.addEventListener('click', () => {
+  const userProfile = getUserProfile();
+  if (userProfile) {
+    const newName = prompt('Masukkan nama baru:', userProfile.name || ''); // Prompt untuk mengubah nama
+    if (newName) {
+      updateProfileNameInStorage(newName);
+    }
+  } else {
+    alert('Pengguna tidak ditemukan!');
+  }
+});
+
+// Fungsi untuk memperbarui nama pengguna di localStorage
+function updateProfileNameInStorage(newName) {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const userEmail = sessionStorage.getItem('userEmail');
+
+  // Cari pengguna berdasarkan email
+  const userIndex = users.findIndex(u => u.email === userEmail);
+
+  if (userIndex !== -1) {
+    // Perbarui nama pengguna
+    users[userIndex].name = newName;
+    localStorage.setItem('users', JSON.stringify(users)); // Simpan ke localStorage
+    alert('Nama profil berhasil diperbarui!');
+    window.location.reload(); // Reload halaman untuk menampilkan perubahan
+  } else {
+    alert('Pengguna tidak ditemukan');
+  }
+}
+
+// Event listener untuk menangani tombol Ganti Foto Profil
+changeProfilePicBtn.addEventListener('click', () => {
+  profileImageInput.click(); // Klik input file untuk memilih gambar
 });
 
 // Memuat profil pengguna saat halaman dimuat
