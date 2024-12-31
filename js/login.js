@@ -55,7 +55,7 @@ export async function handleLogin(event) {
 
         // Menyembunyikan spinner dan redirect ke halaman profil
         loadingSpinner.style.display = 'none';
-        window.location.href = '/html/profil.html'; // Ganti dengan halaman yang sesuai
+        window.location.href = '../html/profil.html'; // Ganti dengan halaman yang sesuai
     } catch (error) {
         // Menyembunyikan spinner dan tampilkan pesan error
         loadingSpinner.style.display = 'none';
