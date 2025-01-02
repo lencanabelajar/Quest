@@ -35,13 +35,22 @@ function saveUserProfile(updatedUser) {
     if (userIndex !== -1) {
         users[userIndex] = updatedUser;
         localStorage.setItem('users', JSON.stringify(users));
-
         console.log("Profil pengguna telah diperbarui:", updatedUser); // Debugging line
     } else {
         console.error('Pengguna tidak ditemukan saat menyimpan profil.');
     }
 }
 
+// Fungsi untuk memvalidasi data profil pengguna
+function validateUserProfile(userProfile) {
+    if (!userProfile || !userProfile.email) {
+        alert('Data profil tidak valid!');
+        return false;
+    }
+    return true;
+}
+
+// Fungsi untuk memuat data profil pengguna
 function loadUserProfile() {
     const userEmail = sessionStorage.getItem('userEmail');
 
@@ -52,7 +61,7 @@ function loadUserProfile() {
 
     const userProfile = getUserProfile();
 
-    if (userProfile) {
+    if (userProfile && validateUserProfile(userProfile)) {
         console.log("Profil pengguna dimuat:", userProfile); // Debugging line
 
         const fallbackName = userEmail ? userEmail.split('@')[0] : "Pengguna Baru";
@@ -76,6 +85,7 @@ function loadUserProfile() {
     }
 }
 
+// Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
     userLevelDisplay.innerText = level;
     expDisplay.innerText = currentXP;
@@ -108,13 +118,19 @@ function levelUp() {
         level++;
         maxXP = Math.ceil(maxXP * 1.2); // Tingkatkan XP yang dibutuhkan untuk level berikutnya
         alert(`Selamat! Anda telah naik ke level ${level}!`);
+
+        // Animasi perubahan level
+        userLevelDisplay.classList.add('level-up');
+        setTimeout(() => {
+            userLevelDisplay.classList.remove('level-up');
+        }, 500); // Hapus kelas animasi setelah 0.5 detik
     } else {
         currentXP = maxXP; // Batasi XP jika level maksimal tercapai
         alert('Anda telah mencapai level maksimal!');
     }
 }
 
-// Fungsi untuk menangani unggahan gambar profil
+// Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
     if (!file) return;
 
@@ -175,20 +191,6 @@ function logout() {
     }
 }
 
-// Event listeners
-window.addEventListener('load', loadUserProfile);
-
-changeProfilePicBtn?.addEventListener('click', () => {
-    profileImageInput.click(); // Membuka dialog file
-});
-
-profileImageInput?.addEventListener('change', event => {
-    const file = event.target.files[0];
-    handleProfilePictureUpload(file);
-});
-
-logoutBtn?.addEventListener('click', logout);
-
 // Fungsi untuk membuka modal edit profil
 editProfileBtn?.addEventListener('click', () => {
     const userProfile = getUserProfile();
@@ -222,3 +224,17 @@ editProfileForm?.addEventListener('submit', event => {
 
 // Fungsi untuk menutup modal dengan tombol Cancel
 cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
+
+// Event listeners
+window.addEventListener('load', loadUserProfile);
+
+changeProfilePicBtn?.addEventListener('click', () => {
+    profileImageInput.click(); // Membuka dialog file
+});
+
+profileImageInput?.addEventListener('change', event => {
+    const file = event.target.files[0];
+    handleProfilePictureUpload(file);
+});
+
+logoutBtn?.addEventListener('click', logout);
