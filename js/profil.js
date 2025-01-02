@@ -40,7 +40,6 @@ function saveUserProfile(updatedUser) {
     }
 }
 
-// Fungsi untuk memuat data profil pengguna ke halaman
 function loadUserProfile() {
     const userEmail = sessionStorage.getItem('userEmail');
 
@@ -52,6 +51,8 @@ function loadUserProfile() {
     const userProfile = getUserProfile();
 
     if (userProfile) {
+        console.log("Profil pengguna dimuat:", userProfile); // Debugging line
+
         const fallbackName = userEmail ? userEmail.split('@')[0] : "Pengguna Baru";
         const displayName = userProfile.name || fallbackName;
 
