@@ -58,10 +58,21 @@ function checkAnswer(taskIndex, userAnswer) {
         feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
         feedbackElement.style.color = "red";
         feedbackElement.style.display = 'block';
+        
+        // Menandai progres sebagai salah
         storeProgress(taskIndex, false);
     }
 
     checkCompletion(); // Periksa apakah semua tugas sudah selesai
+}
+
+// Fungsi untuk mengunci form sehingga tidak bisa dijawab lagi
+function lockTaskForm(taskIndex) {
+    const formElement = document.getElementById(`task-form${taskIndex + 1}`);
+    const inputElements = formElement.querySelectorAll('input, textarea');
+    inputElements.forEach(input => {
+        input.disabled = true; // Nonaktifkan input untuk mengunci form
+    });
 }
 
 // Fungsi untuk menyimpan progres jawaban ke sessionStorage
