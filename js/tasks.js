@@ -8,33 +8,28 @@ const completionMessage = document.getElementById('completion-message');
 const tasksData = [
     {
         questionId: "question1",
-        answer: "Aset Pertanian Bronze adalah kategori aset pertanian yang memiliki nilai tinggi dan memiliki potensi pengelolaan yang baik.",
+        answer: "Auguste Comte",
         xp: 10 // XP yang diberikan untuk jawaban benar
     },
     {
         questionId: "question2",
-        answer: "Keuntungan Aset Pertanian Bronze termasuk nilai tinggi dan potensi pengelolaan yang menguntungkan.",
+        answer: "Masyarakat",
         xp: 10
     },
     {
         questionId: "question3",
-        answer: "Aset Pertanian Bronze dikelola oleh pemerintah dan perusahaan agribisnis.",
+        answer: "Karl Marx",
         xp: 10
     },
     {
         questionId: "question4",
-        answer: "Manfaat mengelola Aset Pertanian Bronze adalah meningkatkan pendapatan petani dan mendukung keberlanjutan pertanian.",
+        answer: "Solidaritas mekanis",
         xp: 15
     },
     {
         questionId: "question5",
-        answer: "Untuk memulai investasi Aset Pertanian Bronze, Anda harus bekerja sama dengan perusahaan agribisnis dan memanfaatkan teknologi pertanian.",
+        answer: "Memahami masyarakat",
         xp: 15
-    },
-    {
-        questionId: "question6",
-        answer: "Tantangan dalam mengelola Aset Pertanian Bronze termasuk perubahan iklim dan ketidakstabilan harga pasar.",
-        xp: 20
     }
 ];
 
