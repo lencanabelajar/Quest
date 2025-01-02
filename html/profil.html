@@ -27,7 +27,7 @@
                 <a href="../html/home.html" class="menu-item" aria-label="Beranda">🏡</a>
                 <a href="../html/profil.html" class="menu-item active" aria-label="Profil">📲</a>
                 <a href="../html/news.html" class="menu-item" aria-label="Berita">📰</a>
-                <button id="logout-btn" class="menu-item" style="display: none;">Log Out</button>
+                <button id="logout-btn" class="menu-item">Log Out</button>
                 <span id="user-greeting" style="margin-left: 10px;">Halo, <span id="greeting-username-display"></span>!</span>
             </nav>
         </div>
@@ -46,21 +46,21 @@
                     <p><strong>Nama:</strong> <span id="profile-username-display"></span></p>
                     <p><strong>Email:</strong> <span id="userEmail"></span></p>
                     <p><strong>Level:</strong> <span id="user-level-display">1</span></p>
-                            <div class="experience-bar">
-                                <div id="exp-bar-fill" style="width: 0%; background: #4caf50; height: 20px;"></div>
-                            </div>
-                            <p><span id="exp-display">0</span>/100 XP</p>
+                    <div class="experience-bar">
+                        <div id="exp-bar-fill" style="width: 0%; background: #4caf50; height: 20px;"></div>
+                    </div>
+                    <p><span id="exp-display">0</span>/100 XP</p>
                     <button id="edit-profile-btn" class="profile-btn" aria-label="Edit profil">Edit Profil</button>
                 </div>
             </div>
 
+            <!-- Modal Edit Profil -->
             <div id="edit-profile-modal" class="modal" style="display: none;">
                 <div class="modal-content">
                     <h3>Edit Profil</h3>
                     <form id="edit-profile-form">
                         <label for="edit-name" class="form-label">Nama:</label>
                         <input type="text" id="edit-name" name="edit-name" placeholder="Nama baru Anda" required>
-  
                         <div class="modal-actions">
                             <button type="submit" class="save-btn">Simpan</button>
                             <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
@@ -86,7 +86,6 @@
     <!-- Scripts -->
     <script type="module" src="../js/scripts.js"></script>
     <script type="module" src="../js/profil.js"></script>
-    <script type="module" src="../js/tasks.js"></script>
 </body>
 
 </html>
