@@ -1,6 +1,6 @@
 // Elemen DOM yang digunakan
-const greetingUsernameDisplay = document.getElementById('greeting-username-display');
-const userNameDisplay = document.getElementById('username-display');
+const greetingUsernameDisplay = document.getElementById('greeting-username-display'); // Digunakan untuk greeting di header
+const userNameDisplay = document.getElementById('profile-username-display'); // Digunakan untuk menampilkan nama di profil
 const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
 const profileImage = document.getElementById('profile-avatar');
@@ -45,19 +45,20 @@ function loadUserProfile() {
 
     const userProfile = getUserProfile();
 
-        if (userProfile) {
-            const fallbackName = userEmail ? userEmail.split('@')[0] : "Pengguna Baru";
-            const displayName = userProfile.name || fallbackName;
-        
-            userNameDisplay.innerText = displayName;
-            userEmailDisplay.innerText = userProfile.email;
-            userLevelDisplay.innerText = userProfile.level || "Pemula";
-            profileImage.src = userProfile.profileImage || "../assets/icon/ruby.png";
-        } else {
-            alert("Data profil tidak ditemukan!");
-            window.location.href = "login.html";
-        }
+    if (userProfile) {
+        const fallbackName = userEmail ? userEmail.split('@')[0] : "Pengguna Baru";
+        const displayName = userProfile.name || fallbackName;
 
+        // Perbarui elemen nama untuk greeting dan profil
+        greetingUsernameDisplay.innerText = displayName; // Nama di header
+        userNameDisplay.innerText = displayName; // Nama di konten profil
+        userEmailDisplay.innerText = userProfile.email;
+        userLevelDisplay.innerText = userProfile.level || "Pemula";
+        profileImage.src = userProfile.profileImage || "../assets/icon/ruby.png";
+    } else {
+        alert("Data profil tidak ditemukan!");
+        window.location.href = "login.html";
+    }
 }
 
 // Fungsi untuk menangani unggahan gambar profil
