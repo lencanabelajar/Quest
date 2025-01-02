@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
             feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
             feedbackElement.style.color = "green";
             storeProgress(taskIndex, true);
-            addExperience(xp);
+            addExperience(xp);  // Menambahkan XP ke profil pengguna
             lockTaskForm(taskIndex);
         } else {
             feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
@@ -69,6 +69,66 @@ document.addEventListener('DOMContentLoaded', function () {
             checkAnswer(index, userAnswer);
         });
     });
+
+    // Fungsi untuk menambahkan XP ke profil pengguna
+    function addExperience(points) {
+        const userProfile = getUserProfile(); // Ambil data profil pengguna
+        if (!userProfile) {
+            alert('Pengguna tidak ditemukan!');
+            return;
+        }
+
+        // Menambahkan XP dan memeriksa level up
+        userProfile.currentXP += points;
+        while (userProfile.currentXP >= userProfile.maxXP) {
+            userProfile.currentXP -= userProfile.maxXP;
+            levelUp(userProfile); // Menangani level up
+        }
+
+        // Simpan perubahan XP ke sessionStorage atau localStorage
+        saveUserProfile(userProfile);
+
+        // Update tampilan XP di halaman profil
+        updateExperienceUI(userProfile);
+    }
+
+    // Fungsi untuk menangani level up
+    function levelUp(userProfile) {
+        userProfile.level++;
+        userProfile.maxXP = Math.ceil(userProfile.maxXP * 1.2); // Meningkatkan XP untuk level berikutnya
+        alert(`Selamat! Anda telah naik ke level ${userProfile.level}!`);
+    }
+
+    // Fungsi untuk memperbarui tampilan XP di halaman profil
+    function updateExperienceUI(userProfile) {
+        const expDisplay = document.getElementById('exp-display');
+        const expBarFill = document.getElementById('exp-bar-fill');
+        const userLevelDisplay = document.getElementById('user-level-display');
+
+        expDisplay.innerText = userProfile.currentXP;
+        userLevelDisplay.innerText = userProfile.level;
+        expBarFill.style.width = `${(userProfile.currentXP / userProfile.maxXP) * 100}%`;
+    }
+
+    // Ambil data profil pengguna
+    function getUserProfile() {
+        const userEmail = sessionStorage.getItem('userEmail');
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        return users.find(user => user.email === userEmail);
+    }
+
+    // Menyimpan data profil pengguna
+    function saveUserProfile(updatedUser) {
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const userIndex = users.findIndex(user => user.email === updatedUser.email);
+
+        if (userIndex !== -1) {
+            users[userIndex] = updatedUser;
+            localStorage.setItem('users', JSON.stringify(users));
+        } else {
+            console.error('Pengguna tidak ditemukan saat menyimpan profil.');
+        }
+    }
 
     // Muat progres sebelumnya saat halaman dimuat
     loadPreviousProgress();
