@@ -9,6 +9,10 @@ const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
 const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
 const logoutBtn = document.getElementById('logout-btn');
+const editProfileModal = document.getElementById('edit-profile-modal');
+const editProfileForm = document.getElementById('edit-profile-form');
+const editNameInput = document.getElementById('edit-name');
+const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
 // Variabel untuk level dan pengalaman
 let currentXP = 0;
@@ -138,6 +142,20 @@ function handleProfilePictureUpload(file) {
     reader.readAsDataURL(file);
 }
 
+// Fungsi untuk membuka modal
+function openModal(modal) {
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+// Fungsi untuk menutup modal
+function closeModal(modal) {
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
 // Fungsi untuk menangani logout
 function logout() {
     sessionStorage.removeItem('userEmail');
@@ -160,3 +178,17 @@ logoutBtn?.addEventListener('click', logout);
 
 // Contoh: Menambahkan XP (dapat dipanggil saat soal dijawab benar)
 // addExperience(30);
+
+editProfileBtn?.addEventListener('click', () => {
+    const userProfile = getUserProfile();
+
+    if (userProfile) {
+        editNameInput.value = userProfile.name || '';
+        editLevelInput.value = userProfile.level || 'Pemula';
+        openModal(editProfileModal);
+    } else {
+        alert('Pengguna tidak ditemukan!');
+    }
+});
+
+cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
