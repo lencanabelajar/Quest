@@ -73,11 +73,11 @@ function loadUserProfile() {
     }
 }
 
-// Fungsi untuk memperbarui UI pengalaman
 function updateExperienceUI() {
     userLevelDisplay.innerText = level;
     expDisplay.innerText = currentXP;
     expBarFill.style.width = `${(currentXP / maxXP) * 100}%`;
+    console.log(`XP: ${currentXP}, Level: ${level}`); // Debugging line
 }
 
 // Fungsi untuk menambahkan XP dan menangani level up
