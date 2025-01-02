@@ -1,6 +1,6 @@
 // Elemen DOM yang digunakan
-const greetingUsernameDisplay = document.getElementById('greeting-username-display'); // Digunakan untuk greeting di header
-const userNameDisplay = document.getElementById('profile-username-display'); // Digunakan untuk menampilkan nama di profil
+const greetingUsernameDisplay = document.getElementById('greeting-username-display'); // Greeting di header
+const userNameDisplay = document.getElementById('profile-username-display'); // Nama di profil
 const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
 const expDisplay = document.getElementById('exp-display');
@@ -176,19 +176,36 @@ profileImageInput?.addEventListener('change', event => {
 
 logoutBtn?.addEventListener('click', logout);
 
-// Contoh: Menambahkan XP (dapat dipanggil saat soal dijawab benar)
-// addExperience(30);
-
+// Fungsi untuk membuka modal edit profil
 editProfileBtn?.addEventListener('click', () => {
     const userProfile = getUserProfile();
 
     if (userProfile) {
-        editNameInput.value = userProfile.name || '';
-        editLevelInput.value = userProfile.level || 'Pemula';
+        editNameInput.value = userProfile.name || ''; // Hanya edit nama
         openModal(editProfileModal);
     } else {
         alert('Pengguna tidak ditemukan!');
     }
 });
 
+// Fungsi untuk menangani submit form edit profil
+editProfileForm?.addEventListener('submit', event => {
+    event.preventDefault(); // Mencegah reload halaman
+
+    const newName = editNameInput.value.trim(); // Ambil nilai baru dari input nama
+    const userProfile = getUserProfile();
+
+    if (userProfile) {
+        // Perbarui data pengguna
+        userProfile.name = newName;
+        saveUserProfile(userProfile); // Simpan perubahan ke localStorage
+        alert('Profil berhasil diperbarui!');
+        closeModal(editProfileModal); // Tutup modal
+        loadUserProfile(); // Perbarui tampilan profil
+    } else {
+        alert('Terjadi kesalahan saat memperbarui profil.');
+    }
+});
+
+// Fungsi untuk menutup modal dengan tombol Cancel
 cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
