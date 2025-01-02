@@ -3,16 +3,17 @@ const greetingUsernameDisplay = document.getElementById('greeting-username-displ
 const userNameDisplay = document.getElementById('profile-username-display'); // Digunakan untuk menampilkan nama di profil
 const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
+const expDisplay = document.getElementById('exp-display');
+const expBarFill = document.getElementById('exp-bar-fill');
 const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
 const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
-const editProfileBtn = document.getElementById('edit-profile-btn');
 const logoutBtn = document.getElementById('logout-btn');
-const editProfileModal = document.getElementById('edit-profile-modal');
-const editProfileForm = document.getElementById('edit-profile-form');
-const editNameInput = document.getElementById('edit-name');
-const editLevelInput = document.getElementById('edit-level');
-const cancelEditBtn = document.getElementById('cancel-edit-btn');
+
+// Variabel untuk level dan pengalaman
+let currentXP = 0;
+let maxXP = 100;
+let level = 1;
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
@@ -53,11 +54,55 @@ function loadUserProfile() {
         greetingUsernameDisplay.innerText = displayName; // Nama di header
         userNameDisplay.innerText = displayName; // Nama di konten profil
         userEmailDisplay.innerText = userProfile.email;
-        userLevelDisplay.innerText = userProfile.level || "Pemula";
+        userLevelDisplay.innerText = userProfile.level || "1";
         profileImage.src = userProfile.profileImage || "../assets/icon/ruby.png";
+
+        // Perbarui data level dan XP
+        currentXP = userProfile.currentXP || 0;
+        maxXP = userProfile.maxXP || 100;
+        level = userProfile.level || 1;
+        updateExperienceUI();
     } else {
         alert("Data profil tidak ditemukan!");
         window.location.href = "login.html";
+    }
+}
+
+// Fungsi untuk memperbarui UI pengalaman
+function updateExperienceUI() {
+    userLevelDisplay.innerText = level;
+    expDisplay.innerText = currentXP;
+    expBarFill.style.width = `${(currentXP / maxXP) * 100}%`;
+}
+
+// Fungsi untuk menambahkan XP dan menangani level up
+function addExperience(points) {
+    currentXP += points;
+    while (currentXP >= maxXP) {
+        currentXP -= maxXP;
+        levelUp();
+    }
+    updateExperienceUI();
+
+    // Simpan perubahan ke localStorage
+    const userProfile = getUserProfile();
+    if (userProfile) {
+        userProfile.currentXP = currentXP;
+        userProfile.maxXP = maxXP;
+        userProfile.level = level;
+        saveUserProfile(userProfile);
+    }
+}
+
+// Fungsi untuk menangani level up
+function levelUp() {
+    if (level < 99) {
+        level++;
+        maxXP = Math.ceil(maxXP * 1.2); // Tingkatkan XP yang dibutuhkan untuk level berikutnya
+        alert(`Selamat! Anda telah naik ke level ${level}!`);
+    } else {
+        currentXP = maxXP; // Batasi XP jika level maksimal tercapai
+        alert('Anda telah mencapai level maksimal!');
     }
 }
 
@@ -93,44 +138,6 @@ function handleProfilePictureUpload(file) {
     reader.readAsDataURL(file);
 }
 
-// Fungsi untuk menyimpan perubahan profil
-function saveProfileChanges(event) {
-    event.preventDefault();
-
-    const newName = editNameInput.value.trim();
-    const newLevel = editLevelInput.value;
-
-    if (!newName) {
-        alert('Nama tidak boleh kosong!');
-        return;
-    }
-
-    const userProfile = getUserProfile();
-
-    if (userProfile) {
-        userProfile.name = newName;
-        userProfile.level = newLevel;
-        saveUserProfile(userProfile);
-        alert('Profil berhasil diperbarui!');
-        loadUserProfile();
-        closeModal(editProfileModal);
-    }
-}
-
-// Fungsi untuk membuka modal
-function openModal(modal) {
-    if (modal) {
-        modal.style.display = 'block';
-    }
-}
-
-// Fungsi untuk menutup modal
-function closeModal(modal) {
-    if (modal) {
-        modal.style.display = 'none';
-    }
-}
-
 // Fungsi untuk menangani logout
 function logout() {
     sessionStorage.removeItem('userEmail');
@@ -149,20 +156,7 @@ profileImageInput?.addEventListener('change', event => {
     handleProfilePictureUpload(file);
 });
 
-editProfileBtn?.addEventListener('click', () => {
-    const userProfile = getUserProfile();
-
-    if (userProfile) {
-        editNameInput.value = userProfile.name || '';
-        editLevelInput.value = userProfile.level || 'Pemula';
-        openModal(editProfileModal);
-    } else {
-        alert('Pengguna tidak ditemukan!');
-    }
-});
-
-cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
-
-editProfileForm?.addEventListener('submit', saveProfileChanges);
-
 logoutBtn?.addEventListener('click', logout);
+
+// Contoh: Menambahkan XP (dapat dipanggil saat soal dijawab benar)
+// addExperience(30);
