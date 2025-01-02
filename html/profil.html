@@ -45,7 +45,11 @@
                 <div class="profile-details">
                     <p><strong>Nama:</strong> <span id="profile-username-display"></span></p>
                     <p><strong>Email:</strong> <span id="userEmail"></span></p>
-                    <p><strong>Level:</strong> <span id="user-level-display">Pemula</span></p>
+                    <p><strong>Level:</strong> <span id="user-level-display">1</span></p>
+                            <div class="experience-bar">
+                                <div id="exp-bar-fill" style="width: 0%; background: #4caf50; height: 20px;"></div>
+                            </div>
+                            <p><span id="exp-display">0</span>/100 XP</p>
                     <button id="edit-profile-btn" class="profile-btn" aria-label="Edit profil">Edit Profil</button>
                 </div>
             </div>
@@ -56,14 +60,7 @@
                     <form id="edit-profile-form">
                         <label for="edit-name" class="form-label">Nama:</label>
                         <input type="text" id="edit-name" name="edit-name" placeholder="Nama baru Anda" required>
-                        
-                        <label for="edit-level" class="form-label">Level:</label>
-                        <select id="edit-level" name="edit-level" required>
-                            <option value="Pemula">Pemula</option>
-                            <option value="Menengah">Menengah</option>
-                            <option value="Ahli">Ahli</option>
-                        </select>
-
+  
                         <div class="modal-actions">
                             <button type="submit" class="save-btn">Simpan</button>
                             <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
