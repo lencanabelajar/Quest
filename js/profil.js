@@ -198,7 +198,7 @@ editProfileForm?.addEventListener('submit', event => {
 
     if (userProfile) {
         // Perbarui data pengguna
-        userProfile.name = newName;
+        userProfile.name = newName || userProfile.name; // Hanya update nama jika ada perubahan
         saveUserProfile(userProfile); // Simpan perubahan ke localStorage
         alert('Profil berhasil diperbarui!');
         closeModal(editProfileModal); // Tutup modal
