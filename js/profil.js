@@ -1,6 +1,6 @@
 // Elemen DOM yang digunakan
 const userNameDisplay = document.getElementById('username-display');
-const userEmailDisplay = document.getElementById('userEmail');
+const userEmailDisplay = document.getElementById('user-email');
 const userLevelDisplay = document.getElementById('user-level-display');
 const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
@@ -29,7 +29,7 @@ function saveUserProfile(updatedUser) {
         users[userIndex] = updatedUser;
         localStorage.setItem('users', JSON.stringify(users));
     } else {
-        alert('Pengguna tidak ditemukan!');
+        console.error('Pengguna tidak ditemukan saat menyimpan profil.');
     }
 }
 
@@ -50,7 +50,7 @@ function loadUserProfile() {
         userLevelDisplay.innerText = userProfile.level || 'Pemula';
         profileImage.src = userProfile.profileImage || '../assets/icon/ruby.png';
     } else {
-        alert('Data profil tidak ditemukan!');
+        console.warn('Data profil tidak ditemukan.');
         window.location.href = 'login.html'; // Redirect jika profil tidak ditemukan
     }
 }
@@ -60,8 +60,15 @@ function handleProfilePictureUpload(file) {
     if (!file) return;
 
     const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    const maxFileSize = 2 * 1024 * 1024; // Maksimal 2 MB
+
     if (!validFileTypes.includes(file.type)) {
         alert('Format file tidak didukung! Harap unggah file berformat JPEG atau PNG.');
+        return;
+    }
+
+    if (file.size > maxFileSize) {
+        alert('Ukuran file terlalu besar! Maksimal 2 MB.');
         return;
     }
 
@@ -100,7 +107,21 @@ function saveProfileChanges(event) {
         saveUserProfile(userProfile);
         alert('Profil berhasil diperbarui!');
         loadUserProfile();
-        editProfileModal.style.display = 'none'; // Tutup modal
+        closeModal(editProfileModal);
+    }
+}
+
+// Fungsi untuk membuka modal
+function openModal(modal) {
+    if (modal) {
+        modal.style.display = 'block';
+    }
+}
+
+// Fungsi untuk menutup modal
+function closeModal(modal) {
+    if (modal) {
+        modal.style.display = 'none';
     }
 }
 
@@ -113,31 +134,29 @@ function logout() {
 // Event listeners
 window.addEventListener('load', loadUserProfile);
 
-changeProfilePicBtn.addEventListener('click', () => {
+changeProfilePicBtn?.addEventListener('click', () => {
     profileImageInput.click(); // Membuka dialog file
 });
 
-profileImageInput.addEventListener('change', event => {
+profileImageInput?.addEventListener('change', event => {
     const file = event.target.files[0];
     handleProfilePictureUpload(file);
 });
 
-editProfileBtn.addEventListener('click', () => {
+editProfileBtn?.addEventListener('click', () => {
     const userProfile = getUserProfile();
 
     if (userProfile) {
         editNameInput.value = userProfile.name || '';
         editLevelInput.value = userProfile.level || 'Pemula';
-        editProfileModal.style.display = 'block'; // Tampilkan modal
+        openModal(editProfileModal);
     } else {
         alert('Pengguna tidak ditemukan!');
     }
 });
 
-cancelEditBtn.addEventListener('click', () => {
-    editProfileModal.style.display = 'none'; // Tutup modal
-});
+cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
 
-editProfileForm.addEventListener('submit', saveProfileChanges);
+editProfileForm?.addEventListener('submit', saveProfileChanges);
 
-logoutBtn.addEventListener('click', logout);
+logoutBtn?.addEventListener('click', logout);
