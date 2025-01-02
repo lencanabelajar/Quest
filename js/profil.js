@@ -35,6 +35,8 @@ function saveUserProfile(updatedUser) {
     if (userIndex !== -1) {
         users[userIndex] = updatedUser;
         localStorage.setItem('users', JSON.stringify(users));
+
+        console.log("Profil pengguna telah diperbarui:", updatedUser); // Debugging line
     } else {
         console.error('Pengguna tidak ditemukan saat menyimpan profil.');
     }
