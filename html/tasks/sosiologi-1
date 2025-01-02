@@ -90,7 +90,7 @@ Secara keseluruhan, sosiologi adalah jendela yang memungkinkan kita untuk meliha
 
 <!-- Pertanyaan 5 -->
 <div class="task-quiz">
-    <h3>Pertanyaan 5: Apa tujuan utama sosiologi dalam mempelajari fenomena sosial?</h3>
+    <h3>Pertanyaan 5: Apa isu sosial yang sering dikritisi oleh Karl Marx melalui teori konflik?</h3>
     <form id="task-form-5" class="task-form">
         <label for="answer5">Jawaban:</label>
         <input type="text" id="answer5" name="answer5" required placeholder="Masukkan jawaban Anda">
