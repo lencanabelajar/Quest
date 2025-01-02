@@ -3,10 +3,10 @@
 
 /* Body */
 body {
-    font-family: 'Press Start 2P', sans-serif;
+    font-family: 'Arial', sans-serif; /* Font yang nyaman dibaca */
     margin: 0;
-    background: #1e1e2f;
-    color: #fff;
+    background: #282c34; /* Latar belakang abu-abu gelap */
+    color: #e4e4e4; /* Teks abu-abu terang */
     overflow-x: hidden;
 }
 
