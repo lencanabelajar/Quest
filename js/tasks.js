@@ -44,9 +44,10 @@ function checkAnswer(taskIndex, userAnswer) {
     const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
     const correctAnswer = task.answer.toLowerCase().trim();
     const xp = task.xp;
+    const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
     // Validasi jawaban
-    if (userAnswer.toLowerCase().trim() === correctAnswer) {
+    if (userAnswerTrimmed === correctAnswer) {
         feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
         feedbackElement.style.color = "green";
         feedbackElement.style.display = 'block';
@@ -54,6 +55,9 @@ function checkAnswer(taskIndex, userAnswer) {
         // Simpan progres dan tambahkan XP
         storeProgress(taskIndex, true);
         addExperience(xp); // Tambahkan XP ke profil
+
+        // Kunci form agar tidak bisa dijawab lagi
+        lockTaskForm(taskIndex);
     } else {
         feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
         feedbackElement.style.color = "red";
@@ -86,16 +90,27 @@ function loadPreviousProgress() {
     tasksData.forEach((_, index) => {
         const taskCompleted = sessionStorage.getItem(`task${index + 1}Completed`);
         const feedbackElement = document.getElementById(`task-feedback${index + 1}`);
+        const formElement = document.getElementById(`task-form${index + 1}`);
 
         if (taskCompleted === 'true') {
             feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
             feedbackElement.style.color = "green";
             feedbackElement.style.display = 'block';
+            lockTaskForm(index); // Kunci form jika sudah benar
         } else if (taskCompleted === 'false') {
             feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
             feedbackElement.style.color = "red";
             feedbackElement.style.display = 'block';
         }
+    });
+}
+
+// Fungsi untuk mengunci form sehingga tidak bisa dijawab lagi
+function lockTaskForm(taskIndex) {
+    const formElement = document.getElementById(`task-form${taskIndex + 1}`);
+    const inputElements = formElement.querySelectorAll('input, textarea');
+    inputElements.forEach(input => {
+        input.disabled = true; // Nonaktifkan input untuk mengunci form
     });
 }
 
