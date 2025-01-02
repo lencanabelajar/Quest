@@ -127,16 +127,3 @@ taskForms.forEach((form, index) => {
 // Muat progres sebelumnya saat halaman dimuat
 loadPreviousProgress();
 
-function logout() {
-    sessionStorage.removeItem('userEmail');
-
-    // Cek apakah URL saat ini mengandung folder 'tasks', jika iya, arahkan ke ../login.html
-    const currentPath = window.location.pathname;
-
-    // Jika berada di dalam folder 'tasks', keluar dari folder tersebut dan ke login.html
-    if (currentPath.includes('tasks')) {
-        window.location.href = '../../login.html'; // Relative path keluar folder tasks
-    } else {
-        window.location.href = 'login.html'; // Path standar untuk halaman lain
-    }
-}
