@@ -77,6 +77,7 @@ header {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     padding: 15px;
     border-radius: 15px;
+    text-decoration: none;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s;
@@ -199,6 +200,7 @@ header {
     align-items: center;
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     padding: 12px;
+    text-decoration: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s, box-shadow 0.3s;
