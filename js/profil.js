@@ -1,4 +1,5 @@
 // Elemen DOM yang digunakan
+const greetingUsernameDisplay = document.getElementById('greeting-username-display');
 const userNameDisplay = document.getElementById('username-display');
 const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
@@ -44,15 +45,19 @@ function loadUserProfile() {
 
     const userProfile = getUserProfile();
 
-    if (userProfile) {
-        userNameDisplay.innerText = userProfile.name || userEmail.split('@')[0];
-        userEmailDisplay.innerText = userProfile.email;
-        userLevelDisplay.innerText = userProfile.level || 'Pemula';
-        profileImage.src = userProfile.profileImage || '../assets/icon/ruby.png';
-    } else {
-        console.warn('Data profil tidak ditemukan.');
-        window.location.href = 'login.html'; // Redirect jika profil tidak ditemukan
-    }
+        if (userProfile) {
+            const fallbackName = userEmail ? userEmail.split('@')[0] : "Pengguna Baru";
+            const displayName = userProfile.name || fallbackName;
+        
+            userNameDisplay.innerText = displayName;
+            userEmailDisplay.innerText = userProfile.email;
+            userLevelDisplay.innerText = userProfile.level || "Pemula";
+            profileImage.src = userProfile.profileImage || "../assets/icon/ruby.png";
+        } else {
+            alert("Data profil tidak ditemukan!");
+            window.location.href = "login.html";
+        }
+
 }
 
 // Fungsi untuk menangani unggahan gambar profil
