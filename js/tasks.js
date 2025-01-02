@@ -28,7 +28,7 @@ const tasksData = [
     },
     {
         questionId: "question5",
-        answer: "Memahami masyarakat",
+        answer: "Ketimpangan sosial",
         xp: 15
     }
 ];
