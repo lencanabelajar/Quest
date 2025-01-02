@@ -46,7 +46,8 @@ function checkAnswer(taskIndex, userAnswer) {
     const xp = task.xp;
     const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
-    // Validasi jawaban
+    console.log(`XP yang akan ditambahkan: ${xp}`); // Debugging line
+
     if (userAnswerTrimmed === correctAnswer) {
         feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
         feedbackElement.style.color = "green";
