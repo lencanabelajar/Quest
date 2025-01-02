@@ -1,6 +1,6 @@
 // Elemen DOM yang digunakan
 const userNameDisplay = document.getElementById('username-display');
-const userEmailDisplay = document.getElementById('user-email');
+const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
 const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
