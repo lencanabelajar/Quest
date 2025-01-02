@@ -1,5 +1,6 @@
 import { addExperience } from './profil.js'; // Jika ingin menambahkan XP
 
+document.addEventListener('DOMContentLoaded', function () {
 // Ambil elemen-elemen yang diperlukan
 const taskForms = document.querySelectorAll('.task-quiz .task-form');
 const completionMessage = document.getElementById('completion-message');
@@ -18,26 +19,27 @@ function checkAnswer(taskIndex, userAnswer) {
     const task = tasksData[taskIndex];
     const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
     const correctAnswer = task.answer.toLowerCase().trim();
+    const xp = task.xp;
     const userAnswerTrimmed = userAnswer.toLowerCase().trim();
     
     feedbackElement.style.display = 'block'; // Pastikan feedback tampil
 
     if (userAnswerTrimmed === correctAnswer) {
-        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-        feedbackElement.style.color = "green";
+            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+            feedbackElement.style.color = "green";
+            feedbackElement.style.display = 'block';
+            storeProgress(taskIndex, true);
+            addExperience(xp);
+            lockTaskForm(taskIndex);
+        } else {
+            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+            feedbackElement.style.color = "red";
+            feedbackElement.style.display = 'block';
+            storeProgress(taskIndex, false);
+        }
 
-        // Simpan progres dan tambahkan XP
-        storeProgress(taskIndex, true);
-        addExperience(task.xp); // Tambahkan XP ke profil
-        lockTaskForm(taskIndex);
-    } else {
-        feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-        feedbackElement.style.color = "red";
-        storeProgress(taskIndex, false);
+        checkCompletion();
     }
-
-    checkCompletion(); // Periksa apakah semua tugas sudah selesai
-}
 
 // Fungsi untuk mengunci form sehingga tidak bisa dijawab lagi
 function lockTaskForm(taskIndex) {
@@ -63,25 +65,6 @@ function checkCompletion() {
     }
 }
 
-// Fungsi untuk memuat progres sebelumnya
-function loadPreviousProgress() {
-    tasksData.forEach((_, index) => {
-        const taskCompleted = sessionStorage.getItem(`task${index + 1}Completed`);
-        const feedbackElement = document.getElementById(`task-feedback${index + 1}`);
-        
-        // Memuat status progres
-        if (taskCompleted === 'true') {
-            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-            feedbackElement.style.color = "green";
-            lockTaskForm(index); // Kunci form jika sudah benar
-        } else if (taskCompleted === 'false') {
-            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-            feedbackElement.style.color = "red";
-        }
-        feedbackElement.style.display = 'block'; // Pastikan feedback tampil
-    });
-}
-
 // Event listener untuk setiap form
 taskForms.forEach((form, index) => {
     form.addEventListener('submit', function (e) {
@@ -93,3 +76,22 @@ taskForms.forEach((form, index) => {
 
 // Muat progres sebelumnya saat halaman dimuat
 loadPreviousProgress();
+function loadPreviousProgress() {
+        tasksData.forEach((_, index) => {
+            const taskCompleted = sessionStorage.getItem(`task${index + 1}Completed`);
+            const feedbackElement = document.getElementById(`task-feedback${index + 1}`);
+            const formElement = document.getElementById(`task-form${index + 1}`);
+
+            if (taskCompleted === 'true') {
+                feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+                feedbackElement.style.color = "green";
+                feedbackElement.style.display = 'block';
+                lockTaskForm(index);
+            } else if (taskCompleted === 'false') {
+                feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+                feedbackElement.style.color = "red";
+                feedbackElement.style.display = 'block';
+            }
+        });
+    }
+});
