@@ -21,6 +21,7 @@ header {
     text-align: center;
     top: 0;
     z-index: 10;
+    animation: blink 2s infinite alternate;
 }
 
 .dashboard-title {
@@ -696,5 +697,16 @@ footer {
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes blink {
+    0%, 100% {
+        background: #3498db;
+        text-shadow: 0 0 5px #ffffff, 0 0 10px #00ffff;
+    }
+    50% {
+        background: #2980b9;
+        text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff;
     }
 }
