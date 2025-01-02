@@ -1,153 +1,143 @@
-// Elemen untuk menampilkan profil pengguna
+// Elemen DOM yang digunakan
 const userNameDisplay = document.getElementById('username-display');
+const userEmailDisplay = document.getElementById('userEmail');
+const userLevelDisplay = document.getElementById('user-level-display');
+const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
-const profileImage = document.getElementById('profile-avatar'); // Perbaiki ID jika berbeda
-const logoutBtn = document.getElementById('logout-btn');
-const uploadSpinner = document.getElementById('upload-spinner'); // Spinner untuk upload gambar
-const editProfileBtn = document.getElementById('edit-profile-btn');
 const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
+const editProfileBtn = document.getElementById('edit-profile-btn');
+const logoutBtn = document.getElementById('logout-btn');
+const editProfileModal = document.getElementById('edit-profile-modal');
+const editProfileForm = document.getElementById('edit-profile-form');
+const editNameInput = document.getElementById('edit-name');
+const editLevelInput = document.getElementById('edit-level');
+const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
-// Fungsi untuk mengambil data profil pengguna dari localStorage
+// Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const userEmail = sessionStorage.getItem('userEmail'); // Ambil email pengguna yang login
-
-  // Cari pengguna berdasarkan email
-  const user = users.find(u => u.email === userEmail);
-
-  return user || null; // Kembalikan data pengguna atau null jika tidak ditemukan
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userEmail = sessionStorage.getItem('userEmail');
+    return users.find(user => user.email === userEmail) || null;
 }
 
-// Fungsi untuk memperbarui gambar profil
-function uploadProfilePicture(file) {
-  const userEmail = sessionStorage.getItem('userEmail');
-  if (!userEmail || !file) {
-    alert('Pengguna tidak terautentikasi atau file tidak valid');
-    return;
-  }
+// Fungsi untuk menyimpan data pengguna ke localStorage
+function saveUserProfile(updatedUser) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(user => user.email === updatedUser.email);
 
-  // Validasi file gambar
-  const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-  if (!validFileTypes.includes(file.type)) {
-    alert('Format file tidak didukung! Harap unggah gambar dengan format JPEG atau PNG.');
-    return;
-  }
-
-  // Tampilkan spinner selama proses upload
-  uploadSpinner.style.display = 'block';
-
-  // Membaca file gambar sebagai base64
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    const profileImageURL = reader.result; // URL base64 gambar
-    updateProfilePictureInStorage(profileImageURL);
-  };
-  reader.readAsDataURL(file); // Membaca file gambar
+    if (userIndex !== -1) {
+        users[userIndex] = updatedUser;
+        localStorage.setItem('users', JSON.stringify(users));
+    } else {
+        alert('Pengguna tidak ditemukan!');
+    }
 }
 
-// Fungsi untuk memperbarui gambar profil di localStorage
-function updateProfilePictureInStorage(profileImageURL) {
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const userEmail = sessionStorage.getItem('userEmail');
+// Fungsi untuk memuat data profil pengguna ke halaman
+function loadUserProfile() {
+    const userEmail = sessionStorage.getItem('userEmail');
 
-  // Cari pengguna berdasarkan email
-  const userIndex = users.findIndex(u => u.email === userEmail);
+    if (!userEmail) {
+        window.location.href = 'login.html'; // Redirect jika tidak ada data login
+        return;
+    }
 
-  if (userIndex !== -1) {
-    // Perbarui gambar profil
-    users[userIndex].profileImage = profileImageURL;
-    localStorage.setItem('users', JSON.stringify(users)); // Simpan ke localStorage
-    alert('Foto profil berhasil diunggah!');
-    window.location.reload(); // Reload halaman untuk menampilkan gambar terbaru
-  } else {
-    alert('Pengguna tidak ditemukan');
-  }
+    const userProfile = getUserProfile();
 
-  // Sembunyikan spinner setelah upload selesai
-  uploadSpinner.style.display = 'none';
+    if (userProfile) {
+        userNameDisplay.innerText = userProfile.name || userEmail.split('@')[0];
+        userEmailDisplay.innerText = userProfile.email;
+        userLevelDisplay.innerText = userProfile.level || 'Pemula';
+        profileImage.src = userProfile.profileImage || '../assets/icon/ruby.png';
+    } else {
+        alert('Data profil tidak ditemukan!');
+        window.location.href = 'login.html'; // Redirect jika profil tidak ditemukan
+    }
+}
+
+// Fungsi untuk menangani unggahan gambar profil
+function handleProfilePictureUpload(file) {
+    if (!file) return;
+
+    const validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (!validFileTypes.includes(file.type)) {
+        alert('Format file tidak didukung! Harap unggah file berformat JPEG atau PNG.');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        const profileImageURL = reader.result;
+        const userProfile = getUserProfile();
+
+        if (userProfile) {
+            userProfile.profileImage = profileImageURL;
+            saveUserProfile(userProfile);
+            alert('Foto profil berhasil diperbarui!');
+            loadUserProfile(); // Reload profil untuk menampilkan perubahan
+        }
+    };
+    reader.readAsDataURL(file);
+}
+
+// Fungsi untuk menyimpan perubahan profil
+function saveProfileChanges(event) {
+    event.preventDefault();
+
+    const newName = editNameInput.value.trim();
+    const newLevel = editLevelInput.value;
+
+    if (!newName) {
+        alert('Nama tidak boleh kosong!');
+        return;
+    }
+
+    const userProfile = getUserProfile();
+
+    if (userProfile) {
+        userProfile.name = newName;
+        userProfile.level = newLevel;
+        saveUserProfile(userProfile);
+        alert('Profil berhasil diperbarui!');
+        loadUserProfile();
+        editProfileModal.style.display = 'none'; // Tutup modal
+    }
 }
 
 // Fungsi untuk menangani logout
 function logout() {
-  sessionStorage.removeItem('userEmail');
-  window.location.href = 'login.html'; // Redirect ke halaman login
+    sessionStorage.removeItem('userEmail');
+    window.location.href = 'login.html';
 }
 
-// Fungsi untuk menampilkan profil pengguna saat halaman dimuat
-function loadUserProfile() {
-  const userEmail = sessionStorage.getItem('userEmail');
+// Event listeners
+window.addEventListener('load', loadUserProfile);
 
-  if (userEmail) {
-    // Menampilkan nama pengguna berdasarkan email
-    userNameDisplay.innerText = userEmail.split('@')[0]; // Menampilkan nama pengguna berdasarkan email
+changeProfilePicBtn.addEventListener('click', () => {
+    profileImageInput.click(); // Membuka dialog file
+});
+
+profileImageInput.addEventListener('change', event => {
+    const file = event.target.files[0];
+    handleProfilePictureUpload(file);
+});
+
+editProfileBtn.addEventListener('click', () => {
     const userProfile = getUserProfile();
 
     if (userProfile) {
-      if (userProfile.profileImage) {
-        profileImage.src = userProfile.profileImage; // Menampilkan foto profil jika ada
-      } else {
-        profileImage.src = './assets/default-profile.png'; // Path gambar default jika tidak ada gambar profil
-      }
+        editNameInput.value = userProfile.name || '';
+        editLevelInput.value = userProfile.level || 'Pemula';
+        editProfileModal.style.display = 'block'; // Tampilkan modal
     } else {
-      alert('Data profil tidak ditemukan');
-      window.location.href = 'login.html'; // Mengarahkan pengguna ke halaman login jika profil tidak ditemukan
+        alert('Pengguna tidak ditemukan!');
     }
-  } else {
-    window.location.href = 'login.html'; // Redirect ke halaman login jika pengguna tidak terautentikasi
-  }
-}
-
-// Event listener untuk menangani unggahan gambar profil
-profileImageInput.addEventListener('change', (event) => {
-  const file = event.target.files[0]; // Ambil file gambar yang diunggah
-  if (file) {
-    uploadProfilePicture(file);
-  }
 });
 
-// Event listener untuk menangani tombol logout
-logoutBtn.addEventListener('click', () => {
-  logout();
+cancelEditBtn.addEventListener('click', () => {
+    editProfileModal.style.display = 'none'; // Tutup modal
 });
 
-// Event listener untuk menangani klik tombol Edit Profil
-editProfileBtn.addEventListener('click', () => {
-  const userProfile = getUserProfile();
-  if (userProfile) {
-    const newName = prompt('Masukkan nama baru:', userProfile.name || ''); // Prompt untuk mengubah nama
-    if (newName) {
-      updateProfileNameInStorage(newName);
-    }
-  } else {
-    alert('Pengguna tidak ditemukan!');
-  }
-});
+editProfileForm.addEventListener('submit', saveProfileChanges);
 
-// Fungsi untuk memperbarui nama pengguna di localStorage
-function updateProfileNameInStorage(newName) {
-  const users = JSON.parse(localStorage.getItem('users')) || [];
-  const userEmail = sessionStorage.getItem('userEmail');
-
-  // Cari pengguna berdasarkan email
-  const userIndex = users.findIndex(u => u.email === userEmail);
-
-  if (userIndex !== -1) {
-    // Perbarui nama pengguna
-    users[userIndex].name = newName;
-    localStorage.setItem('users', JSON.stringify(users)); // Simpan ke localStorage
-    alert('Nama profil berhasil diperbarui!');
-    window.location.reload(); // Reload halaman untuk menampilkan perubahan
-  } else {
-    alert('Pengguna tidak ditemukan');
-  }
-}
-
-// Event listener untuk menangani tombol Ganti Foto Profil
-changeProfilePicBtn.addEventListener('click', () => {
-  profileImageInput.click(); // Klik input file untuk memilih gambar
-});
-
-// Memuat profil pengguna saat halaman dimuat
-window.addEventListener('load', () => {
-  loadUserProfile();
-});
+logoutBtn.addEventListener('click', logout);
