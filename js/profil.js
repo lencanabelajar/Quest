@@ -9,6 +9,7 @@ const profileImage = document.getElementById('profile-avatar');
 const profileImageInput = document.getElementById('profile-image-input');
 const changeProfilePicBtn = document.getElementById('change-profile-pic-btn');
 const logoutBtn = document.getElementById('logout-btn');
+const editProfileBtn = document.getElementById('edit-profile-btn');
 const editProfileModal = document.getElementById('edit-profile-modal');
 const editProfileForm = document.getElementById('edit-profile-form');
 const editNameInput = document.getElementById('edit-name');
