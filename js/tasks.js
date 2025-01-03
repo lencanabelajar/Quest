@@ -4,17 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const completionMessage = document.getElementById('completion-message');
 
     // Jawaban benar untuk setiap pertanyaan
-    const tasksData = [
-        { questionId: "question1", answer: "Auguste Comte", xp: 10 },
-        { questionId: "question2", answer: "Teman", xp: 10 },
-        { questionId: "question3", answer: "Masyarakat", xp: 10 },
-        { questionId: "question4", answer: "Emile Durkheim", xp: 15 },
-        { questionId: "question5", answer: "19", xp: 15 },
-        { questionId: "question6", answer: "Antropologi", xp: 10 },
-        { questionId: "question7", answer: "Kekuasaan", xp: 10 },
-        { questionId: "question8", answer: "Perilaku", xp: 10 },
-        { questionId: "question9", answer: "Ekonomi", xp: 15 },
-        { questionId: "question10", answer: "Sejarah", xp: 15 }
+       const tasksData = [
+        { questionId: "answer1", answer: "Auguste Comte", xp: 10 },
+        { questionId: "answer2", answer: "Teman", xp: 10 },
+        { questionId: "answer3", answer: "Masyarakat", xp: 10 },
+        { questionId: "answer4", answer: "Emile Durkheim", xp: 15 },
+        { questionId: "answer5", answer: "19", xp: 15 },
+        { questionId: "answer6", answer: "Antropologi", xp: 10 },
+        { questionId: "answer7", answer: "Kekuasaan", xp: 10 },
+        { questionId: "answer8", answer: "Perilaku", xp: 10 },
+        { questionId: "answer9", answer: "Ekonomi", xp: 15 },
+        { questionId: "answer10", answer: "Sejarah", xp: 15 }
     ];
 
     // Fungsi untuk memeriksa jawaban
