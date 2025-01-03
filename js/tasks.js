@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function lockTaskForm(taskIndex) {
         const formElement = document.getElementById(`task-form${taskIndex + 1}`);
         const inputElements = formElement.querySelectorAll('input, textarea');
-        inputElements.forEach(input => input.disabled = true); // Nonaktifkan input
-
+        const submitButton = formElement.querySelector('button[type="submit"]'); // Identifikasi tombol Kirim Jawaban
+    
         inputElements.forEach(input => input.disabled = true); // Nonaktifkan input
         if (submitButton) {
             submitButton.disabled = true; // Nonaktifkan tombol Kirim Jawaban
