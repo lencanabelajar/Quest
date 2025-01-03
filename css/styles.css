@@ -524,6 +524,19 @@ form p a:hover {
     display: none;
 }
 
+.level-up-animation {
+    animation: bounce 1s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
 /* Completion message */
 #completion-message {
     background-color: #d4edda;
