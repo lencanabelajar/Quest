@@ -89,7 +89,8 @@ function loadUserProfile() {
 function updateExperienceUI() {
     userLevelDisplay.innerText = level; // Perbarui level pengguna
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
-    expBarFill.style.width = `${(currentXP / maxXP) * 100}%`; // Sesuaikan lebar progress bar
+    expBarFill.value = currentXP; // Perbarui nilai progress bar
+    expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar
     console.log(`XP: ${currentXP}, Level: ${level}, Max XP: ${maxXP}`); // Debugging
 }
 
@@ -131,7 +132,7 @@ function levelUp() {
         userLevelDisplay.classList.add('level-up');
         setTimeout(() => {
             userLevelDisplay.classList.remove('level-up');
-        }, 500); // Hapus kelas animasi setelah 0.5 detik
+        }, 1000); // Hapus kelas animasi setelah 1 detik
     } else {
         currentXP = maxXP; // Batasi XP jika level maksimal tercapai
         alert('Anda telah mencapai level maksimal!');
