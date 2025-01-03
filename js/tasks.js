@@ -84,7 +84,6 @@ function isAnswerClose(userAnswer, correctAnswer) {
             checkAnswer(index, userAnswer);
         });
     });
- });
 
     // Fungsi untuk menambahkan XP ke profil pengguna
     function addExperience(points) {
