@@ -6,10 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Jawaban benar untuk setiap pertanyaan
     const tasksData = [
         { questionId: "question1", answer: "Auguste Comte", xp: 10 },
-        { questionId: "question2", answer: "Masyarakat", xp: 10 },
-        { questionId: "question3", answer: "Karl Marx", xp: 10 },
-        { questionId: "question4", answer: "Solidaritas mekanis", xp: 15 },
-        { questionId: "question5", answer: "Ketimpangan sosial", xp: 15 }
+        { questionId: "question2", answer: "Teman", xp: 10 },
+        { questionId: "question3", answer: "Masyarakat", xp: 10 },
+        { questionId: "question4", answer: "Emile Durkheim", xp: 15 },
+        { questionId: "question5", answer: "19", xp: 15 }
     ];
 
     // Fungsi untuk memeriksa jawaban
