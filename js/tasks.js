@@ -18,29 +18,34 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     // Fungsi untuk memeriksa jawaban
-    function checkAnswer(taskIndex, userAnswer) {
-        const task = tasksData[taskIndex];
-        const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
-        const correctAnswer = task.answer.toLowerCase().trim();
-        const xp = task.xp;
-        const userAnswerTrimmed = userAnswer.toLowerCase().trim();
+ function checkAnswer(taskIndex, userAnswer) {
+    const task = tasksData[taskIndex];
+    const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
+    const correctAnswer = task.answer.toLowerCase().trim();
+    const xp = task.xp;
+    const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
-        feedbackElement.style.display = 'block'; // Pastikan feedback tampil
+    feedbackElement.style.display = 'block';
 
-        if (userAnswerTrimmed === correctAnswer) {
-            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-            feedbackElement.style.color = "green";
-            storeProgress(taskIndex, true);
-            addExperience(xp);  // Menambahkan XP ke profil pengguna
-            lockTaskForm(taskIndex);
-        } else {
-            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-            feedbackElement.style.color = "red";
-            storeProgress(taskIndex, false);
-        }
-
-        checkCompletion();
+    if (userAnswerTrimmed === correctAnswer || isAnswerClose(userAnswerTrimmed, correctAnswer)) {
+        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+        feedbackElement.style.color = "green";
+        storeProgress(taskIndex, true);
+        addExperience(xp);
+        lockTaskForm(taskIndex);
+    } else {
+        feedbackElement.textContent = `Jawaban Anda salah. Coba lagi! Jawaban yang benar adalah: ${correctAnswer}`;
+        feedbackElement.style.color = "red";
+        storeProgress(taskIndex, false);
     }
+
+    checkCompletion();
+}
+
+function isAnswerClose(userAnswer, correctAnswer) {
+    // Toleransi dengan string mirip atau substring
+    return userAnswer.includes(correctAnswer) || correctAnswer.includes(userAnswer);
+}
 
     // Fungsi untuk mengunci form sehingga tidak bisa dijawab lagi
     function lockTaskForm(taskIndex) {
@@ -104,10 +109,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fungsi untuk menangani level up
     function levelUp(userProfile) {
-        userProfile.level++;
-        userProfile.maxXP = Math.ceil(userProfile.maxXP * 1.2); // Meningkatkan XP untuk level berikutnya
-        alert(`Selamat! Anda telah naik ke level ${userProfile.level}!`);
+    userProfile.level++;
+    userProfile.maxXP = Math.ceil(userProfile.maxXP * 1.2);
+    alert(`Selamat! Anda telah naik ke level ${userProfile.level}!`);
+
+    // Tambahkan animasi ke tampilan level
+    const levelDisplay = document.getElementById('user-level-display');
+    if (levelDisplay) {
+        levelDisplay.classList.add('level-up-animation');
+        setTimeout(() => levelDisplay.classList.remove('level-up-animation'), 1000);
     }
+}
 
     // Fungsi untuk memperbarui tampilan XP di halaman profil
     function updateExperienceUI(userProfile) {
@@ -121,14 +133,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Ambil data profil pengguna
-    function getUserProfile() {
+function getUserProfile() {
+    try {
         const userEmail = sessionStorage.getItem('userEmail');
         const users = JSON.parse(localStorage.getItem('users')) || [];
         return users.find(user => user.email === userEmail);
+    } catch (error) {
+        console.error('Gagal mengambil profil pengguna:', error);
+        return null;
     }
+}
 
-    // Menyimpan data profil pengguna
-    function saveUserProfile(updatedUser) {
+function saveUserProfile(updatedUser) {
+    try {
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const userIndex = users.findIndex(user => user.email === updatedUser.email);
 
@@ -138,7 +155,10 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.error('Pengguna tidak ditemukan saat menyimpan profil.');
         }
+    } catch (error) {
+        console.error('Gagal menyimpan profil pengguna:', error);
     }
+}
 
     // Muat progres sebelumnya saat halaman dimuat
     loadPreviousProgress();
