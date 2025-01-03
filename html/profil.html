@@ -10,6 +10,8 @@
     <meta property="og:image" content="../assets/icon/ruby.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://questid.netlify.app/profil.html">
 
     <title>Profil Pengguna</title>
 
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="../css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -27,7 +30,7 @@
                 <a href="../html/home.html" class="menu-item" aria-label="Beranda">🏡</a>
                 <a href="../html/news.html" class="menu-item" aria-label="Berita">📰</a>
                 <button id="logout-btn" class="menu-item">Log Out</button>
-                <span id="user-greeting" style="margin-left: 10px;">Halo, <span id="greeting-username-display"></span>!</span>
+                <span id="user-greeting" style="margin-left: 10px;" aria-live="polite">Halo, <span id="greeting-username-display"></span>!</span>
             </nav>
         </div>
     </header>
@@ -45,35 +48,38 @@
                     <p><strong>Nama:</strong> <span id="profile-username-display"></span></p>
                     <p><strong>Email:</strong> <span id="userEmail"></span></p>
                     <p><strong>Level:</strong> <span id="user-level-display">1</span></p>
-                    <div class="experience-bar">
-                        <div id="exp-bar-fill" style="width: 0%; background: #4caf50; height: 20px;"></div>
-                    </div>
+                    <progress id="exp-bar-fill" value="0" max="100" aria-label="XP Progress"></progress>
                     <p><span id="exp-display">0</span>/100 XP</p>
                     <button id="edit-profile-btn" class="profile-btn" aria-label="Edit profil">Edit Profil</button>
                 </div>
             </div>
 
             <!-- Modal Edit Profil -->
-                <div id="edit-profile-modal" class="modal" style="display: none;">
-                    <div class="modal-content">
-                        <h3>Edit Profil</h3>
-                        <form id="edit-profile-form">
-                            <label for="edit-name" class="form-label">Nama:</label>
-                            <input type="text" id="edit-name" name="edit-name" placeholder="Nama baru Anda" required>
-                            <div class="modal-actions">
-                                <button type="submit" class="save-btn">Simpan</button>
-                                <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
-                            </div>
-                        </form>
+            <dialog id="edit-profile-modal" class="modal">
+                <form id="edit-profile-form" method="dialog">
+                    <h3>Edit Profil</h3>
+                    <label for="edit-name" class="form-label">Nama:</label>
+                    <input type="text" id="edit-name" name="edit-name" placeholder="Nama baru Anda" required>
+                    <div class="modal-actions">
+                        <button type="submit" class="save-btn">Simpan</button>
+                        <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
                     </div>
-                </div>
+                </form>
+            </dialog>
         </section>
+
         <aside>
             <h3>Bagikan Platform Ini</h3>
             <div class="social-share">
-                <a href="https://www.facebook.com/sharer/sharer.php?u=https://questid.netlify.app" target="_blank" aria-label="Bagikan ke Facebook">Facebook</a>
-                <a href="https://twitter.com/intent/tweet?url=https://questid.netlify.app&text=Coba%20Quest%20Platform%20Pembelajaran%20Interaktif!" target="_blank" aria-label="Bagikan ke Twitter">Twitter</a>
-                <a href="https://api.whatsapp.com/send?text=Coba%20Quest%20Platform%20Pembelajaran%20Interaktif!%20https://questid.netlify.app" target="_blank" aria-label="Bagikan ke WhatsApp">WhatsApp</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://questid.netlify.app" target="_blank" aria-label="Bagikan ke Facebook">
+                    <i class="fa fa-facebook"></i> Facebook
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://questid.netlify.app&text=Coba%20Quest%20Platform%20Pembelajaran%20Interaktif!" target="_blank" aria-label="Bagikan ke Twitter">
+                    <i class="fa fa-twitter"></i> Twitter
+                </a>
+                <a href="https://api.whatsapp.com/send?text=Coba%20Quest%20Platform%20Pembelajaran%20Interaktif!%20https://questid.netlify.app" target="_blank" aria-label="Bagikan ke WhatsApp">
+                    <i class="fa fa-whatsapp"></i> WhatsApp
+                </a>
             </div>
         </aside>
     </main>
