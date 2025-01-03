@@ -42,6 +42,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const formElement = document.getElementById(`task-form${taskIndex + 1}`);
         const inputElements = formElement.querySelectorAll('input, textarea');
         inputElements.forEach(input => input.disabled = true); // Nonaktifkan input
+
+        inputElements.forEach(input => input.disabled = true); // Nonaktifkan input
+        if (submitButton) {
+            submitButton.disabled = true; // Nonaktifkan tombol Kirim Jawaban
+        }
     }
 
     // Fungsi untuk menyimpan progres jawaban ke sessionStorage
