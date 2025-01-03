@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "question7", answer: "Kekuasaan", xp: 10 },
         { questionId: "question8", answer: "Perilaku", xp: 10 },
         { questionId: "question9", answer: "Ekonomi", xp: 15 },
-        { questionId: "question10", answer: "Sejarah", xp: 15 },
+        { questionId: "question10", answer: "Sejarah", xp: 15 }
     ];
 
     // Fungsi untuk memeriksa jawaban
