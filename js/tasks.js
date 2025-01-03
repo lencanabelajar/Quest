@@ -27,17 +27,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     feedbackElement.style.display = 'block';
 
-    if (userAnswerTrimmed === correctAnswer || isAnswerClose(userAnswerTrimmed, correctAnswer)) {
-        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-        feedbackElement.style.color = "green";
-        storeProgress(taskIndex, true);
-        addExperience(xp);
-        lockTaskForm(taskIndex);
-    } else {
-        feedbackElement.textContent = `Jawaban Anda salah. Coba lagi!`;
-        feedbackElement.style.color = "red";
-        storeProgress(taskIndex, false);
-    }
+            if (userAnswerTrimmed === correctAnswer) {
+                feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+                feedbackElement.style.color = "green";
+                storeProgress(taskIndex, true);
+                addExperience(xp);
+                lockTaskForm(taskIndex);
+            } else {
+                feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+                feedbackElement.style.color = "red";
+                storeProgress(taskIndex, false);
+            }
 
     checkCompletion();
 }
