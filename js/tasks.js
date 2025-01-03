@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         addExperience(xp);
         lockTaskForm(taskIndex);
     } else {
-        feedbackElement.textContent = `Jawaban Anda salah. Coba lagi! Jawaban yang benar adalah: ${correctAnswer}`;
+        feedbackElement.textContent = `Jawaban Anda salah. Coba lagi!`;
         feedbackElement.style.color = "red";
         storeProgress(taskIndex, false);
     }
