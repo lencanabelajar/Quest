@@ -672,6 +672,7 @@ progress[value]::-moz-progress-bar {
         border: 1px solid #ccc;
         border-radius: 5px;
         overflow: hidden;
+        transition: background-color 0.3s ease; /* Menambahkan animasi perubahan warna */
     }
 
     .accordion-btn {
@@ -686,6 +687,7 @@ progress[value]::-moz-progress-bar {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        transition: background-color 0.3s ease; /* Animasi perubahan warna tombol */
     }
 
     .accordion-btn:hover {
@@ -703,18 +705,30 @@ progress[value]::-moz-progress-bar {
         transition: max-height 0.3s ease;
         padding: 0 10px;
         background-color: #f7f7f7;
+        color: black; /* Warna teks default saat tertutup */
     }
 
     .accordion-content p {
         margin: 10px 0;
     }
 
-    .accordion.open .accordion-content {
-    max-height: none; /* Menghapus batasan tinggi */
-    transition: max-height 0.3s ease; /* Menambahkan animasi */
-    overflow: hidden; /* Menyembunyikan konten saat tertutup */
+    /* Gaya untuk accordion saat dibuka */
+    .accordion.open {
+        background-color: #ffebcd; /* Warna latar belakang yang lembut (contoh: blanchedalmond) */
     }
-
+    
+    .accordion.open .accordion-btn {
+        background-color: #ffb6c1; /* Warna tombol saat dibuka (contoh: lightpink) */
+        color: black; /* Warna teks tombol saat dibuka */
+    }
+    
+    .accordion.open .accordion-content {
+        max-height: none; /* Menghapus batasan tinggi */
+        overflow: hidden; /* Menyembunyikan konten saat tertutup */
+        background-color: #fafad2; /* Warna latar belakang konten saat dibuka (contoh: lightgoldenrodyellow) */
+        color: black; /* Warna teks dalam konten saat dibuka */
+    }
+    
     .accordion.open .arrow {
         transform: rotate(180deg); /* Rotasi panah ke atas */
     }
