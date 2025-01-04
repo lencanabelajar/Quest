@@ -710,7 +710,9 @@ progress[value]::-moz-progress-bar {
     }
 
     .accordion.open .accordion-content {
-        max-height: 100px; /* Sesuaikan tinggi sesuai konten */
+    max-height: none; /* Menghapus batasan tinggi */
+    transition: max-height 0.3s ease; /* Menambahkan animasi */
+    overflow: hidden; /* Menyembunyikan konten saat tertutup */
     }
 
     .accordion.open .arrow {
