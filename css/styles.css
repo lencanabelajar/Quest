@@ -870,13 +870,14 @@ progress[value]::-moz-progress-bar {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between;
-    width: 250px; /* Fixed width */
+    display: flex; /* Arrange items horizontally */
+    flex-direction: row; /* Horizontal layout */
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Vertically center elements */
+    width: 250px; /* Let the container fill up available space */
     padding: 15px;
     text-decoration: none;
-    text-align: center;
+    gap: 20px; /* Spacing between items */
 }
 
 .game-pns-item:hover {
@@ -887,9 +888,9 @@ progress[value]::-moz-progress-bar {
 .game-pns-info {
     color: #2b3d2b; /* Dark green text */
     display: flex;
-    flex-direction: column; /* Arrange items vertically */
-    align-items: center;
-    gap: 10px;
+    flex-direction: row; /* Horizontal layout */
+    align-items: center; /* Vertically center items */
+    gap: 15px;
 }
 
 .game-pns-info h3 {
@@ -907,7 +908,7 @@ progress[value]::-moz-progress-bar {
     font-size: 1rem;
     color: #555; /* Dark gray */
     margin: 0;
-    text-align: center;
+    text-align: left;
 }
 
 .game-pns-info h2 {
@@ -918,6 +919,14 @@ progress[value]::-moz-progress-bar {
     border-radius: 5px;
     text-align: center;
 }
+
+.game-pns-info img.game-invois {
+    width: 80px; /* Fixed width */
+    height: 80px; /* Fixed height */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 50%; /* Optional: Make the image circular */
+}
+
 
 /* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
