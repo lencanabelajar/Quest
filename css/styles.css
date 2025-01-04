@@ -863,6 +863,58 @@ progress[value]::-moz-progress-bar {
     line-height: 1.6; /* Spasi antar baris */
 }
 
+/* Style untuk card PNS */
+.game-pns-item {
+    background-color: #f4f4e8; /* Warna kuning gading */
+    border: 1px solid #d6e3d6; /* Border hijau lembut */
+    border-radius: 12px; /* Membuat sudut melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-pns-item:hover {
+    transform: translateY(-5px); /* Mengangkat card saat hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
+}
+
+.game-pns-info {
+    text-decoration: none;
+    color: #2b3d2b; /* Hijau gelap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-pns-info h3 {
+    font-size: 1.5rem;
+    color: #4caf50; /* Hijau PNS */
+    margin: 0 0 10px 0;
+}
+
+.game-pns-info img {
+    width: 80px;
+    height: 80px;
+    margin: 10px 0;
+}
+
+.game-pns-info p {
+    font-size: 1rem;
+    color: #555; /* Abu-abu gelap */
+    margin: 10px 0;
+    text-align: center;
+}
+
+.game-pns-info h2 {
+    font-size: 1.2rem;
+    color: #2b3d2b; /* Hijau gelap */
+    background-color: #e8f5e9; /* Hijau muda */
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
 /* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
     .navbar .icon {
@@ -898,6 +950,28 @@ progress[value]::-moz-progress-bar {
 
     .news-info p {
         font-size: 0.9rem;
+    }
+
+        .game-pns-item {
+        padding: 15px;
+    }
+
+    .game-pns-info h3 {
+        font-size: 1.3rem;
+    }
+
+    .game-pns-info img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .game-pns-info p {
+        font-size: 0.85rem;
+    }
+
+    .game-pns-info h2 {
+        font-size: 1rem;
+        padding: 4px 8px;
     }
 }
 
