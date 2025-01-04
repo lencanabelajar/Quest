@@ -865,17 +865,16 @@ progress[value]::-moz-progress-bar {
 
 /* Style untuk card PNS */
 .game-pns-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     background-color: #f4f4e8; /* Warna kuning gading */
     border: 1px solid #d6e3d6; /* Border hijau lembut */
     border-radius: 12px; /* Membuat sudut melengkung */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
     overflow: hidden;
-    width: 250px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 10px;
+    display: flex; /* Mengatur layout menjadi horizontal */
+    gap: 15px;
+    align-items: center; /* Vertikal center elemen dalam card */
+    width: 250px; /* Lebar card */
 }
 
 .game-pns-item:hover {
@@ -887,38 +886,37 @@ progress[value]::-moz-progress-bar {
     text-decoration: none;
     color: #2b3d2b; /* Hijau gelap */
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row; /* Membuat konten dalam card horizontal */
+    align-items: center;
     padding: 10px;
-    gap: 10px;
+    gap: 15px;
 }
 
 .game-pns-info h3 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: #4caf50; /* Hijau PNS */
     margin: 0;
 }
 
 .game-pns-info img {
-    width: 60px;
-    height: 60px;
-    margin-right: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .game-pns-info p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555; /* Abu-abu gelap */
-    margin: 5px 0;
+    margin: 0;
+    text-align: left;
 }
 
 .game-pns-info h2 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #2b3d2b; /* Hijau gelap */
     background-color: #e8f5e9; /* Hijau muda */
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
-    align-self: flex-start;
 }
 
 /* Responsive styles untuk layar kecil */
