@@ -865,36 +865,36 @@ progress[value]::-moz-progress-bar {
 
 /* Style untuk card PNS */
 .game-pns-item {
-    background-color: #f4f4e8; /* Warna kuning gading */
-    border: 1px solid #d6e3d6; /* Border hijau lembut */
-    border-radius: 12px; /* Membuat sudut melengkung */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bayangan lembut */
+    background: linear-gradient(135deg, #ff7eb3, #ff758c); /* Gradient background */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex; /* Mengatur layout menjadi horizontal */
-    gap: 15px;
-    align-items: center; /* Vertikal center elemen dalam card */
-    width: 250px; /* Lebar card */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between;
+    width: 250px; /* Fixed width */
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
 }
 
 .game-pns-item:hover {
-    transform: translateY(-5px); /* Mengangkat card saat hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bayangan lebih besar saat hover */
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
 }
 
 .game-pns-info {
-    text-decoration: none;
-    color: #2b3d2b; /* Hijau gelap */
+    color: #2b3d2b; /* Dark green text */
     display: flex;
-    flex-direction: row; /* Membuat konten dalam card horizontal */
+    flex-direction: column; /* Arrange items vertically */
     align-items: center;
-    padding: 10px;
-    gap: 15px;
+    gap: 10px;
 }
 
 .game-pns-info h3 {
     font-size: 1.5rem;
-    color: #4caf50; /* Hijau PNS */
+    color: #4caf50; /* PNS green */
     margin: 0;
 }
 
@@ -905,15 +905,15 @@ progress[value]::-moz-progress-bar {
 
 .game-pns-info p {
     font-size: 1rem;
-    color: #555; /* Abu-abu gelap */
+    color: #555; /* Dark gray */
     margin: 0;
-    text-align: left;
+    text-align: center;
 }
 
 .game-pns-info h2 {
     font-size: 1.2rem;
-    color: #2b3d2b; /* Hijau gelap */
-    background-color: #e8f5e9; /* Hijau muda */
+    color: #2b3d2b; /* Dark green */
+    background-color: #e8f5e9; /* Light green background */
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
