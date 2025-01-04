@@ -754,32 +754,38 @@ progress[value]::-moz-progress-bar {
         background-color: #45a049; /* Warna latar tombol saat di-hover */
     }
 
-/*footer*/
-footer {
-    font-family: 'Press Start 2P', sans-serif;
-    text-align: center;
-    background: #191970;
-    color: #fff;
-    padding: 10px 0;
-    width: 100%;
-    margin-top: 20px;
-    animation: pulse-text 2s infinite;
-}
+    /*footer*/
+    footer {
+        font-family: 'Press Start 2P', sans-serif;
+        text-align: center;
+        background: #191970;
+        color: #fff;
+        padding: 10px 0;
+        width: 100%;
+        margin-top: 20px;
+        animation: pulse-text 2s infinite;
+        position: relative; /* Menambahkan position relative untuk memastikan z-index bekerja */
+        overflow: hidden; /* Pastikan elemen tidak terpotong */
+    }
 
-/*running footer*/
+    /*running footer*/
     .running-text {
         white-space: nowrap;
         overflow: hidden;
         box-sizing: border-box;
+        width: 100%; /* Pastikan lebar cukup untuk menampung teks */
     }
 
     .running-text a {
         display: inline-block;
         padding-left: 100%;
-        animation: marquee 10s linear infinite;
+        animation: marquee 20s linear infinite; /* Memperpanjang durasi untuk memperlambat animasi */
+        animation-delay: 1s; /* Memberi delay sedikit waktu sebelum animasi dimulai */
         font-size: 16px;
         color: #333;
         text-decoration: none;
+        white-space: nowrap; /* Pastikan teks tidak terputus */
+        z-index: 10; /* Menambahkan z-index agar tetap terlihat */
     }
 
     .running-text a:hover {
