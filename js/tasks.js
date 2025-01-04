@@ -14,7 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer7", answer: "Kekuasaan", xp: 10 },
         { questionId: "answer8", answer: "Perilaku", xp: 10 },
         { questionId: "answer9", answer: "Ekonomi", xp: 15 },
-        { questionId: "answer10", answer: "Sejarah", xp: 15 }
+        { questionId: "answer10", answer: "Sejarah", xp: 15 },
+        { questionId: "answer11", answer: "Kuantitatif", xp: 10 },
+        { questionId: "answer12", answer: "Observasi", xp: 15 },
+        { questionId: "answer13", answer: "Kualitatif", xp: 10 },
+        { questionId: "answer14", answer: "Survei", xp: 10 },
+        { questionId: "answer15", answer: "Identifikasi", xp: 15 }
     ];
 
     // Fungsi untuk memeriksa jawaban
