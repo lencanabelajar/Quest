@@ -865,51 +865,54 @@ progress[value]::-moz-progress-bar {
 
 /* Style untuk card PNS */
 .game-pns-item {
-    background: linear-gradient(135deg, #ff7eb3, #ff758c); /* Gradient background */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow */
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex; /* Arrange items horizontally */
-    flex-direction: row; /* Horizontal layout */
-    justify-content: flex-start; /* Align items to the left */
-    align-items: center; /* Vertically center elements */
-    width: 100%; /* Let the container fill up available space */
+    margin: 20px auto;
     padding: 15px;
-    text-decoration: none;
-    gap: 20px; /* Spacing between items */
+    width: 250px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    align-items: center; /* Vertically center items */
+    background: linear-gradient(135deg, #ff7eb3, #ff758c); /* Gradient background */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Soft shadow */
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
 }
 
 .game-pns-item:hover {
-    width: 250px;
-    transform: translateY(-5px); /* Lift on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+    transform: scale(1.05); /* Slightly scale up the card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.6); /* Larger shadow */
 }
 
 .game-pns-info {
-    color: #2b3d2b; /* Dark green text */
     display: flex;
     flex-direction: row; /* Horizontal layout */
     align-items: center; /* Vertically center items */
     gap: 15px;
+    text-decoration: none;
+    color: #2b3d2b; /* Dark green text */
 }
 
 .game-pns-info h3 {
     font-size: 1.5rem;
     color: #4caf50; /* PNS green */
     margin: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
 }
 
-.game-pns-info img {
-    width: 80px;
-    height: 80px;
+.game-invois {
+    width: 60px; /* Adjusted size for the image */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%; /* Circular image */
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Soft shadow */
 }
 
 .game-pns-info p {
-    font-size: 1rem;
-    color: #555; /* Dark gray */
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7); /* Light text shadow */
     margin: 0;
-    text-align: left;
 }
 
 .game-pns-info h2 {
@@ -920,14 +923,6 @@ progress[value]::-moz-progress-bar {
     border-radius: 5px;
     text-align: center;
 }
-
-.game-pns-info img.game-invois {
-    width: 80px; /* Fixed width */
-    height: 80px; /* Fixed height */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    border-radius: 50%; /* Optional: Make the image circular */
-}
-
 
 /* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
