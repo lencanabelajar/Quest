@@ -874,13 +874,14 @@ progress[value]::-moz-progress-bar {
     flex-direction: row; /* Horizontal layout */
     justify-content: flex-start; /* Align items to the left */
     align-items: center; /* Vertically center elements */
-    width: 250px; /* Let the container fill up available space */
+    width: 100%; /* Let the container fill up available space */
     padding: 15px;
     text-decoration: none;
     gap: 20px; /* Spacing between items */
 }
 
 .game-pns-item:hover {
+    width: 250px;
     transform: translateY(-5px); /* Lift on hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
 }
