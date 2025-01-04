@@ -754,6 +754,18 @@ progress[value]::-moz-progress-bar {
         background-color: #45a049; /* Warna latar tombol saat di-hover */
     }
 
+/*footer*/
+footer {
+    font-family: 'Press Start 2P', sans-serif;
+    text-align: center;
+    background: #191970;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    margin-top: 20px;
+    animation: pulse-text 2s infinite;
+}
+
 /*running footer*/
     .running-text {
         white-space: nowrap;
