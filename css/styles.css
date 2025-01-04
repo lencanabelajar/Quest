@@ -802,6 +802,68 @@ progress[value]::-moz-progress-bar {
         }
     }
 
+/* Style untuk elemen utama container */
+.news-main {
+    padding: 20px;
+    background-color: #f9f9f9; /* Warna latar belakang utama */
+    font-family: Arial, sans-serif;
+}
+
+/* Style untuk setiap section berita */
+.news-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Style untuk setiap tab berita */
+.news-tab {
+    background-color: #ffffff; /* Warna latar belakang untuk tab berita */
+    border: 1px solid #ddd; /* Border abu-abu */
+    border-radius: 8px; /* Membuat sudut melengkung */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Memberikan bayangan lembut */
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-tab:hover {
+    transform: translateY(-5px); /* Sedikit mengangkat tab saat hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar saat hover */
+}
+
+/* Style untuk container div dalam tab berita */
+.news-dev {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Style untuk tautan berita */
+.news-info {
+    text-decoration: none; /* Menghapus garis bawah pada tautan */
+    color: #333; /* Warna teks */
+}
+
+.news-info:hover {
+    text-decoration: underline; /* Menambahkan garis bawah saat hover */
+}
+
+/* Style untuk judul berita */
+.news-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #0073e6; /* Warna biru untuk judul */
+}
+
+/* Style untuk deskripsi berita */
+.news-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555; /* Warna abu-abu gelap untuk teks deskripsi */
+    line-height: 1.6; /* Spasi antar baris */
+}
+
+/* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
     .navbar .icon {
         font-size: 1.1em;
@@ -820,6 +882,22 @@ progress[value]::-moz-progress-bar {
     .navbar .icon, .navbar .text, .navbar .login, .navbar .register {
         width: 100%;
         text-align: center;
+    }
+    .news-main {
+        padding: 10px;
+    }
+
+    .news-tab {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+
+    .news-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .news-info p {
+        font-size: 0.9rem;
     }
 }
 
