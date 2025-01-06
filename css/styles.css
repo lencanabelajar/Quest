@@ -10,23 +10,6 @@ body {
     overflow-x: hidden;
 }
 
- /* Gaya untuk tautan agar tidak ada border di sekitar gambar */
-   a {
-   text-decoration: none;
-   }
-
-/* Gaya untuk gambar */
-   img {
-   width: 200px;
-   height: auto;
-   transition: transform 0.3s ease; /* Animasi saat gambar di-hover */
-   }
-
- /* Efek hover pada gambar */
-   img:hover {
-   transform: scale(1.1); /* Memperbesar gambar saat di-hover */
-   }
-
 /* Header */
 header {
     font-family: 'Press Start 2P', sans-serif;
