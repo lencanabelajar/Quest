@@ -78,8 +78,6 @@ function loadUserProfile() {
         currentXP = userProfile.currentXP || 0;
         maxXP = userProfile.maxXP || 100;
         level = userProfile.level || 1;
-        
-        // Update pengalaman UI untuk menunjukkan data level dan XP terbaru
         updateExperienceUI();
     } else {
         alert("Data profil tidak ditemukan!");
@@ -90,42 +88,28 @@ function loadUserProfile() {
 // Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
     userLevelDisplay.innerText = level; // Perbarui level pengguna
-    expDisplay.innerText = `${currentXP}/${maxXP} XP`; // Tampilkan format XP seperti "80/200 XP"
+    expDisplay.innerText = currentXP; // Perbarui XP saat ini
     expBarFill.value = currentXP; // Perbarui nilai progress bar
     expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar
-
-    // Debugging: Log nilai XP, level, dan progress bar
-    console.log(`UI diperbarui: XP = ${currentXP}, Level = ${level}, Max XP = ${maxXP}`);
+    console.log(`XP: ${currentXP}, Level: ${level}, Max XP: ${maxXP}`); // Debugging
 }
 
 // Fungsi untuk menambahkan XP dan menangani level up
 function addExperience(points) {
     currentXP += points;
 
-    // Debugging: Log nilai XP dan level sebelum diproses
-    console.log(`Sebelum proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
-
-    // Tangani kenaikan level secara akumulatif
+    // Tangani kenaikan level
     while (currentXP >= maxXP && level < 99) {
-            currentXP -= maxXP; // Kurangi currentXP dengan maxXP untuk level selanjutnya
-            level++; // Naik level
-            maxXP = maxXP * 2; // Gandakan maxXP untuk setiap level baru
-        }
-
-
-        // Debugging: Log perubahan level dan maxXP
-        console.log(`Level up! Level sekarang: ${level}, Max XP sekarang: ${maxXP}`);
+        currentXP -= maxXP;
+        levelUp();
     }
-        
-      // Jika level sudah maksimal, batasi XP ke maxXP
+
+    // Jika level sudah maksimal, batasi XP ke batas maksimal
     if (level === 99 && currentXP > maxXP) {
-            currentXP = maxXP;
-        }
+        currentXP = maxXP;
+    }
 
-    // Debugging: Log nilai XP dan level setelah diproses
-    console.log(`Setelah proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
-
-    updateExperienceUI(); // Update UI untuk level dan XP
+    updateExperienceUI();
 
     // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
@@ -140,12 +124,8 @@ function addExperience(points) {
 // Fungsi untuk menangani level up
 function levelUp() {
     if (level < 99) {
-        level++; // Naik level
-        maxXP = Math.ceil(maxXP * 1.5); // Naikkan maxXP dengan faktor 1.5 setiap level
-
-        // Debugging: Log perubahan level dan maxXP
-        console.log(`Level up! Level sekarang: ${level}, Max XP sekarang: ${maxXP}`);
-
+        level++;
+        maxXP *= 2; // Tingkatkan XP yang dibutuhkan menjadi 2x lipat
         alert(`Selamat! Anda telah naik ke level ${level}!`);
 
         // Animasi perubahan level
