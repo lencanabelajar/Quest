@@ -99,11 +99,11 @@ function updateExperienceUI() {
 // Fungsi untuk menambahkan XP dan menangani level up
 function addExperience(points) {
     currentXP += points;
-    
-   // Debugging: Log nilai XP dan level sebelum diproses
+
+    // Debugging: Log nilai XP dan level sebelum diproses
     console.log(`Sebelum proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
-    
-  // Tangani kenaikan level
+
+    // Tangani kenaikan level
     while (currentXP >= maxXP && level < 99) {
         currentXP -= maxXP; // Kurangi currentXP dengan maxXP
         levelUp(); // Naik level
@@ -114,12 +114,12 @@ function addExperience(points) {
         currentXP = maxXP;
     }
 
-   // Debugging: Log nilai XP dan level setelah diproses
+    // Debugging: Log nilai XP dan level setelah diproses
     console.log(`Setelah proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
-    
+
     updateExperienceUI();
 
-   // Simpan perubahan ke localStorage
+    // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
     if (userProfile) {
         userProfile.currentXP = currentXP;
