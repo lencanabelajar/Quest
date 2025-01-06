@@ -17,7 +17,7 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
 // Variabel untuk level dan pengalaman
 let currentXP = 0;
-let maxXP = 0; // Total XP akumulatif
+let maxXP = 100; // Total XP akumulatif
 let level = 1;
 let xpThresholds = [100, 200, 300, 400, 500]; // Threshold XP untuk tiap level, bisa lebih banyak sesuai level 99
 
