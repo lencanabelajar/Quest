@@ -89,7 +89,7 @@ function loadUserProfile() {
 function updateExperienceUI() {
     userLevelDisplay.innerText = level; // Perbarui level pengguna
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
-    expBarFill.value = currentXP; // Perbarui nilai progress bar
+    expBarFill.value = currentXP % maxXP; // Progres bar hanya berdasarkan sisa XP setelah level
     expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar
     console.log(`XP: ${currentXP}, Level: ${level}, Max XP: ${maxXP}`); // Debugging
 }
