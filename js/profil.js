@@ -17,9 +17,10 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
 // Variabel untuk level dan pengalaman
 let currentXP = 0;
-let maxXP = 100; // Total XP akumulatif
+let totalXP = 0; // Total XP akumulatif
 let level = 1;
 let xpThresholds = [100, 200, 300, 400, 500]; // Threshold XP untuk tiap level, bisa lebih banyak sesuai level 99
+let maxXP = xpThresholds[level - 1]; // Atur maxXP sesuai dengan level awal
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
@@ -103,7 +104,7 @@ function addExperience(points) {
         alert('Anda telah mencapai level maksimal!');
     }
 
-    updateExperienceUI();
+    updateExperienceUI();  // Update UI untuk XP dan level baru
     
     // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
@@ -125,6 +126,9 @@ function levelUp() {
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
+        // Perbarui maxXP sesuai dengan level baru
+        maxXP = xpThresholds[level - 1];
+
         // Animasi perubahan level
         userLevelDisplay.classList.add('level-up');
         setTimeout(() => {
@@ -135,12 +139,10 @@ function levelUp() {
 
 // Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
-    console.log(`Updating UI: Current XP = ${currentXP}, Max XP = ${xpThresholds[level - 1]}`);
-    
     userLevelDisplay.innerText = level; // Perbarui level pengguna
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
     expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
-    expBarFill.max = xpThresholds[level - 1]; // Perbarui nilai maksimal progress bar berdasarkan threshold level
+    expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar berdasarkan threshold level
     console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`); // Debugging
 }
 
