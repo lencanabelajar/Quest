@@ -105,19 +105,17 @@ function addExperience(points) {
     // Debugging: Log nilai XP dan level sebelum diproses
     console.log(`Sebelum proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
 
-    // Tangani kenaikan level
+    // Tangani kenaikan level secara akumulatif
     while (currentXP >= maxXP && level < 99) {
-        currentXP -= maxXP; // Kurangi currentXP dengan maxXP untuk naik level
+        currentXP -= maxXP; // Kurangi currentXP dengan maxXP untuk level selanjutnya
         level++; // Naik level
-        maxXP = Math.ceil(maxXP * 1.5); // Naikkan maxXP dengan faktor 1.5 setiap level
+        maxXP = maxXP * 2; // Gandakan maxXP untuk setiap level baru
 
         // Debugging: Log perubahan level dan maxXP
         console.log(`Level up! Level sekarang: ${level}, Max XP sekarang: ${maxXP}`);
-        
-        alert(`Selamat! Anda telah naik ke level ${level}!`);
     }
-
-    // Jika level sudah maksimal, batasi XP ke maxXP
+        
+      // Jika level sudah maksimal, batasi XP ke maxXP
     if (level === 99 && currentXP > maxXP) {
         currentXP = maxXP;
     }
@@ -125,7 +123,7 @@ function addExperience(points) {
     // Debugging: Log nilai XP dan level setelah diproses
     console.log(`Setelah proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
 
-    updateExperienceUI();
+    updateExperienceUI(); // Update UI untuk level dan XP
 
     // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
