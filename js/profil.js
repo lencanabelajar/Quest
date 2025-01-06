@@ -99,14 +99,14 @@ function loadUserProfile() {
     }
 }
 
-// Fungsi untuk memperbarui XP dan Level secara kumulatif
+// Fungsi untuk menambahkan XP dan memeriksa apakah level perlu dinaikkan
 function addExperience(points) {
     currentXP += points;
     totalXP += points; // Tambahkan ke total XP kumulatif
 
     // Periksa jika XP sudah mencapai threshold untuk level berikutnya
     while (currentXP >= xpThresholds[level - 1] && level < 99) {
-        currentXP -= xpThresholds[level - 1]; // Reset XP untuk level selanjutnya
+        currentXP -= xpThresholds[level - 1]; // Kurangi XP berdasarkan threshold level saat ini
         levelUp(); // Panggil fungsi untuk naikkan level
     }
 
