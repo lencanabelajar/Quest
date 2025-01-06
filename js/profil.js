@@ -100,13 +100,14 @@ function addExperience(points) {
 
     // Tangani kenaikan level
     while (currentXP >= maxXP && level < 99) {
-        currentXP -= maxXP;
-        levelUp();
+        currentXP -= maxXP; // Kurangi XP sesuai dengan level yang tercapai
+        levelUp(); // Panggil fungsi levelUp() untuk naikkan level
     }
 
     // Jika level sudah maksimal, batasi XP ke batas maksimal
-    if (level === 99 && currentXP > maxXP) {
-        currentXP = maxXP;
+    if (level === 99) {
+        currentXP = maxXP; // Batasi XP pada level 99
+        alert('Anda telah mencapai level maksimal!');
     }
 
     updateExperienceUI();
@@ -125,7 +126,7 @@ function addExperience(points) {
 function levelUp() {
     if (level < 99) {
         level++;
-        maxXP *= 2; // Tingkatkan XP yang dibutuhkan menjadi 2x lipat
+        maxXP = Math.ceil(maxXP * 1.5); // Menambah maxXP dengan faktor 1.5 untuk setiap level baru
         alert(`Selamat! Anda telah naik ke level ${level}!`);
 
         // Animasi perubahan level
@@ -133,9 +134,6 @@ function levelUp() {
         setTimeout(() => {
             userLevelDisplay.classList.remove('level-up');
         }, 1000); // Hapus kelas animasi setelah 1 detik
-    } else {
-        currentXP = maxXP; // Batasi XP jika level maksimal tercapai
-        alert('Anda telah mencapai level maksimal!');
     }
 }
 
