@@ -134,7 +134,7 @@ function levelUp() {
         level++;
         
         // Tentukan XP threshold berikutnya untuk level baru
-        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100; // Meningkatkan dengan faktor 1.5 setiap level
+        xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5); // Meningkatkan dengan faktor 1.5 setiap level
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
