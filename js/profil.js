@@ -133,7 +133,7 @@ function addExperience(points) {
 function levelUp() {
     if (level < 99) {
         level++; // Naik level
-        maxXP *= 2; // Gandakan maxXP setiap kali naik level
+        maxXP = Math.ceil(maxXP * 1.5); // Naikkan maxXP dengan faktor 1.5 setiap level
 
         // Debugging: Log perubahan level dan maxXP
         console.log(`Level up! Level sekarang: ${level}, Max XP sekarang: ${maxXP}`);
