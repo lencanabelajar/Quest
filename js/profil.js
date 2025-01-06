@@ -135,6 +135,8 @@ function levelUp() {
 
 // Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
+    console.log(`Updating UI: Current XP = ${currentXP}, Max XP = ${xpThresholds[level - 1]}`);
+    
     userLevelDisplay.innerText = level; // Perbarui level pengguna
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
     expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
