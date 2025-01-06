@@ -97,7 +97,10 @@ function updateExperienceUI() {
 // Fungsi untuk menambahkan XP dan menangani level up
 function addExperience(points) {
     currentXP += points;
-
+    
+    // Debugging: Tambahkan log untuk memantau nilai XP
+    console.log(`XP setelah penambahan: ${currentXP}, Max XP: ${maxXP}, Level: ${level}`);
+    
     // Tangani kenaikan level
     while (currentXP >= maxXP && level < 99) {
         currentXP -= maxXP;
@@ -126,6 +129,7 @@ function levelUp() {
     if (level < 99) {
         level++;
         maxXP *= 2; // Tingkatkan XP yang dibutuhkan menjadi 2x lipat
+        console.log(`Level up! Level sekarang: ${level}, Max XP: ${maxXP}`); // Debugging
         alert(`Selamat! Anda telah naik ke level ${level}!`);
 
         // Animasi perubahan level
