@@ -17,8 +17,9 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
 // Variabel untuk level dan pengalaman
 let currentXP = 0;
-let maxXP = 100;
+let totalXP = 0; // Total XP akumulatif
 let level = 1;
+let xpThresholds = [100, 200, 300, 400, 500]; // Threshold XP untuk tiap level, bisa lebih banyak sesuai level 99
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
@@ -85,38 +86,30 @@ function loadUserProfile() {
     }
 }
 
-// Fungsi untuk memperbarui UI XP dan Level
-function updateExperienceUI() {
-    userLevelDisplay.innerText = level; // Perbarui level pengguna
-    expDisplay.innerText = currentXP; // Perbarui XP saat ini
-    expBarFill.value = currentXP % maxXP; // Progres bar hanya berdasarkan sisa XP setelah level
-    expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar
-    console.log(`XP: ${currentXP}, Level: ${level}, Max XP: ${maxXP}`); // Debugging
-}
-
-// Fungsi untuk menambahkan XP dan menangani level up
+// Fungsi untuk memperbarui XP dan Level secara kumulatif
 function addExperience(points) {
     currentXP += points;
+    totalXP += points; // Tambahkan ke total XP kumulatif
 
-    // Tangani kenaikan level
-    while (currentXP >= maxXP && level < 99) {
-        currentXP -= maxXP; // Kurangi XP sesuai dengan level yang tercapai
-        levelUp(); // Panggil fungsi levelUp() untuk naikkan level
+    // Periksa jika XP sudah mencapai threshold untuk level berikutnya
+    while (currentXP >= xpThresholds[level - 1] && level < 99) {
+        currentXP -= xpThresholds[level - 1]; // Reset XP untuk level selanjutnya
+        levelUp(); // Panggil fungsi untuk naikkan level
     }
 
-    // Jika level sudah maksimal, batasi XP ke batas maksimal
+    // Batasi jika level sudah mencapai 99
     if (level === 99) {
-        currentXP = maxXP; // Batasi XP pada level 99
+        currentXP = xpThresholds[98] || 0; // Pastikan tidak lebih dari max threshold untuk level 99
         alert('Anda telah mencapai level maksimal!');
     }
 
     updateExperienceUI();
-
+    
     // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
     if (userProfile) {
         userProfile.currentXP = currentXP;
-        userProfile.maxXP = maxXP;
+        userProfile.totalXP = totalXP;
         userProfile.level = level;
         saveUserProfile(userProfile);
     }
@@ -126,15 +119,27 @@ function addExperience(points) {
 function levelUp() {
     if (level < 99) {
         level++;
-        maxXP = Math.ceil(maxXP * 1.5); // Menambah maxXP dengan faktor 1.5 untuk setiap level baru
+        
+        // Tentukan XP threshold berikutnya untuk level baru
+        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100; // Meningkatkan dengan faktor 1.5 setiap level
+        
         alert(`Selamat! Anda telah naik ke level ${level}!`);
-
+        
         // Animasi perubahan level
         userLevelDisplay.classList.add('level-up');
         setTimeout(() => {
             userLevelDisplay.classList.remove('level-up');
         }, 1000); // Hapus kelas animasi setelah 1 detik
     }
+}
+
+// Fungsi untuk memperbarui UI XP dan Level
+function updateExperienceUI() {
+    userLevelDisplay.innerText = level; // Perbarui level pengguna
+    expDisplay.innerText = currentXP; // Perbarui XP saat ini
+    expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
+    expBarFill.max = xpThresholds[level - 1]; // Perbarui nilai maksimal progress bar berdasarkan threshold level
+    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`); // Debugging
 }
 
 // Fungsi untuk mengatur foto profil
