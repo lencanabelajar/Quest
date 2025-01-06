@@ -89,6 +89,7 @@ function loadUserProfile() {
 
         // Perbarui data level dan XP
         currentXP = userProfile.currentXP || 0;
+        totalXP = userProfile.totalXP || 0;
         maxXP = userProfile.maxXP || 100;
         level = userProfile.level || 1;
         updateExperienceUI();
