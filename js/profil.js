@@ -106,8 +106,8 @@ function addExperience(points) {
 
     // Debugging untuk memeriksa nilai XP saat ini
     console.log(`Menambahkan XP: ${points}. XP saat ini: ${currentXP}`);
-    
-    // Periksa jika XP sudah mencapai threshold untuk level berikutnya
+
+    // Memastikan threshold XP dihitung dengan benar
     while (currentXP >= xpThresholds[level - 1] && level < 99) {
         console.log(`XP ${currentXP} >= Threshold untuk level ${level}: ${xpThresholds[level - 1]}`);
         currentXP -= xpThresholds[level - 1]; // Kurangi XP berdasarkan threshold level saat ini
@@ -139,7 +139,8 @@ function levelUp() {
         level++;
         
         // Tentukan XP threshold berikutnya untuk level baru
-        xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5); // Meningkatkan dengan faktor 1.5 setiap level
+        // Setiap level memerlukan 1.5 kali lebih banyak XP daripada level sebelumnya
+        xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5) || 100; // Meningkatkan dengan faktor 1.5 setiap level
         console.log(`Threshold untuk level ${level} adalah: ${xpThresholds[level - 1]}`);
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
@@ -163,6 +164,22 @@ function updateExperienceUI() {
     expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar berdasarkan threshold level
     console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}, Max XP: ${maxXP}`); // Debugging
 }
+
+// Fungsi untuk memperbarui array xpThresholds secara dinamis
+function updateXpThresholds() {
+    let baseXP = 100; // XP untuk level pertama
+    let factor = 1.5; // Faktor pertumbuhan XP setiap level
+
+    // Loop untuk menghitung threshold XP untuk setiap level sampai level 99
+    xpThresholds = [];
+    for (let i = 0; i < 99; i++) {
+        xpThresholds.push(baseXP);
+        baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
+    }
+}
+
+// Panggil updateXpThresholds untuk pertama kali
+updateXpThresholds();
 
 // Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
