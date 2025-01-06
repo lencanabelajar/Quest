@@ -107,9 +107,11 @@ function addExperience(points) {
 
     // Tangani kenaikan level secara akumulatif
     while (currentXP >= maxXP && level < 99) {
-        currentXP -= maxXP; // Kurangi currentXP dengan maxXP untuk level selanjutnya
-        level++; // Naik level
-        maxXP = maxXP * 2; // Gandakan maxXP untuk setiap level baru
+            currentXP -= maxXP; // Kurangi currentXP dengan maxXP untuk level selanjutnya
+            level++; // Naik level
+            maxXP = maxXP * 2; // Gandakan maxXP untuk setiap level baru
+        }
+
 
         // Debugging: Log perubahan level dan maxXP
         console.log(`Level up! Level sekarang: ${level}, Max XP sekarang: ${maxXP}`);
@@ -117,8 +119,8 @@ function addExperience(points) {
         
       // Jika level sudah maksimal, batasi XP ke maxXP
     if (level === 99 && currentXP > maxXP) {
-        currentXP = maxXP;
-    }
+            currentXP = maxXP;
+        }
 
     // Debugging: Log nilai XP dan level setelah diproses
     console.log(`Setelah proses: XP = ${currentXP}, Max XP = ${maxXP}, Level = ${level}`);
