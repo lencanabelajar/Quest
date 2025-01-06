@@ -19,7 +19,18 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 let currentXP = 0;
 let totalXP = 0; // Total XP akumulatif
 let level = 1;
-let xpThresholds = [100, 200, 300, 400, 500]; // Threshold XP untuk tiap level, bisa lebih banyak sesuai level 99
+
+// Membuat array xpThresholds secara dinamis
+let xpThresholds = [];
+let baseXP = 100;  // XP untuk level pertama
+let factor = 1.5;  // Faktor pertumbuhan XP setiap level
+
+// Loop untuk menghitung threshold XP untuk setiap level sampai level 99
+for (let i = 0; i < 99; i++) {
+    xpThresholds.push(baseXP);
+    baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
+}
+
 let maxXP = xpThresholds[level - 1]; // Atur maxXP sesuai dengan level awal
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
