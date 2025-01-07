@@ -944,6 +944,24 @@ progress[value]::-moz-progress-bar {
     transition: width 0.3s ease-in-out;
 }
 
+/* CSS Animasi untuk Badge */
+#badge-container {
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+#badge-container.badge-animation {
+    opacity: 1;
+}
+
+#badge-img {
+    width: 100px; /* Atur ukuran badge sesuai kebutuhan */
+    height: 100px;
+    margin-bottom: 10px;
+}
+
 /* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
     .navbar .icon {
