@@ -23,7 +23,7 @@ let totalXP = 0; // Deklarasikan totalXP di awal kode
 let xpThresholds = [];
 let baseXP = 100; // Mulai dari level 1 dengan 100 XP
 
-
+// Mengisi xpThresholds untuk 99 level
 for (let i = 0; i < 99; i++) {
     xpThresholds.push(baseXP);
     baseXP = Math.floor(baseXP * 1.5); // Kalikan dengan faktor 1.5 untuk level berikutnya
@@ -127,7 +127,7 @@ function addExperience(points) {
 function levelUp() {
     if (level < 99) {
         level++;
-        
+
         // Tentukan XP threshold berikutnya untuk level baru
         xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100; // Meningkatkan dengan faktor 1.5 setiap level
         
