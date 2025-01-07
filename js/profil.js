@@ -101,64 +101,55 @@ function loadUserProfile() {
     }
 }
 
-// Fungsi untuk memperbarui XP dan Level secara kumulatif
+// Fungsi untuk menambahkan XP dan memperbarui level
 function addExperience(points) {
-    currentXP += points;
-    totalXP += points; // Tambahkan ke total XP kumulatif
-
-    // Periksa jika XP sudah mencapai threshold untuk level berikutnya
-    while (currentXP >= xpThresholds[level - 1] && level < 99) {
-        currentXP -= xpThresholds[level - 1]; // Reset XP untuk level selanjutnya
-        levelUp(); // Panggil fungsi untuk naikkan level
-    }
-
-    // Batasi jika level sudah mencapai 99
-    if (level === 99) {
-        currentXP = xpThresholds[98] || 0; // Pastikan tidak lebih dari max threshold untuk level 99
-        alert('Anda telah mencapai level maksimal!');
-    }
-
-    updateExperienceUI();
-    
-    // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
-    if (userProfile) {
-        userProfile.currentXP = currentXP;
-        userProfile.totalXP = totalXP;
-        userProfile.level = level;
-        saveUserProfile(userProfile);
+    if (!userProfile) {
+        alert("Profil pengguna tidak ditemukan!");
+        return;
     }
+
+    // Tambahkan XP baru
+    userProfile.currentXP = userProfile.currentXP || 0;
+    userProfile.level = userProfile.level || 1;
+    userProfile.totalXP = userProfile.totalXP || 0;
+
+    userProfile.currentXP += points;
+    userProfile.totalXP += points;
+
+    // Periksa apakah level naik
+    while (userProfile.currentXP >= xpThresholds[userProfile.level - 1] && userProfile.level < 99) {
+        userProfile.currentXP -= xpThresholds[userProfile.level - 1]; // Kurangi threshold level
+        userProfile.level++; // Tambahkan level
+        alert(`Selamat! Anda telah naik ke level ${userProfile.level}!`);
+    }
+
+    // Batasi jika level sudah maksimal
+    if (userProfile.level === 99) {
+        userProfile.currentXP = Math.min(userProfile.currentXP, xpThresholds[98]);
+    }
+
+    // Simpan perubahan ke localStorage
+    saveUserProfile(userProfile);
+
+    // Perbarui tampilan UI
+    updateExperienceUI(userProfile);
 }
 
-// Fungsi untuk menangani level up
-function levelUp() {
-    if (level < 99) {
-        level++; // Meningkatkan level
+// Fungsi untuk memperbarui tampilan XP dan level
+function updateExperienceUI(userProfile) {
+    if (!userProfile) return;
 
-        // Tentukan XP threshold berikutnya untuk level baru
-        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5; // Menggunakan threshold level sebelumnya
-        
-        alert(`Selamat! Anda telah naik ke level ${level}!`);
-        
-        // Animasi perubahan level
-        userLevelDisplay.classList.add('level-up');
-        setTimeout(() => {
-            userLevelDisplay.classList.remove('level-up');
-        }, 1000); // Hapus kelas animasi setelah 1 detik
-    }
-}
+    const expBarFill = document.getElementById('exp-bar-fill');
+    const userLevelDisplay = document.getElementById('user-level-display');
+    const expDisplay = document.getElementById('exp-display');
 
-// Fungsi untuk memperbarui UI XP dan Level
-function updateExperienceUI() {
-    console.log(`Updating UI: Current XP = ${currentXP}, Max XP = ${xpThresholds[level - 1]}`);
-    
-    userLevelDisplay.innerText = level; // Perbarui level pengguna
-    expDisplay.innerText = currentXP; // Perbarui XP saat ini
-    expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
-    expBarFill.max = xpThresholds[level - 1]; // Perbarui nilai maksimal progress bar berdasarkan threshold level
-    
-    // Debugging output untuk melihat nilai yang terupdate
-    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`);
+    userLevelDisplay.innerText = `Level ${userProfile.level}`;
+    expDisplay.innerText = `XP: ${userProfile.currentXP} / ${xpThresholds[userProfile.level - 1]}`;
+
+    // Atur progress bar
+    expBarFill.value = userProfile.currentXP;
+    expBarFill.max = xpThresholds[userProfile.level - 1];
 }
 
 // Fungsi untuk mengatur foto profil
