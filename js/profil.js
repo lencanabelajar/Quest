@@ -129,7 +129,13 @@ function levelUp() {
         level++;
 
         // Tentukan XP threshold berikutnya untuk level baru
-        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100; // Meningkatkan dengan faktor 1.5 setiap level
+        if (level === 2) {
+            // Menggunakan threshold level 1 untuk level 2
+            xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5;
+        } else {
+            // Meningkatkan dengan faktor 1.5 setiap level setelah level 2
+            xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100;
+        }
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
