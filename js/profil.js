@@ -108,8 +108,11 @@ function addExperience(points) {
 function updateExperienceUI() {
     userLevelDisplay.innerText = level;
     expDisplay.innerText = `${currentXP} / ${xpThresholds[level - 1]} XP`;
-    expBarFill.value = currentXP;
-    expBarFill.max = xpThresholds[level - 1];
+
+    // Update nilai progress bar
+    const expBar = document.getElementById('exp-bar');
+    expBar.value = currentXP; // Nilai XP saat ini
+    expBar.max = xpThresholds[level - 1]; // Threshold level saat ini
 }
 
 // Event listeners
