@@ -554,32 +554,33 @@ form p a:hover {
     text-align: center;
 }
 
+/* Styling tambahan untuk progress bar untuk lebih responsif di berbagai browser */
 progress[value] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #f3f3f3; /* Warna dasar */
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #f3f3f3;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 progress[value]::-webkit-progress-bar {
-  background-color: #f3f3f3; /* Background bar */
-  border-radius: 10px;
+    background-color: #f3f3f3;
+    border-radius: 10px;
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: #4caf50; /* Warna hijau untuk progres */
-  border-radius: 10px;
-  transition: width 0.4s ease-in-out;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out;
 }
 
 progress[value]::-moz-progress-bar {
-  background-color: #4caf50; /* Warna hijau untuk progres */
-  border-radius: 10px;
-  transition: width 0.4s ease-in-out;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out;
 }
 
 /* Media Query for smaller screens */
@@ -922,6 +923,25 @@ progress[value]::-moz-progress-bar {
     padding: 5px 10px;
     border-radius: 5px;
     text-align: center;
+}
+
+/* Menambahkan styling untuk keseluruhan bar XP */
+#exp-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0; /* Background progres */
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Styling untuk elemen progress bar fill */
+#exp-bar-fill {
+    height: 100%;
+    width: 0%; /* Ini akan diubah melalui JS */
+    background-color: #4caf50; /* Warna hijau */
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
 }
 
 /* Responsive styles untuk layar kecil */
