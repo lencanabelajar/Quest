@@ -74,17 +74,30 @@ function isAnswerClose(userAnswer, correctAnswer) {
         sessionStorage.setItem(`task${taskIndex + 1}Completed`, isCorrect);
     }
 
-    // Fungsi untuk memeriksa apakah semua tugas sudah selesai
-    function checkCompletion() {
-        const allTasksCompleted = tasksData.every((_, index) => 
-            sessionStorage.getItem(`task${index + 1}Completed`) === 'true'
-        );
+// Fungsi untuk memeriksa apakah semua tugas sudah selesai
+function checkCompletion() {
+    const allTasksCompleted = tasksData.every((_, index) => 
+        sessionStorage.getItem(`task${index + 1}Completed`) === 'true'
+    );
 
-        if (allTasksCompleted) {
-            completionMessage.style.display = 'block'; // Tampilkan pesan penyelesaian
-            alert("Selamat! Anda telah menyelesaikan semua tugas.");
-        }
+    if (allTasksCompleted) {
+        completionMessage.style.display = 'block'; // Tampilkan pesan penyelesaian
+        alert("Selamat! Anda telah menyelesaikan semua tugas.");
+        
+        // Menampilkan badge setelah semua tugas selesai dengan benar
+        showBadge();
     }
+}
+
+// Fungsi untuk menampilkan badge
+function showBadge() {
+    const badgeContainer = document.getElementById('badge-container');
+    badgeContainer.style.display = 'block'; // Menampilkan elemen badge
+    
+    // Opsional: Bisa menambahkan animasi atau efek jika diinginkan
+    badgeContainer.classList.add('badge-animation');
+    setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
+}
 
     // Event listener untuk setiap form
     taskForms.forEach((form, index) => {
