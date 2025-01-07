@@ -130,7 +130,10 @@ function addExperience(points) {
         userProfile.level = level;
         saveUserProfile(userProfile);
     }
-}
+    
+    else {
+    console.error('Tidak ditemukan pengguna yang sesuai di profil.');
+    }
 
 // Fungsi untuk menangani level up
 function levelUp() {
@@ -138,8 +141,7 @@ function levelUp() {
         console.log(`Naik level! Level sebelumnya: ${level}`);
         level++;
         
-        // Tentukan XP threshold berikutnya untuk level baru
-        // Setiap level memerlukan 1.5 kali lebih banyak XP daripada level sebelumnya
+        // Update threshold XP berdasarkan faktor 1.5 setiap level
         xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5) || 100; // Meningkatkan dengan faktor 1.5 setiap level
         console.log(`Threshold untuk level ${level} adalah: ${xpThresholds[level - 1]}`);
         
@@ -170,10 +172,10 @@ function updateXpThresholds() {
     let baseXP = 100; // XP untuk level pertama
     let factor = 1.5; // Faktor pertumbuhan XP setiap level
 
-    // Loop untuk menghitung threshold XP untuk setiap level sampai level 99
-    xpThresholds = [];
+    xpThresholds = [baseXP]; // Menambahkan threshold untuk level pertama
+
+     // Loop untuk menghitung threshold XP untuk setiap level sampai level 99
     for (let i = 1; i < 99; i++) {
-        xpThresholds.push(baseXP);
         baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
         xpThresholds.push(baseXP);
     }
@@ -181,6 +183,7 @@ function updateXpThresholds() {
 
 // Panggil updateXpThresholds untuk pertama kali
 updateXpThresholds();
+let maxXP = xpThresholds[level - 1]; // Set maxXP setelah xpThresholds terisi
 
 // Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
