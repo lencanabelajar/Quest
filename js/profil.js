@@ -36,6 +36,36 @@ function fillXPThresholds() {
 // Memanggil fungsi untuk mengisi xpThresholds
 fillXPThresholds();
 
+// Fungsi untuk mendapatkan data profil pengguna dari localStorage
+function getUserProfile() {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userEmail = sessionStorage.getItem('userEmail');
+    return users.find(user => user.email === userEmail) || null;
+}
+
+// Fungsi untuk menyimpan data pengguna ke localStorage
+function saveUserProfile(updatedUser) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(user => user.email === updatedUser.email);
+
+    if (userIndex !== -1) {
+        users[userIndex] = updatedUser;
+        localStorage.setItem('users', JSON.stringify(users));
+        console.log("Profil pengguna telah diperbarui:", updatedUser); // Debugging line
+    } else {
+        console.error('Pengguna tidak ditemukan saat menyimpan profil.');
+    }
+}
+
+// Fungsi untuk memvalidasi data profil pengguna
+function validateUserProfile(userProfile) {
+    if (!userProfile || !userProfile.email) {
+        alert('Data profil tidak valid!');
+        return false;
+    }
+    return true;
+}
+
 // Fungsi untuk memuat data profil pengguna
 function loadUserProfile() {
     const userEmail = sessionStorage.getItem('userEmail');
@@ -130,9 +160,6 @@ function updateExperienceUI() {
     // Debugging output untuk melihat nilai yang terupdate
     console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`);
 }
-
-// Fungsi untuk memuat profil pengguna pada saat load halaman
-window.addEventListener('load', loadUserProfile);
 
 // Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
