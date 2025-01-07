@@ -172,9 +172,10 @@ function updateXpThresholds() {
 
     // Loop untuk menghitung threshold XP untuk setiap level sampai level 99
     xpThresholds = [];
-    for (let i = 0; i < 99; i++) {
+    for (let i = 1; i < 99; i++) {
         xpThresholds.push(baseXP);
         baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
+        xpThresholds.push(baseXP);
     }
 }
 
