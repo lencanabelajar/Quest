@@ -17,21 +17,9 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 
 // Variabel untuk level dan pengalaman
 let currentXP = 0;
-let totalXP = 0; // Total XP akumulatif
+let maxXP = 100; // Total XP akumulatif
 let level = 1;
-
-// Membuat array xpThresholds secara dinamis
-let xpThresholds = [];
-let baseXP = 100;  // XP untuk level pertama
-let factor = 1.5;  // Faktor pertumbuhan XP setiap level
-
-// Loop untuk menghitung threshold XP untuk setiap level sampai level 99
-for (let i = 0; i < 99; i++) {
-    xpThresholds.push(baseXP);
-    baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
-}
-
-let maxXP = xpThresholds[level - 1]; // Atur maxXP sesuai dengan level awal
+let xpThresholds = [100, 200, 300, 400, 500]; // Threshold XP untuk tiap level, bisa lebih banyak sesuai level 99
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
@@ -89,7 +77,6 @@ function loadUserProfile() {
 
         // Perbarui data level dan XP
         currentXP = userProfile.currentXP || 0;
-        totalXP = userProfile.totalXP || 0;
         maxXP = userProfile.maxXP || 100;
         level = userProfile.level || 1;
         updateExperienceUI();
@@ -99,18 +86,14 @@ function loadUserProfile() {
     }
 }
 
-// Fungsi untuk menambahkan XP dan memeriksa apakah level perlu dinaikkan
+// Fungsi untuk memperbarui XP dan Level secara kumulatif
 function addExperience(points) {
     currentXP += points;
     totalXP += points; // Tambahkan ke total XP kumulatif
 
-    // Debugging untuk memeriksa nilai XP saat ini
-    console.log(`Menambahkan XP: ${points}. XP saat ini: ${currentXP}`);
-
-    // Memastikan threshold XP dihitung dengan benar
+    // Periksa jika XP sudah mencapai threshold untuk level berikutnya
     while (currentXP >= xpThresholds[level - 1] && level < 99) {
-        console.log(`XP ${currentXP} >= Threshold untuk level ${level}: ${xpThresholds[level - 1]}`);
-        currentXP -= xpThresholds[level - 1]; // Kurangi XP berdasarkan threshold level saat ini
+        currentXP -= xpThresholds[level - 1]; // Reset XP untuk level selanjutnya
         levelUp(); // Panggil fungsi untuk naikkan level
     }
 
@@ -120,7 +103,7 @@ function addExperience(points) {
         alert('Anda telah mencapai level maksimal!');
     }
 
-    updateExperienceUI();  // Update UI untuk XP dan level baru
+    updateExperienceUI();
     
     // Simpan perubahan ke localStorage
     const userProfile = getUserProfile();
@@ -130,26 +113,18 @@ function addExperience(points) {
         userProfile.level = level;
         saveUserProfile(userProfile);
     }
-    
-    else {
-    console.error('Tidak ditemukan pengguna yang sesuai di profil.');
-    }
+}
 
 // Fungsi untuk menangani level up
 function levelUp() {
     if (level < 99) {
-        console.log(`Naik level! Level sebelumnya: ${level}`);
         level++;
         
-        // Update threshold XP berdasarkan faktor 1.5 setiap level
-        xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5) || 100; // Meningkatkan dengan faktor 1.5 setiap level
-        console.log(`Threshold untuk level ${level} adalah: ${xpThresholds[level - 1]}`);
+        // Tentukan XP threshold berikutnya untuk level baru
+        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100; // Meningkatkan dengan faktor 1.5 setiap level
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
-        // Perbarui maxXP sesuai dengan level baru
-        maxXP = xpThresholds[level - 1];
-
         // Animasi perubahan level
         userLevelDisplay.classList.add('level-up');
         setTimeout(() => {
@@ -160,30 +135,14 @@ function levelUp() {
 
 // Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
+    console.log(`Updating UI: Current XP = ${currentXP}, Max XP = ${xpThresholds[level - 1]}`);
+    
     userLevelDisplay.innerText = level; // Perbarui level pengguna
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
     expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
-    expBarFill.max = maxXP; // Perbarui nilai maksimal progress bar berdasarkan threshold level
-    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}, Max XP: ${maxXP}`); // Debugging
+    expBarFill.max = xpThresholds[level - 1]; // Perbarui nilai maksimal progress bar berdasarkan threshold level
+    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`); // Debugging
 }
-
-// Fungsi untuk memperbarui array xpThresholds secara dinamis
-function updateXpThresholds() {
-    let baseXP = 100; // XP untuk level pertama
-    let factor = 1.5; // Faktor pertumbuhan XP setiap level
-
-    xpThresholds = [baseXP]; // Menambahkan threshold untuk level pertama
-
-     // Loop untuk menghitung threshold XP untuk setiap level sampai level 99
-    for (let i = 1; i < 99; i++) {
-        baseXP = Math.floor(baseXP * factor);  // Setiap level membutuhkan 1.5 kali lebih banyak XP
-        xpThresholds.push(baseXP);
-    }
-}
-
-// Panggil updateXpThresholds untuk pertama kali
-updateXpThresholds();
-let maxXP = xpThresholds[level - 1]; // Set maxXP setelah xpThresholds terisi
 
 // Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
