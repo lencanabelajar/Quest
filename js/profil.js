@@ -23,41 +23,18 @@ let totalXP = 0; // Deklarasikan totalXP di awal kode
 let xpThresholds = [];
 let baseXP = 100; // Mulai dari level 1 dengan 100 XP
 
-// Mengisi xpThresholds untuk 99 level
-for (let i = 0; i < 99; i++) {
-    xpThresholds.push(baseXP);
-    baseXP = Math.floor(baseXP * 1.5); // Kalikan dengan faktor 1.5 untuk level berikutnya
-}
-
-// Fungsi untuk mendapatkan data profil pengguna dari localStorage
-function getUserProfile() {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userEmail = sessionStorage.getItem('userEmail');
-    return users.find(user => user.email === userEmail) || null;
-}
-
-// Fungsi untuk menyimpan data pengguna ke localStorage
-function saveUserProfile(updatedUser) {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const userIndex = users.findIndex(user => user.email === updatedUser.email);
-
-    if (userIndex !== -1) {
-        users[userIndex] = updatedUser;
-        localStorage.setItem('users', JSON.stringify(users));
-        console.log("Profil pengguna telah diperbarui:", updatedUser); // Debugging line
-    } else {
-        console.error('Pengguna tidak ditemukan saat menyimpan profil.');
+// Fungsi untuk mengisi xpThresholds untuk 99 level
+function fillXPThresholds() {
+    xpThresholds = []; // Reset xpThresholds array
+    baseXP = 100; // Mulai dari level 1 dengan 100 XP
+    for (let i = 0; i < 99; i++) {
+        xpThresholds.push(baseXP);
+        baseXP = Math.floor(baseXP * 1.5); // Kalikan dengan faktor 1.5 untuk level berikutnya
     }
 }
 
-// Fungsi untuk memvalidasi data profil pengguna
-function validateUserProfile(userProfile) {
-    if (!userProfile || !userProfile.email) {
-        alert('Data profil tidak valid!');
-        return false;
-    }
-    return true;
-}
+// Memanggil fungsi untuk mengisi xpThresholds
+fillXPThresholds();
 
 // Fungsi untuk memuat data profil pengguna
 function loadUserProfile() {
@@ -126,16 +103,10 @@ function addExperience(points) {
 // Fungsi untuk menangani level up
 function levelUp() {
     if (level < 99) {
-        level++;
+        level++; // Meningkatkan level
 
         // Tentukan XP threshold berikutnya untuk level baru
-        if (level === 2) {
-            // Menggunakan threshold level 1 untuk level 2
-            xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5;
-        } else {
-            // Meningkatkan dengan faktor 1.5 setiap level setelah level 2
-            xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5 || 100;
-        }
+        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5; // Menggunakan threshold level sebelumnya
         
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
@@ -159,6 +130,9 @@ function updateExperienceUI() {
     // Debugging output untuk melihat nilai yang terupdate
     console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`);
 }
+
+// Fungsi untuk memuat profil pengguna pada saat load halaman
+window.addEventListener('load', loadUserProfile);
 
 // Fungsi untuk mengatur foto profil
 function handleProfilePictureUpload(file) {
