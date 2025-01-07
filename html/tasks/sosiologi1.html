@@ -579,6 +579,33 @@
         });
     });
 </script>
+    
+<script>
+    // Fungsi untuk memeriksa apakah semua tugas telah dijawab benar
+    function checkAllTasksAnswered() {
+        const allTasksCompleted = tasksData.every((_, index) => 
+            sessionStorage.getItem(`task${index + 1}Completed`) === 'true'
+        );
+
+        // Jika semua tugas sudah selesai, tampilkan badge
+        if (allTasksCompleted) {
+            showBadge();
+        }
+    }
+
+    // Fungsi untuk menampilkan badge
+    function showBadge() {
+        const badgeContainer = document.getElementById('badge-container');
+        badgeContainer.style.display = 'block'; // Tampilkan badge
+        
+        // Opsional: Menambahkan animasi badge
+        badgeContainer.classList.add('badge-animation');
+        setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
+    }
+
+    // Periksa status jawaban setelah halaman dimuat
+    window.addEventListener('DOMContentLoaded', checkAllTasksAnswered);
+</script>
 
     <!-- Scripts -->
     <script src="../../js/profil.js"></script>
