@@ -95,6 +95,7 @@ function loadUserProfile() {
 // Fungsi untuk memperbarui XP dan Level secara kumulatif
 function addExperience(points) {
     currentXP += points;
+    totalXP += points; // Tambahkan ke total XP kumulatif
 
     // Periksa jika XP sudah mencapai threshold untuk level berikutnya
     while (currentXP >= xpThresholds[level - 1] && level < 99) {
@@ -146,7 +147,9 @@ function updateExperienceUI() {
     expDisplay.innerText = currentXP; // Perbarui XP saat ini
     expBarFill.value = currentXP; // Progress bar berdasarkan XP saat ini
     expBarFill.max = xpThresholds[level - 1]; // Perbarui nilai maksimal progress bar berdasarkan threshold level
-    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`); // Debugging
+    
+    // Debugging output untuk melihat nilai yang terupdate
+    console.log(`Total XP: ${totalXP}, Level: ${level}, Current XP: ${currentXP}`);
 }
 
 // Fungsi untuk mengatur foto profil
