@@ -23,18 +23,11 @@ let totalXP = 0; // Deklarasikan totalXP di awal kode
 let xpThresholds = [];
 let baseXP = 100; // Mulai dari level 1 dengan 100 XP
 
-// Fungsi untuk mengisi xpThresholds untuk 99 level
-function fillXPThresholds() {
-    xpThresholds = []; // Reset xpThresholds array
-    baseXP = 100; // Mulai dari level 1 dengan 100 XP
-    for (let i = 0; i < 99; i++) {
-        xpThresholds.push(baseXP);
-        baseXP = Math.floor(baseXP * 1.5); // Kalikan dengan faktor 1.5 untuk level berikutnya
-    }
+// Mengisi xpThresholds untuk 99 level
+for (let i = 0; i < 99; i++) {
+    xpThresholds.push(baseXP);
+    baseXP = Math.floor(baseXP * 1.5); // Kalikan dengan faktor 1.5 untuk level berikutnya
 }
-
-// Memanggil fungsi untuk mengisi xpThresholds
-fillXPThresholds();
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
@@ -133,11 +126,11 @@ function addExperience(points) {
 // Fungsi untuk menangani level up
 function levelUp() {
     if (level < 99) {
-        level++; // Meningkatkan level
+        level++;
 
         // Tentukan XP threshold berikutnya untuk level baru
-        xpThresholds[level - 1] = xpThresholds[level - 2] * 1.5; // Menggunakan threshold level sebelumnya
-        
+        xpThresholds[level - 1] = Math.floor(xpThresholds[level - 2] * 1.5); // Menggunakan threshold level sebelumnya dikali faktor 1.5
+
         alert(`Selamat! Anda telah naik ke level ${level}!`);
         
         // Animasi perubahan level
