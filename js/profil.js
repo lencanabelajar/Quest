@@ -19,8 +19,10 @@ const cancelEditBtn = document.getElementById('cancel-edit-btn');
 let currentXP = 0;
 let maxXP = 100; // Total XP akumulatif
 let level = 1;
+let totalXP = 0; // Deklarasikan totalXP di awal kode
 let xpThresholds = [];
 let baseXP = 100; // Mulai dari level 1 dengan 100 XP
+
 
 for (let i = 0; i < 99; i++) {
     xpThresholds.push(baseXP);
