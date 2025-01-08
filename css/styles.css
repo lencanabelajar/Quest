@@ -1044,6 +1044,17 @@ progress[value]::-moz-progress-bar {
     transition: opacity 1s ease-in-out;
 }
 
+.badge-container .badge {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
 .badge-container.badge-animation {
     opacity: 1;
 }
