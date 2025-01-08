@@ -71,7 +71,7 @@ profileImageInput.addEventListener('change', handleProfileImageUpload);
 // Load games and initialize pagination
 handlePagination(); // Initialize pagination for dynamic loading
 
-const tasksPerPage = 10;
+const tasksPerPage = 4;
 let currentPage = 1;
 const taskData = [...];  // Your task data array
 
