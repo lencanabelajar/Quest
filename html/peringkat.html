@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Peringkat - QUEST">
+    <meta property="og:title" content="Peringkat - Quest Platform">
+    <meta property="og:description" content="Lihat peringkat pemain terbaik di berbagai kategori di Quest Platform">
+    <meta property="og:image" content="../assets/icon/ruby.png">
+    <meta property="og:url" content="https://questid.netlify.app/leaderboard">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
+    <title>Peringkat - QUEST.ID</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../assets/icon/ruby.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">QUEST</h1>
+            <nav class="dashboard-menu">
+                <a href="../html/home.html" class="menu-item">🏡</a>
+                <a href="../html/profil.html" class="menu-item">📲</a>
+                <a href="../html/news.html" class="menu-item">📰</a>
+                <button id="logout-btn" class="menu-item">Log Out</button>
+                <span id="user-greeting" style="margin-left: 10px;">Halo, <span id="greeting-username-display"></span>!</span>
+            </nav>
+        </div>
+    </header>
+
+    <main class="leaderboard-main">
+        <section class="leaderboard-section">
+            <h2>🏆 Peringkat</h2>
+            <!-- Tab untuk memilih segmen peringkat -->
+            <div class="leaderboard-tabs">
+                <button class="tab-button" id="tab-pelajar">Edisi Pelajar - Mahasiswa</button>
+                <button class="tab-button" id="tab-pns">Edisi Pegawai Negeri ~ CPNS P3K ~ ASN</button>
+                <button class="tab-button" id="tab-profesional">Edisi Pekerja Profesional - Non Pemerintahan</button>
+                <button class="tab-button" id="tab-global">Peringkat Global</button>
+            </div>
+
+            <!-- Konten peringkat per segmen -->
+            <div class="leaderboard-content">
+                <div id="pelajar-leaderboard" class="leaderboard-tab-content">
+                    <h3>Top 5 - Edisi Pelajar - Mahasiswa</h3>
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Peringkat</th>
+                                <th>Nama Pengguna</th>
+                                <th>Skor</th>
+                                <th>Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data peringkat Pelajar -->
+                            <tr>
+                                <td>1</td>
+                                <td>Alice</td>
+                                <td>950</td>
+                                <td>00:12:34</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Bob</td>
+                                <td>850</td>
+                                <td>00:15:22</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Charlie</td>
+                                <td>800</td>
+                                <td>00:18:50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="pns-leaderboard" class="leaderboard-tab-content">
+                    <h3>Top 5 - Edisi Pegawai Negeri ~ CPNS P3K ~ ASN</h3>
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Peringkat</th>
+                                <th>Nama Pengguna</th>
+                                <th>Skor</th>
+                                <th>Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data peringkat PNS -->
+                            <tr>
+                                <td>1</td>
+                                <td>Andi</td>
+                                <td>920</td>
+                                <td>00:11:45</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Rina</td>
+                                <td>870</td>
+                                <td>00:14:10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="profesional-leaderboard" class="leaderboard-tab-content">
+                    <h3>Top 5 - Edisi Pekerja Profesional - Non Pemerintahan</h3>
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Peringkat</th>
+                                <th>Nama Pengguna</th>
+                                <th>Skor</th>
+                                <th>Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data peringkat Profesional -->
+                            <tr>
+                                <td>1</td>
+                                <td>Donny</td>
+                                <td>980</td>
+                                <td>00:13:05</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Linda</td>
+                                <td>880</td>
+                                <td>00:16:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="global-leaderboard" class="leaderboard-tab-content">
+                    <h3>Top 5 - Peringkat Global</h3>
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th>Peringkat</th>
+                                <th>Nama Pengguna</th>
+                                <th>Skor</th>
+                                <th>Waktu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data peringkat Global -->
+                            <tr>
+                                <td>1</td>
+                                <td>Eka</td>
+                                <td>1050</td>
+                                <td>00:10:30</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Farah</td>
+                                <td>950</td>
+                                <td>00:13:15</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="running-text">
+            <a href="https://saweria.co/questID" target="_blank">
+                Klik untuk mendukung pengembangan platform ini.
+            </a>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/peringkat.js"></script>
+</body>
+
+</html>
