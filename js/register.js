@@ -58,6 +58,8 @@ registerForm.addEventListener('submit', async function (e) {
             email: email,
             password: encryptedPassword,
             profileImage: profileImageURL,
+            level: 1,     // Tambahkan level default
+            totalXP: 0    // Jika total XP diperlukan, tambahkan juga
         };
 
         let users = JSON.parse(localStorage.getItem('users')) || []; // Ambil daftar pengguna yang sudah ada
