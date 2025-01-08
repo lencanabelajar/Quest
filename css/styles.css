@@ -1065,6 +1065,41 @@ progress[value]::-moz-progress-bar {
     margin-bottom: 10px;
 }
 
+/* Pengaturan dasar untuk pagination */
+.pagination {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Gaya tombol pagination */
+.pagination button {
+    background-color: #007bff; /* Warna biru */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+/* Efek hover untuk tombol pagination */
+.pagination button:hover {
+    background-color: #0056b3; /* Biru lebih gelap */
+}
+
+/* Efek tombol pagination yang aktif */
+.pagination button.active {
+    background-color: #004085;
+    border-color: #003366;
+}
+
+/* Menghilangkan outline saat tombol difokuskan */
+.pagination button:focus {
+    outline: none;
+}
+
 /* Responsive styles untuk layar kecil */
 @media (max-width: 480px) {
     .navbar .icon {
@@ -1122,6 +1157,16 @@ progress[value]::-moz-progress-bar {
     .game-pns-info h2 {
         font-size: 1rem;
         padding: 4px 8px;
+    }
+    .pagination {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pagination button {
+        margin: 5px 0;
+        width: 100%;
     }
 }
 
