@@ -167,12 +167,31 @@ function addBadge(badgeName) {
         return;
     }
 
-    // Menambahkan badge jika belum ada
-    if (!userProfile.badges.includes(badgeName)) {
-        userProfile.badges.push(badgeName);
-        saveUserProfile(userProfile); // Simpan perubahan profil
-        showBadgeInProfile(badgeName); // Tampilkan badge di profil
+// Fungsi untuk menambahkan badge setelah menyelesaikan tugas
+function addBadge(badge) {
+    const userProfile = getUserProfile(); // Ambil profil pengguna
+    if (!userProfile) {
+        alert('Pengguna tidak ditemukan!');
+        return;
     }
+
+    // Pastikan badges ada pada profil pengguna
+    if (!userProfile.badges) {
+        userProfile.badges = [];
+    }
+
+    // Jika badge belum ada, tambahkan
+    if (!userProfile.badges.includes(badge)) {
+        userProfile.badges.push(badge);
+        saveUserProfile(userProfile); // Simpan kembali data pengguna
+    }
+}
+
+// Contoh: Menambahkan badge saat tugas selesai
+function handleTaskCompletion(taskIndex) {
+    // Logika setelah tugas selesai, misalnya menambahkan badge
+    const badge = `badge_${taskIndex + 1}`; // Misalnya badge berdasarkan nomor tugas
+    addBadge(badge);
 }
     
     // Ambil data profil pengguna
