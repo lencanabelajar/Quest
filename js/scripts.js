@@ -73,7 +73,7 @@ handlePagination(); // Initialize pagination for dynamic loading
 
 const tasksPerPage = 4;
 let currentPage = 1;
-const taskData = [...];  // Your task data array
+const taskData = [...];  // Array task data Anda
 
 function showPage(page) {
     const start = (page - 1) * tasksPerPage;
@@ -81,13 +81,32 @@ function showPage(page) {
     const tasksToShow = taskData.slice(start, end);
 
     const taskList = document.getElementById('task-list');
-    taskList.innerHTML = '';
+    taskList.innerHTML = '';  // Clear previous task list
+
     tasksToShow.forEach(task => {
         const taskElement = createTask(task.judul, task.link, task.kategori, task.icon);
-        taskList.innerHTML += taskElement;
+        taskList.innerHTML += taskElement;  // Append new tasks to list
     });
 
+    // Update pagination
+    updatePagination();
     currentPage = page;
+}
+
+function updatePagination() {
+    const totalPages = Math.ceil(taskData.length / tasksPerPage);
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = '';  // Clear existing pagination buttons
+
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.innerText = i;
+        button.onclick = () => showPage(i);
+        if (i === currentPage) {
+            button.classList.add('active');  // Mark current page as active
+        }
+        pagination.appendChild(button);
+    }
 }
 
 showPage(currentPage);  // Initial page load
