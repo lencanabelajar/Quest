@@ -877,6 +877,17 @@ progress[value]::-moz-progress-bar {
     animation: glow 1.5s ease-in-out infinite alternate;
 }
 
+/* Animasi koin berputar */
+@keyframes coinSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.coin-animation {
+    display: inline-block;
+    animation: coinSpin 1s ease-in-out;
+}
+
 /* Animasi kilau cahaya pada koin */
 @keyframes glow {
     0% {
