@@ -73,8 +73,9 @@ handlePagination(); // Initialize pagination for dynamic loading
 
 const tasksPerPage = 4;
 let currentPage = 1;
-const taskData = [...];  // Array task data Anda
+let taskData = [];  // Pastikan taskData diisi dengan data yang benar
 
+// Fungsi untuk menampilkan halaman task
 function showPage(page) {
     const start = (page - 1) * tasksPerPage;
     const end = start + tasksPerPage;
@@ -85,7 +86,7 @@ function showPage(page) {
 
     tasksToShow.forEach(task => {
         const taskElement = createTask(task.judul, task.link, task.kategori, task.icon);
-        taskList.innerHTML += taskElement;  // Append new tasks to list
+        taskList.appendChild(taskElement);  // Append new task using appendChild
     });
 
     // Update pagination
@@ -93,6 +94,7 @@ function showPage(page) {
     currentPage = page;
 }
 
+// Fungsi untuk memperbarui pagination
 function updatePagination() {
     const totalPages = Math.ceil(taskData.length / tasksPerPage);
     const pagination = document.querySelector('.pagination');
@@ -109,4 +111,19 @@ function updatePagination() {
     }
 }
 
-showPage(currentPage);  // Initial page load
+// Fungsi untuk memuat data game
+function loadGames(page) {
+    // Misalnya Anda mendapatkan data game dari API atau data statis
+    fetch(`path_to_your_data?page=${page}`)
+        .then(response => response.json())
+        .then(data => {
+            taskData = data; // Assign data to taskData
+            showPage(currentPage);  // Load initial page
+        })
+        .catch(error => console.error("Error loading games:", error));
+}
+
+// Call loadGames when the page loads
+window.addEventListener('load', () => {
+    loadGames(currentPage);  // Load games for the first page
+});
