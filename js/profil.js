@@ -26,6 +26,8 @@ for (let i = 1; i < 99; i++) {
     xpThresholds.push(Math.floor(xpThresholds[i - 1] * 1.5)); // Meningkatkan dengan faktor 1.5 setiap level
 }
 
+console.log('XP Thresholds:', xpThresholds);
+
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
 function getUserProfile() {
     const users = JSON.parse(localStorage.getItem('users')) || [];
