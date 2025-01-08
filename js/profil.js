@@ -67,9 +67,12 @@ function loadUserProfile() {
         userEmailDisplay.innerText = userProfile.email;
 
       // Tambahkan level default jika tidak ada
-        if (!userProfile.level) {
-            userProfile.level = 1;
-            saveUserProfile(userProfile); // Simpan data baru ke localStorage
+        if (userProfile.currentXP >= xpThresholds[userProfile.level - 1] && userProfile.level < 99) {
+            let level = userProfile.level;
+            while (userProfile.currentXP >= xpThresholds[level - 1] && level < 99) {
+                level++;
+                userProfile.level = level;
+            }
         }
         
         userLevelDisplay.innerText = userProfile.level || 1;
