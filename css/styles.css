@@ -839,6 +839,60 @@ progress[value]::-moz-progress-bar {
     gap: 10px;
 }
 
+/* Gaya dasar untuk elemen Token */
+#user-token-display {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+    display: inline-block;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Membuat koin berputar */
+.coin {
+    display: inline-block;
+    animation: spin 3s linear infinite;  /* Efek putar yang berulang */
+    transform-origin: center;
+}
+
+/* Animasi putar koin */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Efek cahaya untuk kesan berkilau */
+.coin::before {
+    content: '💰'; /* Emoji koin */
+    font-size: 30px;
+    position: absolute;
+    top: -10px;
+    left: -30px;
+    opacity: 0.5;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* Animasi kilau cahaya pada koin */
+@keyframes glow {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Menambahkan efek bayangan agar tampak lebih 3D */
+#user-token-display {
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+
 /* Style untuk tautan berita */
 .news-info {
     text-decoration: none; /* Menghapus garis bawah pada tautan */
