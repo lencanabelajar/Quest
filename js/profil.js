@@ -78,16 +78,29 @@ function loadUserProfile() {
         userLevelDisplay.innerText = userProfile.level || 1;
         profileImage.src = userProfile.profileImage || '../assets/icon/ruby.png';
 
+        // Memperbarui progress bar
+        const expBar = document.getElementById('exp-bar');
+        expBar.value = userProfile.currentXP || 0;
+        expBar.max = xpThresholds[userProfile.level - 1];
+
+                // Memperbarui tampilan koin
+                document.getElementById('user-coin-display').innerText = userProfile.coins || 0;
+            } else {
+                alert("Data profil tidak ditemukan!");
+                window.location.href = "login.html";
+            }
+        }
+
         // Perbarui data level dan XP
         currentXP = userProfile.currentXP || 0;
         level = userProfile.level || 1;
         totalXP = userProfile.totalXP || 0;
         updateExperienceUI();
-    } else {
-        alert("Data profil tidak ditemukan!");
-        window.location.href = "login.html";
-    }
-}
+            } else {
+                alert("Data profil tidak ditemukan!");
+                window.location.href = "login.html";
+            }
+        }
 
 // Fungsi untuk menambahkan pengalaman dan menangani level up
 function addExperience(points) {
@@ -103,6 +116,7 @@ function addExperience(points) {
         currentXP -= xpThresholds[level - 1];
         level++;
         alert(`Selamat! Anda telah naik ke level ${level}!`);
+        addCoins(50);  // Menambahkan 5 koin saat naik level
     }
 
     // Batasi jika level sudah mencapai 99
@@ -132,6 +146,18 @@ function updateExperienceUI() {
     const expBar = document.getElementById('exp-bar');
     expBar.value = currentXP; // Nilai XP saat ini
     expBar.max = xpThresholds[level - 1]; // Threshold level saat ini
+}
+
+// Fungsi untuk menambahkan koin
+function addCoins(points) {
+    let userProfile = getUserProfile();
+    if (!userProfile) return;
+
+    userProfile.coins = (userProfile.coins || 0) + points;  // Menambah koin yang dimiliki
+    saveUserProfile(userProfile);  // Simpan kembali ke localStorage
+
+    // Perbarui tampilan koin di UI
+    document.getElementById('user-coin-display').innerText = userProfile.coins;
 }
 
 // Event listeners
