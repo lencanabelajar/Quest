@@ -122,7 +122,7 @@ function addExperience(points) {
 
 // Fungsi untuk memperbarui UI XP dan Level
 function updateExperienceUI() {
-    userLevelDisplay.innerText = level;
+    userLevelDisplay.innerText = `Level: ${level}`;
     expDisplay.innerText = `${currentXP} / ${xpThresholds[level - 1]} XP`;
 
     // Update nilai progress bar
