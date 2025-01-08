@@ -65,6 +65,13 @@ function loadUserProfile() {
         greetingUsernameDisplay.innerText = userProfile.name || userEmail.split('@')[0];
         userNameDisplay.innerText = userProfile.name || userEmail.split('@')[0];
         userEmailDisplay.innerText = userProfile.email;
+
+      // Tambahkan level default jika tidak ada
+        if (!userProfile.level) {
+            userProfile.level = 1;
+            saveUserProfile(userProfile); // Simpan data baru ke localStorage
+        }
+        
         userLevelDisplay.innerText = userProfile.level || 1;
         profileImage.src = userProfile.profileImage || '../assets/icon/ruby.png';
 
