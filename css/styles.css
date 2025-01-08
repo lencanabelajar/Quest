@@ -572,13 +572,13 @@ progress[value]::-webkit-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: #4caf50; /* Warna hijau untuk progres */
+  background-color: #cc0a1e; /* Warna hijau untuk progres */
   border-radius: 10px;
   transition: width 0.4s ease-in-out; /* Animasi saat nilai berubah */
 }
 
 progress[value]::-moz-progress-bar {
-  background-color: #4caf50; /* Warna hijau untuk progres */
+  background-color: #cc0a1e; /* Warna hijau untuk progres */
   border-radius: 10px;
   transition: width 0.4s ease-in-out; /* Animasi */
 }
