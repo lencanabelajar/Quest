@@ -83,24 +83,19 @@ function loadUserProfile() {
         expBar.value = userProfile.currentXP || 0;
         expBar.max = xpThresholds[userProfile.level - 1];
 
-                // Memperbarui tampilan koin
-                document.getElementById('user-coin-display').innerText = userProfile.coins || 0;
-            } else {
-                alert("Data profil tidak ditemukan!");
-                window.location.href = "login.html";
-            }
-        }
+        // Memperbarui tampilan koin
+        document.getElementById('user-coin-display').innerText = userProfile.coins || 0;
+    } else {
+        alert("Data profil tidak ditemukan!");
+        window.location.href = "login.html";
+    }
 
         // Perbarui data level dan XP
         currentXP = userProfile.currentXP || 0;
         level = userProfile.level || 1;
         totalXP = userProfile.totalXP || 0;
+
         updateExperienceUI();
-            } else {
-                alert("Data profil tidak ditemukan!");
-                window.location.href = "login.html";
-            }
-        }
 
 // Fungsi untuk menambahkan pengalaman dan menangani level up
 function addExperience(points) {
