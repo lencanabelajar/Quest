@@ -175,6 +175,29 @@ function addCoins(points) {
 // Event listeners
 window.addEventListener('load', loadUserProfile);
 
+// Fungsi untuk menampilkan badges yang didapatkan
+function displayBadges() {
+    const userProfile = getUserProfile(); // Ambil data profil pengguna
+    const badgeContainer = document.getElementById('badge-container'); // Elemen untuk menampilkan badges
+
+    // Pastikan profil pengguna memiliki badges dan badges tidak kosong
+    if (userProfile && userProfile.badges && userProfile.badges.length > 0) {
+        // Jika ada badges, tampilkan
+        userProfile.badges.forEach(badge => {
+            const badgeElement = document.createElement('div');
+            badgeElement.classList.add('badge');
+            badgeElement.innerText = badge; // Badge bisa berupa nama atau gambar
+            badgeContainer.appendChild(badgeElement);
+        });
+    } else {
+        // Jika tidak ada badges, beri pesan kosong atau sembunyikan elemen
+        badgeContainer.innerHTML += '<p>Tidak ada badges yang diperoleh.</p>';
+    }
+}
+
+// Panggil fungsi displayBadges saat halaman dimuat
+window.addEventListener('load', displayBadges);
+
 // Export fungsi addExperience untuk digunakan di halaman lain
 export { addExperience };
 
