@@ -96,18 +96,21 @@ function showPage(page) {
 
 // Fungsi untuk memperbarui pagination
 function updatePagination() {
-    const totalPages = Math.ceil(taskData.length / tasksPerPage);
-    const pagination = document.querySelector('.pagination');
-    pagination.innerHTML = '';  // Clear existing pagination buttons
+    const paginationContainer = document.querySelector('.pagination');
+    paginationContainer.innerHTML = '';  // Clear pagination buttons
 
+    const totalPages = Math.ceil(taskData.length / tasksPerPage); // Total halaman
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement('button');
-        button.innerText = i;
+        button.textContent = i;
         button.onclick = () => showPage(i);
+
+        // Menandai tombol yang aktif
         if (i === currentPage) {
-            button.classList.add('active');  // Mark current page as active
+            button.classList.add('active');
         }
-        pagination.appendChild(button);
+
+        paginationContainer.appendChild(button);
     }
 }
 
