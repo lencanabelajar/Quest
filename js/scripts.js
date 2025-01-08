@@ -70,3 +70,24 @@ profileImageInput.addEventListener('change', handleProfileImageUpload);
 
 // Load games and initialize pagination
 handlePagination(); // Initialize pagination for dynamic loading
+
+const tasksPerPage = 10;
+let currentPage = 1;
+const taskData = [...];  // Your task data array
+
+function showPage(page) {
+    const start = (page - 1) * tasksPerPage;
+    const end = start + tasksPerPage;
+    const tasksToShow = taskData.slice(start, end);
+
+    const taskList = document.getElementById('task-list');
+    taskList.innerHTML = '';
+    tasksToShow.forEach(task => {
+        const taskElement = createTask(task.judul, task.link, task.kategori, task.icon);
+        taskList.innerHTML += taskElement;
+    });
+
+    currentPage = page;
+}
+
+showPage(currentPage);  // Initial page load
