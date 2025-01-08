@@ -79,6 +79,10 @@ function addExperience(points) {
     currentXP += points;
     totalXP += points;
 
+    console.log(`Added XP: ${points}`);
+    console.log(`Current XP: ${currentXP}, Total XP: ${totalXP}, Level: ${level}`);
+    console.log(`XP Threshold for Level ${level}: ${xpThresholds[level - 1]}`);
+    
     // Periksa jika XP mencapai threshold untuk level berikutnya
     while (currentXP >= xpThresholds[level - 1] && level < 99) {
         currentXP -= xpThresholds[level - 1];
