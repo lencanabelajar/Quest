@@ -114,16 +114,20 @@ function updatePagination() {
 // Fungsi untuk memuat data game
 function loadGames(page) {
     // Misalnya Anda mendapatkan data game dari API atau data statis
-    fetch(`path_to_your_data?page=${page}`)
+    return fetch(`path_to_your_data?page=${page}`)
         .then(response => response.json())
         .then(data => {
             taskData = data; // Assign data to taskData
-            showPage(currentPage);  // Load initial page
+            showPage(page);  // Pastikan halaman yang sesuai ditampilkan setelah data dimuat
         })
         .catch(error => console.error("Error loading games:", error));
 }
 
 // Call loadGames when the page loads
 window.addEventListener('load', () => {
-    loadGames(currentPage);  // Load games for the first page
+    loadGames(currentPage)  // Memuat data untuk halaman pertama
+        .then(() => {
+            showPage(currentPage);  // Pastikan halaman pertama ditampilkan setelah data dimuat
+        })
+        .catch(error => console.error("Error loading games:", error));
 });
