@@ -1,6 +1,6 @@
 // Elemen DOM yang digunakan
-const greetingUsernameDisplay = document.getElementById('greeting-username-display'); // Greeting di header
-const userNameDisplay = document.getElementById('profile-username-display'); // Nama di profil
+const greetingUsernameDisplay = document.getElementById('greeting-username-display'); 
+const userNameDisplay = document.getElementById('profile-username-display'); 
 const userEmailDisplay = document.getElementById('userEmail');
 const userLevelDisplay = document.getElementById('user-level-display');
 const expDisplay = document.getElementById('exp-display');
@@ -66,7 +66,7 @@ function loadUserProfile() {
         userNameDisplay.innerText = userProfile.name || userEmail.split('@')[0];
         userEmailDisplay.innerText = userProfile.email;
 
-      // Tambahkan level default jika tidak ada
+        // Tambahkan level default jika tidak ada
         if (userProfile.currentXP >= xpThresholds[userProfile.level - 1] && userProfile.level < 99) {
             let level = userProfile.level;
             while (userProfile.currentXP >= xpThresholds[level - 1] && level < 99) {
@@ -90,12 +90,13 @@ function loadUserProfile() {
         window.location.href = "login.html";
     }
 
-        // Perbarui data level dan XP
-        currentXP = userProfile.currentXP || 0;
-        level = userProfile.level || 1;
-        totalXP = userProfile.totalXP || 0;
+    // Perbarui data level dan XP
+    currentXP = userProfile.currentXP || 0;
+    level = userProfile.level || 1;
+    totalXP = userProfile.totalXP || 0;
 
-        updateExperienceUI();
+    updateExperienceUI();
+}
 
 // Fungsi untuk menambahkan pengalaman dan menangani level up
 function addExperience(points) {
@@ -255,9 +256,6 @@ editProfileForm?.addEventListener('submit', event => {
 
 // Fungsi untuk menutup modal dengan tombol Cancel
 cancelEditBtn?.addEventListener('click', () => closeModal(editProfileModal));
-
-// Event listeners
-window.addEventListener('load', loadUserProfile);
 
 changeProfilePicBtn?.addEventListener('click', () => {
     profileImageInput.click(); // Membuka dialog file
