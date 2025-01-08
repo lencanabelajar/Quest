@@ -1018,7 +1018,7 @@ progress[value]::-moz-progress-bar {
 }
 
 /* Menambahkan styling untuk keseluruhan bar XP */
-#exp-bar {
+.exp-bar {
     width: 100%;
     height: 20px;
     background-color: #f0f0f0; /* Background progres */
@@ -1028,7 +1028,7 @@ progress[value]::-moz-progress-bar {
 }
 
 /* Styling untuk elemen progress bar fill */
-#exp-bar-fill {
+.exp-bar-fill {
     height: 100%;
     width: 0%; /* Ini akan diubah melalui JS */
     background-color: #ab0c3c; /* Warna merah*/
@@ -1037,18 +1037,18 @@ progress[value]::-moz-progress-bar {
 }
 
 /* CSS Animasi untuk Badge */
-#badge-container {
+.badge-container {
     text-align: center;
     margin-top: 20px;
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
-#badge-container.badge-animation {
+.badge-container.badge-animation {
     opacity: 1;
 }
 
-#badge-img {
+.badge-img {
     width: 100px; /* Atur ukuran badge sesuai kebutuhan */
     height: 100px;
     margin-bottom: 10px;
