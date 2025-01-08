@@ -26,6 +26,9 @@ for (let i = 1; i < 99; i++) {
     xpThresholds.push(Math.floor(xpThresholds[i - 1] * 1.5)); // Meningkatkan dengan faktor 1.5 setiap level
 }
 
+// Simpan XP thresholds ke localStorage
+localStorage.setItem('xpThresholds', JSON.stringify(xpThresholds));
+
 console.log('XP Thresholds:', xpThresholds);
 
 // Fungsi untuk mendapatkan data profil pengguna dari localStorage
