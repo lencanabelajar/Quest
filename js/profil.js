@@ -36,6 +36,13 @@ function getUserProfile() {
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const userEmail = sessionStorage.getItem('userEmail');
     return users.find(user => user.email === userEmail) || null;
+
+    // Jika pengguna ditemukan, pastikan ada properti coins
+    if (userProfile) {
+        userProfile.coins = userProfile.coins || 0; // Inisialisasi koin dengan nilai 0 jika tidak ada
+    }
+
+    return userProfile || null;
 }
 
 // Fungsi untuk menyimpan data pengguna ke localStorage
