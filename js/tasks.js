@@ -160,6 +160,21 @@ function showBadge() {
         expBarFill.style.width = `${(userProfile.currentXP / userProfile.maxXP) * 100}%`;
     }
 
+function addBadge(badgeName) {
+    const userProfile = getUserProfile(); // Ambil data profil pengguna
+    if (!userProfile) {
+        alert('Pengguna tidak ditemukan!');
+        return;
+    }
+
+    // Menambahkan badge jika belum ada
+    if (!userProfile.badges.includes(badgeName)) {
+        userProfile.badges.push(badgeName);
+        saveUserProfile(userProfile); // Simpan perubahan profil
+        showBadgeInProfile(badgeName); // Tampilkan badge di profil
+    }
+}
+    
     // Ambil data profil pengguna
 function getUserProfile() {
     try {
@@ -186,6 +201,18 @@ function saveUserProfile(updatedUser) {
     } catch (error) {
         console.error('Gagal menyimpan profil pengguna:', error);
     }
+}
+
+function showBadgeInProfile(badgeName) {
+    const badgeContainer = document.getElementById('badge-container');
+    
+    // Membuat elemen baru untuk badge
+    const badgeElement = document.createElement('div');
+    badgeElement.classList.add('badge');
+    badgeElement.innerText = badgeName;
+
+    // Menambahkan elemen badge ke dalam container
+    badgeContainer.appendChild(badgeElement);
 }
 
     // Muat progres sebelumnya saat halaman dimuat
