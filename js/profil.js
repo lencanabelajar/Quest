@@ -159,6 +159,15 @@ function addCoins(points) {
     userProfile.coins = (userProfile.coins || 0) + points;  // Menambah koin yang dimiliki
     saveUserProfile(userProfile);  // Simpan kembali ke localStorage
 
+     // Menambahkan animasi koin
+    const coinDisplay = document.getElementById('user-coin-display');
+    if (coinDisplay) {
+        coinDisplay.classList.add('coin-animation');
+        setTimeout(() => {
+            coinDisplay.classList.remove('coin-animation');
+        }, 1000);  // Hapus animasi setelah 1 detik
+    }
+    
     // Perbarui tampilan koin di UI
     document.getElementById('user-coin-display').innerText = userProfile.coins;
 }
