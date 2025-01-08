@@ -52,7 +52,7 @@ header {
 }
 
 .menu-item:hover {
-    background: #191970;
+    background: #3a3a5e;
     transform: scale(1.05);
 }
 
@@ -939,7 +939,7 @@ progress[value]::-moz-progress-bar {
 #exp-bar-fill {
     height: 100%;
     width: 0%; /* Ini akan diubah melalui JS */
-    background-color: #4caf50; /* Warna hijau */
+    background-color: #ab0c3c; /* Warna merah*/
     border-radius: 10px;
     transition: width 0.3s ease-in-out;
 }
