@@ -73,18 +73,19 @@ handlePagination(); // Initialize pagination for dynamic loading
 
 // Daftar task yang akan ditampilkan di halaman
 const taskData = [
-    { judul: 'Pengantar Sosiologi', link: 'sosiologi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
-    { judul: 'Pengantar Sejarah', link: 'sejarah1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
-    { judul: 'Pengantar Ekonomi', link: 'ekonomi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
-    { judul: 'Cooming Soon', link: 'coomingsoon', kategori: 'Cooming-Soon', icon: 'ruby.png' },
-    // Tambahkan data lainnya
+    { judul: 'Pengantar Sosiologi', link: '../html/tasks/sosiologi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Pengantar Sejarah', link: '../html/tasks/sejarah1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Pengantar Ekonomi', link: '../html/tasks/ekonomi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Cooming Soon', link: 'tasks/coomingsoon.html', kategori: 'Cooming-Soon', icon: 'ruby.png' },
+    { judul: 'Cooming Soon', link: 'tasks/coomingsoon.html', kategori: 'Cooming-Soon', icon: 'ruby.png' },
+    { judul: 'Cooming Soon', link: 'tasks/coomingsoon.html', kategori: 'Cooming-Soon', icon: 'ruby.png' },
 ];
 
 // Jumlah task yang ditampilkan per halaman
-const tasksPerPage = 3;  
+const tasksPerPage = 3;
 
 // Halaman yang sedang aktif
-let currentPage = 1;  
+let currentPage = 1;
 
 // Fungsi untuk menampilkan halaman task
 function showPage(page) {
@@ -92,12 +93,12 @@ function showPage(page) {
     const end = start + tasksPerPage;
     const tasksToShow = taskData.slice(start, end);
 
-    const taskList = document.getElementById('task-list');
-    taskList.innerHTML = '';  // Clear previous task list
+    const taskList = document.getElementById('student-games-list');
+    taskList.innerHTML = ''; // Clear previous task list
 
     tasksToShow.forEach(task => {
         const taskElement = createTask(task.judul, task.link, task.kategori, task.icon);
-        taskList.appendChild(taskElement);  // Append new task using appendChild
+        taskList.appendChild(taskElement); // Append new task using appendChild
     });
 
     // Update pagination
@@ -137,7 +138,7 @@ function createTask(judul, link, kategori, icon) {
 // Fungsi untuk memperbarui tombol pagination
 function updatePagination() {
     const paginationContainer = document.querySelector('.pagination');
-    paginationContainer.innerHTML = '';  // Clear pagination buttons
+    paginationContainer.innerHTML = ''; // Clear pagination buttons
 
     const totalPages = Math.ceil(taskData.length / tasksPerPage);
     for (let i = 1; i <= totalPages; i++) {
