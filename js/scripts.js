@@ -71,9 +71,21 @@ profileImageInput.addEventListener('change', handleProfileImageUpload);
 // Load games and initialize pagination
 handlePagination(); // Initialize pagination for dynamic loading
 
-const tasksPerPage = 4;
-let currentPage = 1;
-let taskData = [];  // Pastikan taskData diisi dengan data yang benar
+// Daftar task yang akan ditampilkan di halaman
+const taskData = [
+    { judul: 'Pengantar Sosiologi', link: 'sosiologi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Pengantar Sejarah', link: 'sejarah1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Pengantar Ekonomi', link: 'ekonomi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
+    { judul: 'Cooming Soon', link: 'coomingsoon', kategori: 'Cooming-Soon', icon: 'ruby.png' },
+    { judul: 'Cooming Soon', link: 'coomingsoon', kategori: 'Cooming-Soon', icon: 'ruby.png' }
+    // Tambahkan data lainnya
+];
+
+// Jumlah task yang ditampilkan per halaman
+const tasksPerPage = 3;  
+
+// Halaman yang sedang aktif
+let currentPage = 1;  
 
 // Fungsi untuk menampilkan halaman task
 function showPage(page) {
@@ -94,18 +106,46 @@ function showPage(page) {
     currentPage = page;
 }
 
-// Fungsi untuk memperbarui pagination
+// Fungsi untuk membuat elemen task
+function createTask(judul, link, kategori, icon) {
+    const taskElement = document.createElement('div');
+    taskElement.classList.add('game-item');
+
+    const taskLink = document.createElement('a');
+    taskLink.href = link;
+    taskLink.classList.add('game-info');
+
+    const taskTitle = document.createElement('h3');
+    taskTitle.textContent = judul;
+
+    const taskImage = document.createElement('img');
+    taskImage.src = `../assets/icon/${icon}`;
+    taskImage.alt = judul;
+    taskImage.classList.add('game-invois');
+    taskImage.loading = 'lazy';
+
+    const taskCategory = document.createElement('h2');
+    taskCategory.textContent = kategori;
+
+    taskLink.appendChild(taskTitle);
+    taskLink.appendChild(taskImage);
+    taskLink.appendChild(taskCategory);
+    taskElement.appendChild(taskLink);
+
+    return taskElement;
+}
+
+// Fungsi untuk memperbarui tombol pagination
 function updatePagination() {
     const paginationContainer = document.querySelector('.pagination');
     paginationContainer.innerHTML = '';  // Clear pagination buttons
 
-    const totalPages = Math.ceil(taskData.length / tasksPerPage); // Total halaman
+    const totalPages = Math.ceil(taskData.length / tasksPerPage);
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement('button');
         button.textContent = i;
         button.onclick = () => showPage(i);
 
-        // Menandai tombol yang aktif
         if (i === currentPage) {
             button.classList.add('active');
         }
@@ -113,6 +153,11 @@ function updatePagination() {
         paginationContainer.appendChild(button);
     }
 }
+
+// Memanggil fungsi untuk menampilkan halaman pertama saat halaman dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    showPage(1);
+});
 
 // Fungsi untuk memuat data game
 function loadGames(page) {
