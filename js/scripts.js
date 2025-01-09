@@ -77,7 +77,6 @@ const taskData = [
     { judul: 'Pengantar Sejarah', link: 'sejarah1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
     { judul: 'Pengantar Ekonomi', link: 'ekonomi1', kategori: 'Pelajar-Mahasiswa', icon: 'ruby.png' },
     { judul: 'Cooming Soon', link: 'coomingsoon', kategori: 'Cooming-Soon', icon: 'ruby.png' },
-    { judul: 'Cooming Soon', link: 'coomingsoon', kategori: 'Cooming-Soon', icon: 'ruby.png' }
     // Tambahkan data lainnya
 ];
 
