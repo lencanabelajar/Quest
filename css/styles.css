@@ -201,6 +201,13 @@ header {
     margin-top: 10px;
 }
 
+/* Ukuran gambar di dalam kartu */
+.game-invois {
+    max-width: 100px; /* Membatasi ukuran gambar agar lebih kecil */
+    height: auto; /* Menjaga proporsi gambar */
+    margin-bottom: 10px;
+}
+
 .game-info p {
     margin: 5px 0;
     font-size: 0.95em;
@@ -573,50 +580,8 @@ form p a:hover {
   flex-wrap: wrap;
 }
 
-/* Responsif: Untuk desktop dan landscape, menampilkan 3 kartu per baris */
 .game-favourite, .edisi-khusus {
-    display: flex;
-    flex-wrap: wrap; /* Membuat kartu bisa dibungkus ke baris baru */
-    justify-content: center;
-    gap: 20px;  /* Jarak antar kartu */
-}
-
-.game-favourite h2, .edisi-khusus h2 {
-    font-size: 1.5rem;
-    text-align: center;
-}
-
-/* Menampilkan kartu game dengan flex */
-.game-item, .edisi-khusus-item {
-    display: flex;
-    flex: 0 0 30%; /* Mengatur agar ada 3 kolom di desktop */
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
-    background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 250px; /* Ukuran kartu lebih kecil */
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.game-item h3, .edisi-khusus-item h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.game-item p, .edisi-khusus-item h2 {
-    font-size: 1rem;
-    color: #333;
-}
-
-.game-item h2 {
-    font-size: 0.9rem;
-    color: #333;
+  width: 48%; /* Agar keduanya hampir sama lebar */
 }
 
 @keyframes bounce {
@@ -763,10 +728,7 @@ form p a:hover {
   .game-favourite, .edisi-khusus {
     width: 100%;
   }
-    
-    .game-item, .edisi-khusus-item {
-      flex: 0 0 45%; /* Mengatur agar ada 2 kolom di mobile */
-    }
+
 }
 
 /*besar kecil tombol panah versi tryhackme*/
@@ -1273,10 +1235,6 @@ form p a:hover {
     .pagination button {
         margin: 5px 0;
         width: 100%;
-    }
-    
-    .game-item, .edisi-khusus-item {
-        flex: 0 0 90%; /* Mengatur agar ada 1 kolom di mobile */
     }
 }
 
