@@ -1,5 +1,5 @@
-// Daftar game yang akan ditampilkan (data statis atau diambil dari API)
-const gameData = [
+// Data game untuk "Non Government"
+const nonGovernmentData = [
     { judul: '📚 Pengantar Dunia Kerja Profesional', link: '../html/tasks/pengantarnongovernment', kategori: 'Non Government', icon: 'ruby.png' },
     { judul: '📚 Pengelolaan Waktu yang Efektif di Tempat Kerja Profesional', link: '../html/tasks/manajemenwaktu', kategori: 'Non Government', icon: 'ruby.png' },
     { judul: 'Pengantar Komunikasi Dunia Kerja', link: '../html/tasks/pengantarkomunikasikerja', kategori: 'Non Government', icon: 'ruby.png' },
@@ -16,7 +16,7 @@ let currentPage = 1;  // Halaman pertama yang akan ditampilkan
 function showPage(page) {
     const startIndex = (page - 1) * gamesPerPage;
     const endIndex = startIndex + gamesPerPage;
-    const gamesToShow = gameData.slice(startIndex, endIndex);
+    const gamesToShow = nonGovernmentData.slice(startIndex, endIndex);
 
     const gamesList = document.getElementById('games-list');
     gamesList.innerHTML = ''; // Hapus isi sebelumnya
@@ -47,7 +47,7 @@ function updatePagination() {
     const paginationContainer = document.getElementById('pagination-container');
     paginationContainer.innerHTML = ''; // Hapus pagination sebelumnya
 
-    const totalPages = Math.ceil(gameData.length / gamesPerPage);
+    const totalPages = Math.ceil(nonGovernmentData.length / gamesPerPage);
 
     for (let i = 1; i <= totalPages; i++) {
         const button = document.createElement('button');
