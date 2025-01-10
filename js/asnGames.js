@@ -4,28 +4,24 @@ const asnGames = [
         title: "📚 Pengantar PPPK",
         link: "../html/tasks/pengantarp3k",
         image: "../assets/icon/ruby.png",
-        description: "📚 Pengantar PPPK",
         target: "Calon PPPK",
     },
     {
         title: "📚 Pengantar CPNS",
         link: "../html/tasks/pengantarcpns",
         image: "../assets/icon/ruby.png",
-        description: "📚 Pengantar CPNS",
         target: "Calon CPNS",
     },
     {
         title: "📚 Pengantar Arsiparis",
         link: "../html/tasks/arsiparis",
         image: "../assets/icon/ruby.png",
-        description: "📚 Pengantar Arsiparis",
         target: "CPNS - Arsiparis",
     },
     {
         title: "🛠 Cooming Soon",
         link: "../html/tasks/coomingsoon",
         image: "../assets/icon/ruby.png",
-        description: "🛠 Cooming Soon",
         target: "Offline",
     },
 ];
