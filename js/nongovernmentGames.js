@@ -18,7 +18,7 @@ function showPage(page) {
     const endIndex = startIndex + gamesPerPage;
     const gamesToShow = nonGovernmentData.slice(startIndex, endIndex);
 
-    const gamesList = document.getElementById('games-list');
+    const gamesList = document.getElementById('games-list');  // ID yang sesuai dengan HTML
     gamesList.innerHTML = ''; // Hapus isi sebelumnya
 
     // Menampilkan game
@@ -44,7 +44,7 @@ function showPage(page) {
 
 // Fungsi untuk memperbarui tombol pagination
 function updatePagination() {
-    const paginationContainer = document.getElementById('pagination-container');
+    const paginationContainer = document.getElementById('pagination-container');  // ID sesuai HTML
     paginationContainer.innerHTML = ''; // Hapus pagination sebelumnya
 
     const totalPages = Math.ceil(nonGovernmentData.length / gamesPerPage);
