@@ -32,7 +32,7 @@ const asnGames = [
 
 // Fungsi untuk menampilkan daftar game
 function displayAsnGames(page = 1, itemsPerPage = 3) {
-    const gamesList = document.getElementById("games-list");
+    const gamesList = document.getElementById("asn-games-list");
     gamesList.innerHTML = ""; // Kosongkan daftar sebelumnya
 
     const startIndex = (page - 1) * itemsPerPage;
