@@ -69,26 +69,26 @@ header {
 /* Game Container Styling */
 .games-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsif */
+    gap: 30px; /* Jarak antar kartu lebih besar */
+    padding: 20px; /* Ruang di sekitar grid */
 }
 
+/* Game Item Styling */
 .game-item {
-    width: 250px; /* Fixed width for the game items */
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
-    padding: 15px;
+    padding: 20px;
     border-radius: 15px;
-    text-decoration: none;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 15px; /* Jarak antar elemen dalam kartu */
 }
 
-/* Different Background Gradients for Odd/Even Items */
+/* Gradien Berbeda untuk Tiap Kartu */
 .game-item:nth-child(2n) {
     background: linear-gradient(135deg, #7ee8fa, #80ff72);
 }
@@ -101,53 +101,43 @@ header {
     background: linear-gradient(135deg, #d4fc79, #96e6a1);
 }
 
-/* Game Link Styling */
-.game-link {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    background: linear-gradient(135deg, #7ee8fa, #80ff72);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    animation: glow 3s infinite alternate;
-    height: 100%;
-}
-
+/* Game Thumbnail Styling */
 .game-thumbnail {
     width: 100%;
-    aspect-ratio: 16/9;
+    height: auto;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.game-link h3 {
-    font-size: 1em;
+/* Game Title Styling */
+.game-item h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: white;
     margin: 10px 0;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
 }
 
-.game-link p {
-    margin: 5px 0;
-    font-size: 1.1em;
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+/* Game Description Styling */
+.game-item p {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    margin: 0;
 }
 
 /* Hover Effects */
-.game-link:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.8);
+.game-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.5);
 }
 
-.game-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+/* Game Link Styling */
+.game-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .pagination {
@@ -1221,5 +1211,12 @@ progress[value]::-moz-progress-bar {
     50% {
         background: #2980b9;
         text-shadow: 0 0 15px #00ffff, 0 0 20px #00ffff;
+    }
+}
+
+/* Optional: Responsiveness */
+@media (max-width: 600px) {
+    .games-container {
+        grid-template-columns: 1fr; /* Satu kolom untuk layar kecil */
     }
 }
