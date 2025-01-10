@@ -152,32 +152,6 @@ header {
     color: inherit;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.pagination button {
-    background: #3a3a5e;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.pagination button:hover {
-    background: #1e1e2f;
-}
-
-.pagination button:disabled {
-    background: #555;
-    cursor: not-allowed;
-}
-
 /* Game Favourite Section */
 .game-favourite {
     margin: 20px auto;
@@ -1148,32 +1122,40 @@ form p a:hover {
 
 /* Pengaturan dasar untuk pagination */
 .pagination {
+    display: flex;
+    justify-content: center; /* Memusatkan tombol pagination secara horizontal */
+    gap: 10px; /* Memberikan jarak antar tombol */
+    margin-top: 20px; /* Memberikan jarak atas */
     text-align: center;
-    margin-top: 30px;
 }
 
-/* Gaya tombol pagination */
 .pagination button {
-    background-color: #007bff; /* Warna biru */
+    background-color: #007bff; /* Warna biru untuk tombol */
     color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
-    margin: 0 5px;
-    transition: background-color 0.3s;
+    margin: 0 5px; /* Jarak antar tombol */
+    transition: background-color 0.3s; /* Transisi saat hover */
 }
 
-/* Efek hover untuk tombol pagination */
+/* Efek hover saat tombol pagination disorot */
 .pagination button:hover {
-    background-color: #0056b3; /* Biru lebih gelap */
+    background-color: #0056b3; /* Biru lebih gelap saat hover */
 }
 
-/* Efek tombol pagination yang aktif */
+/* Efek saat tombol pagination aktif */
 .pagination button.active {
     background-color: #004085;
     border-color: #003366;
+}
+
+/* Mengubah tampilan tombol yang dinonaktifkan */
+.pagination button:disabled {
+    background-color: #555; /* Warna lebih gelap */
+    cursor: not-allowed; /* Tidak dapat diklik */
 }
 
 /* Menghilangkan outline saat tombol difokuskan */
