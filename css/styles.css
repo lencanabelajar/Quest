@@ -75,7 +75,6 @@ header {
     margin-top: 20px; /* Jarak atas */
 }
 
-/* Game Item Styling */
 .game-item {
     background: linear-gradient(135deg, #ff7eb3, #ff758c);
     padding: 20px;
@@ -87,6 +86,18 @@ header {
     flex-direction: column;
     justify-content: space-between;
     gap: 15px; /* Jarak antar elemen dalam kartu */
+    width: 300px; /* Tentukan lebar kartu */
+    height: auto; /* Pastikan tinggi kartu fleksibel */
+}
+
+.game-item img {
+    width: 100%; /* Mengisi lebar kartu */
+    height: auto; /* Menjaga rasio gambar */
+    border-bottom: 2px solid #ddd; /* Pemisah antara gambar dan teks */
+}
+
+.game-item h3, .game-item p, .game-item h2 {
+    margin: 10px 0;
 }
 
 /* Gradien Berbeda untuk Tiap Kartu */
