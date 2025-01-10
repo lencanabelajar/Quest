@@ -63,7 +63,6 @@ function showPage(page) {
             <a href="${game.link}" class="game-info">
                 <h3>${game.judul}</h3>
                 <img src="../assets/icon/${game.icon}" alt="${game.judul}" class="game-invois" loading="lazy">
-                <p>${game.judul}</p>
                 <h2>${game.kategori}</h2>
             </a>
         `;
