@@ -523,6 +523,77 @@ form p a:hover {
     animation: bounce 1s;
 }
 
+/* Edisi Khusus Section */
+.edisi-khusus {
+    margin: 20px auto;
+    padding: 15px;
+    width: 250px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #1e1e2f, #4b0082);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    animation: glow-bg 4s infinite alternate, scale-up 5s ease-in-out infinite;
+    text-align: center;
+}
+
+.edisi-khusus h2 {
+    color: #fff;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    animation: pulse-text 3s ease-in-out infinite;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.edisi-khusus-list {
+    width: 100%;
+}
+
+.edisi-khusus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.edisi-khusus-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+}
+
+.edisi-khusus-info h3 {
+    font-size: 1.2em;
+    margin: 8px 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+}
+
+.edisi-khusus-info:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+/* Responsif untuk Desktop */
+.game-sections {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Untuk memberi jarak antara kedua bagian */
+  flex-wrap: wrap;
+}
+
+.game-favourite, .edisi-khusus {
+  width: 48%; /* Agar keduanya hampir sama lebar */
+}
+
 @keyframes bounce {
     0%, 100% {
         transform: scale(1);
@@ -533,7 +604,7 @@ form p a:hover {
 }
 
 /* Completion message */
-#completion-message {
+.completion-message {
     background-color: #d4edda;
     padding: 15px;
     border-radius: 8px;
@@ -545,7 +616,7 @@ form p a:hover {
 }
 
 /* Styling tambahan untuk progress bar untuk lebih responsif di berbagai browser */
-progress[value] {
+.progress {
   appearance: none;
   -webkit-appearance: none; /* Untuk kompatibilitas di Safari/Chrome */
   width: 100%; /* Lebar penuh */
@@ -556,18 +627,18 @@ progress[value] {
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Efek bayangan */
 }
 
-progress[value]::-webkit-progress-bar {
+.progress::-webkit-progress-bar {
   background-color: #f3f3f3; /* Background bar */
   border-radius: 10px;
 }
 
-progress[value]::-webkit-progress-value {
+.progress::-webkit-progress-value {
   background-color: #cc0a1e; /* Warna hijau untuk progres */
   border-radius: 10px;
   transition: width 0.4s ease-in-out; /* Animasi saat nilai berubah */
 }
 
-progress[value]::-moz-progress-bar {
+.progress::-moz-progress-bar {
   background-color: #cc0a1e; /* Warna hijau untuk progres */
   border-radius: 10px;
   transition: width 0.4s ease-in-out; /* Animasi */
@@ -659,6 +730,14 @@ progress[value]::-moz-progress-bar {
     #edit-profile-btn {
         width: 100%;
     }
+
+      .game-sections {
+    flex-direction: column; /* Agar menjadi satu kolom pada perangkat lebih kecil */
+  }
+
+  .game-favourite, .edisi-khusus {
+    width: 100%;
+  }
 
 }
 
