@@ -3,46 +3,56 @@
 const studentGames = [
     {
         title: "Pengantar Sosiologi",
-        description: "Pengantar Sosiologi",
-        target: "Pelajar-Mahasiswa",
+        link: "../html/tasks/sosiologi1",
         image: "../assets/icon/ruby.png",
-        link: "../html/tasks/sosiologi1"
+        description: "Pengantar Sosiologi",
     },
     {
         title: "Pengantar Sejarah",
-        description: "Pengantar Sejarah",
-        target: "Pelajar-Mahasiswa",
+        link: "../html/tasks/sejarah1",
         image: "../assets/icon/ruby.png",
-        link: "../html/tasks/sejarah1"
+        description: "Pengantar Sejarah",
     },
     {
         title: "Pengantar Ekonomi",
-        description: "Pengantar Ekonomi",
-        target: "Pelajar-Mahasiswa",
+        link: "../html/tasks/ekonomi1",
         image: "../assets/icon/ruby.png",
-        link: "../html/tasks/ekonomi1"
+        description: "Pengantar Ekonomi",
     },
     {
-        title: "🛠 Cooming Soon",
-        description: "Konten sedang dalam pengembangan",
-        target: "Offline",
+        title: "🛠 Coming Soon",
+        link: "tasks/coomingsoon.html",
         image: "../assets/icon/ruby.png",
-        link: "tasks/coomingsoon.html"
+        description: "Offline",
     },
-    // Tambahkan data game lainnya di sini
+    {
+        title: "🛠 Coming Soon",
+        link: "tasks/coomingsoon.html",
+        image: "../assets/icon/ruby.png",
+        description: "Offline",
+    },
+    {
+        title: "🛠 Coming Soon",
+        link: "tasks/coomingsoon.html",
+        image: "../assets/icon/ruby.png",
+        description: "Offline",
+    },
 ];
 
-// Fungsi untuk menampilkan daftar game
-function displayStudentGames(page = 1, itemsPerPage = 3) {
+// Konstanta untuk jumlah item per halaman
+const ITEMS_PER_PAGE = 3;
+
+// Fungsi untuk menampilkan daftar game berdasarkan halaman
+function displayStudentGames(page = 1) {
     const studentGamesList = document.getElementById("student-games-list");
     studentGamesList.innerHTML = ""; // Kosongkan daftar sebelumnya
 
     // Hitung indeks game yang akan ditampilkan
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    const startIndex = (page - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
     const gamesToDisplay = studentGames.slice(startIndex, endIndex);
 
-    // Iterasi dan tambahkan elemen game ke dalam kontainer
+    // Tambahkan elemen game ke dalam kontainer
     gamesToDisplay.forEach(game => {
         const gameItem = document.createElement("div");
         gameItem.className = "game-item";
@@ -51,7 +61,6 @@ function displayStudentGames(page = 1, itemsPerPage = 3) {
                 <h3>${game.title}</h3>
                 <img src="${game.image}" alt="${game.description}" class="game-invois" loading="lazy">
                 <p>${game.description}</p>
-                <h2>${game.target}</h2>
             </a>
         `;
         studentGamesList.appendChild(gameItem);
@@ -65,11 +74,32 @@ function showPage(page) {
 
     // Perbarui status tombol aktif di pagination
     const paginationButtons = document.querySelectorAll(".pagination button");
-    paginationButtons.forEach(button => button.classList.remove("active"));
-    paginationButtons[page - 1].classList.add("active");
+    paginationButtons.forEach((button, index) => {
+        if (index + 1 === page) {
+            button.classList.add("active");
+        } else {
+            button.classList.remove("active");
+        }
+    });
 }
 
-// Tampilkan halaman pertama secara default
+// Fungsi untuk membuat tombol pagination
+function createPagination(totalItems) {
+    const paginationContainer = document.querySelector(".pagination");
+    paginationContainer.innerHTML = ""; // Kosongkan pagination sebelumnya
+
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement("button");
+        button.textContent = i;
+        button.onclick = () => showPage(i);
+        if (i === 1) button.classList.add("active"); // Halaman pertama aktif secara default
+        paginationContainer.appendChild(button);
+    }
+}
+
+// Event listener untuk memuat halaman pertama dan membuat pagination
 document.addEventListener("DOMContentLoaded", () => {
-    displayStudentGames(1); // Tampilkan halaman pertama
+    createPagination(studentGames.length); // Buat tombol pagination
+    displayStudentGames(1); // Tampilkan halaman pertama secara default
 });
