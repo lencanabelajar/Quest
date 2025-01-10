@@ -1,11 +1,40 @@
 // Data game untuk "Non Government"
 const nonGovernmentData = [
-    { judul: '📚 Pengantar Dunia Kerja Profesional', link: '../html/tasks/pengantarnongovernment', kategori: 'Non Government', icon: 'ruby.png' },
-    { judul: '📚 Pengelolaan Waktu yang Efektif di Tempat Kerja Profesional', link: '../html/tasks/manajemenwaktu', kategori: 'Non Government', icon: 'ruby.png' },
-    { judul: 'Pengantar Komunikasi Dunia Kerja', link: '../html/tasks/pengantarkomunikasikerja', kategori: 'Non Government', icon: 'ruby.png' },
-    { judul: '🛠 Cooming Soon', link: '../html/tasks/coomingsoon', kategori: 'Offline', icon: 'ruby.png' },
-    { judul: '🛠 Cooming Soon', link: '../html/tasks/coomingsoon', kategori: 'Offline', icon: 'ruby.png' },
-    { judul: '🛠 Cooming Soon', link: '../html/tasks/coomingsoon', kategori: 'Offline', icon: 'ruby.png' },
+    { 
+        judul: '📚 Pengantar Dunia Kerja Profesional',
+        link: '../html/tasks/pengantarnongovernment',
+        kategori: 'Non Government',
+        icon: 'ruby.png' 
+    },
+    {
+        judul: '📚 Pengelolaan Waktu yang Efektif di Tempat Kerja Profesional',
+        link: '../html/tasks/manajemenwaktu',
+        kategori: 'Non Government',
+        icon: 'ruby.png' 
+    },
+    { 
+        judul: 'Pengantar Komunikasi Dunia Kerja',
+        link: '../html/tasks/pengantarkomunikasikerja',
+        kategori: 'Non Government',
+        icon: 'ruby.png' 
+    },
+    { judul: '🛠 Cooming Soon',
+     link: '../html/tasks/coomingsoon',
+     kategori: 'Offline',
+     icon: 'ruby.png' 
+    },
+    { 
+        judul: '🛠 Cooming Soon',
+        link: '../html/tasks/coomingsoon',
+        kategori: 'Offline',
+        icon: 'ruby.png' 
+    },
+    { 
+        judul: '🛠 Cooming Soon',
+        link: '../html/tasks/coomingsoon',
+        kategori: 'Offline',
+        icon: 'ruby.png' 
+    },
 ];
 
 // Jumlah game yang ditampilkan per halaman
