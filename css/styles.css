@@ -1133,24 +1133,25 @@ form p a:hover {
     text-align: center;
 }
 
+/* Default styling untuk tombol pagination (Desktop/ Landscape) */
 .pagination button {
-    background-color: #007bff; /* Warna biru untuk tombol */
+    background-color: #007bff; /* Warna biru */
     color: white;
     border: none;
     border-radius: 5px;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
-    margin: 0 5px; /* Jarak antar tombol */
-    transition: background-color 0.3s; /* Transisi saat hover */
+    margin: 0 5px;
+    transition: background-color 0.3s;
 }
 
-/* Efek hover saat tombol pagination disorot */
+/* Efek hover untuk tombol pagination */
 .pagination button:hover {
-    background-color: #0056b3; /* Biru lebih gelap saat hover */
+    background-color: #0056b3; /* Biru lebih gelap */
 }
 
-/* Efek saat tombol pagination aktif */
+/* Efek tombol pagination yang aktif */
 .pagination button.active {
     background-color: #004085;
     border-color: #003366;
@@ -1295,5 +1296,23 @@ form p a:hover {
 @media (max-width: 600px) {
     .games-container {
         grid-template-columns: 1fr; /* Satu kolom untuk layar kecil */
+    }
+}
+
+/* Media Query untuk tampilan Mobile - Portrait */
+@media (max-width: 767px) {
+    .pagination button {
+        padding: 8px 12px;  /* Menurunkan padding agar tombol lebih ringkas */
+        font-size: 14px;  /* Mengurangi ukuran font */
+        margin: 0 3px;    /* Mengurangi jarak antar tombol */
+    }
+}
+
+/* Media Query untuk tampilan Mobile - Landscape */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .pagination button {
+        padding: 9px 13px;  /* Ukuran padding sedikit lebih besar untuk tablet */
+        font-size: 15px;     /* Ukuran font sedikit lebih besar */
+        margin: 0 4px;       /* Margin antar tombol tetap sedikit kecil */
     }
 }
