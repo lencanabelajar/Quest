@@ -68,10 +68,11 @@ header {
 
 /* Game Container Styling */
 .games-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsif */
-    gap: 30px; /* Jarak antar kartu lebih besar */
-    padding: 20px; /* Ruang di sekitar grid */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Memusatkan secara horizontal */
+    gap: 20px; /* Jarak antar kartu */
+    margin-top: 20px; /* Jarak atas */
 }
 
 /* Game Item Styling */
