@@ -1124,13 +1124,13 @@ form p a:hover {
     margin-bottom: 10px;
 }
 
-/* Pengaturan dasar untuk pagination */
+/* Default styling untuk tombol pagination (Desktop/ Landscape) */
 .pagination {
     display: flex;
-    justify-content: center; /* Memusatkan tombol pagination secara horizontal */
-    gap: 10px; /* Memberikan jarak antar tombol */
-    margin-top: 20px; /* Memberikan jarak atas */
-    text-align: center;
+    justify-content: center; /* Menjaga tombol tetap di tengah */
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Agar tombol bisa menyesuaikan layar jika banyak */
 }
 
 /* Default styling untuk tombol pagination (Desktop/ Landscape) */
@@ -1301,11 +1301,17 @@ form p a:hover {
 
 /* Media Query untuk tampilan Mobile - Portrait */
 @media (max-width: 767px) {
+    .pagination {
+        flex-direction: row; /* Pastikan tombol pagination tetap horizontal */
+        justify-content: center; /* Tombol tetap di tengah */
+        overflow-x: auto; /* Memungkinkan scroll jika tombol terlalu banyak */
+    }
+
     .pagination button {
         padding: 6px 10px;  /* Mengurangi padding lebih kecil */
         font-size: 12px;    /* Mengurangi ukuran font */
         margin: 0 3px;      /* Mengurangi jarak antar tombol */
-        width: 30px;        /* Membatasi lebar tombol */
+        width: auto;        /* Lebar tombol otomatis agar tidak terdistorsi */
         text-align: center; /* Memastikan teks tetap di tengah */
     }
 }
