@@ -41,8 +41,7 @@ function displayAsnGames(page = 1, itemsPerPage = 3) {
         gameItem.innerHTML = `
             <a href="${game.link}" class="game-info">
                 <h3>${game.title}</h3>
-                <img src="${game.image}" alt="${game.description}" class="game-invois" loading="lazy">
-                <p>${game.description}</p>
+                <img src="${game.image}" alt="${game.title}" class="game-invois" loading="lazy">
                 <h2>${game.target}</h2>
             </a>
         `;
