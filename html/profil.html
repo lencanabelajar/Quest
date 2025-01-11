@@ -65,10 +65,25 @@
                             <p><span id="segment-rank-display"></span></p>
                             <p><span id="global-rank-display"></span></p>                            
 
-                            <div id="badge-container" class="badge-container">
-                            <h3>Badges yang diperoleh</h3>
-                                <!-- Badges akan ditambahkan di sini -->
-                            </div>
+                            <div id="badge-container"></div>
+
+<script>
+    // Fungsi untuk menampilkan badge saat halaman profil dimuat
+    window.addEventListener('DOMContentLoaded', function() {
+        displayBadge();
+    });
+
+    // Fungsi untuk menampilkan badge
+    function displayBadge() {
+        const badgeContainer = document.getElementById('badge-container');
+        if (sessionStorage.getItem('sociologyBadge')) {
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            badge.textContent = sessionStorage.getItem('sociologyBadge');
+            badgeContainer.appendChild(badge);
+        }
+    }
+</script>
 
                             <!-- Button untuk edit profil -->
                             <button id="edit-profile-btn" class="profile-btn" aria-label="Edit profil">Edit Profil</button>
