@@ -84,7 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer78", answer: "Polusi udara", xp: 15 },
         { questionId: "answer79", answer: "Pencemaran udara", xp: 15 },
         { questionId: "answer80", answer: "Ruang hijau", xp: 15 },
-        
+        { questionId: "answer81", answer: "Pelanggaran", xp: 15 },
+        { questionId: "answer82", answer: "Ketidakmampuan", xp: 15 },
+        { questionId: "answer83", answer: "Durkheim", xp: 15 },
+        { questionId: "answer84", answer: "Bandura", xp: 15 },
+        { questionId: "answer85", answer: "Ketegangan", xp: 15 },
+
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
