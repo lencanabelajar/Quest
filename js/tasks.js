@@ -74,7 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer68", answer: "Perbedaan", xp: 15 },
         { questionId: "answer69", answer: "Kehancuran", xp: 15 },
         { questionId: "answer70", answer: "Kemajuan", xp: 15 },
-
+        { questionId: "answer71", answer: "Kemiskinan", xp: 15 },
+        { questionId: "answer72", answer: "Kemampuan dasar", xp: 15 },
+        { questionId: "answer73", answer: "Faktor ekonomi", xp: 15 },
+        { questionId: "answer74", answer: "Perlakuan tidak adil", xp: 15 },
+        { questionId: "answer75", answer: "Diskriminasi rasial", xp: 15 },
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
