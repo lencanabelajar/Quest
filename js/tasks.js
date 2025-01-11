@@ -107,29 +107,75 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     // Fungsi untuk memeriksa jawaban
-    function checkAnswer(taskIndex, userAnswer) {
-        const task = tasksData[taskIndex];
-        const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
-        const correctAnswer = task.answer.toLowerCase().trim();
-        const xp = task.xp;
-        const userAnswerTrimmed = userAnswer.toLowerCase().trim();
+function checkAnswer(taskIndex, userAnswer) {
+    const task = tasksData[taskIndex];
+    const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
+    const correctAnswer = task.answer.toLowerCase().trim();
+    const xp = task.xp;
+    const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
-        feedbackElement.style.display = 'block';
+    feedbackElement.style.display = 'block';
 
-        if (userAnswerTrimmed === correctAnswer) {
-            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-            feedbackElement.style.color = "green";
-            storeProgress(taskIndex, true);
-            addExperience(xp);
-            lockTaskForm(taskIndex);
-        } else {
-            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-            feedbackElement.style.color = "red";
-            storeProgress(taskIndex, false);
+    if (userAnswerTrimmed === correctAnswer) {
+        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+        feedbackElement.style.color = "green";
+        storeProgress(taskIndex, true);
+        addExperience(xp);
+        lockTaskForm(taskIndex);
+
+        // Cek jika taskIndex antara 0 dan 94 (answer1 sampai answer95)
+        if (taskIndex >= 0 && taskIndex <= 94) {
+            giveSociologyBadge(); // Fungsi untuk memberikan badge
+        }
+    } else {
+        feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+        feedbackElement.style.color = "red";
+        storeProgress(taskIndex, false);
+    }
+
+    checkCompletion();
+}
+
+// Fungsi untuk memberikan badge "LENCANA PENGANTAR SOSIOLOGI" dengan gambar dan nama pengguna
+function giveSociologyBadge() {
+    const badgeContainer = document.getElementById('badge-container');
+    
+    // Cek jika badge sudah ada
+    if (!badgeContainer.classList.contains('badge-animation')) {
+        const userProfile = getUserProfile(); // Ambil profil pengguna
+        if (!userProfile) {
+            console.error("Profil pengguna tidak ditemukan!");
+            return;
         }
 
-        checkCompletion();
+        // Membuat elemen badge baru
+        const badge = document.createElement('div');
+        badge.classList.add('badge');
+        
+        // Membuat elemen gambar
+        const badgeImage = document.createElement('img');
+        badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/ruby.png';  // Ganti URL sesuai dengan path gambar Anda di GitHub
+        badgeImage.alt = 'LENCANA PENGANTAR SOSIOLOGI';
+        badgeImage.classList.add('badge-image'); // Anda bisa menambahkan class untuk styling
+
+        // Membuat elemen teks dengan nama pengguna
+        const badgeText = document.createElement('p');
+        badgeText.classList.add('badge-text');
+        badgeText.textContent = `LENCANA PENGANTAR SOSIOLOGI - ${userProfile.name}`;
+
+        // Menambahkan gambar dan teks ke dalam badge
+        badge.appendChild(badgeImage);
+        badge.appendChild(badgeText);
+
+        // Menambahkan badge ke badge container
+        badgeContainer.appendChild(badge);
+        badgeContainer.style.display = 'block';
+        badgeContainer.classList.add('badge-animation');
+
+        // Menghilangkan animasi setelah beberapa detik
+        setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
     }
+}
 
     // Fungsi untuk mengunci form
     function lockTaskForm(taskIndex) {
