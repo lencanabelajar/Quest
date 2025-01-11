@@ -28,7 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer22", answer: "Identitas Sosial", xp: 10 },
         { questionId: "answer23", answer: "Albert Bandura", xp: 15 },
         { questionId: "answer24", answer: "Simbol", xp: 15 },
-        { questionId: "answer25", answer: "Perilaku", xp: 15 }   
+        { questionId: "answer25", answer: "Perilaku", xp: 15 },
+        { questionId: "answer96", answer: "PPPK dipekerjakan berdasarkan kontrak, sedangkan PNS memiliki status kepegawaian tetap", xp: 15 },
+        { questionId: "answer97", answer: "Meningkatkan efisiensi administrasi negara dengan fleksibilitas perekrutan tenaga profesional", xp: 15 },
+        { questionId: "answer98", answer: "Guru, tenaga kesehatan, tenaga teknis", xp: 15 },
+        { questionId: "answer99", answer: "Dengan merekrut tenaga profesional sesuai kebutuhan tanpa proses yang panjang", xp: 15 },
+        { questionId: "answer100", answer: "Gaji, tunjangan, fasilitas, hak cuti", xp: 15 }
     ];
 
     // Fungsi untuk memeriksa jawaban
