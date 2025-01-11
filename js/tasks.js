@@ -89,7 +89,11 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer83", answer: "Durkheim", xp: 15 },
         { questionId: "answer84", answer: "Bandura", xp: 15 },
         { questionId: "answer85", answer: "Ketegangan", xp: 15 },
-
+        { questionId: "answer86", answer: "Globalisasi", xp: 15 },
+        { questionId: "answer87", answer: "Dampak sosial", xp: 15 },
+        { questionId: "answer88", answer: "Ketimpangan ekonomi", xp: 15 },
+        { questionId: "answer89", answer: "Teknologi sosial", xp: 15 },
+        { questionId: "answer90", answer: "Pemberdayaan", xp: 15 },
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
