@@ -28,9 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer22", answer: "Identitas Sosial", xp: 10 },
         { questionId: "answer23", answer: "Albert Bandura", xp: 15 },
         { questionId: "answer24", answer: "Simbol", xp: 15 },
-        { questionId: "answer25", answer: "Perilaku", xp: 15 },
-
-        
+        { questionId: "answer25", answer: "Perilaku", xp: 15 },        
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
