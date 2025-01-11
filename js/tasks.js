@@ -28,7 +28,14 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer22", answer: "Identitas Sosial", xp: 10 },
         { questionId: "answer23", answer: "Albert Bandura", xp: 15 },
         { questionId: "answer24", answer: "Simbol", xp: 15 },
-        { questionId: "answer25", answer: "Perilaku", xp: 15 },        
+        { questionId: "answer25", answer: "Perilaku", xp: 15 },
+        { questionId: "answer26", answer: "Kebutuhan", xp: 15 },
+        { questionId: "answer27", answer: "Ascribed", xp: 15 },
+        { questionId: "answer28", answer: "Status", xp: 15 },
+        { questionId: "answer29", answer: "Pengetahuan", xp: 15 },
+        { questionId: "answer30", answer: "Terkait", xp: 15 },
+
+        
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
