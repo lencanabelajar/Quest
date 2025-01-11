@@ -64,6 +64,12 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer58", answer: "Globalisasi", xp: 15 },
         { questionId: "answer59", answer: "Teknologi", xp: 15 },
         { questionId: "answer60", answer: "Urbanisasi", xp: 15 },
+        { questionId: "answer61", answer: "Proses", xp: 15 },
+        { questionId: "answer62", answer: "Interkoneksi", xp: 15 },
+        { questionId: "answer63", answer: "Teknologi", xp: 15 },
+        { questionId: "answer64", answer: "Kemajuan", xp: 15 },
+        { questionId: "answer65", answer: "Pengaruh", xp: 15 },
+
         { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
         { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
         { questionId: "answer98", answer: "Guru", xp: 15 },
