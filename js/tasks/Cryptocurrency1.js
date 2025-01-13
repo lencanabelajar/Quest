@@ -4,41 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const completionMessage = document.getElementById('completion-message');
 
     const tasksData = [
-        { questionId: "answer1", answer: "Kontrak kerja", xp: 15 },
-        { questionId: "answer2", answer: "Kepegawaian tetap", xp: 15 },
-        { questionId: "answer3", answer: "Guru", xp: 15 },
-        { questionId: "answer4", answer: "Pengembangan SDM", xp: 15 },
-        { questionId: "answer5", answer: "Hak gaji", xp: 15 },
-        { questionId: "answer6", answer: "18", xp: 15 },
-        { questionId: "answer7", answer: "KTP", xp: 15 },
-        { questionId: "answer8", answer: "Kompetensi", xp: 15 },
-        { questionId: "answer9", answer: "SSCASN", xp: 15 },
-        { questionId: "answer10", answer: "Pengalaman kerja", xp: 15 },
-        { questionId: "answer11", answer: "Portal SSCASN", xp: 15 },
-        { questionId: "answer12", answer: "Disqualifikasi", xp: 20 },
-        { questionId: "answer13", answer: "Tes tertulis", xp: 25 },
-        { questionId: "answer14", answer: "Penilaian wawancara", xp: 20 },
-        { questionId: "answer15", answer: "Ijazah", xp: 30 },
-        { questionId: "answer16", answer: "Jabatan Teknis", xp: 15 },
-        { questionId: "answer17", answer: "Jabatan Struktural", xp: 20 },
-        { questionId: "answer18", answer: "Guru", xp: 25 },
-        { questionId: "answer19", answer: "Jabatan Teknis", xp: 20 },
-        { questionId: "answer20", answer: "Peningkatan Kualifikasi", xp: 30 },
-        { questionId: "answer21", answer: "Gaji Tunjangan", xp: 15 },
-        { questionId: "answer22", answer: "BPJS Kesehatan", xp: 20 },
-        { questionId: "answer23", answer: "Cuti Hak", xp: 25 },
-        { questionId: "answer24", answer: "Mematuhi Aturan", xp: 20 },
-        { questionId: "answer25", answer: "Tanggung Jawab", xp: 30 },
-        { questionId: "answer25", answer: "Pelatihan Pendidikan", xp: 15 },
-        { questionId: "answer26", answer: "Persyaratan Kinerja", xp: 20 },
-        { questionId: "answer27", answer: "Prestasi Kerja", xp: 25 },
-        { questionId: "answer28", answer: "Pendidikan Pengalaman", xp: 20 },
-        { questionId: "answer29", answer: "Kesempatan Promosi", xp: 30 },
-        { questionId: "answer30", answer: "Birokrasi Lambat", xp: 15 },
-        { questionId: "answer31", answer: "Mobilitas Tinggi", xp: 20 },
-        { questionId: "answer32", answer: "Ketidakpastian Kontrak", xp: 25 },
-        { questionId: "answer33", answer: "Manajemen Waktu", xp: 20 },
-        { questionId: "answer34", answer: "Adaptasi Cepat", xp: 30 }
+        { questionId: "answer1", answer: "Terdesentralisasi", xp: 20 },
+        { questionId: "answer2", answer: "Kriptografi", xp: 15 },
+        { questionId: "answer3", answer: "Buku besar", xp: 25 },
+        { questionId: "answer4", answer: "Konsensus jaringan", xp: 30 },
+        { questionId: "answer5", answer: "Volatilitas tinggi", xp: 20 }
+        
     ];
 
     // Fungsi untuk memeriksa jawaban
