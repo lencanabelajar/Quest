@@ -102,6 +102,11 @@
                 Coming Soon...
             </div>
         </div>
+                        <!-- Elemen Badge -->
+                <div id="badge-container" style="display: none;">
+                    <img src="../../assets/icon/PPPK1.jpg">" alt="Badge" id="badge-img">
+                    <h3>Selamat! Anda Mendapatkan Badge!</h3>
+                </div>
 
         <aside>
             <h3>Bagikan Platform Ini</h3>
@@ -138,10 +143,31 @@
         });
     });
 </script>
+    
+<script>
+    // Fungsi untuk memeriksa apakah semua tugas telah dijawab benar
+    function checkAllTasksAnswered() {
+        const allTasksCompleted = tasksData.every((_, index) => 
+            sessionStorage.getItem(`task${index + 1}Completed`) === 'true'
+        );
+
+        // Jika semua tugas sudah selesai, tampilkan badge
+        if (allTasksCompleted) {
+            showBadge();
+        }
+    }
+
+ <!-- Badge Container -->
+<div id="badge-container" style="display: none;"></div>
+
+    // Periksa status jawaban setelah halaman dimuat
+    window.addEventListener('DOMContentLoaded', checkAllTasksAnswered);
+</script>
+
 
     <!-- Scripts -->
+    <script type="module" src="../../js/tasks/Cryptocurrency1.js"></script>
     <script src="../../js/profil.js"></script>
-    <script src="../../js/tasks.js"></script>
 </body>
 
 </html>
