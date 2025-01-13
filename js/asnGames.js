@@ -3,7 +3,7 @@ const asnGames = [
     {
         title: "📚 Pengantar PPPK",
         link: "../html/tasks/pengantarp3k",
-        image: "../assets/icon/ruby.png",
+        image: "../assets/icon/PPPK1.jpg",
         target: "Calon PPPK",
     },
     {
