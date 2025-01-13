@@ -149,7 +149,7 @@ function giveSociologyBadge() {
         
         // Membuat elemen gambar
         const badgeImage = document.createElement('img');
-        badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/ruby.png';  // Ganti URL sesuai dengan path gambar Anda di GitHub
+        badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/SOSIOLOGI1.jpg';  // Ganti URL sesuai dengan path gambar Anda di GitHub
         badgeImage.alt = 'LENCANA PENGANTAR SOSIOLOGI';
         badgeImage.classList.add('badge-image'); // Anda bisa menambahkan class untuk styling
 
