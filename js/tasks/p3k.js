@@ -59,7 +59,7 @@ function checkAnswer(taskIndex, userAnswer) {
         lockTaskForm(taskIndex);
 
         // Cek jika taskIndex antara 0 dan 94 (answer1 sampai answer95)
-        if (taskIndex >= 0 && taskIndex <= 94) {
+        if (taskIndex >= 0 && taskIndex <= 33) {
             giveSociologyBadge(); // Fungsi untuk memberikan badge
         }
     } else {
@@ -71,7 +71,7 @@ function checkAnswer(taskIndex, userAnswer) {
     checkCompletion();
 }
 
-// Fungsi untuk memberikan badge "LENCANA PENGANTAR SOSIOLOGI" dengan gambar dan nama pengguna
+// Fungsi untuk memberikan badge "LENCANA PENGANTAR PPPK" dengan gambar dan nama pengguna
 function giveSociologyBadge() {
     const badgeContainer = document.getElementById('badge-container');
     
@@ -90,13 +90,13 @@ function giveSociologyBadge() {
         // Membuat elemen gambar
         const badgeImage = document.createElement('img');
         badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/ruby.png';  // Ganti URL sesuai dengan path gambar Anda di GitHub
-        badgeImage.alt = 'LENCANA PENGANTAR SOSIOLOGI';
+        badgeImage.alt = 'LENCANA PENGANTAR PPPK';
         badgeImage.classList.add('badge-image'); // Anda bisa menambahkan class untuk styling
 
         // Membuat elemen teks dengan nama pengguna
         const badgeText = document.createElement('p');
         badgeText.classList.add('badge-text');
-        badgeText.textContent = `LENCANA PENGANTAR SOSIOLOGI - ${userProfile.name}`;
+        badgeText.textContent = `LENCANA PENGANTAR PPPK - ${userProfile.name}`;
 
         // Menambahkan gambar dan teks ke dalam badge
         badge.appendChild(badgeImage);
