@@ -4,7 +4,7 @@ const studentGames = [
     {
         title: "Pengantar Sosiologi",
         link: "../html/tasks/sosiologi1",
-        image: "../assets/icon/ruby.png",
+        image: "../assets/icon/SOSIOLOGI1.jpg",
         description: "Pengantar Sosiologi",
     },
     {
