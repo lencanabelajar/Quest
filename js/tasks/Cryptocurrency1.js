@@ -23,7 +23,16 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer17", answer: "Hash", xp: 15 },
         { questionId: "answer18", answer: "Terdesentralisasi", xp: 25 },
         { questionId: "answer19", answer: "Proof of Work", xp: 20 },
-        { questionId: "answer20", answer: "Kriptografi", xp: 25 }
+        { questionId: "answer20", answer: "Kriptografi", xp: 25 },
+        { questionId: "answer21", answer: "Bitcoin", xp: 20 },
+        { questionId: "answer22", answer: "Ethereum", xp: 15 },
+        { questionId: "answer23", answer: "Ripple", xp: 20 },
+        { questionId: "answer24", answer: "Litecoin", xp: 25 },
+        { questionId: "answer25", answer: "Bitcoin Cash", xp: 25 },
+        { questionId: "answer26", answer: "Tether", xp: 20 },
+        { questionId: "answer27", answer: "Polygon", xp: 20 },
+        { questionId: "answer28", answer: "Dogecoin", xp: 30 }
+
     ];
 
     // Fungsi untuk memeriksa jawaban
