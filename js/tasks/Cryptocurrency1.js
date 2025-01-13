@@ -31,7 +31,12 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer25", answer: "Bitcoin Cash", xp: 25 },
         { questionId: "answer26", answer: "Tether", xp: 20 },
         { questionId: "answer27", answer: "Polygon", xp: 20 },
-        { questionId: "answer28", answer: "Dogecoin", xp: 30 }
+        { questionId: "answer28", answer: "Dogecoin", xp: 30 },
+        { questionId: "answer29", answer: "Transaksi Cepat", xp: 20 },
+        { questionId: "answer30", answer: "Fluktuasi Harga", xp: 15 },
+        { questionId: "answer31", answer: "Volatilitas Tinggi", xp: 25 },
+        { questionId: "answer32", answer: "Keamanan", xp: 20 },
+        { questionId: "answer33", answer: "Regulasi Tidak Jelas", xp: 30 }
 
     ];
 
