@@ -71,8 +71,8 @@ function checkAnswer(taskIndex, userAnswer) {
         addExperience(xp);
         lockTaskForm(taskIndex);
 
-        // Cek jika taskIndex antara 0 dan 94 (answer1 sampai answer95)
-        if (taskIndex >= 0 && taskIndex <= 33) {
+        // Cek jika taskIndex antara 0 dan 48 (answer1 sampai answer48)
+        if (taskIndex >= 0 && taskIndex <= 47) {
             giveSociologyBadge(); // Fungsi untuk memberikan badge
         }
     } else {
