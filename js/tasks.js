@@ -98,13 +98,8 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer92", answer: "Media sosial", xp: 15 },
         { questionId: "answer93", answer: "Kerusakan", xp: 15 },
         { questionId: "answer94", answer: "Konektivitas", xp: 15 },
-        { questionId: "answer95", answer: "Ketimpangan", xp: 15 },
-        { questionId: "answer96", answer: "Kontrak kerja", xp: 15 },
-        { questionId: "answer97", answer: "Kepegawaian tetap", xp: 15 },
-        { questionId: "answer98", answer: "Guru", xp: 15 },
-        { questionId: "answer99", answer: "Pengembangan SDM", xp: 15 },
-        { questionId: "answer100", answer: "Hak gaji", xp: 15 }
-    ];
+        { questionId: "answer95", answer: "Ketimpangan", xp: 15 }
+      ];
 
     // Fungsi untuk memeriksa jawaban
 function checkAnswer(taskIndex, userAnswer) {
