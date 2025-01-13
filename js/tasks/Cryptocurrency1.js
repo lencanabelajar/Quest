@@ -41,7 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer35", answer: "Kunci Pribadi", xp: 25 },
         { questionId: "answer36", answer: "Cryptocurrency", xp: 30 },
         { questionId: "answer37", answer: "2FA", xp: 20 },
-        { questionId: "answer38", answer: "Keamanan Tinggi", xp: 15 }
+        { questionId: "answer38", answer: "Keamanan Tinggi", xp: 15 },
+        { questionId: "answer39", answer: "Regulasi Pajak", xp: 25 },
+        { questionId: "answer40", answer: "Pajak Transaksi", xp: 20 },
+        { questionId: "answer41", answer: "Adopsi Massal", xp: 30 },
+        { questionId: "answer42", answer: "Transaksi Ilegal", xp: 20 },
+        { questionId: "answer43", answer: "Investasi Cryptocurrency", xp: 15 }
+
     ];
 
     // Fungsi untuk memeriksa jawaban
