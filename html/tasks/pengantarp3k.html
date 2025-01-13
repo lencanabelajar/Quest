@@ -221,9 +221,9 @@
                 <button class="accordion-btn"> 🟤 Tantangan Pengelolaan Administrasi dalam PPPK ASN <span class="arrow">🔰</span></button>
                 <div class="accordion-content">
                     🛠 Coming Soon
-                </div>
-            </div>
-
+        </section>
+    </div>
+</div>
                         <!-- Elemen Badge -->
                 <div id="badge-container" style="display: none;">
                     <img src="../../assets/icon/ruby.png">" alt="Badge" id="badge-img">
@@ -257,7 +257,7 @@
     </div>
 </footer>
     
-<script>
+    <script>
     document.querySelectorAll('.accordion-btn').forEach(button => {
         button.addEventListener('click', () => {
             const accordion = button.parentElement;
@@ -279,15 +279,8 @@
         }
     }
 
-    // Fungsi untuk menampilkan badge
-    function showBadge() {
-        const badgeContainer = document.getElementById('badge-container');
-        badgeContainer.style.display = 'block'; // Tampilkan badge
-        
-        // Opsional: Menambahkan animasi badge
-        badgeContainer.classList.add('badge-animation');
-        setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
-    }
+ <!-- Badge Container -->
+<div id="badge-container" style="display: none;"></div>
 
     // Periksa status jawaban setelah halaman dimuat
     window.addEventListener('DOMContentLoaded', checkAllTasksAnswered);
