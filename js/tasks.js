@@ -71,22 +71,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         feedbackElement.style.display = 'block';
 
-        if (userAnswerTrimmed === correctAnswer) {
-            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-            feedbackElement.style.color = "green";
-            storeProgress(taskIndex, true);
-            addExperience(xp, coin); // Tambahkan XP dan koin sesuai soal
-            lockTaskForm(taskIndex);
-
-            // Cek jika taskIndex antara 0 dan 94 (answer1 sampai answer95)
-            if (taskIndex >= 0 && taskIndex <= 94) {
-                giveSociologyBadge(); // Fungsi untuk memberikan badge
-            }
-        } else {
-            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-            feedbackElement.style.color = "red";
-            storeProgress(taskIndex, false);
-        }
+                           if (userAnswerTrimmed === correctAnswer) {
+                        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+                        feedbackElement.style.color = "green";
+                        storeProgress(taskIndex, true);
+                        addExperience(xp, coin); // Tambahkan XP dan koin sesuai soal
+                        lockTaskForm(taskIndex); // Mengunci form setelah jawaban benar
+                    
+                        if (taskIndex >= 0 && taskIndex <= 94) {
+                            giveSociologyBadge(); // Memberikan badge
+                        }
+                    } else {
+                        feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+                        feedbackElement.style.color = "red";
+                        storeProgress(taskIndex, false);
+                    }
 
         checkCompletion();
     }
@@ -132,17 +131,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Fungsi untuk mengunci form
-    function lockTaskForm(taskIndex) {
-        const formElement = document.getElementById(`task-form${taskIndex + 1}`);
-        const inputElements = formElement.querySelectorAll('input, textarea');
-        const submitButton = formElement.querySelector('button[type="submit"]');
-    
-        inputElements.forEach(input => input.disabled = true);
-        if (submitButton) {
-            submitButton.disabled = true;
-        }
+// Fungsi untuk mengunci form setelah jawaban benar
+function lockTaskForm(taskIndex) {
+    const formElement = document.getElementById(`task-form${taskIndex + 1}`);
+    const inputElements = formElement.querySelectorAll('input, textarea');
+    const submitButton = formElement.querySelector('button[type="submit"]');
+
+    // Mengunci elemen input dan tombol submit
+    inputElements.forEach(input => input.disabled = true);
+    if (submitButton) {
+        submitButton.disabled = true;
     }
+}
 
     // Fungsi untuk menyimpan progres
     function storeProgress(taskIndex, isCorrect) {
