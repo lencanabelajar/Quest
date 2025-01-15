@@ -258,4 +258,25 @@ function lockTaskForm(taskIndex) {
             console.error("Error saat menyimpan profil pengguna:", error);
         }
     }
+
+  // Muat progres sebelumnya saat halaman dimuat
+    loadPreviousProgress();
+    function loadPreviousProgress() {
+        tasksData.forEach((_, index) => {
+            const taskCompleted = sessionStorage.getItem(`task${index + 1}Completed`);
+            const feedbackElement = document.getElementById(`task-feedback${index + 1}`);
+            const formElement = document.getElementById(`task-form${index + 1}`);
+
+            if (taskCompleted === 'true') {
+                feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+                feedbackElement.style.color = "green";
+                feedbackElement.style.display = 'block';
+                lockTaskForm(index);
+            } else if (taskCompleted === 'false') {
+                feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+                feedbackElement.style.color = "red";
+                feedbackElement.style.display = 'block';
+            }
+        });
+    }
 });
