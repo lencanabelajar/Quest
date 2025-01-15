@@ -90,11 +90,11 @@ function loadUserProfile() {
         expBar.value = userProfile.currentXP || 0;
         expBar.max = xpThresholds[userProfile.level - 1];
 
-        // Memperbarui tampilan koin
-        document.getElementById('user-coin-display').innerText = userProfile.coins || 0;
+        // Perbarui tampilan koin
+        updateCoinDisplay(userProfile.coins || 0);
     } else {
-        alert("Data profil tidak ditemukan!");
-        window.location.href = "login.html";
+        alert('Data profil tidak ditemukan!');
+        window.location.href = 'login.html';
     }
 
     // Perbarui data level dan XP
@@ -151,25 +151,26 @@ function updateExperienceUI() {
     expBar.max = xpThresholds[level - 1]; // Threshold level saat ini
 }
 
-// Fungsi untuk menambahkan koin
-function addCoins(points) {
-    let userProfile = getUserProfile();
-    if (!userProfile) return;
-
-    userProfile.coins = (userProfile.coins || 0) + points;  // Menambah koin yang dimiliki
-    saveUserProfile(userProfile);  // Simpan kembali ke localStorage
-
-     // Menambahkan animasi koin
+// Fungsi untuk memperbarui UI Koin
+function updateCoinDisplay(coins) {
     const coinDisplay = document.getElementById('user-coin-display');
     if (coinDisplay) {
+        coinDisplay.innerText = coins;
+
+        // Tambahkan animasi koin
         coinDisplay.classList.add('coin-animation');
-        setTimeout(() => {
-            coinDisplay.classList.remove('coin-animation');
-        }, 1000);  // Hapus animasi setelah 1 detik
+        setTimeout(() => coinDisplay.classList.remove('coin-animation'), 1000);
     }
-    
-    // Perbarui tampilan koin di UI
-    document.getElementById('user-coin-display').innerText = userProfile.coins;
+}
+
+// Fungsi untuk menambahkan koin
+function addCoins(points) {
+    const userProfile = getUserProfile();
+    if (!userProfile) return;
+
+        userProfile.coins += points; // Tambahkan koin
+    saveUserProfile(userProfile); // Simpan ke localStorage
+    updateCoinDisplay(userProfile.coins); // Perbarui tampilan
 }
 
 // Event listeners
