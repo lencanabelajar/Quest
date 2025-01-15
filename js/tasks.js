@@ -228,6 +228,8 @@ function giveSociologyBadge() {
         }
 
         userProfile.currentXP += points;
+
+	// Proses level up jika XP melebihi batas    
         while (userProfile.currentXP >= userProfile.maxXP) {
             userProfile.currentXP -= userProfile.maxXP;
             levelUp(userProfile);
@@ -236,6 +238,7 @@ function giveSociologyBadge() {
 	// Tambahkan koin
    	userProfile.coins = (userProfile.coins || 0) + coinsEarned;
 
+	// Simpan dan perbarui UI    
         saveUserProfile(userProfile);
         updateExperienceUI(userProfile);
     }
