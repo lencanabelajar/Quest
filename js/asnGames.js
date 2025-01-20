@@ -7,10 +7,10 @@ const asnGames = [
         target: "Calon PPPK",
     },
     {
-        title: "📚 Pengantar CPNS",
-        link: "../html/tasks/pengantarcpns",
+        title: "📚 Pengantar Tes Kompetensi Teknis Satpol PP",
+        link: "../html/tasks/pengantarteskompetensiteknissatpolpp",
         image: "../assets/icon/ruby.png",
-        target: "Calon CPNS",
+        target: "Calon PPPK",
     },
     {
         title: "📚 Pengantar Arsiparis",
