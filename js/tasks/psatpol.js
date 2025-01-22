@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { "questionId": "answer8", "answer": "Ketertiban", "xp": 15 },
         { "questionId": "answer9", "answer": "Kepolisian", "xp": 10 },
         { "questionId": "answer10", "answer": "Acara Besar", "xp": 10 },
-        { "questionId": "answer11", "answer": "Seluruh Wilayah", "xp": 20 },
+        { "questionId": "answer11", "answer": "Ya", "xp": 20 },
         
         { questionId: "answer12", answer: "Disqualifikasi", xp: 20 },
         { questionId: "answer13", answer: "Tes tertulis", xp: 25 },
