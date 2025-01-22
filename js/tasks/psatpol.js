@@ -4,11 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const completionMessage = document.getElementById('completion-message');
 
     const tasksData = [
-        { questionId: "answer1", answer: "Kontrak kerja", xp: 15 },
-        { questionId: "answer2", answer: "Kepegawaian tetap", xp: 15 },
-        { questionId: "answer3", answer: "Guru", xp: 15 },
-        { questionId: "answer4", answer: "Pengembangan SDM", xp: 15 },
-        { questionId: "answer5", answer: "Hak gaji", xp: 15 },
+        { questionId: "answer1", answer: "Penegakan Perda", xp: 15 },
+        { questionId: "answer2", answer: "Ketertiban", xp: 10 },
+        { questionId: "answer3", answer: "Perlindungan", xp: 20 },
+        { questionId: "answer4", answer: "Evakuasi", xp: 25 },
+        { questionId: "answer5", answer: "Kepolisian", xp: 15 },
+        
         { questionId: "answer6", answer: "18", xp: 15 },
         { questionId: "answer7", answer: "KTP", xp: 15 },
         { questionId: "answer8", answer: "Kompetensi", xp: 15 },
