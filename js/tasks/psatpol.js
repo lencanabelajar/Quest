@@ -39,7 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer38", answer: "Pemantauan Langsung", xp: 25 },
         { questionId: "answer39", answer: "Evaluasi Kinerja", xp: 20 },
         { questionId: "answer40", answer: "Pelatihan dan Pembinaan", xp: 30 },
-        { questionId: "answer41", answer: "Penghargaan dan Sanksi", xp: 15 }
+        { questionId: "answer41", answer: "Penghargaan dan Sanksi", xp: 15 },
+
+        { questionId: "answer42", answer: "Etika Sopan", xp: 20 },
+        { questionId: "answer43", answer: "Peraturan Daerah", xp: 25 },
+        { questionId: "answer44", answer: "Kejujuran dan Tanggung Jawab", xp: 20 },
+        { questionId: "answer45", answer: "Disiplin Kerja", xp: 30 },
+        { questionId: "answer46", answer: "Hierarki dan Komando", xp: 15 }
         
     ];
 
