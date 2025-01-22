@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer39", answer: "Kejujuran dan Tanggung Jawab", xp: 20 },
         { questionId: "answer40", answer: "Disiplin Kerja", xp: 30 },
         { questionId: "answer41", answer: "Hierarki dan Komando", xp: 15 },
-        { questionId: "answer47", answer: "Keterbatasan Anggota", xp: 20 },
-        { questionId: "answer48", answer: "Peralatan Tidak Memadai", xp: 25 },
-        { questionId: "answer49", answer: "Ketidakpatuhan Masyarakat", xp: 20 },
-        { questionId: "answer50", answer: "Tekanan Sosial Politik", xp: 30 },
-        { questionId: "answer51", answer: "Evakuasi dan Penyelamatan", xp: 15 }        
+        { questionId: "answer42", answer: "Keterbatasan Anggota", xp: 20 },
+        { questionId: "answer43", answer: "Peralatan Tidak Memadai", xp: 25 },
+        { questionId: "answer44", answer: "Ketidakpatuhan Masyarakat", xp: 20 },
+        { questionId: "answer45", answer: "Tekanan Sosial Politik", xp: 30 },
+        { questionId: "answer46", answer: "Evakuasi dan Penyelamatan", xp: 15 }        
     ];
 
     // Fungsi untuk memeriksa jawaban
