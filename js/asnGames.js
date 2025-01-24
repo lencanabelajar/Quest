@@ -12,6 +12,12 @@ const asnGames = [
         image: "../assets/icon/ruby.png",
         target: "Calon PPPK",
     },
+        {
+        title: "🛡️ Pengetahuan Umum PPPK Satpol PP",
+        link: "../html/tasks/psatpolpu",
+        image: "../assets/icon/ruby.png",
+        target: "Calon PPPK",
+    },
     {
         title: "📚 Pengantar Arsiparis",
         link: "../html/tasks/arsiparis",
