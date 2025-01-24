@@ -797,9 +797,12 @@
 <section>
     <h2>Materi Lanjutan untuk PPPK Satpol</h2>
     <p>
-        Ingin memperdalam materi? Klik tautan di bawah ini untuk mengakses 
-        <a href="psatpolpu.html" target="_blank" style="color: white;">
-            📚 Pengetahuan Umum PPPK Satpol PP
+        Silakan 
+        <a href="https://lencanabelajar.github.io/Quest/html/tasks/login.html" target="_blank" style="color: blue; text-decoration: underline;">
+            login di sini
+        </a> terlebih dahulu untuk mengakses 
+        <a href="https://lencanabelajar.github.io/Quest/html/tasks/psatpolpu" target="_blank" style="color: blue; text-decoration: underline;">
+            Materi Lanjutan PPPK Satpol
         </a>.
     </p>
 </section>
@@ -838,6 +841,14 @@
             accordion.classList.toggle('open');
         });
     });
+</script>
+
+<script>
+    // Redirect pengguna ke halaman login jika mereka belum masuk
+    const userLoggedIn = false; // Ubah ini ke logika autentikasi yang sesuai
+    if (!userLoggedIn) {
+        window.location.href = "https://lencanabelajar.github.io/Quest/html/tasks/login.html";
+    }
 </script>
 
 <!-- Scripts -->
