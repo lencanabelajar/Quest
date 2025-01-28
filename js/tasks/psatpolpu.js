@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer3", correctAnswer: "1945", options: ["1945", "1949", "1950", "1965"], xp: 15 },
         { questionId: "answer4", correctAnswer: "37", options: ["16", "31", "37", "45"], xp: 15 },
         { questionId: "answer5", correctAnswer: "Mencerdaskan kehidupan bangsa", options: ["Melindungi segenap bangsa Indonesia", "Mencerdaskan kehidupan bangsa", "Menjaga persatuan bangsa", "Memajukan kesejahteraan umum"], xp: 15 },
+        { questionId: "answer6", correctAnswer: "Kewenangan pemerintah daerah untuk mengatur sendiri urusan daerah", options: ["Kewenangan pemerintah daerah untuk mengatur sendiri urusan daerah", "Pengaturan urusan pemerintahan oleh pemerintah pusat", "Pemisahan kekuasaan antara pemerintah pusat dan daerah", "Pemerintahan daerah yang tidak terikat pada aturan negara"], xp: 15 },
+        { questionId: "answer7", correctAnswer: "3", options: ["1", "2", "3", "4"], xp: 10 },
+        { questionId: "answer8", correctAnswer: "Gubernur", options: ["Gubernur", "Bupati", "Walikota", "Presiden"], xp: 10 },
+        { questionId: "answer9", correctAnswer: "Memberikan kebebasan kepada daerah untuk mengatur urusan lokal", options: ["Memusatkan semua kewenangan pada pemerintah pusat", "Memberikan kebebasan kepada daerah untuk mengatur urusan lokal", "Menambah kewenangan pemerintah daerah di semua sektor", "Menyatukan sistem pemerintahan nasional dan daerah"], xp: 20 }
     ];
 
     // Fungsi untuk memeriksa jawaban
