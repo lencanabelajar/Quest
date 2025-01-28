@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tasksData = [
         { questionId: "answer1", correctAnswer: "Pancasila", options: ["Pancasila", "UUD 1945", "Bhinneka Tunggal Ika", "Sumpah Pemuda"], xp: 15 },
         { questionId: "answer2", correctAnswer: "5", options: ["1", "3", "5", "7"], xp: 10 },
+        { questionId: "answer3", correctAnswer: "1945", options: ["1945", "1949", "1950", "1965"], xp: 15 },
         { questionId: "answer2", correctAnswer: "Lima", xp: 15 },
         { questionId: "answer3", correctAnswer: "1945", xp: 15 },
         { questionId: "answer4", correctAnswer: "37", xp: 15 },
