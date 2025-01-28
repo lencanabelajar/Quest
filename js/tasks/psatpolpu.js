@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
         { questionId: "answer1", correctAnswer: "Pancasila", options: ["Pancasila", "UUD 1945", "Bhinneka Tunggal Ika", "Sumpah Pemuda"], xp: 15 },
         { questionId: "answer2", correctAnswer: "5", options: ["1", "3", "5", "7"], xp: 10 },
         { questionId: "answer3", correctAnswer: "1945", options: ["1945", "1949", "1950", "1965"], xp: 15 },
-        { questionId: "answer2", correctAnswer: "Lima", xp: 15 },
-        { questionId: "answer3", correctAnswer: "1945", xp: 15 },
-        { questionId: "answer4", correctAnswer: "37", xp: 15 },
-        { questionId: "answer5", correctAnswer: "Melindungi bangsa", xp: 15 },
+        { questionId: "answer4", correctAnswer: "37", options: ["16", "31", "37", "45"], xp: 15 },
+        { questionId: "answer5", correctAnswer: "Mencerdaskan kehidupan bangsa", options: ["Melindungi segenap bangsa Indonesia", "Mencerdaskan kehidupan bangsa", "Menjaga persatuan bangsa", "Memajukan kesejahteraan umum"], xp: 15 },
     ];
 
     // Fungsi untuk memeriksa jawaban
