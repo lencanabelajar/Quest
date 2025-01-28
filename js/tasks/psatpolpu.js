@@ -113,17 +113,27 @@ function giveSociologyBadge() {
     }
 }
 
-    // Fungsi untuk mengunci form
-    function lockTaskForm(taskIndex) {
-        const formElement = document.getElementById(`task-form${taskIndex + 1}`);
-        const inputElements = formElement.querySelectorAll('input, textarea');
-        const submitButton = formElement.querySelector('button[type="submit"]');
-    
-        inputElements.forEach(input => input.disabled = true);
+// Fungsi untuk mengunci form
+function lockTaskForm(taskIndex) {
+    const formElement = document.getElementById(`task-form${taskIndex + 1}`);
+    const inputElements = formElement.querySelectorAll('input, textarea');
+    const submitButton = formElement.querySelector('button[type="submit"]');
+
+    console.log(`Mengunci form untuk task ${taskIndex + 1}`);
+
+    if (formElement) {
+        inputElements.forEach(input => {
+            input.disabled = true;
+            console.log(`Menonaktifkan input: ${input.name || input.id}`);
+        });
         if (submitButton) {
             submitButton.disabled = true;
+            console.log('Menonaktifkan tombol submit');
         }
+    } else {
+        console.error(`Form untuk task ${taskIndex + 1} tidak ditemukan`);
     }
+}
 
     // Fungsi untuk menyimpan progres
     function storeProgress(taskIndex, isCorrect) {
