@@ -5,104 +5,104 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const tasksData = [
         { questionId: "answer1", correctAnswer: "Pancasila", options: ["Pancasila", "UUD 1945", "Bhinneka Tunggal Ika", "Sumpah Pemuda"], xp: 15 },
-        { questionId: "answer2", answer: "Lima", xp: 15 },
-        { questionId: "answer3", answer: "1945", xp: 15 },
-        { questionId: "answer4", answer: "37", xp: 15 },
-        { questionId: "answer5", answer: "Melindungi bangsa", xp: 15 },
+        { questionId: "answer2", correctAnswer: "Lima", xp: 15 },
+        { questionId: "answer3", correctAnswer: "1945", xp: 15 },
+        { questionId: "answer4", correctAnswer: "37", xp: 15 },
+        { questionId: "answer5", correctAnswer: "Melindungi bangsa", xp: 15 },
     ];
 
     // Fungsi untuk memeriksa jawaban
-function checkAnswer(taskIndex, userAnswer) {
-    const task = tasksData[taskIndex];
-    const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
-    const correctAnswer = task.correctAnswer.toLowerCase().trim();
-    const xp = task.xp;
-    const userAnswerTrimmed = userAnswer.toLowerCase().trim();
+    function checkAnswer(taskIndex, userAnswer) {
+        const task = tasksData[taskIndex];
+        const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
+        const correctAnswer = task.correctAnswer.toLowerCase().trim();
+        const xp = task.xp;
+        const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
-    feedbackElement.style.display = 'block';
+        feedbackElement.style.display = 'block';
 
-    if (userAnswerTrimmed === correctAnswer) {
-        feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
-        feedbackElement.style.color = "green";
-        storeProgress(taskIndex, true);
-        addExperience(xp);
-        lockTaskForm(taskIndex);
+        if (userAnswerTrimmed === correctAnswer) {
+            feedbackElement.textContent = "Jawaban Anda benar! Selamat!";
+            feedbackElement.style.color = "green";
+            storeProgress(taskIndex, true);
+            addExperience(xp);
+            lockTaskForm(taskIndex);
 
-        // Cek jika taskIndex antara 0 dan 94 (answer1 sampai answer95)
-        if (taskIndex >= 0 && taskIndex <= 33) {
-            giveSociologyBadge(); // Fungsi untuk memberikan badge
+            // Cek jika taskIndex antara 0 dan 33 (answer1 sampai answer34)
+            if (taskIndex >= 0 && taskIndex <= 33) {
+                giveSociologyBadge(); // Fungsi untuk memberikan badge
+            }
+        } else {
+            feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
+            feedbackElement.style.color = "red";
+            storeProgress(taskIndex, false);
         }
-    } else {
-        feedbackElement.textContent = "Jawaban Anda salah. Coba lagi!";
-        feedbackElement.style.color = "red";
-        storeProgress(taskIndex, false);
+
+        checkCompletion();
     }
 
-    checkCompletion();
-}
-
-// Fungsi untuk memberikan badge "LENCANA PENGANTAR PPPK" dengan gambar dan nama pengguna
-function giveSociologyBadge() {
-    const badgeContainer = document.getElementById('badge-container');
-    
-    // Cek jika badge sudah ada
-    if (!badgeContainer.classList.contains('badge-animation')) {
-        const userProfile = getUserProfile(); // Ambil profil pengguna
-        if (!userProfile) {
-            console.error("Profil pengguna tidak ditemukan!");
-            return;
-        }
-
-        // Membuat elemen badge baru
-        const badge = document.createElement('div');
-        badge.classList.add('badge');
+    // Fungsi untuk memberikan badge "LENCANA PENGANTAR PPPK" dengan gambar dan nama pengguna
+    function giveSociologyBadge() {
+        const badgeContainer = document.getElementById('badge-container');
         
-        // Membuat elemen gambar
-        const badgeImage = document.createElement('img');
-        badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/PPPK1.jpg';  // Ganti URL sesuai dengan path gambar Anda di GitHub
-        badgeImage.alt = 'LENCANA PENGANTAR PPPK';
-        badgeImage.classList.add('badge-image'); // Anda bisa menambahkan class untuk styling
+        // Cek jika badge sudah ada
+        if (!badgeContainer.classList.contains('badge-animation')) {
+            const userProfile = getUserProfile(); // Ambil profil pengguna
+            if (!userProfile) {
+                console.error("Profil pengguna tidak ditemukan!");
+                return;
+            }
 
-        // Membuat elemen teks dengan nama pengguna
-        const badgeText = document.createElement('p');
-        badgeText.classList.add('badge-text');
-        badgeText.textContent = `LENCANA PENGANTAR PPPK - ${userProfile.name}`;
+            // Membuat elemen badge baru
+            const badge = document.createElement('div');
+            badge.classList.add('badge');
+            
+            // Membuat elemen gambar
+            const badgeImage = document.createElement('img');
+            badgeImage.src = 'https://raw.githubusercontent.com/username/repository/branch/assets/icon/PPPK1.jpg';  // Ganti URL sesuai dengan path gambar Anda di GitHub
+            badgeImage.alt = 'LENCANA PENGANTAR PPPK';
+            badgeImage.classList.add('badge-image'); // Anda bisa menambahkan class untuk styling
 
-        // Menambahkan gambar dan teks ke dalam badge
-        badge.appendChild(badgeImage);
-        badge.appendChild(badgeText);
+            // Membuat elemen teks dengan nama pengguna
+            const badgeText = document.createElement('p');
+            badgeText.classList.add('badge-text');
+            badgeText.textContent = `LENCANA PENGANTAR PPPK - ${userProfile.name}`;
 
-        // Menambahkan badge ke badge container
-        badgeContainer.appendChild(badge);
-        badgeContainer.style.display = 'block';
-        badgeContainer.classList.add('badge-animation');
+            // Menambahkan gambar dan teks ke dalam badge
+            badge.appendChild(badgeImage);
+            badge.appendChild(badgeText);
 
-        // Menghilangkan animasi setelah beberapa detik
-        setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
-    }
-}
+            // Menambahkan badge ke badge container
+            badgeContainer.appendChild(badge);
+            badgeContainer.style.display = 'block';
+            badgeContainer.classList.add('badge-animation');
 
-// Fungsi untuk mengunci form
-function lockTaskForm(taskIndex) {
-    const formElement = document.getElementById(`task-form${taskIndex + 1}`);
-    const inputElements = formElement.querySelectorAll('input, textarea');
-    const submitButton = formElement.querySelector('button[type="submit"]');
-
-    console.log(`Mengunci form untuk task ${taskIndex + 1}`);
-
-    if (formElement) {
-        inputElements.forEach(input => {
-            input.disabled = true;
-            console.log(`Menonaktifkan input: ${input.name || input.id}`);
-        });
-        if (submitButton) {
-            submitButton.disabled = true;
-            console.log('Menonaktifkan tombol submit');
+            // Menghilangkan animasi setelah beberapa detik
+            setTimeout(() => badgeContainer.classList.remove('badge-animation'), 2000);
         }
-    } else {
-        console.error(`Form untuk task ${taskIndex + 1} tidak ditemukan`);
     }
-}
+
+    // Fungsi untuk mengunci form
+    function lockTaskForm(taskIndex) {
+        const formElement = document.getElementById(`task-form${taskIndex + 1}`);
+        const inputElements = formElement.querySelectorAll('input, textarea');
+        const submitButton = formElement.querySelector('button[type="submit"]');
+
+        console.log(`Mengunci form untuk task ${taskIndex + 1}`);
+
+        if (formElement) {
+            inputElements.forEach(input => {
+                input.disabled = true;
+                console.log(`Menonaktifkan input: ${input.name || input.id}`);
+            });
+            if (submitButton) {
+                submitButton.disabled = true;
+                console.log('Menonaktifkan tombol submit');
+            }
+        } else {
+            console.error(`Form untuk task ${taskIndex + 1} tidak ditemukan`);
+        }
+    }
 
     // Fungsi untuk menyimpan progres
     function storeProgress(taskIndex, isCorrect) {
@@ -134,8 +134,18 @@ function lockTaskForm(taskIndex) {
     taskForms.forEach((form, index) => {
         form.addEventListener('submit', function (e) {
             e.preventDefault();
-            const userAnswer = document.getElementById(`answer${index + 1}`).value.trim();
-            checkAnswer(index, userAnswer);
+
+            // Ambil jawaban yang dipilih dari radio button
+            const userAnswer = document.querySelector(`input[name="answer${index + 1}"]:checked`);
+
+            if (userAnswer) {
+                checkAnswer(index, userAnswer.value);
+            } else {
+                const feedbackElement = document.getElementById(`task-feedback${index + 1}`);
+                feedbackElement.textContent = "Silakan pilih jawaban!";
+                feedbackElement.style.color = "orange";
+                feedbackElement.style.display = 'block';
+            }
         });
     });
 
@@ -212,6 +222,7 @@ function lockTaskForm(taskIndex) {
 
     // Muat progres sebelumnya saat halaman dimuat
     loadPreviousProgress();
+
     function loadPreviousProgress() {
         tasksData.forEach((_, index) => {
             const taskCompleted = sessionStorage.getItem(`task${index + 1}Completed`);
