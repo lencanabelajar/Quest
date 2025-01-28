@@ -100,8 +100,24 @@
             <div class="task-quiz">
                 <h3>Berapa sila dalam Pancasila?</h3>
                 <form id="task-form2" class="task-form">
-                    <label for="answer2">Jawaban:</label>
-                    <input type="text" id="answer2" name="answer2" required placeholder="Masukkan jawaban Anda">
+                    <label for="answer2">Pilih jawaban yang benar:</label>
+                    <!-- Pilihan ganda -->
+                    <div>
+                        <input type="radio" id="answer2-option1" name="answer2" value="1">
+                        <label for="answer2-option1">1</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="answer2-option2" name="answer2" value="3">
+                        <label for="answer2-option2">3</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="answer2-option3" name="answer2" value="5">
+                        <label for="answer2-option3">5</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="answer2-option4" name="answer2" value="7">
+                        <label for="answer2-option4">7</label>
+                    </div>
                     <button type="submit">Kirim Jawaban</button>
                 </form>
                 <p id="task-feedback2" class="task-feedback" style="display: none;"></p>
