@@ -154,8 +154,25 @@
             <div class="task-quiz">
                 <h3>Berapa pasal dalam Batang Tubuh UUD 1945?</h3>
                 <form id="task-form4" class="task-form">
-                    <label for="answer4">Jawaban:</label>
-                    <input type="text" id="answer4" name="answer4" required placeholder="Masukkan jawaban Anda">
+                    <fieldset>
+                        <legend>Pilih jawaban yang benar:</legend>
+                        <div>
+                            <input type="radio" id="answer4-option1" name="answer4" value="16">
+                            <label for="answer4-option1">16</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="answer4-option2" name="answer4" value="31">
+                            <label for="answer4-option2">31</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="answer4-option3" name="answer4" value="37">
+                            <label for="answer4-option3">37</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="answer4-option4" name="answer4" value="45">
+                            <label for="answer4-option4">45</label>
+                        </div>
+                    </fieldset>
                     <button type="submit">Kirim Jawaban</button>
                 </form>
                 <p id="task-feedback4" class="task-feedback" style="display: none;"></p>
@@ -165,12 +182,31 @@
             <div class="task-quiz">
                 <h3>Sebutkan dua tujuan utama negara Indonesia?</h3>
                 <form id="task-form5" class="task-form">
-                    <label for="answer5">Jawaban:</label>
-                    <input type="text" id="answer5" name="answer5" required placeholder="Masukkan jawaban Anda">
+                    <label for="answer5">Pilih dua tujuan utama negara Indonesia:</label>
+            
+                    <!-- Pilihan Ganda -->
+                    <div>
+                        <input type="checkbox" id="answer5-option1" name="answer5" value="Melindungi bangsa">
+                        <label for="answer5-option1">Melindungi segenap bangsa Indonesia</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="answer5-option2" name="answer5" value="Mencerdaskan kehidupan bangsa">
+                        <label for="answer5-option2">Mencerdaskan kehidupan bangsa</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="answer5-option3" name="answer5" value="Menjaga persatuan bangsa">
+                        <label for="answer5-option3">Menjaga persatuan bangsa</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="answer5-option4" name="answer5" value="Memajukan kesejahteraan umum">
+                        <label for="answer5-option4">Memajukan kesejahteraan umum</label>
+                    </div>
+                    
                     <button type="submit">Kirim Jawaban</button>
                 </form>
                 <p id="task-feedback5" class="task-feedback" style="display: none;"></p>
             </div>
+
         </section>
     </div>
 </div>
