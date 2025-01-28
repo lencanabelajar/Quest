@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const completionMessage = document.getElementById('completion-message');
 
     const tasksData = [
-        { questionId: "answer1", answer: "Pancasila", xp: 15 },
+        { questionId: "answer1", correctAnswer: "Pancasila", options: ["Pancasila", "UUD 1945", "Bhinneka Tunggal Ika", "Sumpah Pemuda"], xp: 15 },
         { questionId: "answer2", answer: "Lima", xp: 15 },
         { questionId: "answer3", answer: "1945", xp: 15 },
         { questionId: "answer4", answer: "37", xp: 15 },
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function checkAnswer(taskIndex, userAnswer) {
     const task = tasksData[taskIndex];
     const feedbackElement = document.getElementById(`task-feedback${taskIndex + 1}`);
-    const correctAnswer = task.answer.toLowerCase().trim();
+    const correctAnswer = task.correctAnswer.toLowerCase().trim();
     const xp = task.xp;
     const userAnswerTrimmed = userAnswer.toLowerCase().trim();
 
