@@ -127,8 +127,25 @@
             <div class="task-quiz">
                 <h3>Kapan UUD 1945 disahkan?</h3>
                 <form id="task-form3" class="task-form">
-                    <label for="answer3">Jawaban:</label>
-                    <input type="text" id="answer3" name="answer3" required placeholder="Masukkan jawaban Anda">
+                    <fieldset>
+                        <legend>Pilih jawaban yang benar:</legend>
+                        <div>
+                            <input type="radio" id="option1-3" name="answer3" value="1945" required>
+                            <label for="option1-3">1945</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="option2-3" name="answer3" value="1949">
+                            <label for="option2-3">1949</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="option3-3" name="answer3" value="1950">
+                            <label for="option3-3">1950</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="option4-3" name="answer3" value="1965">
+                            <label for="option4-3">1965</label>
+                        </div>
+                    </fieldset>
                     <button type="submit">Kirim Jawaban</button>
                 </form>
                 <p id="task-feedback3" class="task-feedback" style="display: none;"></p>
