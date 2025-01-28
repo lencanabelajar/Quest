@@ -474,8 +474,14 @@ form p a:hover {
 .task-quiz label {
     font-size: 16px;
     color: #555;
-    margin-bottom: 10px;
-    display: block;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
 }
 
 .task-quiz input {
@@ -507,6 +513,23 @@ form p a:hover {
     font-size: 14px;
     color: #4caf50; /* Green feedback */
     display: none;
+}
+
+.task-quiz input[type="radio"] {
+    display: none;
+}
+
+.task-quiz input[type="radio"]:checked + label {
+    background-color: #1e3a8a;
+    color: white;
+    border-color: #1e3a8a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+}
+
+.task-quiz label:hover {
+    background-color: #dbeafe;
+    border-color: #60a5fa;
 }
 
 .level-up-animation {
